@@ -25,7 +25,7 @@ class DriveCategoryController extends GetxController {
       isLoading(true);
 
       var valTok = await getToken();
-      var url = Uri.parse('http://pick4ride.com/api/merchant/vehicle-category');
+      var url = Uri.parse('http://pick4ride.com/api/vehicle-category');
       print('token h yr: $valTok');
       final response = await http.get(url, headers: {
         'Content-Type': 'application/json',

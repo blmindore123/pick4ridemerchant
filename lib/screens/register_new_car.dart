@@ -1947,6 +1947,8 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                               print("enterdetails: $valTok");
 
 
+                              //register car method called
+
                               registerCar(
                                   id,
                                   radioButtonItemvehicle,
@@ -2213,14 +2215,19 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
         //    String? valTok = prefs.getString('token');
         //    print("valTok: $valTok");
 
+        setState(() {
+
+        });
+
         Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList()));
 
-         var result = jsonDecode(response.body);
+       //  var result = jsonDecode(response.body);
+       // getAllCars = GetAllCars.fromJson(result);
+        // setState(() {
+        //   getAllCarsController.getAllCars!.data.removeAt(index);
+        // });
+        //
 
-
-         setState(() {
-           getAllCars = GetAllCars.fromJson(result);
-         });
 
 
 

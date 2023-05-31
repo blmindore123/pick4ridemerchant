@@ -48,6 +48,15 @@ class EditCar extends StatefulWidget {
   final String? imgs7;
   final String? imgs8;
   final String? imgs9;
+  final String? editimgs;
+  final String? editimgs2;
+  final String? editimgs3;
+  final String? editimgs4;
+  final String? editimgs5;
+  final String? editimgs6;
+  final String? editimgs7;
+  final String? editimgs8;
+  final String? editimgs9;
   final String? vehno;
   final String? insurance;
   final List<String>? group;
@@ -77,6 +86,15 @@ class EditCar extends StatefulWidget {
     @required this.imgs7,
     @required this.imgs8,
     @required this.imgs9,
+    @required this.editimgs,
+    @required this.editimgs2,
+    @required this.editimgs3,
+    @required this.editimgs4,
+    @required this.editimgs5,
+    @required this.editimgs6,
+    @required this.editimgs7,
+    @required this.editimgs8,
+    @required this.editimgs9,
     @required this.vehno,
     @required this.group,
     @required this.insurance,
@@ -103,40 +121,37 @@ class _EditCarState extends State<EditCar> {
   late SharedPreferences prefs;
 
   TextEditingController brandNameController = TextEditingController();
-
   TextEditingController numofdoorController = TextEditingController();
-
   TextEditingController noofluggageController = TextEditingController();
-
   TextEditingController gearController = TextEditingController();
-
   TextEditingController fuelController = TextEditingController();
-
   TextEditingController seatsController = TextEditingController();
-
   TextEditingController vehiclenoController = TextEditingController();
-
   TextEditingController priceController = TextEditingController();
-
   TextEditingController descriptionController = TextEditingController();
 
 
   List<String>? imagesgroup;
 
 
+  String? brand,gears,fuels,vehino,insurdt,descriptxt;
+
+  int? doors,luggages,seats,prices;
+
+
   String? multi;
 
   String radioButtonItemride = 'Self Driverrr';
 
-  String? radioButtonItemvehicle;
+  String? radioButtonItemvehicle = 'Self Driverrddr';
 
-  String radioButtonItemac = 'Driverrddr';
+  String? radioButtonItemac;
 
-  int idride = 11;
+  int? idride = 11;
   bool isSwitched = false;
 
   int? idvehicletype;
-  int idac = 31;
+  int? idac = 31;
 
 
 
@@ -148,11 +163,40 @@ class _EditCarState extends State<EditCar> {
 
     setState(() {
 
-      radioButtonItemvehicle = 'Commercial';
+
+      radioButtonItemvehicle = "Commercial";
       idride = widget.drivetype!;
       if(widget.drivetype == 1){
         xval = "yes";
       }
+
+
+      if(widget.ac == "yes"){
+        idac = 1;
+      }
+      else if(widget.ac == "no"){
+        idac = 2;
+      }
+
+
+
+
+
+      if(widget.vehicletype == "Commercial"){
+        idvehicletype = 1;
+      }
+      else if(widget.vehicletype == "Compact"){
+        idvehicletype = 2;
+      }
+      else if(widget.vehicletype == "VIP"){
+        idvehicletype = 3;
+      }
+      else if(widget.vehicletype == "Sports"){
+        idvehicletype = 4;
+      }
+
+
+
 
 
     });
@@ -1244,7 +1288,7 @@ class _EditCarState extends State<EditCar> {
                                 groupValue: idac,
                                 onChanged: (val) {
                                   setState(() {
-                                    radioButtonItemac = 'YES';
+                                    radioButtonItemac = 'yes';
                                     idac = 1;
                                   });
                                 },
@@ -1263,7 +1307,7 @@ class _EditCarState extends State<EditCar> {
                                 groupValue: idac,
                                 onChanged: (val) {
                                   setState(() {
-                                    radioButtonItemac = 'NO';
+                                    radioButtonItemac = 'no';
                                     idac = 2;
                                   });
                                 },
@@ -1586,7 +1630,7 @@ class _EditCarState extends State<EditCar> {
                                     String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
                                     print(formattedDate); //formatted date output using intl package =>  2022-07-04
                                     setState(() {
-                                      licenseController.text = formattedDate; //set foratted date to TextField value.
+                                      licenseController?.text = formattedDate; //set foratted date to TextField value.
                                     });
                                   }else{
                                     print("Date is not selected");
@@ -1651,7 +1695,7 @@ class _EditCarState extends State<EditCar> {
 
 
                                     setState(() {
-                                      insuranceController.text = formattedDate; //set foratted date to TextField value.
+                                      insuranceController?.text = formattedDate; //set foratted date to TextField value.
                                     });
                                   }else{
                                     print("Date is not selected");
@@ -1964,40 +2008,6 @@ class _EditCarState extends State<EditCar> {
                     ),
 
 
-                    // GestureDetector(
-                    //   onTap: (){
-                    //     selectImages();
-                    //   },
-                    //   child: SizedBox(
-                    //     width: 300.0,
-                    //     height: 195,// To show images in particular area only
-                    //     child: selectedImagesnew.isEmpty  // If no images is selected
-                    //         ? const Center(child: Text('Sorry nothing selected!!'))
-                    //         : GridView.builder(
-                    //       // scrollDirection: Axis.horizontal,
-                    //       itemCount: selectedImagesnew.length,
-                    //       gridDelegate:
-                    //       const SliverGridDelegateWithFixedCrossAxisCount(
-                    //           crossAxisCount: 3
-                    //         // Horizontally only 3 images will show
-                    //       ),
-                    //       itemBuilder: (BuildContext context, int index) {
-                    //         // TO show selected file
-                    //         return Padding(
-                    //           padding: EdgeInsets.all(7),
-                    //           child: Center(
-                    //               child: kIsWeb
-                    //                   ? Image.network(
-                    //                   selectedImagesnew[index].path)
-                    //                   : Image.file(selectedImagesnew[index])),
-                    //         );
-                    //         // If you are making the web app then you have to
-                    //         // use image provider as network image or in
-                    //         // android or iOS it will as file only
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
 
 
 
@@ -2042,7 +2052,7 @@ class _EditCarState extends State<EditCar> {
                         : GridView.builder(
 
                       scrollDirection: Axis.horizontal,
-                      itemCount:  selectedImagesnew.length,
+                      itemCount:  5/*selectedImagesnew.length*/,
                       gridDelegate:
                       const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 1
@@ -2102,48 +2112,124 @@ class _EditCarState extends State<EditCar> {
                               )
                           ),
                           onPressed: () {
-                            if(_formKey.currentState!.validate() && image1 != null && image2 != null && image3 != null && image4 != null && imageFileList != null){
 
-                              _formKey.currentState?.save();
                               String? valTok = prefs.getString('token');
                               print("enterdetails: $valTok");
 
 
-                              // editCar(
-                              //   id,
-                              //   radioButtonItem,
-                              //   xval,
-                              //   brandNameController.text,
-                              //   int.parse(numofdoorController.text),
-                              //   int.parse(noofluggageController.text),
-                              //   idac.toString(),
-                              //   gearController.text,
-                              //   fuelController.text,
-                              //   int.parse(seatsController.text),
-                              //   vehiclenoController.text,
-                              //   insuranceController.text,
-                              //   int.parse(priceController.text),
-                              //   descriptionController.text,
-                              //   firstimage ?? '',
-                              //   secondimage ?? '',
-                              //   thirdimage ?? '',
-                              //   fourthimage ?? '',
-                              //   one ?? '',
-                              //   two ?? '',
-                              //   three ?? '',
-                              //   four ?? '',
-                              //   five ?? '',
-                              // );
+                              //1
+                              if(brandNameController.text == ""){
+                                brand = widget.brandn;
+                              }
+                              else{
+                                brand = brandNameController.text;
+                              }
 
-                        //      print(idride);
+                              //2
+                              if(fuelController.text == ""){
+                                fuels = widget.fuel;
+                              }
+                              else{
+                                fuels = fuelController.text;
+                              }
+
+                              //3
+                              if(gearController.text == ""){
+                                gears = widget.gear;
+                              }
+                              else{
+                                gears = gearController.text;
+                              }
+
+                              //4
+                              if(vehiclenoController.text == ""){
+                                vehino = widget.vehno;
+                              }
+                              else{
+                                vehino = vehiclenoController.text;
+                              }
+                             //5
+                              if(insuranceController.text == ""){
+                                insurdt = widget.insurance;
+                              }
+                              else{
+                                insurdt = insuranceController.text;
+                              }
+                             //6
+                              if(descriptionController.text == ""){
+                                descriptxt = widget.description;
+                              }
+                              else{
+                                descriptxt = descriptionController.text;
+                              }
+                              //7
+                              if(numofdoorController.text == ""){
+                                doors = widget.doors.toInt();
+                              }
+                              else{
+                                doors = int.parse(numofdoorController.text);
+                              }
+
+                              //8
+                              if(noofluggageController.text == ""){
+                                luggages = widget.luggage.toInt();
+                              }
+                              else{
+                                luggages = int.parse(noofluggageController.text);
+                              }
+                              //9
+                              if(seatsController.text == ""){
+                                seats = widget.seats.toInt();
+                              }
+                              else{
+                                seats = int.parse(seatsController.text);
+                              }
+                              //10
+                              if(priceController.text == ""){
+                                prices = widget.price.toInt();
+                              }
+                              else{
+                                prices = int.parse(priceController.text);
+                              }
 
 
-                            }
 
 
 
 
 
+                              editCar(
+                                idride ?? widget.id,
+                                radioButtonItemvehicle ?? widget.vehicletype,
+                                xval ?? widget.secdepo,
+                                brand,
+                                doors,
+                                luggages,
+                                radioButtonItemac ?? widget.ac,
+                                gears ?? widget.gear,
+                                fuels ?? widget.fuel,
+                                seats,
+                                vehino ?? widget.vehno,
+                                insurdt ?? widget.insurance,
+                                prices,
+                                descriptxt ?? widget.description,
+                                firstimage ?? widget.editimgs,
+                                secondimage ?? widget.editimgs2,
+                                thirdimage ?? widget.editimgs3,
+                                fourthimage ?? widget.editimgs4,
+                                one ?? widget.editimgs5,
+                                two ?? widget.editimgs6,
+                                three ?? widget.editimgs7,
+                                four ?? widget.editimgs8,
+                                five ?? widget.editimgs9,
+                              );
+
+
+                              print("1 ${widget.editimgs5}");
+                              print("2 ${widget.editimgs6}");
+                              print("3 ${widget.editimgs7}");
+                              print("4 ${widget.editimgs8}");
+                              print("5 ${widget.editimgs9}");
                           },
                           child: Align(
                               alignment: Alignment.center,
@@ -2337,11 +2423,15 @@ class _EditCarState extends State<EditCar> {
         //    String? valTok = prefs.getString('token');
         //    print("valTok: $valTok");
 
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList()));
-
         var result = jsonDecode(response.body);
 
-        getAllCars = GetAllCars.fromJson(result);
+        setState(() {
+       //   getAllCars = GetAllCars.fromJson(result);
+        });
+
+
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList()));
+
 
       }
       else {

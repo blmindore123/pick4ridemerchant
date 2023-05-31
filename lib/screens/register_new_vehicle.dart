@@ -374,7 +374,11 @@ class _RegisterNewVehicleState extends State<RegisterNewVehicle> {
 
                     child:
 
-                    GridView.builder(
+                    Obx(
+                          () => driveCategoryController.isLoading.value
+                          ? Center(
+                        child: CircularProgressIndicator(),
+                      ):  GridView.builder(
                       itemCount: 4,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                         itemBuilder: (BuildContext context,index ){
@@ -392,7 +396,7 @@ class _RegisterNewVehicleState extends State<RegisterNewVehicle> {
                                      //   radius: 42,
                                         minRadius: 42,
                                         maxRadius: 72,
-                                        backgroundImage: NetworkImage(driveCategoryController.driveCategory!.data![index].imageUrl,),
+                                        backgroundImage: NetworkImage(driveCategoryController.driveCategory?.data![index].imageUrl ?? '',),
 
                                       ),
                                     ),
@@ -406,15 +410,13 @@ class _RegisterNewVehicleState extends State<RegisterNewVehicle> {
                                       )
                                   ),
 
-
-                                  
-
-
                                 ],
 
                               );
                         },
                         ),
+
+    )
                   ),
 
                 ],

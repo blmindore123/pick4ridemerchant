@@ -1,0 +1,173 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.pick4ridemerchant"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+11-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:4:5-79
+11-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:4:22-77
+12    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+12-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:4:5-79
+12-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:4:22-77
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:6:5-64
+13-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:6:22-62
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->[:nb_utils] C:\Users\hello\StudioProjects\pick4ridemerchant\build\nb_utils\intermediates\merged_manifest\release\AndroidManifest.xml:9:5-67
+14-->[:nb_utils] C:\Users\hello\StudioProjects\pick4ridemerchant\build\nb_utils\intermediates\merged_manifest\release\AndroidManifest.xml:9:22-64
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->[:nb_utils] C:\Users\hello\StudioProjects\pick4ridemerchant\build\nb_utils\intermediates\merged_manifest\release\AndroidManifest.xml:10:5-79
+15-->[:nb_utils] C:\Users\hello\StudioProjects\pick4ridemerchant\build\nb_utils\intermediates\merged_manifest\release\AndroidManifest.xml:10:22-76
+16    <uses-permission android:name="android.permission.READ_SMS" />
+16-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:9:5-67
+16-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:9:22-64
+17    <uses-permission android:name="android.permission.SEND_SMS" />
+17-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:10:5-67
+17-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:10:22-64
+18    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+18-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:11:5-70
+18-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:11:22-67
+19    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+19-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:12:5-75
+19-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:12:22-72
+20    <uses-permission android:name="android.permission.READ_CONTACTS" />
+20-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:13:5-72
+20-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:13:22-69
+21    <uses-permission android:name="android.permission.READ_PROFILE" />
+21-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:14:5-71
+21-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\release\AndroidManifest.xml:14:22-68
+22
+23    <permission
+23-->[androidx.core:core:1.9.0] C:\Users\hello\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+24        android:name="com.example.pick4ridemerchant.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+24-->[androidx.core:core:1.9.0] C:\Users\hello\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+25        android:protectionLevel="signature" />
+25-->[androidx.core:core:1.9.0] C:\Users\hello\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+26
+27    <uses-permission android:name="com.example.pick4ridemerchant.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+27-->[androidx.core:core:1.9.0] C:\Users\hello\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+27-->[androidx.core:core:1.9.0] C:\Users\hello\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+28
+29    <application
+30        android:name="android.app.Application"
+30-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:10:9-42
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.9.0] C:\Users\hello\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+32        android:icon="@mipmap/ic_launcher"
+32-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:11:9-43
+33        android:label="Pick4Ride Merchant" >
+33-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:9:9-43
+34        <activity
+34-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:12:9-32:20
+35            android:name="com.example.pick4ridemerchant.MainActivity"
+35-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:13:13-41
+36            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+36-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:17:13-163
+37            android:exported="true"
+37-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:14:13-36
+38            android:hardwareAccelerated="true"
+38-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:18:13-47
+39            android:launchMode="singleTop"
+39-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:15:13-43
+40            android:theme="@style/LaunchTheme"
+40-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:16:13-47
+41            android:windowSoftInputMode="adjustResize" >
+41-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:19:13-55
+42
+43            <!--
+44                 Specifies an Android theme to apply to this Activity as soon as
+45                 the Android process has started. This theme is visible to the user
+46                 while the Flutter UI initializes. After that, this theme continues
+47                 to determine the Window background behind the Flutter UI.
+48            -->
+49            <meta-data
+49-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:24:13-27:17
+50                android:name="io.flutter.embedding.android.NormalTheme"
+50-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:25:15-70
+51                android:resource="@style/NormalTheme" />
+51-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:26:15-52
+52
+53            <intent-filter>
+53-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:28:13-31:29
+54                <action android:name="android.intent.action.MAIN" />
+54-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:29:17-68
+54-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:29:25-66
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:30:17-76
+56-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:30:27-74
+57            </intent-filter>
+58        </activity>
+59        <!--
+60             Don't delete the meta-data below.
+61             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+62        -->
+63        <meta-data
+63-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:35:9-37:33
+64            android:name="flutterEmbedding"
+64-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:36:13-44
+65            android:value="2" />
+65-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:37:13-30
+66
+67        <provider
+67-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:10:9-18:20
+68            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+68-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-82
+69            android:authorities="com.example.pick4ridemerchant.flutter.image_provider"
+69-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-74
+70            android:exported="false"
+70-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-37
+71            android:grantUriPermissions="true" >
+71-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-47
+72            <meta-data
+72-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-17:75
+73                android:name="android.support.FILE_PROVIDER_PATHS"
+73-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:16:17-67
+74                android:resource="@xml/flutter_image_picker_file_paths" />
+74-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:17:17-72
+75        </provider>
+76
+77        <uses-library
+77-->[androidx.window:window:1.0.0-beta04] C:\Users\hello\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+78            android:name="androidx.window.extensions"
+78-->[androidx.window:window:1.0.0-beta04] C:\Users\hello\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+79            android:required="false" />
+79-->[androidx.window:window:1.0.0-beta04] C:\Users\hello\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+80        <uses-library
+80-->[androidx.window:window:1.0.0-beta04] C:\Users\hello\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+81            android:name="androidx.window.sidecar"
+81-->[androidx.window:window:1.0.0-beta04] C:\Users\hello\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+82            android:required="false" />
+82-->[androidx.window:window:1.0.0-beta04] C:\Users\hello\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+83
+84        <provider
+84-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hello\.gradle\caches\transforms-3\bd44fb57d7c3686a718759dd3e583490\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+85            android:name="androidx.startup.InitializationProvider"
+85-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hello\.gradle\caches\transforms-3\bd44fb57d7c3686a718759dd3e583490\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+86            android:authorities="com.example.pick4ridemerchant.androidx-startup"
+86-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hello\.gradle\caches\transforms-3\bd44fb57d7c3686a718759dd3e583490\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+87            android:exported="false" >
+87-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hello\.gradle\caches\transforms-3\bd44fb57d7c3686a718759dd3e583490\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+88            <meta-data
+88-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hello\.gradle\caches\transforms-3\bd44fb57d7c3686a718759dd3e583490\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+89                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+89-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hello\.gradle\caches\transforms-3\bd44fb57d7c3686a718759dd3e583490\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+90                android:value="androidx.startup" />
+90-->[androidx.emoji2:emoji2:1.0.0] C:\Users\hello\.gradle\caches\transforms-3\bd44fb57d7c3686a718759dd3e583490\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+91            <meta-data
+91-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\hello\.gradle\caches\transforms-3\da12c36cbc191d2ddc924c1ef309570f\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+92                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+92-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\hello\.gradle\caches\transforms-3\da12c36cbc191d2ddc924c1ef309570f\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+93                android:value="androidx.startup" />
+93-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\hello\.gradle\caches\transforms-3\da12c36cbc191d2ddc924c1ef309570f\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+94        </provider>
+95    </application>
+96
+97</manifest>

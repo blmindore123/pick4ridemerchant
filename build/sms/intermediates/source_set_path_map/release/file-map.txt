@@ -1,0 +1,12 @@
+com.babariviere.sms-jetified-window-java-1.0.0-beta04-0 C:\Users\hello\.gradle\caches\transforms-3\006d93cd422dbc43e89591147c2de572\transformed\jetified-window-java-1.0.0-beta04\res
+com.babariviere.sms-core-1.6.0-1 C:\Users\hello\.gradle\caches\transforms-3\4ca28c4a71705f8a687c69dda140a277\transformed\core-1.6.0\res
+com.babariviere.sms-jetified-annotation-experimental-1.1.0-2 C:\Users\hello\.gradle\caches\transforms-3\8965c941cf4bee4d72541b965c7c9d39\transformed\jetified-annotation-experimental-1.1.0\res
+com.babariviere.sms-jetified-window-1.0.0-beta04-3 C:\Users\hello\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\res
+com.babariviere.sms-main-4 C:\Users\hello\AppData\Local\Pub\Cache\hosted\pub.dev\sms-0.2.4\android\src\main\res
+com.babariviere.sms-release-5 C:\Users\hello\AppData\Local\Pub\Cache\hosted\pub.dev\sms-0.2.4\android\src\release\res
+com.babariviere.sms-pngs-6 C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\generated\res\pngs\release
+com.babariviere.sms-resValues-7 C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\generated\res\resValues\release
+com.babariviere.sms-rs-8 C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\generated\res\rs\release
+com.babariviere.sms-mergeReleaseResources-9 C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.babariviere.sms-mergeReleaseResources-10 C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.babariviere.sms-merged_res-11 C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_res\release

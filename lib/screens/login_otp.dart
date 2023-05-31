@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_otp/flutter_otp.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
@@ -149,6 +150,9 @@ class _LoginState extends State<Login> {
                               ),
 
                               TextFormField(
+                                inputFormatters: [
+                                  new LengthLimitingTextInputFormatter(10),
+                                ],
                                 controller: numberController,
                                 keyboardType: TextInputType.phone,
                                 // validator: (value) {

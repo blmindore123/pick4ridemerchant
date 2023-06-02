@@ -1,32 +1,27 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:pick4ridemerchant/controller/get_all_cars_controller.dart';
-import 'package:pick4ridemerchant/screens/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../classes/getallcars.dart';
-import '../classes/imageres.dart';
-import '../controller/drive_category_controller.dart';
-import 'car_details.dart';
-import 'edit_car.dart';
-import 'home.dart';
-import 'login_otp.dart';
+import '../../classes/getallcars.dart';
+import '../../classes/imageres.dart';
+import '../car/car_details.dart';
+import '../car/edit_car.dart';
+import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
-import 'package:http/src/response.dart';
-import 'package:http/http.dart';
-import 'package:intl/intl.dart';
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class RegisteredCarsList extends StatefulWidget {
-
 
   final String? token;
   const RegisteredCarsList({
@@ -35,11 +30,10 @@ class RegisteredCarsList extends StatefulWidget {
   }) : super(key: key);
   @override
   _RegisteredCarsListState createState() => _RegisteredCarsListState();
-
-
 }
 
 class _RegisteredCarsListState extends State<RegisteredCarsList> {
+
 
   final _formKey = GlobalKey<FormState>();
   late SharedPreferences prefs;
@@ -47,71 +41,69 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
   String? token;
   GetAllCars? getAllCars;
 
+
+  TextEditingController controller = new TextEditingController();
+
+
+
+
+
   @override
   void initState() {
     super.initState();
-    //  value = widget.value == true;
     initSharedPref();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   setState(() {
+    //     getAllCarsController.isLoading == true;
+    //   });
+    // });
 
-      getAllCarsController.isLoading == true;
-      setState(() {
-
-      });
+    setState(() {
 
     });
 
 
   }
+
+
+
+
+
   void initSharedPref() async{
     prefs = await SharedPreferences.getInstance();
   }
 
+  GetAllCarsController getAllCarsController = Get.put(GetAllCarsController());
+
+
+
+
   String radioButtonItem = 'Self Driverrr';
   int id = 11;
   bool isSwitched = false;
-
   int idvehicletype = 21;
   int idac = 31;
-
-  GetAllCarsController getAllCarsController = Get.put(GetAllCarsController());
-
   final ImagePicker imagePicker = ImagePicker();
   List<XFile> imageFileList = [];
-
-
-
   List<String> imagesgroup = [];
-
-
   XFile? image1;
   XFile? image2;
   XFile? image3;
   XFile? image4;
-
   bool agree = false;
   String? respo;
   String? respo2;
   String? respo3;
   String? respo4;
-
   Imageresp? imageresp;
-
   String? firstimage;
   String? secondimage;
   String? thirdimage;
   String? fourthimage;
-
-
   List<File> selectedImagesnew = [];
-
-
   List<String> imagesarr = [];
-
   String? xval;
-
-
   String? one;
   String? two;
   String? three;
@@ -122,43 +114,31 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
 
-
-
+ //_loadData () async{
+ //  await Get.find<GetAllCarsController>().fetchData();
+// }
   @override
   Widget build(BuildContext context) {
-
-
-
-
-
-
     return Scaffold(
-
       resizeToAvoidBottomInset: true,
-
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Icon(Icons.arrow_back),
-        title: Text("Registered Cars",style: TextStyle(color: Colors.black),),
-
+        title: Text("Registered Vehicles",style: TextStyle(color: Colors.black),),
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
       ),
       endDrawer: Drawer(
-
-
         child: Container(
           decoration: BoxDecoration(color: Colors.white),
           child: Column(
             children: <Widget>[
               Expanded(
                 child: Column(children: <Widget>[
-
                   ListTile(
                     title:  Text(""),
                     trailing:  Icon(Icons.arrow_forward_outlined,color: Colors.black,),
                   ),
-
                   // ListTile(
                   //   title: Text(
                   //     'Sign up as supplier',
@@ -186,9 +166,6 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                       color: Colors.purple,
                     ),
                     onTap: () {
-                      /*Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => shufflerBuilder()));*/
                     },
                   ),
                   ListTile(
@@ -207,8 +184,6 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                           builder: (context) => mistakePage()));*/
                     },
                   ),
-
-
                   ListTile(
                     title: Text(
                       'FAQ',
@@ -225,8 +200,6 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                           builder: (context) => mistakePage()));*/
                     },
                   ),
-
-
                   ListTile(
                     title: Text(
                       'Privacy Policy',
@@ -350,34 +323,22 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                       color: Colors.purple,
                     ),
                     onTap: () {
-
                       // String? valTok = prefs.getString('token');
                       // print("signout: $valTok");
                       // logOut(valTok!);
-
                       showDialog(
                         context: context,
                         builder: (BuildContext context) => _buildPopupDialog(context),
                       );
-
-
                     },
                   ),
 
                 ]
                 ),
               ),
-
             ],
           ),
         ),
-
-
-
-
-
-
-
       ),
       backgroundColor: Colors.white,
 
@@ -400,56 +361,6 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
 
-                  Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.width/65.3),
-                    child: Container(
-
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(top: 1, left: MediaQuery.of(context).size.width/32.75, right: MediaQuery.of(context).size.width/49.125),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height/20.075,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Colors.grey.shade100
-                              ),
-                              child: TextField(
-                                textInputAction: TextInputAction.search,
-                                decoration: InputDecoration(
-                                    hintText: "search",
-                                    border: InputBorder.none,
-                                    contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/26.2, top: MediaQuery.of(context).size.height/133.83),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(Icons.search,color: Colors.black,),
-                                      onPressed:
-                                          (){
-
-
-                                        print("${getAllCarsController.getAllCars?.data?.length ??  0}");
-
-                                      },
-                                      iconSize: MediaQuery.of(context).size.width/19.65,
-                                    )
-                                ),
-                                onChanged: (val) {
-                                  setState(() {
-                                  }
-                                  );
-                                },
-                                onSubmitted: (term) {
-
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                  ),
-
 
                   Padding(
                     padding: EdgeInsets.all(15),
@@ -458,8 +369,6 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                       children: [
 
                         Text('Location',style: TextStyle(fontWeight: FontWeight.bold),),
-
-
                         Text('change',style: TextStyle(color: Colors.blue),),
 
                       ],
@@ -485,7 +394,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                 ? Center(
                               child: CircularProgressIndicator(),
                             )
-                                :       Text("${getAllCarsController.getAllCars?.data?.length.toString() ?? '0'} Cars",style: TextStyle(fontWeight: FontWeight.w300),)),
+                                :       Text("${getAllCarsController.getAllCars?.data?.length.toString() ?? '0'} Vehicles",style: TextStyle(fontWeight: FontWeight.w300),)),
 
 
                       )
@@ -501,8 +410,9 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
                     child: Obx(
-                          () =>  getAllCarsController.isLoading.value
-                          ? Center(
+                          () =>
+                          getAllCarsController.isLoading.value
+                              ? Center(
                         child: CircularProgressIndicator(),
                       )
                           :ListView.builder(
@@ -629,7 +539,65 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
 
-                            print("this is image in var image: $imageinsurone");
+                            //////////////////////
+                            var imageinsuroneedit = AppConstants.DEFAULT_IMAGE;
+                            for (var i = 0; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                              imageinsuroneedit = getAllCarsController.getAllCars!.data[index]
+                                  .images[i].image;
+                              break;
+                            }
+                            var imageinsurtwoedit = AppConstants.DEFAULT_IMAGE;
+                            for (var i = 1; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                              imageinsurtwoedit = getAllCarsController.getAllCars!.data[index]
+                                  .images[i].image;
+                              break;
+                            }
+                            var imagerconeedit = AppConstants.DEFAULT_IMAGE;
+                            for (var i = 2; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                              imagerconeedit = getAllCarsController.getAllCars!.data[index]
+                                  .images[i].image;
+                              break;
+                            }
+                            var imagerctwoedit = AppConstants.DEFAULT_IMAGE;
+                            for (var i = 3; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                              imagerctwoedit = getAllCarsController.getAllCars!.data[index]
+                                  .images[i].image;
+                              break;
+                            }
+                            var imageveh1edit = AppConstants.DEFAULT_IMAGE;
+                            for (var i = 4; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                              imageveh1edit = getAllCarsController.getAllCars!.data[index]
+                                  .images[i].image;
+                              break;
+                            }
+                            var imageveh2edit = AppConstants.DEFAULT_IMAGE;
+                            for (var i = 5; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                              imageveh2edit = getAllCarsController.getAllCars!.data[index]
+                                  .images[i].image;
+                              break;
+                            }
+                            var imageveh3edit = AppConstants.DEFAULT_IMAGE;
+                            for (var i = 6; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                              imageveh3edit = getAllCarsController.getAllCars!.data[index]
+                                  .images[i].image;
+                              break;
+                            }
+                            var imageveh4edit = AppConstants.DEFAULT_IMAGE;
+                            for (var i = 7; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                              imageveh4edit = getAllCarsController.getAllCars!.data[index]
+                                  .images[i].image;
+                              break;
+                            }
+                            var imageveh5edit = AppConstants.DEFAULT_IMAGE;
+                            for (var i = 8; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                              imageveh5edit = getAllCarsController.getAllCars!.data[index]
+                                  .images[i].image;
+                              break;
+                            }
+
+
+
+                            print("this is image in var image: $imagevehone");
                             if(getAllCarsController.getAllCars!.data[index].images != null)
                               mywidget.add(
                                 ClipRRect(
@@ -637,7 +605,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                     topLeft: Radius.circular(8.0),
                                     topRight: Radius.circular(8.0),
                                   ),
-                                  child: Image.network(imageinsurone,fit: BoxFit.cover,height: 93,width: 133,),
+                                  child: Image.network(imagevehone,fit: BoxFit.cover,height: 93,width: 133,),
                                 ),
                               );
 
@@ -716,7 +684,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                         children: [
                                           Align(
                                               alignment: Alignment.topLeft,
-                                              child: Text('Economy',style: TextStyle(fontWeight: FontWeight.w300),)
+                                              child: Text('Economy',style: TextStyle(fontWeight: FontWeight.bold),)
                                           ),
 
                                           //Spacer(),
@@ -726,7 +694,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                             width: 141,
                                           ),
 
-                                          Text("Rs. ${getAllCarsController.getAllCars?.data[index].price.toString() ??  'no name'}",style: TextStyle(fontWeight: FontWeight.w300),)
+                                          Text("Rs. ${getAllCarsController.getAllCars?.data[index].price.toString() ??  'no name'}",style: TextStyle(fontWeight: FontWeight.bold),)
 
 
                                         ],
@@ -888,16 +856,11 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                         children: [
 
                                           SizedBox(
-                                            width: 50,
-                                            child: ElevatedButton(
-
-
+                                            width: 100,
+                                            height: 31,
+                                            child: ElevatedButton.icon(
 
                                               onPressed: () async{
-
-
-
-
                                                 print(imagevehone);
 
                                                 print(imagesgroup);
@@ -921,18 +884,27 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                     description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
                                                     secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
                                                     vehno: getAllCarsController.getAllCars?.data[index].vehicleNo ?? 'no',
-                                                    imgs:  imageinsurone ?? AppConstants.DEFAULT_IMAGE,
-                                                    imgs2: imageinsurtwo ?? AppConstants.DEFAULT_IMAGE,
-                                                    imgs3: imagercone ?? AppConstants.DEFAULT_IMAGE,
-                                                    imgs4: imagerctwo ?? AppConstants.DEFAULT_IMAGE,
-                                                    imgs5: imagevehone ?? AppConstants.DEFAULT_IMAGE,
-                                                    imgs6: imagevehtwo ?? AppConstants.DEFAULT_IMAGE,
-                                                    imgs7: imagevehthree ?? AppConstants.DEFAULT_IMAGE,
-                                                    imgs8: imagevehfour ?? AppConstants.DEFAULT_IMAGE,
-                                                    imgs9: imagevehfive ?? AppConstants.DEFAULT_IMAGE,
+                                                    imgs:  imageinsurone ?? '',
+                                                    imgs2: imageinsurtwo ?? '',
+                                                    imgs3: imagercone ?? '',
+                                                    imgs4: imagerctwo ?? '',
+                                                    imgs5: imagevehone ?? '',
+                                                    imgs6: imagevehtwo ?? '',
+                                                    imgs7: imagevehthree ?? '',
+                                                    imgs8: imagevehfour ?? '',
+                                                    imgs9: imagevehfive ?? '',
+                                                    editimgs:  imageinsuroneedit ?? '',
+                                                    editimgs2: imageinsurtwoedit ?? '',
+                                                    editimgs3: imagerconeedit ?? '',
+                                                    editimgs4: imagerctwoedit ?? '',
+                                                    editimgs5: imageveh1edit ?? '',
+                                                    editimgs6: imageveh2edit ?? '',
+                                                    editimgs7: imageveh3edit ?? '',
+                                                    editimgs8: imageveh4edit ?? '',
+                                                    editimgs9: imageveh5edit ?? '',
                                                     insurance: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate ?? 'no',
                                                     group: imagesgroup,
-                                                   drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
+                                                    drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
 
                                                 )));
 
@@ -943,13 +915,13 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                 // imagesgroup?.add(imagevehone);
                                                 // print(imagesgroup);
                                              //   print(getAllCarsController.getAllCars?.data[index].id);
-                                                print(getAllCarsController.getAllCars?.data[index].vehicleType);
+                                                print(imageinsurone);
 
                                               },
                                               style: ButtonStyle(
 
-                                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
+                                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
                                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                       RoundedRectangleBorder(
                                                           borderRadius: BorderRadius.circular(31),
@@ -957,17 +929,20 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                       )
                                                   )
                                               ),
-                                              child: Padding(
-                                                  padding: const EdgeInsets.all(4),
-                                                child: Icon(Icons.edit_outlined,size: 15,),
-                                              ),
+                                              // child: Padding(
+                                              //     padding: const EdgeInsets.all(4),
+                                              //   child: Icon(Icons.edit_outlined,size: 25,),
+                                              // ),
+                                              icon: Icon(Icons.edit_outlined,size: 20,color: Colors.white,),
+                                              label: Text('Edit',style: TextStyle(color: Colors.white),),
                                             ),
 
                                           ), //Si
 
                                           SizedBox(
-                                            width: 50,
-                                            child: ElevatedButton(
+                                            width: 100,
+                                            height: 31,
+                                            child: ElevatedButton.icon(
 
                                               onPressed: () async{
 
@@ -990,15 +965,15 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                   price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
                                                   description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
                                                   secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                  imgs:  imageinsurone ?? AppConstants.DEFAULT_IMAGE,
-                                                  imgs2: imageinsurtwo ?? AppConstants.DEFAULT_IMAGE,
-                                                  imgs3: imagercone ?? AppConstants.DEFAULT_IMAGE,
-                                                  imgs4: imagerctwo ?? AppConstants.DEFAULT_IMAGE,
-                                                  imgs5: imagevehone ?? AppConstants.DEFAULT_IMAGE,
-                                                  imgs6: imagevehtwo ?? AppConstants.DEFAULT_IMAGE,
-                                                  imgs7: imagevehthree ?? AppConstants.DEFAULT_IMAGE,
-                                                  imgs8: imagevehfour ?? AppConstants.DEFAULT_IMAGE,
-                                                  imgs9: imagevehfive ?? AppConstants.DEFAULT_IMAGE,
+                                                  imgs:  imageinsurone ?? '',
+                                                  imgs2: imageinsurtwo ?? '',
+                                                  imgs3: imagercone ?? '',
+                                                  imgs4: imagerctwo ?? '',
+                                                  imgs5: imagevehone ?? '',
+                                                  imgs6: imagevehtwo ?? '',
+                                                  imgs7: imagevehthree ?? '',
+                                                  imgs8: imagevehfour ?? '',
+                                                  imgs9: imagevehfive ?? '',
                                                   insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
 
                                                 //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
@@ -1008,29 +983,34 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                 print(getAllCarsController.getAllCars?.data[index].insuranceExpiryDate);
 
                                               },
+
+
                                               style: ButtonStyle(
 
-                                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
+                                                 foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
                                                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                                       RoundedRectangleBorder(
                                                           borderRadius: BorderRadius.circular(31),
                                                           side: BorderSide(color: Colors.grey.shade300)
                                                       )
                                                   )
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(4),
-                                                child: Icon(Icons.details_rounded,size: 15,),
-                                              ),
+                                             ),
+                                              icon: Icon(Icons.details_rounded,size: 20,color: Colors.white,),
+                                              label: Text('Details',style: TextStyle(color: Colors.white),),
+                                              // child: Padding(
+                                              //   padding: const EdgeInsets.all(4),
+                                              //   child: Icon(Icons.details_rounded,size: 25,color: Colors.blueAccent,),
+                                              // ),
                                             ),
 
                                           ), //Si
 
 
                                           SizedBox(
-                                            width: 50,
-                                            child: ElevatedButton(
+                                            width: 100,
+                                            height: 31,
+                                            child: ElevatedButton.icon(
                                               onPressed: () async{
 
 
@@ -1040,7 +1020,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                    int? vehicleId = getAllCarsController.getAllCars!.data[index].id;
 
                                                    var valToken = await getToken();
-                                                   print("details car $valToken");
+                                                   print("delete car $valToken");
 
                                                     Response response = await delete(
                                                         Uri.parse(AppConstants.BASE_URL+'/merchant/vehicles/$vehicleId'),
@@ -1079,21 +1059,19 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
                                               style: ButtonStyle(
 
-                                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blueGrey),
-                                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                      RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(31),
-                                                          side: BorderSide(color: Colors.grey.shade300)
-                                                      )
-                                                  )
+                                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                     RoundedRectangleBorder(
+                                                         borderRadius: BorderRadius.circular(31),
+                                                         side: BorderSide(color: Colors.grey.shade300)
+                                                     )
+                                                 )
                                               ),
 
-                                              child: Padding(
-                                                  padding: const EdgeInsets.all(4),
-                                                  child: Icon(Icons.delete,size: 15,),
+                                              icon: Icon(Icons.delete,size: 20,color: Colors.white,),
+                                              label: Text('Delete',style: TextStyle(color: Colors.white),),
 
-                                              ),
                                             ),
 
                                           ), //Si
@@ -1212,6 +1190,8 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString('token');
   }
+
+
 
 
 

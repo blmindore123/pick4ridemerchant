@@ -13,32 +13,32 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:5:5-66
-15-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:5:22-64
+15-->C:\Users\hello\Documents\GitHub\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:5:5-66
+15-->C:\Users\hello\Documents\GitHub\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:5:22-64
 16    <uses-permission android:name="android.permission.CAMERA" />
-16-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:4:5-65
-16-->C:\Users\hello\StudioProjects\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:4:22-62
+16-->C:\Users\hello\Documents\GitHub\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:4:5-65
+16-->C:\Users\hello\Documents\GitHub\pick4ridemerchant\android\app\src\main\AndroidManifest.xml:4:22-62
 17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-17-->[:nb_utils] C:\Users\hello\StudioProjects\pick4ridemerchant\build\nb_utils\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-79
-17-->[:nb_utils] C:\Users\hello\StudioProjects\pick4ridemerchant\build\nb_utils\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-76
+17-->[:nb_utils] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\nb_utils\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-79
+17-->[:nb_utils] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\nb_utils\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-76
 18    <uses-permission android:name="android.permission.READ_SMS" />
-18-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-67
-18-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-64
+18-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-67
+18-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-64
 19    <uses-permission android:name="android.permission.SEND_SMS" />
-19-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-67
-19-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-64
+19-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-67
+19-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-64
 20    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-20-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-70
-20-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-67
+20-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-70
+20-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-67
 21    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-21-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-75
-21-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:12:22-72
+21-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-75
+21-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:12:22-72
 22    <uses-permission android:name="android.permission.READ_CONTACTS" />
-22-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-72
-22-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-69
+22-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-72
+22-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-69
 23    <uses-permission android:name="android.permission.READ_PROFILE" />
-23-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:14:5-71
-23-->[:sms] C:\Users\hello\StudioProjects\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:14:22-68
+23-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:14:5-71
+23-->[:sms] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\sms\intermediates\merged_manifest\debug\AndroidManifest.xml:14:22-68
 24
 25    <permission
 25-->[androidx.core:core:1.9.0] C:\Users\hello\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
@@ -92,21 +92,21 @@
 68            android:value="2" />
 69
 70        <provider
-70-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+70-->[:image_picker_android] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
 71            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-71-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
+71-->[:image_picker_android] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
 72            android:authorities="com.example.pick4ridemerchant.flutter.image_provider"
-72-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
+72-->[:image_picker_android] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
 73            android:exported="false"
-73-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+73-->[:image_picker_android] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
 74            android:grantUriPermissions="true" >
-74-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+74-->[:image_picker_android] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
 75            <meta-data
-75-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+75-->[:image_picker_android] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
 76                android:name="android.support.FILE_PROVIDER_PATHS"
-76-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+76-->[:image_picker_android] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
 77                android:resource="@xml/flutter_image_picker_file_paths" />
-77-->[:image_picker_android] C:\Users\hello\StudioProjects\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+77-->[:image_picker_android] C:\Users\hello\Documents\GitHub\pick4ridemerchant\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 78        </provider>
 79
 80        <uses-library

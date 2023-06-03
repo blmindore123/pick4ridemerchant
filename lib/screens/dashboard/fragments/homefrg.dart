@@ -7,7 +7,7 @@ import 'package:pick4ridemerchant/screens/register_new_vehicle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../home.dart';
 import '../../login_otp.dart';
-import '../../registered_cars_list.dart';
+import '../../common/registered_cars_list.dart';
 
 class HomeFragment extends StatefulWidget {
   @override

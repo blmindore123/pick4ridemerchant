@@ -1,15 +1,13 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_otp/flutter_otp.dart';
+// import 'package:flutter_otp/flutter_otp.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'otp.dart';
 
 
 
-FlutterOtp otp = FlutterOtp();
+// FlutterOtp otp = FlutterOtp();
 
 class Login extends StatefulWidget {
 
@@ -43,8 +41,6 @@ class _LoginState extends State<Login> {
             "phone_number": phone_number,
             "role": "merchant"
           }
-
-
       );
       if(response.statusCode == 200){
         var data = jsonDecode(response.body.toString());
@@ -84,7 +80,7 @@ class _LoginState extends State<Login> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("images/app_images/common_top.png"),
-                        fit: BoxFit.cover
+                        fit: BoxFit.fill
                     )
                 ),
                 child: Stack(
@@ -146,7 +142,7 @@ class _LoginState extends State<Login> {
                               //  Divider(),
 
                               SizedBox(
-                                height: 9,
+                                height: 5,
                               ),
 
                               TextFormField(
@@ -223,7 +219,7 @@ class _LoginState extends State<Login> {
      if(_formKey.currentState!.validate()) {
 
         login(country_code,numberController.text.toString(),role);
-        otp.sendOtp(numberController.text.toString(), '1111', minNumber, maxNumber, country_code);
+        // otp.sendOtp(numberController.text.toString(), '1111', minNumber, maxNumber, country_code);
        Navigator.pushAndRemoveUntil(
        context,
        MaterialPageRoute(

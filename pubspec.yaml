@@ -38,14 +38,14 @@ dependencies:
   google_fonts: ^4.0.3
   pin_code_fields: ^7.4.0
   flutter_pin_code_fields:
-  get:
+  get: ^4.1.4
   carousel_slider: ^4.2.1
   http: ^0.13.5
   nb_utils:
-  flutter_otp:
+#  flutter_otp:
   snippet_coder_utils: ^1.0.0
   shared_preferences:
-  jwt_decoder:
+#  jwt_decoder:
   checkbox_formfield:
   intl: ^0.17.0
   image_picker: ^0.8.7+4

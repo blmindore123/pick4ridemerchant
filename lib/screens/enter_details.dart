@@ -82,7 +82,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("images/app_images/common_top.png"),fit: BoxFit.cover
+                        image: AssetImage("images/app_images/common_top.png"),fit: BoxFit.fill
                     )
                 ),
 

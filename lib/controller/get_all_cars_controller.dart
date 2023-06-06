@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../classes/drive_category.dart';
 import '../classes/getallcars.dart';
 
 class GetAllCarsController extends GetxController {

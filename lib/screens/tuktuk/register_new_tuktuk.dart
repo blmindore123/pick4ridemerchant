@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/src/response.dart';
@@ -14,12 +13,9 @@ import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/imageres.dart';
 import '../../controller/drive_category_controller.dart';
-import '../home.dart';
 import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
-import 'package:http/src/response.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 
 class RegisterNewTukTuk extends StatefulWidget {

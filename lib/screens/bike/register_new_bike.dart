@@ -148,7 +148,7 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
     };
 
     File? imagefile1 = File(image1!.path);
-    Image.file(imagefile1!);
+    Image.file(imagefile1);
     File file1 = File(imagefile1.path);
 
     var request = http.MultipartRequest('POST', Uri.parse(AppConstants.BASE_URL+'/upload-image?'));

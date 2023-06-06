@@ -163,6 +163,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                                       height: MediaQuery.of(context).size.height/17,
                                       child: TextFormField(
                                         controller: nameController,
+                                        keyboardType: TextInputType.text,
                                         validator: (nameController) {
                                           String value = nameController.toString();
                                           String pattern = r'[a-zA-Z]';
@@ -173,6 +174,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                                           else if (!regExp.hasMatch(value.toString())) {
                                             return '';
                                           }
+                                          return null;
                                         },
                                         decoration: InputDecoration(
                                           hintText: "Enter Your Name",
@@ -219,6 +221,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                                       height: MediaQuery.of(context).size.height/17,
                                       child: TextFormField(
                                         controller: emailController,
+                                        keyboardType: TextInputType.emailAddress,
                                         validator: (emailController) {
                                           String value = emailController.toString();
                                           String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -229,6 +232,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                                           else if (!regExp.hasMatch(value.toString())) {
                                             return '';
                                           }
+                                          return null;
                                         },
                                         decoration: InputDecoration(
                                           hintText: "Enter Your Email",
@@ -269,6 +273,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                                       height: MediaQuery.of(context).size.height/17,
                                       child: TextFormField(
                                         controller: addressController,
+                                        keyboardType: TextInputType.text,
                                         validator: (addressController) {
                                           String value = addressController.toString();
                                           if (value.length == 0) {

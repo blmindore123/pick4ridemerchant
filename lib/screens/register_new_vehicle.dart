@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/src/response.dart';
 import 'package:http/http.dart';
-import 'package:pick4ridemerchant/screens/register_new_car.dart';
+import 'package:pick4ridemerchant/screens/bike/register_new_bike.dart';
+import 'package:pick4ridemerchant/screens/car/register_new_car.dart';
+import 'package:pick4ridemerchant/screens/tuktuk/register_new_tuktuk.dart';
+import 'package:pick4ridemerchant/screens/van/register_new_van.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../controller/drive_category_controller.dart';
 import 'login_otp.dart';
@@ -13,6 +16,14 @@ import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 
 class RegisterNewVehicle extends StatefulWidget {
+
+  final String? token;
+
+  const RegisterNewVehicle({
+    @required this.token,
+    Key? key,
+  }) : super(key: key);
+
   @override
   _RegisterNewVehicleState createState() => _RegisterNewVehicleState();
 }
@@ -20,6 +31,8 @@ class RegisterNewVehicle extends StatefulWidget {
 class _RegisterNewVehicleState extends State<RegisterNewVehicle> {
 
   late SharedPreferences prefs;
+
+
 
   @override
   void initState() {
@@ -389,7 +402,25 @@ class _RegisterNewVehicleState extends State<RegisterNewVehicle> {
 
                                     GestureDetector(
                                       onTap: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterNewCar()));
+
+                                        if(driveCategoryController.driveCategory?.data[index].id == 1){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterNewCar()));
+                                        }
+                                        if(driveCategoryController.driveCategory?.data[index].id == 2){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterNewVan()));
+                                        }
+                                        if(driveCategoryController.driveCategory?.data[index].id == 3){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterNewBike()));
+                                        }
+                                        if(driveCategoryController.driveCategory?.data[index].id == 4){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisterNewTukTuk()));
+                                        }
+                                        else{
+                                          print("");
+                                        }
+                                        //if()
+
+
                                       },
                                       child: CircleAvatar(
                                         backgroundColor: Colors.transparent,

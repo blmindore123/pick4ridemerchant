@@ -10,24 +10,24 @@ import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pick4ridemerchant/classes/getallcars.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
-import 'package:pick4ridemerchant/screens/registered_cars_list.dart';
+import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../classes/imageres.dart';
-import '../controller/drive_category_controller.dart';
-import 'home.dart';
-import 'login_otp.dart';
+import '../../classes/imageres.dart';
+import '../../controller/drive_category_controller.dart';
+import '../home.dart';
+import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
 import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 
-class RegisterNewCar extends StatefulWidget {
+class RegisterNewBike extends StatefulWidget {
   @override
-  _RegisterNewCarState createState() => _RegisterNewCarState();
+  _RegisterNewBikeState createState() => _RegisterNewBikeState();
 }
 
-class _RegisterNewCarState extends State<RegisterNewCar> {
+class _RegisterNewBikeState extends State<RegisterNewBike> {
 
 
 
@@ -35,7 +35,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
   TextEditingController licenseController = TextEditingController();
 //  TextEditingController pickUptimeController = TextEditingController();
   TextEditingController insuranceController = TextEditingController();
- // TextEditingController dropOfftimeController = TextEditingController();
+  // TextEditingController dropOfftimeController = TextEditingController();
 
 
   final _formKey = GlobalKey<FormState>();
@@ -116,6 +116,9 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
   List<String> imagesarr = [];
 
+
+  List<GetAllCars> _userDetails = [];
+
   String? xval;
 
 
@@ -159,19 +162,19 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-  //  print(await response.stream.bytesToString());
-     respo = await response.stream.bytesToString();
-     print(respo);
-     String? str = respo;
-     String? abc = '"data":"';
-     String? xyz = '"}';
-     int startIndex = str!.indexOf(abc);
-     int endIndex = str.indexOf(xyz,startIndex+ abc.length);
-     firstimage = str.substring(startIndex+abc.length,endIndex);
-     print(firstimage);
+      //  print(await response.stream.bytesToString());
+      respo = await response.stream.bytesToString();
+      print(respo);
+      String? str = respo;
+      String? abc = '"data":"';
+      String? xyz = '"}';
+      int startIndex = str!.indexOf(abc);
+      int endIndex = str.indexOf(xyz,startIndex+ abc.length);
+      firstimage = str.substring(startIndex+abc.length,endIndex);
+      print(firstimage);
     }
     else {
-    print(response.reasonPhrase);
+      print(response.reasonPhrase);
     }
   }
 
@@ -439,7 +442,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Icon(Icons.arrow_back),
-        title: Text("Register New Car",style: TextStyle(color: Colors.black),),
+        title: Text("Register New Bike",style: TextStyle(color: Colors.black),),
 
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
@@ -744,36 +747,36 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                         ),
 
 
-                        Radio(
-                          value: 2,
-                          groupValue: id,
-                          onChanged: (val) {
-                            setState(() {
-                              radioButtonItemride = 'With Driver';
-                              id = 2;
-                            });
-                          },
-                        ),
-                        Text(
-                          'With Driver',
-                          style: new TextStyle(fontSize: 12.0),
-                        ),
-
-
-                        Radio(
-                          value: 3,
-                          groupValue: id,
-                          onChanged: (val) {
-                            setState(() {
-                              radioButtonItemride = 'Wedding Ride';
-                              id = 3;
-                            });
-                          },
-                        ),
-                        Text(
-                          'Wedding Ride',
-                          style: new TextStyle(fontSize: 12.0),
-                        ),
+                        // Radio(
+                        //   value: 2,
+                        //   groupValue: id,
+                        //   onChanged: (val) {
+                        //     setState(() {
+                        //       radioButtonItemride = 'With Driver';
+                        //       id = 2;
+                        //     });
+                        //   },
+                        // ),
+                        // Text(
+                        //   'With Driver',
+                        //   style: new TextStyle(fontSize: 12.0),
+                        // ),
+                        //
+                        //
+                        // Radio(
+                        //   value: 3,
+                        //   groupValue: id,
+                        //   onChanged: (val) {
+                        //     setState(() {
+                        //       radioButtonItemride = 'Wedding Ride';
+                        //       id = 3;
+                        //     });
+                        //   },
+                        // ),
+                        // Text(
+                        //   'Wedding Ride',
+                        //   style: new TextStyle(fontSize: 12.0),
+                        // ),
 
                       ],
                     ),
@@ -783,45 +786,45 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
                     if(radioButtonItemride == 'Self Drive') Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
 
-    Padding(
-    padding: EdgeInsets.only(left: 11),
-    child: Text("Security Deposit",style: TextStyle(fontWeight: FontWeight.bold),)),
-
-
-    SizedBox(
-    width: 41,
-    ),
-
-    Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 11),),
-
-    Switch(
-    value: isSwitched,
-    onChanged: (value) {
-    setState(() {
-    isSwitched = value;
-    print(isSwitched);
-
-    if(isSwitched == true){
-      xval = "yes";
-    }
-    else{
-      xval = "no";
-    }
+                        Padding(
+                            padding: EdgeInsets.only(left: 11),
+                            child: Text("Security Deposit",style: TextStyle(fontWeight: FontWeight.bold),)),
 
 
-    }
-    );
-    },
-    activeTrackColor: Colors.lightGreenAccent,
-    activeColor: Colors.green,
-    ),
-    Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 11),),
+                        SizedBox(
+                          width: 41,
+                        ),
 
-    ],
-    ) else Text(''),
+                        Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 11),),
+
+                        Switch(
+                          value: isSwitched,
+                          onChanged: (value) {
+                            setState(() {
+                              isSwitched = value;
+                              print(isSwitched);
+
+                              if(isSwitched == true){
+                                xval = "yes";
+                              }
+                              else{
+                                xval = "no";
+                              }
+
+
+                            }
+                            );
+                          },
+                          activeTrackColor: Colors.lightGreenAccent,
+                          activeColor: Colors.green,
+                        ),
+                        Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 11),),
+
+                      ],
+                    ) else Text(''),
 
 
 
@@ -858,7 +861,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           },
                         ),
                         Text(
-                          'Commercial',
+                            'Commercial',
                             style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300)
                         ),
 
@@ -874,7 +877,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           },
                         ),
                         Text(
-                          'Compact',
+                            'Compact',
                             style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300)
                         ),
 
@@ -933,131 +936,17 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
                     Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                       mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('Brand & Model',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 105,
-                          ),
-                          Text('No. of Doors',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
-                    ),
-
-                 SizedBox(
-                   height: 11,
-                 ),
-
-
-
-                 Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                   children: [
-
-
-                  //   Text('hhk'),
-
-
-
-
-
-
-
-                  SizedBox(
-                                width: 155,
-                                height: 42,
-                                child: TextFormField(
-                                  controller: brandNameController,
-                                  keyboardType: TextInputType.text,
-                                  validator: (brandNameController) {
-                                    String value = brandNameController.toString();
-                                    if (value!.isEmpty) {
-                                      return 'Please enter some text';
-                                    }
-                                    return null;
-                                  },
-
-
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    hintText: "Write Here",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9),
-                                      borderSide: BorderSide(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9),
-                                      borderSide: BorderSide(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                     SizedBox(
-                       width: 155,
-                       height: 42,
-                       child: TextFormField(
-                         controller: numofdoorController,
-                         keyboardType: TextInputType.number,
-                         validator: (numofdoorController) {
-                           String value = numofdoorController.toString();
-                           if (value!.isEmpty) {
-                             return 'Please enter some text';
-                           }
-                           return null;
-                         },
-
-
-                         decoration: InputDecoration(
-                           filled: true,
-                           hintText: "Write Here",
-                           border: OutlineInputBorder(
-                             borderRadius: BorderRadius.circular(9),
-                             borderSide: BorderSide(
-                               color: Colors.grey,
-                             ),
-                           ),
-                           enabledBorder: OutlineInputBorder(
-                             borderRadius: BorderRadius.circular(9),
-                             borderSide: BorderSide(
-                               color: Colors.white,
-                             ),
-                           ),
-                         ),
-                       ),
-                     ),
-
-                   ],
-                 ),
-
-
-
-
-                    SizedBox(
-                      height: 11,
-                    ),
-
-                    Padding(
                         padding: EdgeInsets.only(left: 11),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
 
 
-                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('Brand & Model',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                             SizedBox(
-                              width: 51,
+                              width: 105,
                             ),
-                            Text('Air Condition',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
                           ],
@@ -1070,15 +959,52 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
 
-//
-
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
 
 
                         //   Text('hhk'),
+
+
+
+
+
+
+
+                        SizedBox(
+                          width: 155,
+                          height: 42,
+                          child: TextFormField(
+                            controller: brandNameController,
+                            keyboardType: TextInputType.text,
+                            validator: (brandNameController) {
+                              String value = brandNameController.toString();
+                              if (value!.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
+
+
+                            decoration: InputDecoration(
+                              filled: true,
+                              hintText: "Write Here",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(9),
+                                borderSide: BorderSide(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(9),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
 
                         SizedBox(
                           width: 155,
@@ -1113,60 +1039,26 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 155,
-                          height: 42,
-                          child: Row(
-                              children: [
-
-                                Radio(
-                                  value: 1,
-                                  groupValue: idac,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      radioButtonItemac = 'YES';
-                                      idac = 1;
-                                    });
-                                  },
-                                ),
-                                Text(
-                                  'Yes',
-                                  style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300),
-                                ),
-
-                                SizedBox(
-                                  width: 6,
-                                ),
-
-                                Radio(
-                                  value: 2,
-                                  groupValue: idac,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      radioButtonItemac = 'NO';
-                                      idac = 2;
-                                    });
-                                  },
-                                ),
-                                Text(
-                                  'No',
-                                  style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300),
-                                ),
-
-
-
-
-
-                              ],
-                            ),
-                        ),
-
-
-
 
 
                       ],
                     ),
+
+
+
+
+
+
+                    SizedBox(
+                      height: 11,
+                    ),
+
+
+
+//
+
+
+
 
 
 
@@ -1281,7 +1173,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
 
-                     SizedBox(
+                    SizedBox(
                       height: 11,
                     ),
 
@@ -1402,10 +1294,10 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           children: [
 
 
-                            Text('License Expired Date',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                            SizedBox(
-                              width: 61,
-                            ),
+                            // Text('License Expired Date',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            // SizedBox(
+                            //   width: 11,
+                            // ),
                             Text('Insurance Expired Date',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
@@ -1417,136 +1309,136 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                       height: 11,
                     ),
 
-                      Row(
-                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
 
-                          //Expanded(
-                           // child:
-
-                          SizedBox(
-                            width: 21,
-                          ),
-
-                            Padding(
-                              padding: EdgeInsets.only(left: 0),
-                              child: Container(
-                                color: Colors.brown.shade50,
-                                padding:const EdgeInsets.all(15),
-                                height:50,
-                                width: 144,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 4),
-                                  child: TextField(
-
-                                    controller: licenseController, //editing controller of this TextField
-
-                                    decoration: const InputDecoration(
-
-                                      border: InputBorder.none,
-
-                                      hintText: 'yyyy/MM/dd'
-                                    ),
-                                    readOnly: true,  // when true user cannot edit text
-                                    onTap: () async {
-                                      DateTime? pickedTime = await showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(), //get today's date
-                                          firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                                          lastDate: DateTime(2101)
-
-
-                                      );
-
-                                      if(pickedTime != null ){
-                                        print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
-                                        String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
-                                        print(formattedDate); //formatted date output using intl package =>  2022-07-04
-                                        setState(() {
-                                          licenseController.text = formattedDate; //set foratted date to TextField value.
-                                        });
-                                      }else{
-                                        print("Date is not selected");
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                         // ),
-
-
-                          Container(
-                              height: 50,
-                              color: Colors.brown.shade50,
-                              child: Icon(Icons.calendar_month,color: Colors.purple,)),
+                        //Expanded(
+                        // child:
+                        //
+                        // SizedBox(
+                        //   width: 21,
+                        // ),
+                        //
+                        //   Padding(
+                        //     padding: EdgeInsets.only(left: 0),
+                        //     child: Container(
+                        //       color: Colors.brown.shade50,
+                        //       padding:const EdgeInsets.all(15),
+                        //       height:50,
+                        //       width: MediaQuery.of(context).size.width/2.72,
+                        //       child: Padding(
+                        //         padding: EdgeInsets.only(top: 4),
+                        //         child: TextField(
+                        //
+                        //           controller: licenseController, //editing controller of this TextField
+                        //
+                        //           decoration: const InputDecoration(
+                        //
+                        //             border: InputBorder.none,
+                        //
+                        //             hintText: 'yyyy/MM/dd'
+                        //           ),
+                        //           readOnly: true,  // when true user cannot edit text
+                        //           onTap: () async {
+                        //             DateTime? pickedTime = await showDatePicker(
+                        //                 context: context,
+                        //                 initialDate: DateTime.now(), //get today's date
+                        //                 firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                        //                 lastDate: DateTime(2101)
+                        //
+                        //
+                        //             );
+                        //
+                        //             if(pickedTime != null ){
+                        //               print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
+                        //               String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
+                        //               print(formattedDate); //formatted date output using intl package =>  2022-07-04
+                        //               setState(() {
+                        //                 licenseController.text = formattedDate; //set foratted date to TextField value.
+                        //               });
+                        //             }else{
+                        //               print("Date is not selected");
+                        //             }
+                        //           },
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
 
 
-                          SizedBox(
-                            width: 11,
-                          ),
+                        // Container(
+                        //     height: 50,
+                        //     color: Colors.brown.shade50,
+                        //     child: Icon(Icons.calendar_month,color: Colors.purple,)),
 
-                         // Expanded(
-                           // child:
-                            Padding(
-                              padding: EdgeInsets.only(right: 0),
-                              child: Container(
-                                color: Colors.brown.shade50,
-                                padding:const EdgeInsets.all(15),
-                                height:50,
-                                width: 144,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 4),
-                                  child: TextField(
 
-                                    controller: insuranceController, //editing controller of this TextField
-                                    decoration: const InputDecoration(
+                        SizedBox(
+                          width: 11,
+                        ),
+
+                        // Expanded(
+                        // child:
+                        Padding(
+                          padding: EdgeInsets.only(right: 0),
+                          child: Container(
+                            color: Colors.brown.shade50,
+                            padding:const EdgeInsets.all(15),
+                            height:50,
+                            width: MediaQuery.of(context).size.width/2.72,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 4),
+                              child: TextField(
+
+                                controller: insuranceController, //editing controller of this TextField
+                                decoration: const InputDecoration(
 
 //                                    suffixIcon: Icon(Icons.calendar_month,color: Colors.purple,),
-                                      border: InputBorder.none,
-                                      hintText: 'yyyy/MM/dd'
+                                    border: InputBorder.none,
+                                    hintText: 'yyyy/MM/dd'
 
-                                    ),
-                                    readOnly: true,  // when true user cannot edit text
-                                    onTap: () async {
-                                      DateTime? pickedTime = await showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(), //get today's date
-                                          firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                                          lastDate: DateTime(2101)
-
-
-                                      );
-
-                                      if(pickedTime != null ){
-                                        print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
-                                        String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
-                                        print(formattedDate); //formatted date output using intl package =>  2022-07-04
-                                        //You can format date as per your need
-
-                                        //  String newTime = formattedDate.replaceAll(new RegExp(r'[^\w\s]+'),'');
-
-
-                                        setState(() {
-                                          insuranceController.text = formattedDate; //set foratted date to TextField value.
-                                        });
-                                      }else{
-                                        print("Date is not selected");
-                                      }
-                                    },
-                                  ),
                                 ),
+                                readOnly: true,  // when true user cannot edit text
+                                onTap: () async {
+                                  DateTime? pickedTime = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(), //get today's date
+                                      firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                                      lastDate: DateTime(2101)
+
+
+                                  );
+
+                                  if(pickedTime != null ){
+                                    print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
+                                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
+                                    print(formattedDate); //formatted date output using intl package =>  2022-07-04
+                                    //You can format date as per your need
+
+                                    //  String newTime = formattedDate.replaceAll(new RegExp(r'[^\w\s]+'),'');
+
+
+                                    setState(() {
+                                      insuranceController.text = formattedDate; //set foratted date to TextField value.
+                                    });
+                                  }else{
+                                    print("Date is not selected");
+                                  }
+                                },
                               ),
                             ),
-                         // ),
+                          ),
+                        ),
+                        // ),
 
-                          Container(
-                              height: 50,
-                              color: Colors.brown.shade50,
-                              child: Icon(Icons.calendar_month,color: Colors.purple,)),
+                        Container(
+                            height: 50,
+                            color: Colors.brown.shade50,
+                            child: Icon(Icons.calendar_month,color: Colors.purple,)),
 
-                        ],
-                      ),
+                      ],
+                    ),
 
 
                     SizedBox(
@@ -1570,18 +1462,18 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                         Padding(
                           padding: EdgeInsets.only(left: 11),
                           child: SizedBox(
-                              width: 300,
-                              height: 45,
-                              child: TextFormField(
+                            width: MediaQuery.of(context).size.width/1.3,
+                            height: 45,
+                            child: TextFormField(
                               controller: priceController,
                               keyboardType: TextInputType.number,
-                                validator: (priceController) {
-                                  String value = priceController.toString();
-                                  if (value!.isEmpty) {
-                                    return 'Please enter some text';
-                                  }
-                                  return null;
-                                },
+                              validator: (priceController) {
+                                String value = priceController.toString();
+                                if (value!.isEmpty) {
+                                  return 'Please enter some text';
+                                }
+                                return null;
+                              },
 
                               decoration: InputDecoration(
                                 filled: true,
@@ -1599,7 +1491,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                                   ),
                                 ),
                               ),
-                          ),
+                            ),
                           ),
                         ),
 
@@ -1633,7 +1525,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                       padding: EdgeInsets.only(left: 11,right: 11),
                       child: SizedBox(
                           width: 480,
-                      //    height: 145,
+                          //    height: 145,
                           child: TextFormField(
                             controller: descriptionController,
                             keyboardType: TextInputType.text,
@@ -1752,9 +1644,9 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
 
-                  SizedBox(
-                    height: 11,
-                  ),
+                    SizedBox(
+                      height: 11,
+                    ),
 
                     Padding(
                       padding: EdgeInsets.only(left: 11),
@@ -1781,7 +1673,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                               height: 115,
                               width: 161,
                               child: Card(
-                                color: Colors.brown.shade50,
+                                  color: Colors.brown.shade50,
                                   child: Image.file(File(image3!.path),fit: BoxFit.cover,)
                               ),
                             ),
@@ -1794,7 +1686,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             height: 115,
                             width: 161,
                             child: Card(
-                                color: Colors.brown.shade50,
+                              color: Colors.brown.shade50,
 
                             ),
                           ),
@@ -1812,8 +1704,8 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             height: 115,
                             width: 161,
                             child: Card(
-                              color: Colors.brown.shade50,
-                            child: Image.file(File(image4!.path),fit: BoxFit.cover,)
+                                color: Colors.brown.shade50,
+                                child: Image.file(File(image4!.path),fit: BoxFit.cover,)
                             ),
                           ),
                         ): GestureDetector(
@@ -1824,7 +1716,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             height: 115,
                             width: 161,
                             child: Card(
-                                color: Colors.brown.shade50,
+                              color: Colors.brown.shade50,
                             ),
                           ),
                         ),
@@ -1835,43 +1727,6 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                     SizedBox(
                       height: 31,
                     ),
-
-
-                    // GestureDetector(
-                    //   onTap: (){
-                    //     selectImages();
-                    //   },
-                    //   child: SizedBox(
-                    //     width: 300.0,
-                    //     height: 195,// To show images in particular area only
-                    //     child: selectedImagesnew.isEmpty  // If no images is selected
-                    //         ? const Center(child: Text('Sorry nothing selected!!'))
-                    //         : GridView.builder(
-                    //       // scrollDirection: Axis.horizontal,
-                    //       itemCount: selectedImagesnew.length,
-                    //       gridDelegate:
-                    //       const SliverGridDelegateWithFixedCrossAxisCount(
-                    //           crossAxisCount: 3
-                    //         // Horizontally only 3 images will show
-                    //       ),
-                    //       itemBuilder: (BuildContext context, int index) {
-                    //         // TO show selected file
-                    //         return Padding(
-                    //           padding: EdgeInsets.all(7),
-                    //           child: Center(
-                    //               child: kIsWeb
-                    //                   ? Image.network(
-                    //                   selectedImagesnew[index].path)
-                    //                   : Image.file(selectedImagesnew[index])),
-                    //         );
-                    //         // If you are making the web app then you have to
-                    //         // use image provider as network image or in
-                    //         // android or iOS it will as file only
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
-
 
 
 
@@ -1898,7 +1753,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           child: kIsWeb
                               ? Image.network(
                               selectedImagesnew[index].path)
-                              : Image.file(selectedImagesnew[index]),
+                              : Image.file(selectedImagesnew[index],fit: BoxFit.cover,),
                         );
 
                       },
@@ -1907,12 +1762,12 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                     ),
 
                     if(selectedImagesnew.length < 6)
-                    ElevatedButton(onPressed: (){
+                      ElevatedButton(onPressed: (){
 
-                      selectImages();
+                        selectImages();
 
-                    }, child: Text('Add Images')
-                    )else Padding(
+                      }, child: Text('Add Images')
+                      )else Padding(
                         padding: EdgeInsets.all(15),
                         child: Text('Max 5 images allowed',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),)),
 
@@ -1921,7 +1776,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/4.22,
                           right: MediaQuery.of(context).size.width/4.22,
                           top: MediaQuery.of(context).size.height/24.44,
-                        bottom: 11
+                          bottom: 11
                       ),
 
                       child: SizedBox(
@@ -1942,45 +1797,46 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           onPressed: () {
                             if(_formKey.currentState!.validate() && image1 != null && image2 != null && image3 != null && image4 != null && imageFileList != null){
 
-                             _formKey.currentState?.save();
+                              _formKey.currentState?.save();
                               String? valTok = prefs.getString('token');
                               print("enterdetails: $valTok");
 
 
-                              //register car method called
+                              //register bike method called
 
-                              registerCar(
-                                  id,
-                                  radioButtonItemvehicle,
-                                  xval,
-                                  brandNameController.text,
-                                  int.parse(numofdoorController.text),
-                                  int.parse(noofluggageController.text),
-                                  idac.toString(),
-                                  gearController.text,
-                                  fuelController.text,
-                                  int.parse(seatsController.text),
-                                  vehiclenoController.text,
-                                  insuranceController.text,
-                                  int.parse(priceController.text),
-                                  descriptionController.text,
-                                  firstimage ?? '',
-                                  secondimage ?? '',
-                                  thirdimage ?? '',
-                                  fourthimage ?? '',
-                                  one ?? '',
-                                  two ?? '',
-                                  three ?? '',
-                                  four ?? '',
-                                  five ?? '',
+                              registerBike(
+                                id,
+                                radioButtonItemvehicle,
+                                xval,
+                                brandNameController.text,
+                                0,
+                                int.parse(noofluggageController.text),
+                                'no',
+                                gearController.text,
+                                fuelController.text,
+                                int.parse(seatsController.text),
+                                vehiclenoController.text,
+                                insuranceController.text,
+                                int.parse(priceController.text),
+                                descriptionController.text,
+                                firstimage ?? '',
+                                secondimage ?? '',
+                                thirdimage ?? '',
+                                fourthimage ?? '',
+                                one ?? '',
+                                two ?? '',
+                                three ?? '',
+                                four ?? '',
+                                five ?? '',
                               );
 
-
-
-
-
-                           }
-
+                            }
+                            else{
+                              const snackBar = SnackBar(
+                                content: Text('Enter All Details!'),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
 
 
                             // id,
@@ -1991,12 +1847,8 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             print(xval);
                             // brandNameController.text,
                             print(brandNameController.text);
-                            // int.parse(numofdoorController.text),
-                            print(int.parse(numofdoorController.text));
                             // int.parse(noofluggageController.text),
                             int.parse(noofluggageController.text);
-                            // idac.toString(),
-                            print(idac.toString());
                             // gearController.text,
                             print(gearController.text);
                             // fuelController.text,
@@ -2018,9 +1870,6 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             print(three);
                             print(four);
                             print(five);
-
-
-
 
                           },
                           child: Align(
@@ -2112,7 +1961,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
 
-  void registerCar(
+  void registerBike(
       int? id,
       String? vehicletypecat,
       String? secdepo,
@@ -2147,7 +1996,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
           body:  json.encode(
               {
-                "vehicle_category": 1,
+                "vehicle_category": 3,
                 "ride_category": id,
                 "vehicle_type": vehicletypecat,
                 "security_deposit": secdepo,
@@ -2172,11 +2021,11 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                     "image": imageTwoinsur
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageOnerc
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageTworc
                   },
                   {
@@ -2187,18 +2036,18 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                     "type": "vehicle",
                     "image": imageTwoveh
                   },
-              {
-              "type": "vehicle",
-              "image": imageThreeveh
-              },
-              {
-              "type": "vehicle",
-              "image": imageFourveh
-              },
-              {
-              "type": "vehicle",
-              "image": imageFiveveh
-              }
+                  {
+                    "type": "vehicle",
+                    "image": imageThreeveh
+                  },
+                  {
+                    "type": "vehicle",
+                    "image": imageFourveh
+                  },
+                  {
+                    "type": "vehicle",
+                    "image": imageFiveveh
+                  }
                 ]
               }
           ),
@@ -2215,14 +2064,17 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
         //    String? valTok = prefs.getString('token');
         //    print("valTok: $valTok");
 
+        final responseJson = json.decode(response.body);
         setState(() {
 
         });
 
+
+
         Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList()));
 
-       //  var result = jsonDecode(response.body);
-       // getAllCars = GetAllCars.fromJson(result);
+        //  var result = jsonDecode(response.body);
+        // getAllCars = GetAllCars.fromJson(result);
         // setState(() {
         //   getAllCarsController.getAllCars!.data.removeAt(index);
         // });
@@ -2244,9 +2096,23 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
     }
   }
 
+  //doors
+  //ac
+  //
+
+
+  void noToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    var x = preferences.getString('token');
+
+    if(x == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+
+  }
+
 
 }
-
 
 
 

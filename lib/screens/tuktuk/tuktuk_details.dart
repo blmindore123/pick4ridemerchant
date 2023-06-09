@@ -5,17 +5,17 @@ import 'package:flutter/widgets.dart';
 import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pick4ridemerchant/screens/registered_cars_list.dart';
+import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'home.dart';
-import 'login_otp.dart';
+import '../home.dart';
+import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
 import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 
-class CarDetails extends StatefulWidget {
+class TukTukDetails extends StatefulWidget {
 
   final token;
   final int? id;
@@ -44,7 +44,7 @@ class CarDetails extends StatefulWidget {
   final String? insur;
 
 
-  const CarDetails({
+  const TukTukDetails({
     @required this.token,
     @required this.id,
     @required this.brandn,
@@ -74,10 +74,10 @@ class CarDetails extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CarDetailsState createState() => _CarDetailsState();
+  _TukTukDetailsState createState() => _TukTukDetailsState();
 }
 
-class _CarDetailsState extends State<CarDetails> {
+class _TukTukDetailsState extends State<TukTukDetails> {
 
 
 
@@ -99,7 +99,7 @@ class _CarDetailsState extends State<CarDetails> {
   TextEditingController vehiclenoController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-
+  CarouselController carouselController = CarouselController();
 
 
 
@@ -138,19 +138,19 @@ class _CarDetailsState extends State<CarDetails> {
   Widget build(BuildContext context) {
 
 
-    vehwidaimg = widget.imgs;
+    vehwidaimg = widget.imgs5;
     widgetimg.add(vehwidaimg);
 
-    vehwidbimg = widget.imgs;
+    vehwidbimg = widget.imgs6;
     widgetimg.add(vehwidbimg);
 
-    vehwidcimg = widget.imgs;
+    vehwidcimg = widget.imgs7;
     widgetimg.add(vehwidcimg);
 
-    vehwiddimg = widget.imgs;
+    vehwiddimg = widget.imgs8;
     widgetimg.add(vehwiddimg);
 
-    vehwideimg = widget.imgs;
+    vehwideimg = widget.imgs9;
     widgetimg.add(vehwideimg);
 
 
@@ -164,7 +164,7 @@ class _CarDetailsState extends State<CarDetails> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Icon(Icons.arrow_back),
-        title: Text("Vehicle Detail",style: TextStyle(color: Colors.black),),
+        title: Text("TukTuk Details",style: TextStyle(color: Colors.black),),
 
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
@@ -453,6 +453,7 @@ class _CarDetailsState extends State<CarDetails> {
                           onTap: (){
                           },
                           child: CarouselSlider.builder(
+                            carouselController: carouselController,
                             options: CarouselOptions(
                               height:280.0,
                             ),
@@ -467,7 +468,7 @@ class _CarDetailsState extends State<CarDetails> {
                                     width: MediaQuery.of(context).size.width,
                                     //   color: Colors.brown.shade50,
 
-                                  //  child: Image.network(widget.imgs!,fit: BoxFit.cover,),
+                                    //  child: Image.network(widget.imgs!,fit: BoxFit.cover,),
 
 
 
@@ -494,7 +495,7 @@ class _CarDetailsState extends State<CarDetails> {
                           left: 19,
                           child: IconButton(
                             onPressed: (){
-
+                              carouselController.previousPage();
                             },
                             icon: Icon(Icons.arrow_back_ios),
                           ),
@@ -505,7 +506,7 @@ class _CarDetailsState extends State<CarDetails> {
                           top: 118,left: 331,
                           child: IconButton(
                             onPressed: (){
-
+                              carouselController.nextPage();
                             },
                             icon: Icon(Icons.arrow_forward_ios_sharp),
                           ),
@@ -636,7 +637,7 @@ class _CarDetailsState extends State<CarDetails> {
                           SizedBox(
                             width: 118,
                           ),
-                          Text('No. of Doors',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                          Text('Count of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
                         ],
@@ -687,95 +688,7 @@ class _CarDetailsState extends State<CarDetails> {
 
                               child: Padding(
                                   padding: EdgeInsets.only(top: 15,left: 19,right: 6),
-                                  child: Text(widget.doors!,maxLines:2,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 13),)),
-
-
-                            ),
-
-
-                          ),
-                        ),
-
-                        //TextFormField(),
-                        //TextFormField(),
-
-                      ],
-                    ),
-                  ),
-
-
-
-
-                  SizedBox(
-                    height: 11,
-                  ),
-
-
-
-                  Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('Count of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 46,
-                          ),
-                          Text('Air Condition(AC/Non-AC)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
-                  ),
-
-                  SizedBox(
-                    height: 11,
-                  ),
-
-
-                  Container(
-                    height: 42,
-                    child: Row(
-                      children: [
-
-
-
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 11),
-                            child: Container(
-                              height: 42,
-                              color: Colors.brown.shade50,
-
-                              child: Padding(
-                                  padding: EdgeInsets.only(top: 15,left: 19,right: 6),
                                   child: Text(widget.luggage!,maxLines:2,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 13),)),
-
-
-                            ),
-
-
-                          ),
-                        ),
-
-
-
-                        SizedBox(
-                          width: 11,
-                        ),
-
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 11),
-                            child: Container(
-                              height: 42,
-                              color: Colors.brown.shade50,
-
-                              child: Padding(
-                                  padding: EdgeInsets.only(top: 15,left: 19,right: 6),
-                                  child: Text(widget.ac!,maxLines:2,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 13),)),
 
 
                             ),
@@ -1484,6 +1397,14 @@ class _CarDetailsState extends State<CarDetails> {
 
 
 
+  void noToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    var x = preferences.getString('token');
 
+    if(x == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+
+  }
 
 }

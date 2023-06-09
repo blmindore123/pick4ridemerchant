@@ -5,7 +5,6 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:pick4ridemerchant/screens/enter_details.dart';
 import 'package:pick4ridemerchant/screens/home.dart';
 import 'package:pick4ridemerchant/screens/login_otp.dart';
-import 'package:pick4ridemerchant/screens/register_new_car.dart';
 import 'package:pick4ridemerchant/screens/register_new_vehicle.dart';
 
 

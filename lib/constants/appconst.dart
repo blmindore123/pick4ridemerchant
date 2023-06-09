@@ -2,7 +2,7 @@ class AppConstants{
 
   static const String APP_NAME="KK";
   static const int APP_Version = 1;
-  static const String DEFAULT_IMAGE = "https://images.freeimages.com/images/previews/c2c/beautiful-white-and-yellow-wildflower-1641919.jpg";
+  static const String DEFAULT_IMAGE = "";
 
 
   static const String BASE_URL = "http://pick4ride.com/api";

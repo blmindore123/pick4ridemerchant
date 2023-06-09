@@ -1830,12 +1830,13 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
                                 five ?? '',
                               );
 
-
-
-
-
                             }
-
+                            else{
+                              const snackBar = SnackBar(
+                                content: Text('Enter All Details!'),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
 
 
                             // id,
@@ -1869,9 +1870,6 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
                             print(three);
                             print(four);
                             print(five);
-
-
-
 
                           },
                           child: Align(
@@ -2023,11 +2021,11 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
                     "image": imageTwoinsur
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageOnerc
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageTworc
                   },
                   {
@@ -2101,8 +2099,20 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
   //doors
   //ac
   //
-}
 
+
+  void noToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    var x = preferences.getString('token');
+
+    if(x == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+
+  }
+
+
+}
 
 
 

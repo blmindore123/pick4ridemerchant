@@ -708,12 +708,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                   children: [
 
 
-
-
-
-
-
-
                     SizedBox(
                       height: 31,
                     ),
@@ -942,11 +936,12 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           children: [
 
 
+
                             Text('Brand & Model',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                             SizedBox(
                               width: 105,
                             ),
-                            Text('No. of Doors',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
                           ],
@@ -1005,83 +1000,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 155,
-                          height: 42,
-                          child: TextFormField(
-                            controller: numofdoorController,
-                            keyboardType: TextInputType.number,
-                            validator: (numofdoorController) {
-                              String value = numofdoorController.toString();
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
-
-
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: "Write Here",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-
-
-
-
-                    SizedBox(
-                      height: 11,
-                    ),
-
-                    Padding(
-                        padding: EdgeInsets.only(left: 11),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-
-
-                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                            SizedBox(
-                              width: 51,
-                            ),
-                            Text('Air Condition',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                          ],
-                        )
-                    ),
-
-                    SizedBox(
-                      height: 11,
-                    ),
-
-
-
-//
-
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-
-
-                        //   Text('hhk'),
 
                         SizedBox(
                           width: 155,
@@ -1116,56 +1034,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 155,
-                          height: 42,
-                          child: Row(
-                            children: [
-
-                              Radio(
-                                value: 1,
-                                groupValue: idac,
-                                onChanged: (val) {
-                                  setState(() {
-                                    radioButtonItemac = 'YES';
-                                    idac = 1;
-                                  });
-                                },
-                              ),
-                              Text(
-                                'Yes',
-                                style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300),
-                              ),
-
-                              SizedBox(
-                                width: 6,
-                              ),
-
-                              Radio(
-                                value: 2,
-                                groupValue: idac,
-                                onChanged: (val) {
-                                  setState(() {
-                                    radioButtonItemac = 'NO';
-                                    idac = 2;
-                                  });
-                                },
-                              ),
-                              Text(
-                                'No',
-                                style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300),
-                              ),
-
-
-
-
-
-                            ],
-                          ),
-                        ),
-
-
-
 
 
                       ],
@@ -1619,19 +1487,15 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                     SizedBox(
                       height: 11,
                     ),
-
                     Padding(
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
                           child: Text('Description',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
-
-
                     SizedBox(
                       height: 11,
                     ),
-
                     Padding(
                       padding: EdgeInsets.only(left: 11,right: 11),
                       child: SizedBox(
@@ -1640,7 +1504,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           child: TextFormField(
                             controller: descriptionController,
                             keyboardType: TextInputType.text,
-
                             validator: (descriptionController) {
                               String value = descriptionController.toString();
                               if (value!.isEmpty) {
@@ -1648,7 +1511,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                               }
                               return null;
                             },
-
                             decoration: InputDecoration(
                               filled: true,
                               hintText: "Enter Here",
@@ -1668,26 +1530,18 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           )
                       ),
                     ),
-
-
-
                     SizedBox(
                       height: 11,
                     ),
-
                     Padding(
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
                           child: Text('Image of vehicle license and insurance copy',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
-
-
                     SizedBox(
                       height: 11,
                     ),
-
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -1719,10 +1573,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             ),
                           ),
                         ),
-
-
-
-
                         SizedBox(
                           width: 21,
                         ),
@@ -1879,9 +1729,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
 
                     GestureDetector( onTap: (){  }, child: SizedBox( width: MediaQuery.of(context).size.width, height: 155, child: selectedImagesnew.isEmpty ? const Center(child: Text('Add Images') )
-
                         : GridView.builder(
-
                       scrollDirection: Axis.horizontal,
                       itemCount:  selectedImagesnew.length,
                       gridDelegate:
@@ -1932,7 +1780,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                         width: MediaQuery.of(context).size.width/2.56,
                         child: ElevatedButton(
                           style: ButtonStyle(
-
                               foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                               backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -1944,14 +1791,10 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           ),
                           onPressed: () {
                             if(_formKey.currentState!.validate() && image1 != null && image2 != null && image3 != null && image4 != null && imageFileList != null){
-
                               _formKey.currentState?.save();
                               String? valTok = prefs.getString('token');
                               print("enterdetails: $valTok");
-
-
                               //register car method called
-
                               registerTuktuk(
                                 id,
                                 radioButtonItemvehicle,
@@ -1977,13 +1820,13 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                                 four ?? '',
                                 five ?? '',
                               );
-
-
-
-
-
                             }
-
+                            else{
+                              const snackBar = SnackBar(
+                                content: Text('Enter All Details!'),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
 
 
                             // id,
@@ -1995,9 +1838,9 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             // brandNameController.text,
                             print(brandNameController.text);
                             // int.parse(numofdoorController.text),
-                            print(int.parse(numofdoorController.text));
+                       //     print(int.parse(numofdoorController.text));
                             // int.parse(noofluggageController.text),
-                            int.parse(noofluggageController.text);
+                         //   int.parse(noofluggageController.text);
                             // idac.toString(),
                             print(idac.toString());
                             // gearController.text,
@@ -2021,10 +1864,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             print(three);
                             print(four);
                             print(five);
-
-
-
-
                           },
                           child: Align(
                               alignment: Alignment.center,
@@ -2175,11 +2014,11 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                     "image": imageTwoinsur
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageOnerc
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageTworc
                   },
                   {
@@ -2212,36 +2051,23 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
 
       if(response.statusCode == 200){
-
         print(response.body.toString());
         print('vehicle added');
         //    String? valTok = prefs.getString('token');
         //    print("valTok: $valTok");
-
         final responseJson = json.decode(response.body);
         setState(() {
        //   for (Map<String,dynamic> user in responseJson) {
         //    _userDetails.add(GetAllCars.fromJson(user));
         //  }
         });
-
-
-
         Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList()));
-
         //  var result = jsonDecode(response.body);
         // getAllCars = GetAllCars.fromJson(result);
         // setState(() {
         //   getAllCarsController.getAllCars!.data.removeAt(index);
         // });
         //
-
-
-
-
-
-
-
       }
       else {
         print('failed');
@@ -2249,6 +2075,16 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
     }catch(e){
       print(e.toString());
       print('catched');
+    }
+  }
+
+
+
+  void noToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    var x = preferences.getString('token');
+    if(x == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
     }
   }
 

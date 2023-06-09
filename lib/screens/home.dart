@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pick4ridemerchant/extensions/string_ext.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/images.dart';
 import 'dashboard/fragments/earning.dart';
 import 'dashboard/fragments/filter.dart';
 import 'dashboard/fragments/homefrg.dart';
 import 'dashboard/fragments/notify.dart';
 import 'dashboard/fragments/profile.dart';
+import 'login_otp.dart';
 
 class HomeScreen extends StatefulWidget {
   final token;
@@ -23,15 +25,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
 
+  late SharedPreferences prefs;
 
   int currentIndex = 0;
-
-
-
-
-
-
-
 
   @override
   void initState() {
@@ -127,4 +123,18 @@ class _HomeScreenState extends State<HomeScreen> {
       endDrawerEnableOpenDragGesture: false,
     );
   }
+
+
+  //
+
+  void noToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    var x = preferences.getString('token');
+
+    if(x == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+
+  }
+
 }

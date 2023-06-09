@@ -1476,15 +1476,7 @@ class _EditCarState extends State<EditCar> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
 
-
                         //   Text('hhk'),
-
-
-
-
-
-
-
                         SizedBox(
                           width: 155,
                           height: 42,
@@ -2008,16 +2000,6 @@ class _EditCarState extends State<EditCar> {
                     ),
 
 
-
-
-
-
-
-
-
-
-
-
                     GestureDetector(
                       onTap: (){  },
                       child: SizedBox(
@@ -2025,7 +2007,7 @@ class _EditCarState extends State<EditCar> {
                         height: 155,
                         child: selectedImagesnew.isEmpty ? GridView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount:  widget.group?.length,
+                              itemCount:  5,
                               gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 1
@@ -2195,14 +2177,11 @@ class _EditCarState extends State<EditCar> {
 
 
 
-
-
-
                               editCar(
                                 idride ?? widget.id,
                                 radioButtonItemvehicle ?? widget.vehicletype,
                                 xval ?? widget.secdepo,
-                                brand,
+                                brand ?? widget.brandn,
                                 doors,
                                 luggages,
                                 radioButtonItemac ?? widget.ac,
@@ -2213,26 +2192,24 @@ class _EditCarState extends State<EditCar> {
                                 insurdt ?? widget.insurance,
                                 prices,
                                 descriptxt ?? widget.description,
-                                firstimage ?? widget.editimgs,
-                                secondimage ?? widget.editimgs2,
-                                thirdimage ?? widget.editimgs3,
-                                fourthimage ?? widget.editimgs4,
-                                one ?? widget.editimgs5,
-                                two ?? widget.editimgs6,
-                                three ?? widget.editimgs7,
-                                four ?? widget.editimgs8,
-                                five ?? widget.editimgs9,
+                                firstimage ?? '',
+                                secondimage ?? '',
+                                thirdimage ?? '',
+                                fourthimage ?? '',
+                                one ?? '',
+                                two ?? '',
+                                three ?? '',
+                                four ?? '',
+                                five ?? '',
+                                // three ?? widget.editimgs7,
+                                // four ?? widget.editimgs8,
+                                // five ?? widget.editimgs9,
                               );
 
 
-                              print("1 ${widget.editimgs5}");
-                              print("2 ${widget.editimgs6}");
-                              print("3 ${widget.editimgs7}");
-                              print("4 ${widget.editimgs8}");
-                              print("5 ${widget.editimgs9}");
+                              print("veh $radioButtonItemvehicle");
 
 
-                              print("selected images new : $selectedImagesnew");
 
                           },
                           child: Align(
@@ -2449,5 +2426,14 @@ class _EditCarState extends State<EditCar> {
     }
   }
 
+  void noToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    var x = preferences.getString('token');
+
+    if(x == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+
+  }
 
 }

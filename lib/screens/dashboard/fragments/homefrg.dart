@@ -17,23 +17,48 @@ class HomeFragment extends StatefulWidget {
 class _HomeFragmentState extends State<HomeFragment> {
 
   late SharedPreferences prefs;
+  String? checktoken;
+  String? toke;
 
   @override
   void initState() {
     super.initState();
     //  value = widget.value == true;
     initSharedPref();
+    checkToken();
+
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) {
+      // if(toke == null){
+      //   Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+      // }
+      setState(() {
+      });
+    });
+
+
+
   }
   void initSharedPref() async{
     prefs = await SharedPreferences.getInstance();
+
+  toke = prefs.getString('token');
+
   }
+
+
 
 
 
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
+
+
 
         resizeToAvoidBottomInset: true,
 
@@ -382,8 +407,13 @@ backgroundColor: Colors.white,
                 Padding(
                   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/17,right: MediaQuery.of(context).size.width/17),
                   child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList()));
+
+
+
+                      onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList(
+                        token: toke,
+                      )));
                     },
                     child: Container(
                       height: MediaQuery.of(context).size.height/8.11,
@@ -521,7 +551,9 @@ backgroundColor: Colors.white,
                             //  padding: EdgeInsets.all(20) //content padding inside button
                           ),
                           onPressed: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterNewVehicle()));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterNewVehicle(
+                              token: toke
+                            )));
                             //code to execute when this button is pressed.
                           },
                           child: Text("Register New Vehicles",style: TextStyle(fontSize: MediaQuery.of(context).size.width/14.96),)
@@ -606,6 +638,36 @@ backgroundColor: Colors.white,
 
       ],
     );
+  }
+
+
+
+  //
+
+  void noToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    var x = preferences.getString('token');
+
+    if(x == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+
+  }
+
+
+
+
+  checkToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    checktoken = preferences.getString('token');
+
+    if(checktoken == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+    else{
+      print("kjkln");
+    }
+
   }
 
 

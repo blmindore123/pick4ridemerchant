@@ -12,6 +12,8 @@ import 'package:pick4ridemerchant/controller/get_all_cars_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/getallcars.dart';
 import '../../classes/imageres.dart';
+import '../bike/bike_details.dart';
+import '../bike/edit_bike.dart';
 import '../car/car_details.dart';
 import '../car/edit_car.dart';
 import '../login_otp.dart';
@@ -20,6 +22,11 @@ import 'package:get/get_core/src/get_main.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
+import '../tuktuk/edit_tuktuk.dart';
+import '../tuktuk/tuktuk_details.dart';
+import '../van/edit_van.dart';
+import '../van/van_details.dart';
 
 class RegisteredCarsList extends StatefulWidget {
 
@@ -44,24 +51,34 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
   TextEditingController controller = new TextEditingController();
 
+  // List<Map<String,dynamic>> _allUsers = [];
+  //
+  //
+  // List<Map<String,dynamic>> _foundUsers = [];
 
-
-
+ String? toke;
 
   @override
   void initState() {
     super.initState();
+
     initSharedPref();
 
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   setState(() {
-    //     getAllCarsController.isLoading == true;
-    //   });
-    // });
+    checkToken();
 
-    setState(() {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) {
+      getAllCarsController.fetchData();
 
+
+          setState(() {
+     });
     });
+
+
+
+
+
 
 
   }
@@ -72,12 +89,25 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
   void initSharedPref() async{
     prefs = await SharedPreferences.getInstance();
+
+    toke = prefs.getString('token');
   }
 
+  // void _runFilter(String enteredKeyword){
+  //   List<Map<String,dynamic>> results = [];
+  //   if(enteredKeyword.isEmpty){
+  //     results = _allUsers;
+  //   }else{
+  //     results = _allUsers.where((user) => user["name"].toLowerCase().contains(enteredKeyword).toLowerCase()).toList();
+  //   }
+  //   setState(() {
+  //     _foundUsers = results;
+  //   });
+  // }
+
+
+
   GetAllCarsController getAllCarsController = Get.put(GetAllCarsController());
-
-
-
 
   String radioButtonItem = 'Self Driverrr';
   int id = 11;
@@ -109,18 +139,24 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
   String? three;
   String? four;
   String? five;
+  List<String> suggestons = [];
+  String? _result;
+
+  String? checktoken;
+
+  //
 
 
-
-
-
- //_loadData () async{
- //  await Get.find<GetAllCarsController>().fetchData();
-// }
   @override
   Widget build(BuildContext context) {
+
+    // String? valTok = prefs.getString('token');
+    // if(valTok == null){
+    //   Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    // }
+
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+     // resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Icon(Icons.arrow_back),
@@ -128,6 +164,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
       ),
+
       endDrawer: Drawer(
         child: Container(
           decoration: BoxDecoration(color: Colors.white),
@@ -224,8 +261,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                     leading: Icon(
                       Icons.location_on,
                       size: 20.0,
-                      color: Colors.purple,
-                    ),
+                      color: Colors.purple,),
                     onTap: () {
                       /* Navigator.pop(context);
                       Navigator.of(context).push(new MaterialPageRoute(
@@ -342,533 +378,351 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
       ),
       backgroundColor: Colors.white,
 
-      body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        child: RefreshIndicator(
-          onRefresh: () async {
-            setState(()
-            {
+      body:
+    //  SingleChildScrollView(
+       // physics: AlwaysScrollableScrollPhysics(),
+        // child: RefreshIndicator(
+        //   onRefresh: () async {
+        //     setState(()
+        //     {
+        //
+        //     }
+        //     );
+        //
+        //   },
+      //  child:
+        SingleChildScrollView(
+          physics: ScrollPhysics(),
+          child: Stack(
+              children: [
 
-            }
-            );
-
-          },
-        child:  Stack(
-            children: [
-
-              // child:
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                // child:
+                Column(
+              //    crossAxisAlignment: CrossAxisAlignment.center,
+            //      mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
 
 
-                  Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-
-                        Text('Location',style: TextStyle(fontWeight: FontWeight.bold),),
-                        Text('change',style: TextStyle(color: Colors.blue),),
-
-                      ],
+                    SizedBox(
+                      height: 21,
                     ),
-                  ),
 
-                  Divider(color: Colors.black,),
+                    // TextField(
+                    //   onChanged: (value) => _runFilter(value),
+                    //   decoration: InputDecoration(
+                    //     labelText: 'search',suffixIcon: Icon(Icons.search)),
+                    // ),
+
+
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+
+                          Text('Location',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text('change',style: TextStyle(color: Colors.blue),),
+
+                        ],
+                      ),
+                    ),
+
+                    Divider(color: Colors.black,),
 
 
 
 
 
-                  SizedBox(
-                    height: 11,
-                  ),
+                    SizedBox(
+                      height: 11,
+                    ),
 
-                  Padding(
-                      padding: EdgeInsets.only(left: 23,bottom: 11),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Obx(
-                                () =>  getAllCarsController.isLoading.value
+                    Padding(
+                        padding: EdgeInsets.only(left: 23,bottom: 11),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Obx(
+                                  () =>  getAllCarsController.isLoading.value
+                                  ? Center(
+                                child: Text(""),
+                              )
+                                  :       Text("${getAllCarsController.getAllCars?.data?.length.toString() ?? '0'} Vehicles",style: TextStyle(fontWeight: FontWeight.w300),)),
+
+
+                        )
+
+                    ),
+
+
+
+                    //       if(getAllCarsController.getAllCars?.data?.length != null)
+                    Container(
+                      child: Obx(
+                            () =>
+                            getAllCarsController.isLoading.value
                                 ? Center(
-                              child: CircularProgressIndicator(),
-                            )
-                                :       Text("${getAllCarsController.getAllCars?.data?.length.toString() ?? '0'} Vehicles",style: TextStyle(fontWeight: FontWeight.w300),)),
+                          child: CircularProgressIndicator(),
+                        )
+                            :ListView.builder(
+                               physics: NeverScrollableScrollPhysics(),
+                               shrinkWrap: true,
+                                itemCount: getAllCarsController.getAllCars?.data?.length ??  0,
+
+                          //     itemCount: _foundUsers.length,
+                            itemBuilder: (context,index){
+                         //     _allUsers.add();
+
+                              // suggestons.add(
+                              //     getAllCarsController.getAllCars!.data[index].brandModel
+                              // );
+
+                              List<Widget> mywidget = [];
+
+                              //one insur
+                              var imageinsurone = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 0; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imageinsurone = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].imageUrl;
+                                break;
+                              }
 
 
-                      )
+                              //two insur
 
-                  ),
+                              var imageinsurtwo = AppConstants.DEFAULT_IMAGE;
+                              print(imageinsurtwo);
 
-
-
-                  //       if(getAllCarsController.getAllCars?.data?.length != null)
-                  Container(
-
-                    height: MediaQuery.of(context).size.height,
-
-
-                    child: Obx(
-                          () =>
-                          getAllCarsController.isLoading.value
-                              ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                          :ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: getAllCarsController.getAllCars?.data?.length ??  0,
-                          itemBuilder: (context,index){
-
-
-
-                            List<Widget> mywidget = [];
-
-                            //one insur
-
-                            var imageinsurone = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 0; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imageinsurone = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].imageUrl;
-                              break;
-                            }
-
-
-                            //two insur
-
-                            var imageinsurtwo = AppConstants.DEFAULT_IMAGE;
-                            print(imageinsurtwo);
-
-                            for (var i = 1; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imageinsurtwo = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].imageUrl;
-                              break;
-                            }
+                              for (var i = 1; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imageinsurtwo = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].imageUrl;
+                                break;
+                              }
 
 
 
-                            //one rc
-                            var imagercone = AppConstants.DEFAULT_IMAGE;
-                            print(imagercone);
+                              //one rc
+                              var imagercone = AppConstants.DEFAULT_IMAGE;
+                              print(imagercone);
 
-                            for (var i = 2; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imagercone = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].imageUrl;
-                              break;
-                            }
-
-
-                            //two rc
-                            var imagerctwo = AppConstants.DEFAULT_IMAGE;
-                            print(imagerctwo);
-                            for (var i = 3; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imagerctwo = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].imageUrl;
-                              break;
-                            }
+                              for (var i = 2; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imagercone = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].imageUrl;
+                                break;
+                              }
 
 
-                            //one veh
-                            var imagevehone = AppConstants.DEFAULT_IMAGE;
-
-                            print(imagevehone);
-
-                            for (var i = 4; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imagevehone = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].imageUrl;
-                              break;
-                            }
+                              //two rc
+                              var imagerctwo = AppConstants.DEFAULT_IMAGE;
+                              print(imagerctwo);
+                              for (var i = 3; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imagerctwo = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].imageUrl;
+                                break;
+                              }
 
 
-                            //two veh
-                            var imagevehtwo = AppConstants.DEFAULT_IMAGE;
+                              //one veh
+                              var imagevehone = AppConstants.DEFAULT_IMAGE;
 
-                            print(imagevehtwo);
+                              print(imagevehone);
 
-                            for (var i = 5; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imagevehtwo = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].imageUrl;
-                              break;
-                            }
-
-
-                            //three veh
-                            var imagevehthree = AppConstants.DEFAULT_IMAGE;
-
-                            print(imagevehthree);
-
-                            for (var i = 6; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imagevehthree = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].imageUrl;
-                              break;
-                            }
+                              for (var i = 4; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imagevehone = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].imageUrl;
+                                break;
+                              }
 
 
-                            //four veh
-                            var imagevehfour = AppConstants.DEFAULT_IMAGE;
+                              //two veh
+                              var imagevehtwo = AppConstants.DEFAULT_IMAGE;
 
-                            print(imagevehfour);
+                              print(imagevehtwo);
 
-                            for (var i = 7; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imagevehfour = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].imageUrl;
-                              break;
-                            }
+                              for (var i = 5; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imagevehtwo = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].imageUrl;
+                                break;
+                              }
 
 
-                            //five veh
-                            var imagevehfive = AppConstants.DEFAULT_IMAGE;
+                              //three veh
+                              var imagevehthree = AppConstants.DEFAULT_IMAGE;
 
-                            print(imagevehfive);
+                              print(imagevehthree);
 
-                            for (var i = 8; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imagevehfive = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].imageUrl;
-                              break;
-                            }
+                              for (var i = 6; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imagevehthree = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].imageUrl;
+                                break;
+                              }
+
+
+                              //four veh
+                              var imagevehfour = AppConstants.DEFAULT_IMAGE;
+
+                              print(imagevehfour);
+
+                              for (var i = 7; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imagevehfour = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].imageUrl;
+                                break;
+                              }
+
+
+                              //five veh
+                              var imagevehfive = AppConstants.DEFAULT_IMAGE;
+
+                              print(imagevehfive);
+
+                              for (var i = 8; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imagevehfive = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].imageUrl;
+                                break;
+                              }
 
 
 
 
-                            imagesgroup.add(imagevehone ?? '');
-                            imagesgroup.add(imagevehtwo ?? '');
-                            imagesgroup.add(imagevehthree ?? '');
-                            imagesgroup.add(imagevehfour ?? '');
-                            imagesgroup.add(imagevehfive ?? '');
+                              imagesgroup.add(imagevehone ?? '');
+                              imagesgroup.add(imagevehtwo ?? '');
+                              imagesgroup.add(imagevehthree ?? '');
+                              imagesgroup.add(imagevehfour ?? '');
+                              imagesgroup.add(imagevehfive ?? '');
 
 
 
 
-                            //////////////////////
-                            var imageinsuroneedit = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 0; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imageinsuroneedit = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].image;
-                              break;
-                            }
-                            var imageinsurtwoedit = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 1; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imageinsurtwoedit = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].image;
-                              break;
-                            }
-                            var imagerconeedit = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 2; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imagerconeedit = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].image;
-                              break;
-                            }
-                            var imagerctwoedit = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 3; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imagerctwoedit = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].image;
-                              break;
-                            }
-                            var imageveh1edit = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 4; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imageveh1edit = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].image;
-                              break;
-                            }
-                            var imageveh2edit = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 5; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imageveh2edit = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].image;
-                              break;
-                            }
-                            var imageveh3edit = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 6; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imageveh3edit = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].image;
-                              break;
-                            }
-                            var imageveh4edit = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 7; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imageveh4edit = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].image;
-                              break;
-                            }
-                            var imageveh5edit = AppConstants.DEFAULT_IMAGE;
-                            for (var i = 8; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                              imageveh5edit = getAllCarsController.getAllCars!.data[index]
-                                  .images[i].image;
-                              break;
-                            }
+                              //////////////////////
+                              var imageinsuroneedit = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 0; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imageinsuroneedit = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].image;
+                                break;
+                              }
+                              var imageinsurtwoedit = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 1; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imageinsurtwoedit = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].image;
+                                break;
+                              }
+                              var imagerconeedit = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 2; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imagerconeedit = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].image;
+                                break;
+                              }
+                              var imagerctwoedit = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 3; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imagerctwoedit = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].image;
+                                break;
+                              }
+                              var imageveh1edit = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 4; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imageveh1edit = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].image;
+                                break;
+                              }
+                              var imageveh2edit = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 5; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imageveh2edit = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].image;
+                                break;
+                              }
+                              var imageveh3edit = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 6; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imageveh3edit = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].image;
+                                break;
+                              }
+                              var imageveh4edit = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 7; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imageveh4edit = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].image;
+                                break;
+                              }
+                              var imageveh5edit = AppConstants.DEFAULT_IMAGE;
+                              for (var i = 8; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
+                                imageveh5edit = getAllCarsController.getAllCars!.data[index]
+                                    .images[i].image;
+                                break;
+                              }
 
 
 
-                            print("this is image in var image: $imagevehone");
-                            if(getAllCarsController.getAllCars!.data[index].images != null)
-                              mywidget.add(
+                              print("this is image in var image: $imagevehone");
+                              if(getAllCarsController.getAllCars!.data[index].images != null)
+                                mywidget.add(
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(8.0),
+                                      topRight: Radius.circular(8.0),
+                                    ),
+                                    child: Image.network(imagevehone,fit: BoxFit.cover,height: 93,width: 133,),
+                                  ),
+                                );
+
+                              else mywidget.add(
                                 ClipRRect(
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(8.0),
                                     topRight: Radius.circular(8.0),
                                   ),
-                                  child: Image.network(imagevehone,fit: BoxFit.cover,height: 93,width: 133,),
+
+                                  child: Image.network(AppConstants.DEFAULT_IMAGE,fit: BoxFit.cover,height: 93,width: 133,),
                                 ),
                               );
 
-                            else mywidget.add(
-                              ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(8.0),
-                                  topRight: Radius.circular(8.0),
-                                ),
+                              //  }
 
-                                child: Image.network(AppConstants.DEFAULT_IMAGE,fit: BoxFit.cover,height: 93,width: 133,),
-                              ),
-                            );
 
-                            //  }
 
+                              print(getAllCarsController.getAllCars?.data[index].id);
+                              int? vehicledelid = getAllCarsController.getAllCars?.data[index].id;
 
+                              //    prefs?.setString('vehicledelid', vehicledelid.toString());
+                              //  print("ids $vehicledelid");
 
-                            print(getAllCarsController.getAllCars?.data[index].id);
-                            int? vehicledelid = getAllCarsController.getAllCars?.data[index].id;
 
-                            //    prefs?.setString('vehicledelid', vehicledelid.toString());
-                            //  print("ids $vehicledelid");
 
+                              return Card(
 
+                                //
+                                //key: ValueKey(getAllCarsController.getAllCars!.data[index].brandModel),
+                                // key: ValueKey(_foundUsers[index].brandModel),
 
-                            return Card(
-                              elevation: 60,
-                              shadowColor: Colors.black,
-                              color: Colors.white,
 
-                              child: SizedBox(
-                                width: 350,
-                                height: 370,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Column(
-                                    children: [
+                                //we have to replace each fields like
+                                //getAllCarsController.getAllCars?.data[index].brandModel ?? 'no name'
+                                //                          _foundUsers[index].brandModel
+                                //
+                                elevation: 60,
+                                shadowColor: Colors.black,
+                                color: Colors.white,
 
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(getAllCarsController.getAllCars?.data[index].brandModel ?? 'no name'
-                                            ,style: TextStyle(fontWeight: FontWeight.bold),),
+                                child: SizedBox(
+                                  width: 350,
+                                  height: 360,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Column(
+                                      children: [
 
-                                          Container(
-                                            width: 31,
-                                            height: 31,
-                                            decoration: BoxDecoration(
-                                              color: Colors.black12,
-                                              borderRadius: BorderRadius.all(Radius.circular(30)),
-                                            ),
-                                            child: Icon(Icons.favorite_border,size: 15,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(getAllCarsController.getAllCars?.data[index].brandModel ?? 'no name'
+                                              ,style: TextStyle(fontWeight: FontWeight.bold),),
 
-                                          ),
-
-
-                                        ],
-                                      ),
-
-                                      Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Text('or similar',style: TextStyle(fontWeight: FontWeight.w300),)),
-
-
-                                      SizedBox(
-                                        height: 23,
-                                      ),
-
-
-
-
-                                      Row(
-                                        //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                                        children: [
-                                          Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text('Economy',style: TextStyle(fontWeight: FontWeight.bold),)
-                                          ),
-
-                                          //Spacer(),
-
-
-                                          SizedBox(
-                                            width: 141,
-                                          ),
-
-                                          Text("Rs. ${getAllCarsController.getAllCars?.data[index].price.toString() ??  'no name'}",style: TextStyle(fontWeight: FontWeight.bold),)
-
-
-                                        ],
-                                      ),
-
-                                      SizedBox(height: 11,),
-
-
-                                      Row(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Row(
-                                                children: [
-
-                                                  SizedBox(
-                                                    width: 2 ,
-                                                  ),
-
-                                                  Container(
-                                                    width: 53,
-                                                    height: 28
-                                                    ,
-                                                    color: Colors.black12,
-                                                    child: Row(
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 5 ,
-                                                        ),
-                                                        Text(getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? '0',style: TextStyle(fontWeight: FontWeight.bold),),
-                                                        SizedBox(
-                                                          width: 5 ,
-                                                        ),
-                                                        Icon(Icons.person,color: Colors.black26,),
-                                                      ],
-                                                    ),
-                                                  ),
-
-
-                                                  SizedBox(
-                                                    width: 2 ,
-                                                  ),
-
-                                                  Container(
-                                                    width: 53,
-                                                    height: 28,
-                                                    color: Colors.black12,
-                                                    child: Row(
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 5 ,
-                                                        ),
-                                                        Text(getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? '0',style: TextStyle(fontWeight: FontWeight.bold),),
-                                                        SizedBox(
-                                                          width: 5 ,
-                                                        ),
-                                                        Icon(Icons.food_bank_outlined,color: Colors.black26,),
-                                                      ],
-                                                    ),
-                                                  ),
-
-
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-
-                                          SizedBox(
-                                            width: 91,
-                                          ),
-
-                                          Column(
-                                            children: [
-                                              Text(getAllCarsController.getAllCars?.data[index].vehicleNo ?? '',style: TextStyle(fontWeight: FontWeight.bold),)
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-
-
-
-                                      SizedBox(
-                                        height: 21,
-                                      ),
-
-
-
-
-
-
-                                      Row(
-                                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Column(
-                                            //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            children: [
-
-
-                                              Row(
-
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Icon(Icons.ac_unit),
-                                                      SizedBox(height: 11,),
-                                                      Icon(Icons.car_rental_outlined),
-                                                      SizedBox(height: 11,),
-                                                      Icon(Icons.propane_tank),
-                                                    ],
-                                                  ),
-
-                                                  SizedBox(
-                                                    width: 11,
-                                                  ),
-
-                                                  Column(
-                                                    children: [
-                                                      Text('Air Conditioning',style: TextStyle(fontWeight: FontWeight.bold),),
-                                                      SizedBox(height: 21,),
-                                                      Text(getAllCarsController.getAllCars?.data[index].gearType ?? '',style: TextStyle(fontWeight: FontWeight.bold),),
-                                                      SizedBox(height: 21,),
-                                                      Text(getAllCarsController.getAllCars?.data[index].fuelType ?? '',style: TextStyle(fontWeight: FontWeight.bold),),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-
-
-
-
-                                            ],
-                                          ),
-
-
-                                          Spacer(),
-
-                                          Container(
-                                            width: MediaQuery.of(context).size.width/2.53,
-                                            child: Column(
-
-                                                children: mywidget
-
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-
-                                      //CircleAvatar
-                                      const SizedBox(
-                                        height: 26,
-                                      ), //SizedBox
-
-
-
-
-
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-
-                                          SizedBox(
-                                            width: 100,
-                                            height: 31,
-                                            child: ElevatedButton.icon(
-
-                                              onPressed: () async{
-                                                print(imagevehone);
-
-                                                print(imagesgroup);
-
+                                            GestureDetector(
+                                              onTap: () async{
+                                                // print("top: $imagevehone top");
+                                                // print(imagesgroup);
                                                 var valToken = await getToken();
                                                 print("edit car $valToken");
 
-                                                Navigator.push(context, MaterialPageRoute(builder: (context)=> EditCar(
+                                                if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Car"){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> EditCar(
                                                     token: valToken,
                                                     id: vehicledelid,
                                                     brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
@@ -906,219 +760,616 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                     group: imagesgroup,
                                                     drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
 
-                                                )));
+                                                  )));
+                                                }
+                                                if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Bike"){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> EditBike(
+                                                    token: valToken,
+                                                    id: vehicledelid,
+                                                    brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
+                                                    vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
+                                                    seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
+                                                    doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
+                                                    luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
+                                                    ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
+                                                    gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
+                                                    fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
+                                                    fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
+                                                    price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
+                                                    description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
+                                                    secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
+                                                    vehno: getAllCarsController.getAllCars?.data[index].vehicleNo ?? 'no',
+                                                    imgs:  imageinsurone ?? '',
+                                                    imgs2: imageinsurtwo ?? '',
+                                                    imgs3: imagercone ?? '',
+                                                    imgs4: imagerctwo ?? '',
+                                                    imgs5: imagevehone ?? '',
+                                                    imgs6: imagevehtwo ?? '',
+                                                    imgs7: imagevehthree ?? '',
+                                                    imgs8: imagevehfour ?? '',
+                                                    imgs9: imagevehfive ?? '',
+                                                    editimgs:  imageinsuroneedit ?? '',
+                                                    editimgs2: imageinsurtwoedit ?? '',
+                                                    editimgs3: imagerconeedit ?? '',
+                                                    editimgs4: imagerctwoedit ?? '',
+                                                    editimgs5: imageveh1edit ?? '',
+                                                    editimgs6: imageveh2edit ?? '',
+                                                    editimgs7: imageveh3edit ?? '',
+                                                    editimgs8: imageveh4edit ?? '',
+                                                    editimgs9: imageveh5edit ?? '',
+                                                    insurance: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate ?? 'no',
+                                                    group: imagesgroup,
+                                                    drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
+
+                                                  )));
+                                                }
+                                                if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Van"){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> EditVan(
+                                                    token: valToken,
+                                                    id: vehicledelid,
+                                                    brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
+                                                    vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
+                                                    seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
+                                                    doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
+                                                    luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
+                                                    ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
+                                                    gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
+                                                    fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
+                                                    fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
+                                                    price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
+                                                    description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
+                                                    secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
+                                                    vehno: getAllCarsController.getAllCars?.data[index].vehicleNo ?? 'no',
+                                                    imgs:  imageinsurone ?? '',
+                                                    imgs2: imageinsurtwo ?? '',
+                                                    imgs3: imagercone ?? '',
+                                                    imgs4: imagerctwo ?? '',
+                                                    imgs5: imagevehone ?? '',
+                                                    imgs6: imagevehtwo ?? '',
+                                                    imgs7: imagevehthree ?? '',
+                                                    imgs8: imagevehfour ?? '',
+                                                    imgs9: imagevehfive ?? '',
+                                                    editimgs:  imageinsuroneedit ?? '',
+                                                    editimgs2: imageinsurtwoedit ?? '',
+                                                    editimgs3: imagerconeedit ?? '',
+                                                    editimgs4: imagerctwoedit ?? '',
+                                                    editimgs5: imageveh1edit ?? '',
+                                                    editimgs6: imageveh2edit ?? '',
+                                                    editimgs7: imageveh3edit ?? '',
+                                                    editimgs8: imageveh4edit ?? '',
+                                                    editimgs9: imageveh5edit ?? '',
+                                                    insurance: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate ?? 'no',
+                                                    group: imagesgroup,
+                                                    drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
+
+                                                  )));
+                                                }
+                                                if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Tuk-Tuk"){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> EditTukTuk(
+                                                    token: valToken,
+                                                    id: vehicledelid,
+                                                    brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
+                                                    vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
+                                                    seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
+                                                    doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
+                                                    luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
+                                                    ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
+                                                    gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
+                                                    fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
+                                                    fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
+                                                    price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
+                                                    description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
+                                                    secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
+                                                    vehno: getAllCarsController.getAllCars?.data[index].vehicleNo ?? 'no',
+                                                    imgs:  imageinsurone ?? '',
+                                                    imgs2: imageinsurtwo ?? '',
+                                                    imgs3: imagercone ?? '',
+                                                    imgs4: imagerctwo ?? '',
+                                                    imgs5: imagevehone ?? '',
+                                                    imgs6: imagevehtwo ?? '',
+                                                    imgs7: imagevehthree ?? '',
+                                                    imgs8: imagevehfour ?? '',
+                                                    imgs9: imagevehfive ?? '',
+                                                    editimgs:  imageinsuroneedit ?? '',
+                                                    editimgs2: imageinsurtwoedit ?? '',
+                                                    editimgs3: imagerconeedit ?? '',
+                                                    editimgs4: imagerctwoedit ?? '',
+                                                    editimgs5: imageveh1edit ?? '',
+                                                    editimgs6: imageveh2edit ?? '',
+                                                    editimgs7: imageveh3edit ?? '',
+                                                    editimgs8: imageveh4edit ?? '',
+                                                    editimgs9: imageveh5edit ?? '',
+                                                    insurance: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate ?? 'no',
+                                                    group: imagesgroup,
+                                                    drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
+
+                                                  )));
+                                                }
+                                                else{
+                                                  print("sss");
+                                                }
 
 
 
 
 
-                                                // imagesgroup?.add(imagevehone);
-                                                // print(imagesgroup);
-                                             //   print(getAllCarsController.getAllCars?.data[index].id);
-                                                print(imageinsurone);
-
+                                                print("img $imagevehone img");
                                               },
-                                              style: ButtonStyle(
+                                              child: Container(
+                                                width: 31,
+                                                height: 31,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black12,
+                                                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                                                ),
+                                                child: Icon(Icons.edit_outlined,size: 15,),
 
-                                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                      RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(31),
-                                                          side: BorderSide(color: Colors.grey.shade300)
-                                                      )
-                                                  )
                                               ),
-                                              // child: Padding(
-                                              //     padding: const EdgeInsets.all(4),
-                                              //   child: Icon(Icons.edit_outlined,size: 25,),
-                                              // ),
-                                              icon: Icon(Icons.edit_outlined,size: 20,color: Colors.white,),
-                                              label: Text('Edit',style: TextStyle(color: Colors.white),),
                                             ),
 
-                                          ), //Si
 
-                                          SizedBox(
-                                            width: 100,
-                                            height: 31,
-                                            child: ElevatedButton.icon(
-
-                                              onPressed: () async{
+                                          ],
+                                        ),
 
 
-                                                var valToken = await getToken();
-                                                print("details car $valToken");
 
-                                                Navigator.push(context, MaterialPageRoute(builder: (context)=> CarDetails(
-                                                  token: valToken,
-                                                  id: vehicledelid,
-                                                  brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
-                                                  vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
-                                                  seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
-                                                  doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
-                                                  luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
-                                                  ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
-                                                  gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
-                                                  fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
-                                                  fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
-                                                  price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
-                                                  description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
-                                                  secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                  imgs:  imageinsurone ?? '',
-                                                  imgs2: imageinsurtwo ?? '',
-                                                  imgs3: imagercone ?? '',
-                                                  imgs4: imagerctwo ?? '',
-                                                  imgs5: imagevehone ?? '',
-                                                  imgs6: imagevehtwo ?? '',
-                                                  imgs7: imagevehthree ?? '',
-                                                  imgs8: imagevehfour ?? '',
-                                                  imgs9: imagevehfive ?? '',
-                                                  insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
 
-                                                //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
+                                            Text('or similar',style: TextStyle(fontWeight: FontWeight.w300),),
 
-                                                )));
+                                            GestureDetector(
+                                              onTap: () async{
 
-                                                print(getAllCarsController.getAllCars?.data[index].insuranceExpiryDate);
+
+                                                try{
+
+                                                  int? vehicleId = getAllCarsController.getAllCars!.data[index].id;
+
+                                                  var valToken = await getToken();
+                                                  print("delete car $valToken");
+
+                                                  Response response = await delete(
+                                                      Uri.parse(AppConstants.BASE_URL+'/merchant/vehicles/$vehicleId'),
+                                                      headers: {
+                                                        'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
+                                                      }
+                                                  );
+                                                  if(response.statusCode == 200){
+                                                    print(response.body.toString());
+
+                                                    var result = jsonDecode(response.body);
+
+                                                    setState(() {
+                                                      getAllCarsController.getAllCars!.data.removeAt(index);
+                                                    });
+
+                                                    getAllCars = GetAllCars.fromJson(result);
+
+
+                                                  }
+                                                  else {
+                                                    print('failed');
+                                                    print(response.body.toString());
+                                                    print(response.toString());
+                                                    print(valToken);
+                                                  }
+                                                }
+                                                catch(e){
+                                                  print(e.toString());
+                                                }
 
                                               },
+                                              child: Container(
+                                                width: 31,
+                                                height: 31,
+                                                // decoration: BoxDecoration(
+                                                //   color: Colors.black12,
+                                                //   borderRadius: BorderRadius.all(Radius.circular(30)),
+                                                // ),
+                                                child: Icon(Icons.delete,size: 15,color: Colors.red,),
 
-
-                                              style: ButtonStyle(
-
-                                                 foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                      RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(31),
-                                                          side: BorderSide(color: Colors.grey.shade300)
-                                                      )
-                                                  )
-                                             ),
-                                              icon: Icon(Icons.details_rounded,size: 20,color: Colors.white,),
-                                              label: Text('Details',style: TextStyle(color: Colors.white),),
-                                              // child: Padding(
-                                              //   padding: const EdgeInsets.all(4),
-                                              //   child: Icon(Icons.details_rounded,size: 25,color: Colors.blueAccent,),
-                                              // ),
+                                              ),
                                             ),
 
-                                          ), //Si
+
+                                          ],
+                                        ),
 
 
-                                          SizedBox(
-                                            width: 100,
-                                            height: 31,
-                                            child: ElevatedButton.icon(
-                                              onPressed: () async{
+                                        SizedBox(
+                                          height: 23,
+                                        ),
 
 
 
-                                                  try{
 
-                                                   int? vehicleId = getAllCarsController.getAllCars!.data[index].id;
+                                        Row(
+                                          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                                                   var valToken = await getToken();
-                                                   print("delete car $valToken");
+                                          children: [
+                                            Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Text('Economy',style: TextStyle(fontWeight: FontWeight.bold),)
+                                            ),
 
-                                                    Response response = await delete(
-                                                        Uri.parse(AppConstants.BASE_URL+'/merchant/vehicles/$vehicleId'),
-                                                        headers: {
-                                                          'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
-                                                        }
-                                                    );
-                                                    if(response.statusCode == 200){
-                                                      print(response.body.toString());
-
-                                                      var result = jsonDecode(response.body);
-
-                                                      setState(() {
-                                                        getAllCarsController.getAllCars!.data.removeAt(index);
-                                                      });
-
-                                                      getAllCars = GetAllCars.fromJson(result);
+                                            //Spacer(),
 
 
-                                                    }
-                                                    else {
-                                                      print('failed');
-                                                      print(response.body.toString());
-                                                      print(response.toString());
-                                                      print(valToken);
-                                                    }
+                                            SizedBox(
+                                              width: 141,
+                                            ),
+
+                                            Text("Rs. ${getAllCarsController.getAllCars?.data[index].price.toString() ??  'no name'}",style: TextStyle(fontWeight: FontWeight.bold),)
+
+
+                                          ],
+                                        ),
+
+                                        SizedBox(height: 11,),
+
+
+                                        Row(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+
+                                                    SizedBox(
+                                                      width: 2 ,
+                                                    ),
+
+                                                    Container(
+                                                      width: 53,
+                                                      height: 28
+                                                      ,
+                                                      color: Colors.black12,
+                                                      child: Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 5 ,
+                                                          ),
+                                                          Text(getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? '0',style: TextStyle(fontWeight: FontWeight.bold),),
+                                                          SizedBox(
+                                                            width: 5 ,
+                                                          ),
+                                                          Icon(Icons.person,color: Colors.black26,),
+                                                        ],
+                                                      ),
+                                                    ),
+
+
+                                                    SizedBox(
+                                                      width: 2 ,
+                                                    ),
+
+                                                    Container(
+                                                      width: 53,
+                                                      height: 28,
+                                                      color: Colors.black12,
+                                                      child: Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 5 ,
+                                                          ),
+                                                          Text(getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? '0',style: TextStyle(fontWeight: FontWeight.bold),),
+                                                          SizedBox(
+                                                            width: 5 ,
+                                                          ),
+                                                          Icon(Icons.food_bank_outlined,color: Colors.black26,),
+                                                        ],
+                                                      ),
+                                                    ),
+
+
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+
+                                            SizedBox(
+                                              width: 91,
+                                            ),
+
+                                            Column(
+                                              children: [
+                                                Text(getAllCarsController.getAllCars?.data[index].vehicleNo ?? '',style: TextStyle(fontWeight: FontWeight.bold),)
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+
+
+
+                                        SizedBox(
+                                          height: 21,
+                                        ),
+
+
+                                        Row(
+                                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Column(
+                                              //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+
+
+                                                Row(
+
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Icon(Icons.ac_unit),
+                                                        SizedBox(height: 11,),
+                                                        Icon(Icons.car_rental_outlined),
+                                                        SizedBox(height: 11,),
+                                                        Icon(Icons.propane_tank),
+                                                      ],
+                                                    ),
+
+                                                    SizedBox(
+                                                      width: 11,
+                                                    ),
+
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text('Air Conditioning',style: TextStyle(fontWeight: FontWeight.bold),),
+                                                        SizedBox(height: 21,),
+                                                        Text(getAllCarsController.getAllCars?.data[index].gearType ?? '',style: TextStyle(fontWeight: FontWeight.bold),),
+                                                        SizedBox(height: 21,),
+                                                        Text(getAllCarsController.getAllCars?.data[index].fuelType ?? '',style: TextStyle(fontWeight: FontWeight.bold),),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+
+
+
+
+                                              ],
+                                            ),
+
+
+                                            Spacer(),
+
+                                            Container(
+                                              width: MediaQuery.of(context).size.width/2.53,
+                                              child: Column(
+
+                                                  children: mywidget
+
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        //CircleAvatar
+                                        const SizedBox(
+                                          height: 26,
+                                        ), //SizedBox
+
+
+
+
+
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+
+
+                                            SizedBox(
+                                              width: 170,
+                                              height: 31,
+                                              child: ElevatedButton.icon(
+
+                                                onPressed: () async{
+
+
+                                                  var valToken = await getToken();
+                                                  print("details car $valToken");
+
+                                                  if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Car")
+                                                   {
+                                                     Navigator.push(context, MaterialPageRoute(builder: (context)=> CarDetails(
+                                                       token: valToken,
+                                                       id: vehicledelid,
+                                                       brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
+                                                       vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
+                                                       seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
+                                                       doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
+                                                       luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
+                                                       ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
+                                                       gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
+                                                       fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
+                                                       fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
+                                                       price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
+                                                       description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
+                                                       secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
+                                                       imgs:  imageinsurone ?? '',
+                                                       imgs2: imageinsurtwo ?? '',
+                                                       imgs3: imagercone ?? '',
+                                                       imgs4: imagerctwo ?? '',
+                                                       imgs5: imagevehone ?? '',
+                                                       imgs6: imagevehtwo ?? '',
+                                                       imgs7: imagevehthree ?? '',
+                                                       imgs8: imagevehfour ?? '',
+                                                       imgs9: imagevehfive ?? '',
+                                                       insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
+
+                                                       //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
+
+                                                     )));
+                                                   }
+                                                  if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Bike")
+                                                  {
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> BikeDetails(
+                                                      token: valToken,
+                                                      id: vehicledelid,
+                                                      brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
+                                                      vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
+                                                      seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
+                                                      doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
+                                                      luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
+                                                      ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
+                                                      gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
+                                                      fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
+                                                      fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
+                                                      price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
+                                                      description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
+                                                      secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
+                                                      imgs:  imageinsurone ?? '',
+                                                      imgs2: imageinsurtwo ?? '',
+                                                      imgs3: imagercone ?? '',
+                                                      imgs4: imagerctwo ?? '',
+                                                      imgs5: imagevehone ?? '',
+                                                      imgs6: imagevehtwo ?? '',
+                                                      imgs7: imagevehthree ?? '',
+                                                      imgs8: imagevehfour ?? '',
+                                                      imgs9: imagevehfive ?? '',
+                                                      insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
+
+                                                      //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
+
+                                                    )));
                                                   }
-                                                  catch(e){
-                                                    print(e.toString());
+                                                  if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Van")
+                                                  {
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> VanDetails(
+                                                      token: valToken,
+                                                      id: vehicledelid,
+                                                      brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
+                                                      vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
+                                                      seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
+                                                      doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
+                                                      luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
+                                                      ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
+                                                      gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
+                                                      fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
+                                                      fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
+                                                      price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
+                                                      description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
+                                                      secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
+                                                      imgs:  imageinsurone ?? '',
+                                                      imgs2: imageinsurtwo ?? '',
+                                                      imgs3: imagercone ?? '',
+                                                      imgs4: imagerctwo ?? '',
+                                                      imgs5: imagevehone ?? '',
+                                                      imgs6: imagevehtwo ?? '',
+                                                      imgs7: imagevehthree ?? '',
+                                                      imgs8: imagevehfour ?? '',
+                                                      imgs9: imagevehfive ?? '',
+                                                      insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
+
+                                                      //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
+
+                                                    )));
                                                   }
+                                                  if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Tuk-Tuk")
+                                                  {
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> TukTukDetails(
+                                                      token: valToken,
+                                                      id: vehicledelid,
+                                                      brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
+                                                      vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
+                                                      seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
+                                                      doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
+                                                      luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
+                                                      ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
+                                                      gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
+                                                      fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
+                                                      fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
+                                                      price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
+                                                      description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
+                                                      secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
+                                                      imgs:  imageinsurone ?? '',
+                                                      imgs2: imageinsurtwo ?? '',
+                                                      imgs3: imagercone ?? '',
+                                                      imgs4: imagerctwo ?? '',
+                                                      imgs5: imagevehone ?? '',
+                                                      imgs6: imagevehtwo ?? '',
+                                                      imgs7: imagevehthree ?? '',
+                                                      imgs8: imagevehfour ?? '',
+                                                      imgs9: imagevehfive ?? '',
+                                                      insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
+
+                                                      //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
+
+                                                    )));
+                                                  }
+                                                  else{
+                                                    print("aaa");
+                                                  }
+//                                                print(getAllCarsController.getAllCars?.data[index].insuranceExpiryDate);
+
+                                                },
 
 
+                                                style: ButtonStyle(
 
-                                              },
-
-
-                                              style: ButtonStyle(
-
-                                                  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                     RoundedRectangleBorder(
-                                                         borderRadius: BorderRadius.circular(31),
-                                                         side: BorderSide(color: Colors.grey.shade300)
-                                                     )
-                                                 )
+                                                   foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                        RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(31),
+                                                            side: BorderSide(color: Colors.grey.shade300)
+                                                        )
+                                                    )
+                                               ),
+                                                icon: Icon(Icons.details_rounded,size: 20,color: Colors.white,),
+                                                label: Text('View Details',style: TextStyle(color: Colors.white),),
+                                                // child: Padding(
+                                                //   padding: const EdgeInsets.all(4),
+                                                //   child: Icon(Icons.details_rounded,size: 25,color: Colors.blueAccent,),
+                                                // ),
                                               ),
 
-                                              icon: Icon(Icons.delete,size: 20,color: Colors.white,),
-                                              label: Text('Delete',style: TextStyle(color: Colors.white),),
-
-                                            ),
-
-                                          ), //Si
+                                            ), //Si
 
 
-                                        ],
-                                      ),
+
+                                          ],
+                                        ),
 
 
 
 
-                                    ],
-                                  ), //Column
-                                ), //Padding
-                              ), //SizedBox
-                            );
+                                      ],
+                                    ), //Column
+                                  ), //Padding
+                                ), //SizedBox
+                              );
 
 
-                          }
+                            }
+                        ),
                       ),
                     ),
-                  ),
-                  //else Center(
-                  //     child: CircularProgressIndicator()
-                  // ),
+                    //else Center(
+                    //     child: CircularProgressIndicator()
+                    // ),
 
 
-                  //
+                    //
 
 
-                  SizedBox(height: 5,),
+                    SizedBox(height: 5,),
 
 
+                  ],
+                ),
+                //   ),
 
 
-
-
-                ],
-              ),
-              //   ),
-
-
-            ],
-          ),
-
+              ],
+            ),
         ),
-      ),
+
+       // ),
+     // ),
     );
   }
 
@@ -1193,8 +1444,57 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
 
+ checkToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    checktoken = preferences.getString('token');
+
+    if(checktoken == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+    else{
+      print("kjkln");
+    }
+
+  }
 
 
 
 
+
+
+}
+
+class CustomDelegate extends SearchDelegate<String> {
+
+
+  List<String> data = ['apple','mango','pineapple','apple'];
+
+  @override
+  List<Widget> buildActions(BuildContext context) => [IconButton(icon: Icon(Icons.clear), onPressed: () => query = '')];
+
+  @override
+  Widget buildLeading(BuildContext context) => IconButton(icon: Icon(Icons.chevron_left), onPressed: () => close(context, ''));
+
+  @override
+  Widget buildResults(BuildContext context) => Container();
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    var listToShow;
+    if (query.isNotEmpty)
+      listToShow = data.where((e) => e.contains(query) && e.startsWith(query)).toList();
+    else
+      listToShow = data;
+
+    return ListView.builder(
+      itemCount: listToShow.length,
+      itemBuilder: (_, i) {
+        var noun = listToShow[i];
+        return ListTile(
+          title: Text(noun),
+          onTap: () => close(context, noun),
+        );
+      },
+    );
+  }
 }

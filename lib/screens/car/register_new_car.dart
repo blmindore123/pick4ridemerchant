@@ -1951,7 +1951,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                               registerCar(
                                   id,
                                   radioButtonItemvehicle,
-                                  xval,
+                                  xval ?? '0',
                                   brandNameController.text,
                                   int.parse(numofdoorController.text),
                                   int.parse(noofluggageController.text),
@@ -1974,6 +1974,13 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                                   five ?? '',
                               );
                            }
+                            else{
+                              const snackBar = SnackBar(
+                                content: Text('Enter All Details!'),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+
                             print(id);
                             print(radioButtonItemvehicle);
                             print(xval);
@@ -2141,11 +2148,11 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                     "image": imageTwoinsur
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageOnerc
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageTworc
                   },
                   {
@@ -2199,6 +2206,17 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
     }
   }
 
+
+
+  void noToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    var x = preferences.getString('token');
+
+    if(x == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+
+  }
 
 }
 

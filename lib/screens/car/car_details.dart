@@ -87,6 +87,7 @@ class _CarDetailsState extends State<CarDetails> {
   TextEditingController insuranceController = TextEditingController();
   // TextEditingController dropOfftimeController = TextEditingController();
 
+  CarouselController carouselController = CarouselController();
 
   final _formKey = GlobalKey<FormState>();
   late SharedPreferences prefs;
@@ -164,7 +165,7 @@ class _CarDetailsState extends State<CarDetails> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Icon(Icons.arrow_back),
-        title: Text("Vehicle Detail",style: TextStyle(color: Colors.black),),
+        title: Text("Car Details",style: TextStyle(color: Colors.black),),
 
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
@@ -453,6 +454,7 @@ class _CarDetailsState extends State<CarDetails> {
                           onTap: (){
                           },
                           child: CarouselSlider.builder(
+                            carouselController: carouselController,
                             options: CarouselOptions(
                               height:280.0,
                             ),
@@ -494,7 +496,7 @@ class _CarDetailsState extends State<CarDetails> {
                           left: 19,
                           child: IconButton(
                             onPressed: (){
-
+                              carouselController.previousPage();
                             },
                             icon: Icon(Icons.arrow_back_ios),
                           ),
@@ -505,7 +507,7 @@ class _CarDetailsState extends State<CarDetails> {
                           top: 118,left: 331,
                           child: IconButton(
                             onPressed: (){
-
+                              carouselController.nextPage();
                             },
                             icon: Icon(Icons.arrow_forward_ios_sharp),
                           ),
@@ -1484,6 +1486,14 @@ class _CarDetailsState extends State<CarDetails> {
 
 
 
+  void noToken() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    var x = preferences.getString('token');
 
+    if(x == null){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    }
+
+  }
 
 }

@@ -17,6 +17,7 @@ void main() {
       [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown])
       .then((_) => runApp(
       GetMaterialApp(
+        debugShowCheckedModeBanner: false,
           home: MyApp())
   )
   );

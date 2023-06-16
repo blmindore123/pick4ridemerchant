@@ -1951,7 +1951,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                               registerVan(
                                 id,
                                 radioButtonItemvehicle,
-                                xval,
+                                xval ?? '0',
                                 brandNameController.text,
                                 int.parse(numofdoorController.text),
                                 int.parse(noofluggageController.text),
@@ -1973,13 +1973,13 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                 four ?? '',
                                 five ?? '',
                               );
-
-
-
-
-
                             }
-
+                            else{
+                              const snackBar = SnackBar(
+                                content: Text('Enter All Details!'),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
 
 
                             // id,
@@ -1993,7 +1993,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                             // int.parse(numofdoorController.text),
                             print(int.parse(numofdoorController.text));
                             // int.parse(noofluggageController.text),
-                            int.parse(noofluggageController.text);
+  //                          int.parse(noofluggageController.text);
                             // idac.toString(),
                             print(idac.toString());
                             // gearController.text,
@@ -2171,11 +2171,11 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                     "image": imageTwoinsur
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageOnerc
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageTworc
                   },
                   {

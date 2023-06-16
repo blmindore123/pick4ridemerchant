@@ -2,40 +2,124 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:pick4ridemerchant/classes/getallcars.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/imageres.dart';
 import '../../controller/drive_category_controller.dart';
+import '../home.dart';
 import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
+import 'package:http/src/response.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 
-class RegisterNewTukTuk extends StatefulWidget {
+class EditTukTuk extends StatefulWidget {
+
+  final token;
+  final int? id;
+  final String? brandn;
+  final String? seats;
+  final String? vehicletype;
+  final String? doors;
+  final String? luggage;
+  final String? ac;
+  final String? gear;
+  final String? fuel;
+  final String? fuelstatus;
+  final String? price;
+  final String? description;
+  final String? secdepo;
+  final String? imgs;
+  final String? imgs2;
+  final String? imgs3;
+  final String? imgs4;
+  final String? imgs5;
+  final String? imgs6;
+  final String? imgs7;
+  final String? imgs8;
+  final String? imgs9;
+  final String? editimgs;
+  final String? editimgs2;
+  final String? editimgs3;
+  final String? editimgs4;
+  final String? editimgs5;
+  final String? editimgs6;
+  final String? editimgs7;
+  final String? editimgs8;
+  final String? editimgs9;
+  final String? vehno;
+  final String? insurance;
+  final List<String>? group;
+  final int? drivetype;
+
+  const EditTukTuk({
+    @required this.token,
+    @required this.id,
+    @required this.brandn,
+    @required this.seats,
+    @required this.vehicletype,
+    @required this.doors,
+    @required this.luggage,
+    @required this.ac,
+    @required this.gear,
+    @required this.fuel,
+    @required this.fuelstatus,
+    @required this.price,
+    @required this.description,
+    @required this.secdepo,
+    @required this.imgs,
+    @required this.imgs2,
+    @required this.imgs3,
+    @required this.imgs4,
+    @required this.imgs5,
+    @required this.imgs6,
+    @required this.imgs7,
+    @required this.imgs8,
+    @required this.imgs9,
+    @required this.editimgs,
+    @required this.editimgs2,
+    @required this.editimgs3,
+    @required this.editimgs4,
+    @required this.editimgs5,
+    @required this.editimgs6,
+    @required this.editimgs7,
+    @required this.editimgs8,
+    @required this.editimgs9,
+    @required this.vehno,
+    @required this.group,
+    @required this.insurance,
+    @required this.drivetype,
+    Key? key,
+  }) : super(key: key);
   @override
-  _RegisterNewTukTukState createState() => _RegisterNewTukTukState();
+  _EditTukTukState createState() => _EditTukTukState();
+
+
 }
 
-class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
+class _EditTukTukState extends State<EditTukTuk> {
 
 
 
 
   TextEditingController licenseController = TextEditingController();
-//  TextEditingController pickUptimeController = TextEditingController();
-  TextEditingController insuranceController = TextEditingController();
-  // TextEditingController dropOfftimeController = TextEditingController();
 
+  TextEditingController insuranceController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
   late SharedPreferences prefs;
+
   TextEditingController brandNameController = TextEditingController();
   TextEditingController numofdoorController = TextEditingController();
   TextEditingController noofluggageController = TextEditingController();
@@ -47,10 +131,27 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
   TextEditingController descriptionController = TextEditingController();
 
 
+  List<String>? imagesgroup;
+
+
+  String? brand,gears,fuels,vehino,insurdt,descriptxt;
+
+  int? doors,luggages,seats,prices;
+
 
   String? multi;
 
+  String radioButtonItemride = 'Self Driverrr';
 
+  String? radioButtonItemvehicle = 'Self Driverrddr';
+
+  String? radioButtonItemac;
+
+  int? idride = 11;
+  bool isSwitched = false;
+
+  int? idvehicletype;
+  int? idac = 31;
 
 
 
@@ -59,31 +160,63 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
     super.initState();
     //  value = widget.value == true;
     initSharedPref();
+
+    setState(() {
+
+
+      radioButtonItemvehicle = "Commercial";
+      idride = widget.drivetype!;
+      if(widget.drivetype == 1){
+        xval = "yes";
+      }
+
+
+      if(widget.ac == "yes"){
+        idac = 1;
+      }
+      else if(widget.ac == "no"){
+        idac = 2;
+      }
+
+
+
+
+
+      if(widget.vehicletype == "Commercial"){
+        idvehicletype = 1;
+      }
+      else if(widget.vehicletype == "Compact"){
+        idvehicletype = 2;
+      }
+      else if(widget.vehicletype == "VIP"){
+        idvehicletype = 3;
+      }
+      else if(widget.vehicletype == "Sports"){
+        idvehicletype = 4;
+      }
+
+
+
+
+
+    });
+
+
+
   }
   void initSharedPref() async{
     prefs = await SharedPreferences.getInstance();
   }
 
-  String radioButtonItem = 'Self Driverrr';
-  int id = 11;
-  bool isSwitched = false;
 
-  int idvehicletype = 21;
-  int idac = 31;
+
+
+
 
   DriveCategoryController driveCategoryController = Get.put(DriveCategoryController());
 
-
-
   final ImagePicker imagePicker = ImagePicker();
   List<XFile> imageFileList = [];
-
-
-  String radioButtonItemride = 'Self Driverrr';
-
-  String radioButtonItemvehicle = 'Self Driverrddr';
-
-  String radioButtonItemac = 'Driverrddr';
 
 
   XFile? image1;
@@ -111,9 +244,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
 
   List<String> imagesarr = [];
-
-
-  List<GetAllCars> _userDetails = [];
 
   String? xval;
 
@@ -429,6 +559,8 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
   @override
   Widget build(BuildContext context) {
 
+    print(radioButtonItemvehicle);
+
 
 
     return Scaffold(
@@ -438,7 +570,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Icon(Icons.arrow_back),
-        title: Text("Register New Tuk-Tuk",style: TextStyle(color: Colors.black),),
+        title: Text("Edit TukTuk",style: TextStyle(color: Colors.black),),
 
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
@@ -696,12 +828,26 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
 
 
+
+
+
+            // if(radioButtonItem == null){
+            //   radioButtonItem == widget.ride
+            // }
+
+
             Form(
               key: _formKey,
               child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
+
+
+
+
+
+
 
 
                     SizedBox(
@@ -723,11 +869,12 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                       children: [
                         Radio(
                           value: 1,
-                          groupValue: id,
+                          groupValue: idride,
                           onChanged: (val) {
                             setState(() {
                               radioButtonItemride = 'Self Drive';
-                              id = 1;
+                              idride = 1;
+                              print(idride);
                             });
                           },
                         ),
@@ -736,14 +883,15 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           style: new TextStyle(fontSize: 12.0),
                         ),
 
-
+                        //
                         // Radio(
                         //   value: 2,
-                        //   groupValue: id,
+                        //   groupValue: idride,
                         //   onChanged: (val) {
                         //     setState(() {
                         //       radioButtonItemride = 'With Driver';
-                        //       id = 2;
+                        //       idride = 2;
+                        //       print(idride);
                         //     });
                         //   },
                         // ),
@@ -755,13 +903,19 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                         //
                         // Radio(
                         //   value: 3,
-                        //   groupValue: id,
+                        //   groupValue: idride,
                         //   onChanged: (val) {
+                        //
                         //     setState(() {
                         //       radioButtonItemride = 'Wedding Ride';
-                        //       id = 3;
+                        //       idride = 3;
+                        //       print(idride);
                         //     });
+                        //
+                        //
                         //   },
+                        //
+                        //
                         // ),
                         // Text(
                         //   'Wedding Ride',
@@ -838,13 +992,21 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                     ),
 
 
+
+
+
+
                     Row(
                       children: [
                         Radio(
                           value: 1,
                           groupValue: idvehicletype,
                           onChanged: (val) {
+
+                            //    radioButtonItemvehicle = widget.vehicletype!;
+
                             setState(() {
+
                               radioButtonItemvehicle = 'Commercial';
                               idvehicletype = 1;
                             });
@@ -860,6 +1022,9 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           value: 2,
                           groupValue: idvehicletype,
                           onChanged: (val) {
+
+
+
                             setState(() {
                               radioButtonItemvehicle = 'Compact';
                               idvehicletype = 2;
@@ -882,6 +1047,8 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           value: 3,
                           groupValue: idvehicletype,
                           onChanged: (val) {
+
+
                             setState(() {
                               radioButtonItemvehicle = 'VIP';
                               idvehicletype = 3;
@@ -901,6 +1068,9 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           value: 4,
                           groupValue: idvehicletype,
                           onChanged: (val) {
+
+
+
                             setState(() {
                               radioButtonItemvehicle = 'Sports';
                               idvehicletype = 4;
@@ -930,7 +1100,6 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-
 
 
                             Text('Brand & Model',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
@@ -967,6 +1136,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           width: 155,
                           height: 42,
                           child: TextFormField(
+                            //initialValue: widget.brandn ?? '',
                             controller: brandNameController,
                             keyboardType: TextInputType.text,
                             validator: (brandNameController) {
@@ -980,7 +1150,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
                             decoration: InputDecoration(
                               filled: true,
-                              hintText: "Write Here",
+                              hintText: widget.brandn,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9),
                                 borderSide: BorderSide(
@@ -996,6 +1166,8 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             ),
                           ),
                         ),
+
+
 
                         SizedBox(
                           width: 155,
@@ -1014,7 +1186,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
                             decoration: InputDecoration(
                               filled: true,
-                              hintText: "Write Here",
+                              hintText: widget.luggage,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9),
                                 borderSide: BorderSide(
@@ -1030,10 +1202,20 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             ),
                           ),
                         ),
-
-
                       ],
                     ),
+
+
+
+
+
+
+                    SizedBox(
+                      height: 11,
+                    ),
+
+
+
 
 
 
@@ -1093,7 +1275,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
                             decoration: InputDecoration(
                               filled: true,
-                              hintText: "Write Here",
+                              hintText: widget.gear,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9),
                                 borderSide: BorderSide(
@@ -1126,7 +1308,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
                             decoration: InputDecoration(
                               filled: true,
-                              hintText: "Write Here",
+                              hintText: widget.fuel,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9),
                                 borderSide: BorderSide(
@@ -1179,15 +1361,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
 
-
                         //   Text('hhk'),
-
-
-
-
-
-
-
                         SizedBox(
                           width: 155,
                           height: 42,
@@ -1205,7 +1379,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
                             decoration: InputDecoration(
                               filled: true,
-                              hintText: "Write Here",
+                              hintText: widget.seats,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9),
                                 borderSide: BorderSide(
@@ -1238,7 +1412,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
                             decoration: InputDecoration(
                               filled: true,
-                              hintText: "Write Here",
+                              hintText: widget.vehno,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9),
                                 borderSide: BorderSide(
@@ -1268,10 +1442,10 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
 
-
+                            //
                             // Text('License Expired Date',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                             // SizedBox(
-                            //   width: 11,
+                            //   width: 61,
                             // ),
                             Text('Insurance Expired Date',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
@@ -1285,64 +1459,67 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                     ),
 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
 
-                        //Expanded(
-                        // child:
+                        // //Expanded(
+                        // // child:
+                        // Padding(
+                        //   padding: EdgeInsets.only(left: 0),
+                        //   child: Container(
+                        //     color: Colors.brown.shade50,
+                        //     padding:const EdgeInsets.all(15),
+                        //     height:50,
+                        //     width: 144,
+                        //     child: Padding(
+                        //       padding: EdgeInsets.only(top: 4),
+                        //       child: TextField(
                         //
-                        // SizedBox(
-                        //   width: 21,
-                        // ),
+                        //         controller: licenseController, //editing controller of this TextField
+                        //         // validator: (vehiclenoController) {
+                        //         //   String value = vehiclenoController.toString();
+                        //         //   if (value.length == 0) {
+                        //         //     return 'please enter';
+                        //         //   }
+                        //         //   else{
+                        //         //     return '';
+                        //         //   }
+                        //         // },
                         //
-                        //   Padding(
-                        //     padding: EdgeInsets.only(left: 0),
-                        //     child: Container(
-                        //       color: Colors.brown.shade50,
-                        //       padding:const EdgeInsets.all(15),
-                        //       height:50,
-                        //       width: MediaQuery.of(context).size.width/2.72,
-                        //       child: Padding(
-                        //         padding: EdgeInsets.only(top: 4),
-                        //         child: TextField(
-                        //
-                        //           controller: licenseController, //editing controller of this TextField
-                        //
-                        //           decoration: const InputDecoration(
+                        //         decoration: const InputDecoration(
                         //
                         //             border: InputBorder.none,
                         //
-                        //             hintText: 'yyyy/MM/dd'
-                        //           ),
-                        //           readOnly: true,  // when true user cannot edit text
-                        //           onTap: () async {
-                        //             DateTime? pickedTime = await showDatePicker(
-                        //                 context: context,
-                        //                 initialDate: DateTime.now(), //get today's date
-                        //                 firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                        //                 lastDate: DateTime(2101)
-                        //
-                        //
-                        //             );
-                        //
-                        //             if(pickedTime != null ){
-                        //               print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
-                        //               String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
-                        //               print(formattedDate); //formatted date output using intl package =>  2022-07-04
-                        //               setState(() {
-                        //                 licenseController.text = formattedDate; //set foratted date to TextField value.
-                        //               });
-                        //             }else{
-                        //               print("Date is not selected");
-                        //             }
-                        //           },
+                        //             hintText: '2023-05-21'
                         //         ),
+                        //         readOnly: true,  // when true user cannot edit text
+                        //         onTap: () async {
+                        //           DateTime? pickedTime = await showDatePicker(
+                        //               context: context,
+                        //               initialDate: DateTime.now(), //get today's date
+                        //               firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                        //               lastDate: DateTime(2101)
+                        //
+                        //
+                        //           );
+                        //
+                        //           if(pickedTime != null ){
+                        //             print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
+                        //             String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
+                        //             print(formattedDate); //formatted date output using intl package =>  2022-07-04
+                        //             setState(() {
+                        //               licenseController?.text = formattedDate; //set foratted date to TextField value.
+                        //             });
+                        //           }else{
+                        //             print("Date is not selected");
+                        //           }
+                        //         },
                         //       ),
                         //     ),
                         //   ),
                         // ),
-
-
+                        // // ),
+                        //
+                        //
                         // Container(
                         //     height: 50,
                         //     color: Colors.brown.shade50,
@@ -1361,17 +1538,17 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             color: Colors.brown.shade50,
                             padding:const EdgeInsets.all(15),
                             height:50,
-                            width: MediaQuery.of(context).size.width/2.72,
+                            width: 144,
                             child: Padding(
                               padding: EdgeInsets.only(top: 4),
                               child: TextField(
 
                                 controller: insuranceController, //editing controller of this TextField
-                                decoration: const InputDecoration(
+                                decoration:  InputDecoration(
 
 //                                    suffixIcon: Icon(Icons.calendar_month,color: Colors.purple,),
                                     border: InputBorder.none,
-                                    hintText: 'yyyy/MM/dd'
+                                    hintText: widget.insurance
 
                                 ),
                                 readOnly: true,  // when true user cannot edit text
@@ -1395,7 +1572,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
 
                                     setState(() {
-                                      insuranceController.text = formattedDate; //set foratted date to TextField value.
+                                      insuranceController?.text = formattedDate; //set foratted date to TextField value.
                                     });
                                   }else{
                                     print("Date is not selected");
@@ -1437,7 +1614,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                         Padding(
                           padding: EdgeInsets.only(left: 11),
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width/1.3,
+                            width: 300,
                             height: 45,
                             child: TextFormField(
                               controller: priceController,
@@ -1452,7 +1629,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
                               decoration: InputDecoration(
                                 filled: true,
-                                hintText: "Enter Here",
+                                hintText: widget.price,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(9),
                                   borderSide: BorderSide(
@@ -1483,15 +1660,19 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                     SizedBox(
                       height: 11,
                     ),
+
                     Padding(
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
                           child: Text('Description',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
+
+
                     SizedBox(
                       height: 11,
                     ),
+
                     Padding(
                       padding: EdgeInsets.only(left: 11,right: 11),
                       child: SizedBox(
@@ -1500,6 +1681,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           child: TextFormField(
                             controller: descriptionController,
                             keyboardType: TextInputType.text,
+
                             validator: (descriptionController) {
                               String value = descriptionController.toString();
                               if (value!.isEmpty) {
@@ -1507,9 +1689,10 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                               }
                               return null;
                             },
+
                             decoration: InputDecoration(
                               filled: true,
-                              hintText: "Enter Here",
+                              hintText: widget.description,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9),
                                 borderSide: BorderSide(
@@ -1526,18 +1709,26 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           )
                       ),
                     ),
+
+
+
                     SizedBox(
                       height: 11,
                     ),
+
                     Padding(
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
                           child: Text('Image of vehicle license and insurance copy',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
+
+
                     SizedBox(
                       height: 11,
                     ),
+
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -1565,10 +1756,15 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             width: 161,
                             child: Card(
                               color: Colors.brown.shade50,
+                              child: Image.network(widget.imgs!,fit: BoxFit.cover,),
 
                             ),
                           ),
                         ),
+
+
+
+
                         SizedBox(
                           width: 21,
                         ),
@@ -1593,6 +1789,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             width: 161,
                             child: Card(
                               color: Colors.brown.shade50,
+                              child: Image.network(widget.imgs2!,fit: BoxFit.cover,),
                             ),
                           ),
                         ),
@@ -1644,6 +1841,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             width: 161,
                             child: Card(
                               color: Colors.brown.shade50,
+                              child: Image.network(widget.imgs3!,fit: BoxFit.cover,),
 
                             ),
                           ),
@@ -1674,6 +1872,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             width: 161,
                             child: Card(
                               color: Colors.brown.shade50,
+                              child: Image.network(widget.imgs4!,fit: BoxFit.cover,),
                             ),
                           ),
                         ),
@@ -1686,71 +1885,64 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                     ),
 
 
-                    // GestureDetector(
-                    //   onTap: (){
-                    //     selectImages();
-                    //   },
-                    //   child: SizedBox(
-                    //     width: 300.0,
-                    //     height: 195,// To show images in particular area only
-                    //     child: selectedImagesnew.isEmpty  // If no images is selected
-                    //         ? const Center(child: Text('Sorry nothing selected!!'))
-                    //         : GridView.builder(
-                    //       // scrollDirection: Axis.horizontal,
-                    //       itemCount: selectedImagesnew.length,
-                    //       gridDelegate:
-                    //       const SliverGridDelegateWithFixedCrossAxisCount(
-                    //           crossAxisCount: 3
-                    //         // Horizontally only 3 images will show
-                    //       ),
-                    //       itemBuilder: (BuildContext context, int index) {
-                    //         // TO show selected file
-                    //         return Padding(
-                    //           padding: EdgeInsets.all(7),
-                    //           child: Center(
-                    //               child: kIsWeb
-                    //                   ? Image.network(
-                    //                   selectedImagesnew[index].path)
-                    //                   : Image.file(selectedImagesnew[index])),
-                    //         );
-                    //         // If you are making the web app then you have to
-                    //         // use image provider as network image or in
-                    //         // android or iOS it will as file only
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
+                    GestureDetector(
+                      onTap: (){  },
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 155,
+                        child: selectedImagesnew.isEmpty ? GridView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount:  5,
+                          gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 1
 
-
-
-
-                    GestureDetector( onTap: (){  }, child: SizedBox( width: MediaQuery.of(context).size.width, height: 155, child: selectedImagesnew.isEmpty ? const Center(child: Text('Add Images') )
-                        : GridView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount:  selectedImagesnew.length,
-                      gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1
-
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        // TO show selected file
-                        return Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black26
-                                  ,width: 2
-                              )
                           ),
-                          child: kIsWeb
-                              ? Image.network(
-                              selectedImagesnew[index].path)
-                              : Image.file(selectedImagesnew[index],fit: BoxFit.cover,),
-                        );
+                          itemBuilder: (BuildContext context, int index) {
+                            // TO show selected file
+                            return Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.black26
+                                      ,width: 2
+                                  )
+                              ),
+                              child:  Image.network(
+                                widget.group?[index] ?? '',fit: BoxFit.cover,
+                              ),
+                            );
 
-                      },
-                    ),
-                    ),
+                          },
+                        )
+
+
+                            : GridView.builder(
+
+                          scrollDirection: Axis.horizontal,
+                          itemCount:  selectedImagesnew.length,
+                          gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 1
+
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            // TO show selected file
+                            return Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.black26
+                                      ,width: 2
+                                  )
+                              ),
+                              child: kIsWeb
+                                  ? Image.network(
+                                  selectedImagesnew[index].path)
+                                  : Image.file(selectedImagesnew[index]),
+                            );
+
+                          },
+                        ),
+                      ),
                     ),
 
                     if(selectedImagesnew.length < 6)
@@ -1776,6 +1968,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                         width: MediaQuery.of(context).size.width/2.56,
                         child: ElevatedButton(
                           style: ButtonStyle(
+
                               foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                               backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -1786,80 +1979,123 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                               )
                           ),
                           onPressed: () {
-                            if(_formKey.currentState!.validate() && image1 != null && image2 != null && image3 != null && image4 != null && imageFileList != null){
-                              _formKey.currentState?.save();
-                              String? valTok = prefs.getString('token');
-                              print("enterdetails: $valTok");
-                              //register car method called
-                              registerTuktuk(
-                                id,
-                                radioButtonItemvehicle,
-                                xval,
-                                brandNameController.text,
-                                0,
-                                int.parse(noofluggageController.text),
-                                "no",
-                                gearController.text,
-                                fuelController.text,
-                                int.parse(seatsController.text),
-                                vehiclenoController.text,
-                                insuranceController.text,
-                                int.parse(priceController.text),
-                                descriptionController.text,
-                                firstimage ?? '',
-                                secondimage ?? '',
-                                thirdimage ?? '',
-                                fourthimage ?? '',
-                                one ?? '',
-                                two ?? '',
-                                three ?? '',
-                                four ?? '',
-                                five ?? '',
-                              );
+
+                            String? valTok = prefs.getString('token');
+                            print("enterdetails: $valTok");
+
+
+                            //1
+                            if(brandNameController.text == ""){
+                              brand = widget.brandn;
                             }
                             else{
-                              const snackBar = SnackBar(
-                                content: Text('Enter All Details!'),
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              brand = brandNameController.text;
+                            }
+
+                            //2
+                            if(fuelController.text == ""){
+                              fuels = widget.fuel;
+                            }
+                            else{
+                              fuels = fuelController.text;
+                            }
+
+                            //3
+                            if(gearController.text == ""){
+                              gears = widget.gear;
+                            }
+                            else{
+                              gears = gearController.text;
+                            }
+
+                            //4
+                            if(vehiclenoController.text == ""){
+                              vehino = widget.vehno;
+                            }
+                            else{
+                              vehino = vehiclenoController.text;
+                            }
+                            //5
+                            if(insuranceController.text == ""){
+                              insurdt = widget.insurance;
+                            }
+                            else{
+                              insurdt = insuranceController.text;
+                            }
+                            //6
+                            if(descriptionController.text == ""){
+                              descriptxt = widget.description;
+                            }
+                            else{
+                              descriptxt = descriptionController.text;
+                            }
+                            //7
+                            if(numofdoorController.text == ""){
+                              doors = widget.doors.toInt();
+                            }
+                            else{
+                              doors = int.parse(numofdoorController.text);
+                            }
+
+                            //8
+                            if(noofluggageController.text == ""){
+                              luggages = widget.luggage.toInt();
+                            }
+                            else{
+                              luggages = int.parse(noofluggageController.text);
+                            }
+                            //9
+                            if(seatsController.text == ""){
+                              seats = widget.seats.toInt();
+                            }
+                            else{
+                              seats = int.parse(seatsController.text);
+                            }
+                            //10
+                            if(priceController.text == ""){
+                              prices = widget.price.toInt();
+                            }
+                            else{
+                              prices = int.parse(priceController.text);
                             }
 
 
-                            // id,
-                            print(id);
-                            // radioButtonItem,
-                            print(radioButtonItemvehicle);
-                            // xval,
-                            print(xval);
-                            // brandNameController.text,
-                            print(brandNameController.text);
-                            // int.parse(numofdoorController.text),
-                       //     print(int.parse(numofdoorController.text));
-                            // int.parse(noofluggageController.text),
-                         //   int.parse(noofluggageController.text);
-                            // idac.toString(),
-                            print(idac.toString());
-                            // gearController.text,
-                            print(gearController.text);
-                            // fuelController.text,
-                            print(fuelController.text);
-                            // int.parse(seatsController.text),
-                            print(int.parse(seatsController.text));
-                            // vehiclenoController.text,
-                            print(vehiclenoController.text);
-                            // insuranceController.text,
-                            print(insuranceController.text);
-                            // int.parse(priceController.text),
-                            print(int.parse(priceController.text));
-                            // descriptionController.text,
-                            print(descriptionController.text);
-                            // firstimage
-                            print(firstimage);
-                            print(one);
-                            print(two);
-                            print(three);
-                            print(four);
-                            print(five);
+
+
+                            editTukTuk(
+                              idride ?? widget.id,
+                              radioButtonItemvehicle ?? widget.vehicletype,
+                              xval ?? widget.secdepo,
+                              brand ?? widget.brandn,
+                              0,
+                              luggages,
+                              "no",
+                              gears ?? widget.gear,
+                              fuels ?? widget.fuel,
+                              seats,
+                              vehino ?? widget.vehno,
+                              insurdt ?? widget.insurance,
+                              prices,
+                              descriptxt ?? widget.description,
+                              firstimage ?? '',
+                              secondimage ?? '',
+                              thirdimage ?? '',
+                              fourthimage ?? '',
+                              one ?? '',
+                              two ?? '',
+                              three ?? '',
+                              four ?? '',
+                              five ?? '',
+                              // three ?? widget.editimgs7,
+                              // four ?? widget.editimgs8,
+                              // five ?? widget.editimgs9,
+                            );
+
+
+                            print("veh $radioButtonItemvehicle");
+
+
+
                           },
                           child: Align(
                               alignment: Alignment.center,
@@ -1950,7 +2186,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
 
 
-  void registerTuktuk(
+  void editTukTuk(
       int? id,
       String? vehicletypecat,
       String? secdepo,
@@ -1978,10 +2214,10 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
     try{
 
       var valToken = await getToken();
-      print("reg car $valToken");
+      print("edit van $valToken");
 
-      Response response = await post(
-          Uri.parse('http://pick4ride.com/api/merchant/vehicles'),
+      Response response = await put(
+          Uri.parse('http://pick4ride.com/api/merchant/vehicles/${widget.id}'),
 
           body:  json.encode(
               {
@@ -2010,11 +2246,11 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                     "image": imageTwoinsur
                   },
                   {
-                    "type": "rc_book",
+                    "type": "insurance",
                     "image": imageOnerc
                   },
                   {
-                    "type": "rc_book",
+                    "type": "insurance",
                     "image": imageTworc
                   },
                   {
@@ -2047,23 +2283,24 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
 
       if(response.statusCode == 200){
+
+        setState(() {
+
+        });
+
         print(response.body.toString());
         print('vehicle added');
-        //    String? valTok = prefs.getString('token');
-        //    print("valTok: $valTok");
-        final responseJson = json.decode(response.body);
-        setState(() {
-       //   for (Map<String,dynamic> user in responseJson) {
-        //    _userDetails.add(GetAllCars.fromJson(user));
-        //  }
-        });
+        //String? valTok = prefs.getString('token');
+        //print("valTok: $valTok");
+        //var result = jsonDecode(response.body);
+        //getAllCars = GetAllCars.fromJson(result);
+
+
+
+
         Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList()));
-        //  var result = jsonDecode(response.body);
-        // getAllCars = GetAllCars.fromJson(result);
-        // setState(() {
-        //   getAllCarsController.getAllCars!.data.removeAt(index);
-        // });
-        //
+
+
       }
       else {
         print('failed');
@@ -2074,22 +2311,14 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
     }
   }
 
-
-
   void noToken() async{
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     var x = preferences.getString('token');
+
     if(x == null){
       Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
     }
+
   }
 
-
 }
-
-
-
-
-
-
-

@@ -247,6 +247,7 @@ class _OtpPageState extends State<OtpPage> {
         // }
 
         var newToken = veri['data']['token'];
+
         prefs.setString('token', newToken);
         print("new token h: $newToken");
 

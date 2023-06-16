@@ -13,12 +13,22 @@ import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
 
 class RegisterNewVehicle extends StatefulWidget {
+
+  final String? token;
+
+  const RegisterNewVehicle({
+    @required this.token,
+    Key? key,
+  }) : super(key: key);
+
   @override
   _RegisterNewVehicleState createState() => _RegisterNewVehicleState();
 }
 
 class _RegisterNewVehicleState extends State<RegisterNewVehicle> {
   late SharedPreferences prefs;
+
+
 
   @override
   void initState() {

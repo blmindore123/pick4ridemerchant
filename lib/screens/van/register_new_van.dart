@@ -45,6 +45,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
   TextEditingController vehiclenoController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController pricekmController = TextEditingController();
 
 
 
@@ -1052,7 +1053,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                           children: [
 
 
-                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                             SizedBox(
                               width: 51,
                             ),
@@ -1564,6 +1565,8 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       height: 11,
                     ),
 
+
+                    if(radioButtonItemride == 'Self Drive' || radioButtonItemride == 'Wedding Ride')
                     Row(
                       children: <Widget>[
                         Padding(
@@ -1609,7 +1612,112 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
 
                         Text('Per Day'),
                       ],
-                    ),
+                    ) else Row(
+    children: <Widget>[
+    Padding(
+    padding: EdgeInsets.only(left: 11),
+    child: SizedBox(
+    width: MediaQuery.of(context).size.width/1.3,
+    height: 45,
+    child: TextFormField(
+    controller: pricekmController,
+    keyboardType: TextInputType.number,
+    validator: (pricekmController) {
+    String value = pricekmController.toString();
+    if (value!.isEmpty) {
+    return 'Please enter some text';
+    }
+    return null;
+    },
+
+    decoration: InputDecoration(
+    filled: true,
+    hintText: "Enter Here",
+    border: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(9),
+    borderSide: BorderSide(
+    color: Colors.grey,
+    ),
+    ),
+    enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(9),
+    borderSide: BorderSide(
+    color: Colors.white,
+    ),
+    ),
+    ),
+    ),
+    ),
+    ),
+
+    SizedBox(
+    width: 5,
+    ),
+
+
+    Text('Per Km'),
+    ],
+    ),
+
+
+    SizedBox(
+    height: 11,
+    ),
+
+
+    //
+    //
+
+
+    if(radioButtonItemride == 'Self Drive' || radioButtonItemride == 'Wedding Ride')
+    Text("")
+    else Row(
+    children: <Widget>[
+    Padding(
+    padding: EdgeInsets.only(left: 11),
+    child: SizedBox(
+    width: MediaQuery.of(context).size.width/1.3,
+    height: 45,
+    child: TextFormField(
+    controller: priceController,
+    keyboardType: TextInputType.number,
+    validator: (priceController) {
+    String value = priceController.toString();
+    if (value!.isEmpty) {
+    return 'Please enter some text';
+    }
+    return null;
+    },
+
+    decoration: InputDecoration(
+    filled: true,
+    hintText: "Enter Here",
+    border: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(9),
+    borderSide: BorderSide(
+    color: Colors.grey,
+    ),
+    ),
+    enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(9),
+    borderSide: BorderSide(
+    color: Colors.white,
+    ),
+    ),
+    ),
+    ),
+    ),
+    ),
+
+    SizedBox(
+    width: 5,
+    ),
+
+
+    Text('Per Day'),
+    ],
+    ),
+
 
 
                     SizedBox(
@@ -1693,14 +1801,36 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                             onTap: (){
                               selectOneImage(ImageSource.gallery);
                             },
-                            child: Container(
-                              height: 115,
-                              width: 161,
-                              child: Card(
-                                  color: Colors.brown.shade50,
-                                  child: Image.file(File(image1!.path),fit: BoxFit.cover,)
-                              ),
-                            ),
+                            // child: Container(
+                            //   height: 115,
+                            //   width: 161,
+                            //   child: Card(
+                            //       color: Colors.brown.shade50,
+                            //       child: Image.file(File(image1!.path),fit: BoxFit.cover,)
+                            //   ),
+                            // ),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    width: 161,
+                                    child: Card(
+                                        color: Colors.brown.shade50,
+                                        child: Image.file(File(image1!.path),fit: BoxFit.cover,)
+                                    ),
+                                  ),
+
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: (){
+                                        setState(() {
+                                          image1 = null;
+                                        });
+                                      }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                  ),
+
+                                ],
+                              )
                           ),
                         ): GestureDetector(
                           onTap: (){
@@ -1729,10 +1859,32 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                           child: Container(
                             height: 115,
                             width: 161,
-                            child: Card(
-                                color: Colors.brown.shade50,
-                                child: Image.file(File(image2!.path),fit: BoxFit.cover,)
-                            ),
+                            // child: Card(
+                            //     color: Colors.brown.shade50,
+                            //     child: Image.file(File(image2!.path),fit: BoxFit.cover,)
+                            // ),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    width: 161,
+                                    child: Card(
+                                        color: Colors.brown.shade50,
+                                        child: Image.file(File(image2!.path),fit: BoxFit.cover,)
+                                    ),
+                                  ),
+
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: (){
+                                        setState(() {
+                                          image2 = null;
+                                        });
+                                      }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                  ),
+
+                                ],
+                              )
                           ),
                         ): GestureDetector(
                           onTap: (){
@@ -1779,10 +1931,32 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                             child: Container(
                               height: 115,
                               width: 161,
-                              child: Card(
-                                  color: Colors.brown.shade50,
-                                  child: Image.file(File(image3!.path),fit: BoxFit.cover,)
-                              ),
+                              // child: Card(
+                              //     color: Colors.brown.shade50,
+                              //     child: Image.file(File(image3!.path),fit: BoxFit.cover,)
+                              // ),
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 161,
+                                      child: Card(
+                                          color: Colors.brown.shade50,
+                                          child: Image.file(File(image3!.path),fit: BoxFit.cover,)
+                                      ),
+                                    ),
+
+                                    Positioned(
+                                      left: 111,
+                                      child: IconButton(
+                                        onPressed: (){
+                                          setState(() {
+                                            image3 = null;
+                                          });
+                                        }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                    ),
+
+                                  ],
+                                )
                             ),
                           ),
                         ): GestureDetector(
@@ -1810,10 +1984,34 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                           child: Container(
                             height: 115,
                             width: 161,
-                            child: Card(
-                                color: Colors.brown.shade50,
-                                child: Image.file(File(image4!.path),fit: BoxFit.cover,)
-                            ),
+                            // child: Card(
+                            //     color: Colors.brown.shade50,
+                            //     child: Image.file(File(image4!.path),fit: BoxFit.cover,)
+                            // ),
+                              child: Stack(
+
+                                children: [
+
+                                  Container(
+                                    width: 161,
+                                    child: Card(
+                                        color: Colors.brown.shade50,
+                                        child: Image.file(File(image4!.path),fit: BoxFit.cover,)
+                                    ),
+                                  ),
+
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: (){
+                                        setState(() {
+                                          image4 = null;
+                                        });
+                                      }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                  ),
+
+                                ],
+                              )
                           ),
                         ): GestureDetector(
                           onTap: (){
@@ -1836,45 +2034,15 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                     ),
 
 
-                    // GestureDetector(
-                    //   onTap: (){
-                    //     selectImages();
-                    //   },
-                    //   child: SizedBox(
-                    //     width: 300.0,
-                    //     height: 195,// To show images in particular area only
-                    //     child: selectedImagesnew.isEmpty  // If no images is selected
-                    //         ? const Center(child: Text('Sorry nothing selected!!'))
-                    //         : GridView.builder(
-                    //       // scrollDirection: Axis.horizontal,
-                    //       itemCount: selectedImagesnew.length,
-                    //       gridDelegate:
-                    //       const SliverGridDelegateWithFixedCrossAxisCount(
-                    //           crossAxisCount: 3
-                    //         // Horizontally only 3 images will show
-                    //       ),
-                    //       itemBuilder: (BuildContext context, int index) {
-                    //         // TO show selected file
-                    //         return Padding(
-                    //           padding: EdgeInsets.all(7),
-                    //           child: Center(
-                    //               child: kIsWeb
-                    //                   ? Image.network(
-                    //                   selectedImagesnew[index].path)
-                    //                   : Image.file(selectedImagesnew[index])),
-                    //         );
-                    //         // If you are making the web app then you have to
-                    //         // use image provider as network image or in
-                    //         // android or iOS it will as file only
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
 
 
 
 
-                    GestureDetector( onTap: (){  }, child: SizedBox( width: MediaQuery.of(context).size.width, height: 155, child: selectedImagesnew.isEmpty ? const Center(child: Text('Add Images') )
+
+                    GestureDetector(
+                      onTap: (){
+
+                      }, child: SizedBox( width: MediaQuery.of(context).size.width, height: 155, child: selectedImagesnew.isEmpty ? const Center(child: Text('Add Images') )
 
                         : GridView.builder(
 
@@ -1887,17 +2055,49 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         // TO show selected file
-                        return Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black26
-                                  ,width: 2
-                              )
-                          ),
-                          child: kIsWeb
-                              ? Image.network(
-                              selectedImagesnew[index].path)
-                              : Image.file(selectedImagesnew[index],fit: BoxFit.cover,),
+                        return Stack(
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: (){
+                                setState(() {
+                                  //       selectedImagesnew.removeAt(index);
+                                });
+                              },
+                              child: Stack(
+                                children: [
+
+
+                                  Container(
+                                    width: 161,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.black26
+                                            ,width: 2
+                                        )
+                                    ),
+                                    child: kIsWeb
+                                        ? Image.network(
+                                        selectedImagesnew[index].path)
+                                        : Image.file(selectedImagesnew[index],fit: BoxFit.cover,),
+                                  ),
+
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: (){
+                                        setState(() {
+                                          selectedImagesnew.removeAt(index);
+                                        });
+                                      }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+
+
+
+                          ],
                         );
 
                       },

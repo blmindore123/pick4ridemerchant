@@ -937,7 +937,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             SizedBox(
                               width: 105,
                             ),
-                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
                           ],
@@ -1550,10 +1550,32 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             child: Container(
                               height: 115,
                               width: 161,
-                              child: Card(
-                                  color: Colors.brown.shade50,
-                                  child: Image.file(File(image1!.path),fit: BoxFit.cover,)
-                              ),
+                              // child: Card(
+                              //     color: Colors.brown.shade50,
+                              //     child: Image.file(File(image1!.path),fit: BoxFit.cover,)
+                              // ),
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 161,
+                                      child: Card(
+                                          color: Colors.brown.shade50,
+                                          child: Image.file(File(image1!.path),fit: BoxFit.cover,)
+                                      ),
+                                    ),
+
+                                    Positioned(
+                                      left: 111,
+                                      child: IconButton(
+                                        onPressed: (){
+                                          setState(() {
+                                            image1 = null;
+                                          });
+                                        }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                    ),
+
+                                  ],
+                                )
                             ),
                           ),
                         ): GestureDetector(
@@ -1579,10 +1601,32 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           child: Container(
                             height: 115,
                             width: 161,
-                            child: Card(
-                                color: Colors.brown.shade50,
-                                child: Image.file(File(image2!.path),fit: BoxFit.cover,)
-                            ),
+                            // child: Card(
+                            //     color: Colors.brown.shade50,
+                            //     child: Image.file(File(image2!.path),fit: BoxFit.cover,)
+                            // ),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    width: 161,
+                                    child: Card(
+                                        color: Colors.brown.shade50,
+                                        child: Image.file(File(image2!.path),fit: BoxFit.cover,)
+                                    ),
+                                  ),
+
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: (){
+                                        setState(() {
+                                          image2 = null;
+                                        });
+                                      }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                  ),
+
+                                ],
+                              )
                           ),
                         ): GestureDetector(
                           onTap: (){
@@ -1629,10 +1673,32 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                             child: Container(
                               height: 115,
                               width: 161,
-                              child: Card(
-                                  color: Colors.brown.shade50,
-                                  child: Image.file(File(image3!.path),fit: BoxFit.cover,)
-                              ),
+                              // child: Card(
+                              //     color: Colors.brown.shade50,
+                              //     child: Image.file(File(image3!.path),fit: BoxFit.cover,)
+                              // ),
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 161,
+                                      child: Card(
+                                          color: Colors.brown.shade50,
+                                          child: Image.file(File(image3!.path),fit: BoxFit.cover,)
+                                      ),
+                                    ),
+
+                                    Positioned(
+                                      left: 111,
+                                      child: IconButton(
+                                        onPressed: (){
+                                          setState(() {
+                                            image3 = null;
+                                          });
+                                        }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                    ),
+
+                                  ],
+                                )
                             ),
                           ),
                         ): GestureDetector(
@@ -1660,10 +1726,34 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                           child: Container(
                             height: 115,
                             width: 161,
-                            child: Card(
-                                color: Colors.brown.shade50,
-                                child: Image.file(File(image4!.path),fit: BoxFit.cover,)
-                            ),
+                            // child: Card(
+                            //     color: Colors.brown.shade50,
+                            //     child: Image.file(File(image4!.path),fit: BoxFit.cover,)
+                            // ),
+                              child: Stack(
+
+                                children: [
+
+                                  Container(
+                                    width: 161,
+                                    child: Card(
+                                        color: Colors.brown.shade50,
+                                        child: Image.file(File(image4!.path),fit: BoxFit.cover,)
+                                    ),
+                                  ),
+
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: (){
+                                        setState(() {
+                                          image4 = null;
+                                        });
+                                      }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                  ),
+
+                                ],
+                              )
                           ),
                         ): GestureDetector(
                           onTap: (){
@@ -1735,19 +1825,63 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         // TO show selected file
-                        return Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black26
-                                  ,width: 2
-                              )
-                          ),
-                          child: kIsWeb
-                              ? Image.network(
-                              selectedImagesnew[index].path)
-                              : Image.file(selectedImagesnew[index],fit: BoxFit.cover,),
-                        );
+                        return
+                        //   Container(
+                        //   decoration: BoxDecoration(
+                        //       border: Border.all(
+                        //           color: Colors.black26
+                        //           ,width: 2
+                        //       )
+                        //   ),
+                        //   child: kIsWeb
+                        //       ? Image.network(
+                        //       selectedImagesnew[index].path)
+                        //       : Image.file(selectedImagesnew[index],fit: BoxFit.cover,),
+                        // );
+                          Stack(
+                            children: <Widget>[
+                              GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    //       selectedImagesnew.removeAt(index);
+                                  });
+                                },
+                                child: Stack(
+                                  children: [
 
+
+                                    Container(
+                                      width: 161,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.black26
+                                              ,width: 2
+                                          )
+                                      ),
+                                      child: kIsWeb
+                                          ? Image.network(
+                                          selectedImagesnew[index].path)
+                                          : Image.file(selectedImagesnew[index],fit: BoxFit.cover,),
+                                    ),
+
+                                    Positioned(
+                                      left: 111,
+                                      child: IconButton(
+                                        onPressed: (){
+                                          setState(() {
+                                            selectedImagesnew.removeAt(index);
+                                          });
+                                        }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+
+
+
+                            ],
+                          );
                       },
                     ),
                     ),

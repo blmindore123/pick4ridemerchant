@@ -1106,7 +1106,7 @@ class _EditTukTukState extends State<EditTukTuk> {
                             SizedBox(
                               width: 105,
                             ),
-                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
                           ],

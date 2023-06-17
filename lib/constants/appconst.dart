@@ -1,8 +1,14 @@
+import 'package:flutter/material.dart';
+
 class AppConstants{
 
   static const String APP_NAME="KK";
   static const int APP_Version = 1;
-  static const String DEFAULT_IMAGE = "";
+
+  static const String DEFAULT_IMAGE ="";
+  //static const String DEFAULT_IMAGE ="https://cdn.pixabay.com/photo/2017/11/10/05/24/add-2935429_1280.png";
+
+  //  static const Image DEFAULT_IMAGE = Image(image: AssetImage("images/app_images/common_top.png"),fit: BoxFit.cover,);
 
 
   static const String BASE_URL = "http://pick4ride.com/api";

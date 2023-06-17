@@ -155,33 +155,30 @@ class _EditCarState extends State<EditCar> {
 
 
 
+ // late String imageurls;
+
+
   @override
   void initState() {
     super.initState();
     //  value = widget.value == true;
     initSharedPref();
 
+    ////
+   // imageurls == widget.imgs;
+/////
     setState(() {
-
-
       radioButtonItemvehicle = "Commercial";
       idride = widget.drivetype!;
       if(widget.drivetype == 1){
         xval = "yes";
       }
-
-
       if(widget.ac == "yes"){
         idac = 1;
       }
       else if(widget.ac == "no"){
         idac = 2;
       }
-
-
-
-
-
       if(widget.vehicletype == "Commercial"){
         idvehicletype = 1;
       }
@@ -194,15 +191,7 @@ class _EditCarState extends State<EditCar> {
       else if(widget.vehicletype == "Sports"){
         idvehicletype = 4;
       }
-
-
-
-
-
     });
-
-
-
   }
   void initSharedPref() async{
     prefs = await SharedPreferences.getInstance();
@@ -446,7 +435,9 @@ class _EditCarState extends State<EditCar> {
 
 
   Future selectImages() async{
+
     final List<XFile> xfilePick = await imagePicker.pickMultiImage();
+
 
     if(xfilePick!.isNotEmpty){
 
@@ -560,6 +551,10 @@ class _EditCarState extends State<EditCar> {
   Widget build(BuildContext context) {
 
  print(radioButtonItemvehicle);
+
+
+
+
 
 
 
@@ -1217,7 +1212,7 @@ class _EditCarState extends State<EditCar> {
                           children: [
 
 
-                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                             SizedBox(
                               width: 51,
                             ),
@@ -1856,10 +1851,35 @@ class _EditCarState extends State<EditCar> {
                             child: Container(
                               height: 115,
                               width: 161,
-                              child: Card(
-                                  color: Colors.brown.shade50,
-                                  child: Image.file(File(image1!.path),fit: BoxFit.cover,)
-                              ),
+                              // child: Card(
+                              //     color: Colors.brown.shade50,
+                              //     child: Image.file(File(image1!.path),fit: BoxFit.cover,)
+                              // ),
+                                child: Stack(
+
+                                  children: [
+
+                                    Container(
+                                      width: 161,
+                                      child: Card(
+                                          color: Colors.brown.shade50,
+                                          child: Image.file(File(image1!.path),fit: BoxFit.cover,)
+                                      ),
+                                    ),
+
+                                    Positioned(
+                                      top: 35,
+                                      left: 111,
+                                      child: IconButton(
+                                        onPressed: (){
+                                          setState(() {
+                                            image1 = null;
+                                          });
+                                        }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                    ),
+
+                                  ],
+                                )
                             ),
                           ),
                         ): GestureDetector(
@@ -1869,11 +1889,40 @@ class _EditCarState extends State<EditCar> {
                           child: Container(
                             height: 115,
                             width: 161,
-                            child: Card(
-                              color: Colors.brown.shade50,
-                              child: Image.network(widget.imgs!,fit: BoxFit.cover,),
+                            // child: Card(
+                            //   color: Colors.brown.shade50,
+                            //   child: Image.network(widget.imgs!,fit: BoxFit.cover,),
+                            //
+                            // ),
+                              child: Stack(
 
-                            ),
+                                children: [
+
+                                  Container(
+                                    width: 161,
+                                    height: 115,
+                                    child: Card(
+                                        color: Colors.brown.shade50,
+                                        child: Image.network(widget.imgs!,fit: BoxFit.cover,),
+                                    //  child: Image.network(imageurl ?? '',fit: BoxFit.cover,),
+                                    ),
+                                  ),
+
+                                  Positioned(
+                                    top: 5,
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: (){
+                                        setState(() {
+
+                                          Image.network("https://i.stack.imgur.com/mwFzF.png");
+
+                                        });
+                                      }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                  ),
+
+                                ],
+                              )
                           ),
                         ),
 
@@ -2015,17 +2064,59 @@ class _EditCarState extends State<EditCar> {
                               ),
                               itemBuilder: (BuildContext context, int index) {
                                 // TO show selected file
-                                return Container(
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.black26
-                                          ,width: 2
-                                      )
-                                  ),
-                                  child:  Image.network(
-                                      widget.group?[index] ?? '',fit: BoxFit.cover,
-                                  ),
-                                );
+                                return
+                                  Stack(
+                                    children: <Widget>[
+                                      GestureDetector(
+                                        onTap: (){
+                                          setState(() {
+                                            //       selectedImagesnew.removeAt(index);
+                                          });
+                                        },
+                                        child: Stack(
+                                          children: [
+
+
+                                            Container(
+                                               height: 155,
+                                              width: 161,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.black26
+                                                      ,width: 2
+                                                  )
+                                              ),
+                                              child:
+                                              Image.network(widget.group?[index] ?? '',fit: BoxFit.cover,)
+
+                                            ),
+
+                                            Positioned(
+                                              left: 111,
+                                              child: IconButton(
+                                                onPressed: (){
+                                                  setState(() {
+                                                 //   widget.group?.removeAt(index);
+                                                  });
+                                                }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+
+                                    ],
+                                  );
+                                //   Container(
+                                //   decoration: BoxDecoration(
+                                //       border: Border.all(
+                                //           color: Colors.black26
+                                //           ,width: 2
+                                //       )
+                                //   ),
+                                //   child:  Image.network(
+                                //       widget.group?[index] ?? '',fit: BoxFit.cover,
+                                //   ),
+                                // );
 
                               },
                             )
@@ -2042,7 +2133,9 @@ class _EditCarState extends State<EditCar> {
                       ),
                       itemBuilder: (BuildContext context, int index) {
                         // TO show selected file
-                        return Container(
+                        return
+
+                          Container(
                           decoration: BoxDecoration(
                               border: Border.all(
                                   color: Colors.black26
@@ -2065,7 +2158,7 @@ class _EditCarState extends State<EditCar> {
 
                         selectImages();
 
-                      }, child: Text('Add Images')
+                      }, child: Text('Add New Images')
                       )else Padding(
                         padding: EdgeInsets.all(15),
                         child: Text('Max 5 images allowed',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),)),
@@ -2220,8 +2313,14 @@ class _EditCarState extends State<EditCar> {
                     ),
 
 
-                    // ElevatedButton(onPressed: (){
-                    //   uploadoneImage();
+                    // ElevatedButton(
+                    //     onPressed: (){
+                    //       //imageurls == widget.imgs;
+                    //
+                    //       print("imageurls before: $imageurls ");
+                    //
+                    //       imageurls == null;
+                    //       print("imageurls after: $imageurls ");
                     // }, child: Text('send')),
 
                   ],

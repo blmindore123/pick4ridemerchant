@@ -119,8 +119,12 @@ print(MediaQuery.of(context).size.height);
                        Text("Please Wait", style: TextStyle(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.width/15.72)),
                        // SizedBox(height: mQ.height * 0.01),
                        Text(
-                         "We Will Auto Verify The \n          OTP Sent To \n    ${widget.country_code} ${widget.phone_number}",
+                         "We Will Auto Verify The \n          OTP Sent To",
                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.width/15.72),
+                       ),
+                       Text(
+                         "${widget.country_code} ${widget.phone_number}",
+                         style: TextStyle(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.width/20.42),
                        ),
                      ],
                    ),

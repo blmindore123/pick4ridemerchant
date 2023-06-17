@@ -720,7 +720,7 @@ class _VanDetailsState extends State<VanDetails> {
                         children: [
 
 
-                          Text('Count of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                          Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                           SizedBox(
                             width: 46,
                           ),

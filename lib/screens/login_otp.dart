@@ -64,12 +64,14 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+     resizeToAvoidBottomInset: false,
+      //resizeToAvoidBottomInset: true,
 
         body: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
 
           child: Column(
+            mainAxisSize: MainAxisSize.max,
             children: [
               Container(
                 height: MediaQuery
@@ -87,6 +89,7 @@ class _LoginState extends State<Login> {
                         fit: BoxFit.cover
                     )
                 ),
+
                 child: Stack(
                   children: [
 
@@ -104,11 +107,6 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-
-
-
-
-
                     Padding(
                       padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/2.54,),
                       child: Container(
@@ -118,12 +116,6 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-
-
-
-
-
-
                     Padding(
                       padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height/1.88,
@@ -134,7 +126,7 @@ class _LoginState extends State<Login> {
                         decoration: BoxDecoration(
                             borderRadius:
                             BorderRadius.all(Radius.circular(21))),
-                        height: MediaQuery.of(context).size.height/8.4,
+                        height: MediaQuery.of(context).size.height/6.4,   // textformfield height //
                         child: Form(
                           key: _formKey,
                           child: Column(
@@ -146,7 +138,7 @@ class _LoginState extends State<Login> {
                               //  Divider(),
 
                               SizedBox(
-                                height: 9,
+                                height: MediaQuery.of(context).size.height/89.22,
                               ),
 
                               TextFormField(
@@ -190,19 +182,11 @@ class _LoginState extends State<Login> {
                                   ),
                                 ),
                               ),
-
-
                             ],
                           ),
                         ),
                       ),
                     ),
-
-
-
-
-
-
                     Padding(
                       padding: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height/1.22,

@@ -1070,7 +1070,7 @@ class _EditBikeState extends State<EditBike> {
                             SizedBox(
                               width: 105,
                             ),
-                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
                           ],
@@ -1413,7 +1413,7 @@ class _EditBikeState extends State<EditBike> {
                             // SizedBox(
                             //   width: 61,
                             // ),
-                            Text('Insurance Expired Date',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('Insurance Expiry Date',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
                           ],
@@ -1580,7 +1580,7 @@ class _EditBikeState extends State<EditBike> {
                         Padding(
                           padding: EdgeInsets.only(left: 11),
                           child: SizedBox(
-                            width: 300,
+                            width: 100,
                             height: 45,
                             child: TextFormField(
                               controller: priceController,
@@ -1686,7 +1686,7 @@ class _EditBikeState extends State<EditBike> {
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
-                          child: Text('Image of vehicle license and insurance copy',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
+                          child: Text('Image of vehicle license and insurance',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
 
 
@@ -1772,7 +1772,7 @@ class _EditBikeState extends State<EditBike> {
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
-                          child: Text('Image of vehicle book copy',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
+                          child: Text('Images of rc book ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
 
                     SizedBox(

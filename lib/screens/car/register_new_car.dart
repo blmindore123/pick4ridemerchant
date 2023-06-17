@@ -14,6 +14,7 @@ import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/imageres.dart';
 import '../../controller/drive_category_controller.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import '../home.dart';
 import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
@@ -23,11 +24,21 @@ import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 
 class RegisterNewCar extends StatefulWidget {
+
+
+
+
   @override
   _RegisterNewCarState createState() => _RegisterNewCarState();
 }
 
 class _RegisterNewCarState extends State<RegisterNewCar> {
+
+
+
+
+
+
 
 
 
@@ -48,6 +59,9 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
   TextEditingController seatsController = TextEditingController();
   TextEditingController vehiclenoController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+
+  TextEditingController pricekmController = TextEditingController();
+
   TextEditingController descriptionController = TextEditingController();
 
 
@@ -56,6 +70,10 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
 
+
+  // String? defaultbrand;
+  // String? defaultgear;
+  // String? defaultfuel;
 
 
   @override
@@ -110,10 +128,11 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
   String? thirdimage;
   String? fourthimage;
 
+  String? brandmodel;
+  String? gearmodel;
+  String? fuelmodel;
 
   List<File> selectedImagesnew = [];
-
-
   List<String> imagesarr = [];
 
 
@@ -320,11 +339,10 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
   Future selectImages() async{
+
     final List<XFile> xfilePick = await imagePicker.pickMultiImage();
 
     if(xfilePick!.isNotEmpty){
-
-
 
       for (var i = 0; i < xfilePick.length; i++) {
 
@@ -382,8 +400,6 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
             }
 
 
-
-
             if(i==2){
 
               three = imagesarr[2];
@@ -434,6 +450,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
   Widget build(BuildContext context) {
 
 
+    // defaultbrand = "Ferrari Enzo";
 
     return Scaffold(
 
@@ -722,7 +739,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
-                          child: Text('Choose the ride option')),
+                          child: Text('Choose the ride option',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
 
 //                  //   if(condition) Widget() else Widget(),
@@ -944,7 +961,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
                           Text('Brand & Model',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                           SizedBox(
-                            width: 105,
+                            width: 115,
                           ),
                           Text('No. of Doors',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
@@ -969,46 +986,134 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
 
+                     // DropdownSearch<String>(
+                     //
+                     //   mode: Mode.MENU,
+                     //   showSelectedItems: true,
+                     //   items: ["ferrari","ferrari enzo"],
+                     //   dropdownSearchDecoration: InputDecoration(
+                     //     labelText: "Brand",
+                     //     hintText: "Brand",
+                     //   ),
+                     //
+                     // //  popupItemDisabled: isItemDisabled,
+                     //   onChanged: itemSelectionChanged,
+                     //
+                     //   showSearchBox: true,
+                     //   searchFieldProps: TextFieldProps(
+                     //     cursorColor: Colors.blue
+                     //   ),
+                     // ),
 
 
 
                   SizedBox(
-                                width: 155,
+                                width: MediaQuery.of(context).size.width/2.0,
                                 height: 42,
-                                child: TextFormField(
-                                  controller: brandNameController,
-                                  keyboardType: TextInputType.text,
-                                  validator: (brandNameController) {
-                                    String value = brandNameController.toString();
-                                    if (value!.isEmpty) {
-                                      return 'Please enter some text';
-                                    }
-                                    return null;
-                                  },
+
+         child: DropdownSearch<String>(
+           //mode of dropdown
+           mode: Mode.DIALOG,
+           //to show search box
+           showSearchBox: true,
+           showSelectedItem: true,
 
 
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    hintText: "Write Here",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9),
-                                      borderSide: BorderSide(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(9),
-                                      borderSide: BorderSide(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+
+           //list of dropdown items
+           items: [
+             "Ferrari Enzo",
+             "Maruti Zen",
+             "Maruti Baleno",
+             "Hyundai Creta",
+             "Toyota Fortuner"
+           ],
+       //    label: "Country",
+
+          // onChanged: print,
+              onChanged: (v){
+
+
+
+
+               if(v== "Ferrari Enzo"){
+
+                 brandmodel = "Ferrari Enzo";
+
+               }
+
+               if(v== "Maruti Zen"){
+
+                 brandmodel = "Maruti Zen";
+
+
+               }
+
+               if(v== "Maruti Baleno"){
+
+                 brandmodel = "Maruti Baleno";
+               }
+
+               if(v== "Hyundai Creta"){
+
+                 brandmodel = "Hyundai Creta";
+
+               }
+
+               if(v== "Toyota Fortuner"){
+
+                 brandmodel = "Toyota Fortuner";
+               }
+               else{
+                 print("");
+               }
+              },
+
+           selectedItem: "Ferrari Enzo",
+
+
+
+
+         ),
+
+
+                    // child: TextFormField(
+                                //   controller: brandNameController,
+                                //   keyboardType: TextInputType.text,
+                                //   validator: (brandNameController) {
+                                //     String value = brandNameController.toString();
+                                //     if (value!.isEmpty) {
+                                //       return 'Please enter some text';
+                                //     }
+                                //     return null;
+                                //   },
+                                //
+                                //
+                                //   decoration: InputDecoration(
+                                //     filled: true,
+                                //     hintText: "Write Here",
+                                //     border: OutlineInputBorder(
+                                //       borderRadius: BorderRadius.circular(9),
+                                //       borderSide: BorderSide(
+                                //         color: Colors.grey,
+                                //       ),
+                                //     ),
+                                //     enabledBorder: OutlineInputBorder(
+                                //       borderRadius: BorderRadius.circular(9),
+                                //       borderSide: BorderSide(
+                                //         color: Colors.white,
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ),
+
                      SizedBox(
-                       width: 155,
+                       width: MediaQuery.of(context).size.width/2.5,
                        height: 42,
-                       child: TextFormField(
+                      child:
+
+                      TextFormField(
                          controller: numofdoorController,
                          keyboardType: TextInputType.number,
                          validator: (numofdoorController) {
@@ -1026,7 +1131,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                            border: OutlineInputBorder(
                              borderRadius: BorderRadius.circular(9),
                              borderSide: BorderSide(
-                               color: Colors.grey,
+                               color: Colors.grey.shade50,
                              ),
                            ),
                            enabledBorder: OutlineInputBorder(
@@ -1056,9 +1161,9 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           children: [
 
 
-                            Text('No. of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                             SizedBox(
-                              width: 51,
+                              width: 86,
                             ),
                             Text('Air Condition',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
@@ -1084,7 +1189,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                         //   Text('hhk'),
 
                         SizedBox(
-                          width: 155,
+                          width: 196,
                           height: 42,
                           child: TextFormField(
                             controller: noofluggageController,
@@ -1104,7 +1209,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9),
                                 borderSide: BorderSide(
-                                  color: Colors.grey,
+                                  color: Colors.grey.shade50,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
@@ -1117,7 +1222,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           ),
                         ),
                         SizedBox(
-                          width: 155,
+                          width: 196,
                           height: 42,
                           child: Row(
                               children: [
@@ -1186,7 +1291,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
                             Text('Gear Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                             SizedBox(
-                              width: 131,
+                              width: 141,
                             ),
                             Text('Fuel Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
@@ -1213,70 +1318,130 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
                         SizedBox(
-                          width: 155,
+                          width: 196,
                           height: 42,
-                          child: TextFormField(
-                            controller: gearController,
-                            keyboardType: TextInputType.text,
-                            validator: (gearController) {
-                              String value = gearController.toString();
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
+                          child: DropdownSearch<String>(
+                            //mode of dropdown
+                            mode: Mode.DIALOG,
+                            //to show search box
+                            showSearchBox: true,
+                            showSelectedItem: true,
+                            //list of dropdown items
+                            items: [
+                              "Manual",
+                              "Automatic",
+
+                            ],
+                            //    label: "Country",
+
+                            onChanged: (vgear){
+
+                              if(vgear == "Manual"){
+                                gearmodel = "Manual";
                               }
-                              return null;
+                              if(vgear == "Automatic"){
+                                gearmodel = "Automatic";
+                              }
+                              else{
+                                print("");
+                              }
                             },
-
-
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: "Write Here",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
+                            //show selected item
+                            selectedItem: "Manual",
                           ),
+                          // child: TextFormField(
+                          //   controller: gearController,
+                          //   keyboardType: TextInputType.text,
+                          //   validator: (gearController) {
+                          //     String value = gearController.toString();
+                          //     if (value!.isEmpty) {
+                          //       return 'Please enter some text';
+                          //     }
+                          //     return null;
+                          //   },
+                          //
+                          //
+                          //   decoration: InputDecoration(
+                          //     filled: true,
+                          //     hintText: "Write Here",
+                          //     border: OutlineInputBorder(
+                          //       borderRadius: BorderRadius.circular(9),
+                          //       borderSide: BorderSide(
+                          //         color: Colors.grey,
+                          //       ),
+                          //     ),
+                          //     enabledBorder: OutlineInputBorder(
+                          //       borderRadius: BorderRadius.circular(9),
+                          //       borderSide: BorderSide(
+                          //         color: Colors.white,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ),
                         SizedBox(
-                          width: 155,
+                          width: 196,
                           height: 42,
-                          child: TextFormField(
-                            controller: fuelController,
-                            keyboardType: TextInputType.text,
-                            validator: (fuelController) {
-                              String value = fuelController.toString();
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
+                          child: DropdownSearch<String>(
+                            //mode of dropdown
+                            mode: Mode.DIALOG,
+                            //to show search box
+                            showSearchBox: true,
+                            showSelectedItem: true,
+                            //list of dropdown items
+                            items: [
+                              "Petrol",
+                              "Diesel",
+                              "CNG",
+                            ],
+                            //    label: "Country",
+                            onChanged: (vfuel){
+
+                              if(vfuel == "Petrol"){
+                                fuelmodel = "Petrol";
                               }
-                              return null;
+                              if(vfuel == "Diesel"){
+                                fuelmodel = "Diesel";
+                              }
+                              if(vfuel == "CNG"){
+                                fuelmodel = "CNG";
+                              }
+                              else{
+                                print("");
+                              }
                             },
-
-
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: "Write Here",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
+                            //show selected item
+                            selectedItem: "Petrol",
                           ),
+                          // child: TextFormField(
+                          //   controller: fuelController,
+                          //   keyboardType: TextInputType.text,
+                          //   validator: (fuelController) {
+                          //     String value = fuelController.toString();
+                          //     if (value!.isEmpty) {
+                          //       return 'Please enter some text';
+                          //     }
+                          //     return null;
+                          //   },
+                          //
+                          //
+                          //   decoration: InputDecoration(
+                          //     filled: true,
+                          //     hintText: "Write Here",
+                          //     border: OutlineInputBorder(
+                          //       borderRadius: BorderRadius.circular(9),
+                          //       borderSide: BorderSide(
+                          //         color: Colors.grey,
+                          //       ),
+                          //     ),
+                          //     enabledBorder: OutlineInputBorder(
+                          //       borderRadius: BorderRadius.circular(9),
+                          //       borderSide: BorderSide(
+                          //         color: Colors.white,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ),
 
                       ],
@@ -1297,7 +1462,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
                             Text('No. of Seats',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                             SizedBox(
-                              width: 111,
+                              width: 131,
                             ),
                             Text('Vehicle No.',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
@@ -1325,7 +1490,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
 
                         SizedBox(
-                          width: 155,
+                          width: 196,
                           height: 42,
                           child: TextFormField(
                             controller: seatsController,
@@ -1357,8 +1522,11 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             ),
                           ),
                         ),
+
+
+
                         SizedBox(
-                          width: 155,
+                          width: 196,
                           height: 42,
                           child: TextFormField(
                             controller: vehiclenoController,
@@ -1424,65 +1592,6 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                            mainAxisAlignment: MainAxisAlignment.start,
                         children: [
 
-                          //Expanded(
-                           // child:
-                          //
-                          // SizedBox(
-                          //   width: 21,
-                          // ),
-                          //
-                          //   Padding(
-                          //     padding: EdgeInsets.only(left: 0),
-                          //     child: Container(
-                          //       color: Colors.brown.shade50,
-                          //       padding:const EdgeInsets.all(15),
-                          //       height:50,
-                          //       width: MediaQuery.of(context).size.width/2.72,
-                          //       child: Padding(
-                          //         padding: EdgeInsets.only(top: 4),
-                          //         child: TextField(
-                          //
-                          //           controller: licenseController, //editing controller of this TextField
-                          //
-                          //           decoration: const InputDecoration(
-                          //
-                          //             border: InputBorder.none,
-                          //
-                          //             hintText: 'yyyy/MM/dd'
-                          //           ),
-                          //           readOnly: true,  // when true user cannot edit text
-                          //           onTap: () async {
-                          //             DateTime? pickedTime = await showDatePicker(
-                          //                 context: context,
-                          //                 initialDate: DateTime.now(), //get today's date
-                          //                 firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                          //                 lastDate: DateTime(2101)
-                          //
-                          //
-                          //             );
-                          //
-                          //             if(pickedTime != null ){
-                          //               print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
-                          //               String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
-                          //               print(formattedDate); //formatted date output using intl package =>  2022-07-04
-                          //               setState(() {
-                          //                 licenseController.text = formattedDate; //set foratted date to TextField value.
-                          //               });
-                          //             }else{
-                          //               print("Date is not selected");
-                          //             }
-                          //           },
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                         // ),
-
-
-                          // Container(
-                          //     height: 50,
-                          //     color: Colors.brown.shade50,
-                          //     child: Icon(Icons.calendar_month,color: Colors.purple,)),
 
 
                           SizedBox(
@@ -1494,7 +1603,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             Padding(
                               padding: EdgeInsets.only(right: 0),
                               child: Container(
-                                color: Colors.brown.shade50,
+                                color: Colors.grey.shade50,
                                 padding:const EdgeInsets.all(15),
                                 height:50,
                                 width: MediaQuery.of(context).size.width/2.72,
@@ -1545,7 +1654,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
                           Container(
                               height: 50,
-                              color: Colors.brown.shade50,
+                              color: Colors.grey.shade50,
                               child: Icon(Icons.calendar_month,color: Colors.purple,)),
 
                         ],
@@ -1556,24 +1665,49 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                       height: 11,
                     ),
 
+                    // Padding(
+                    //   padding: EdgeInsets.only(left: 11),
+                    //   child: Align(
+                    //       alignment: Alignment.topLeft,
+                    //       child: Text('Price',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
+                    // ),
+
                     Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text('Price',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
+                        padding: EdgeInsets.only(left: 11),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+
+
+                            Text('Price(day)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                            SizedBox(
+                              width: 141,
+                            ),
+
+
+                            if(radioButtonItemride == 'With Driver')
+                            Text('Price(km)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),
+                            )else Text(""),
+
+
+                          ],
+                        )
                     ),
+
 
 
                     SizedBox(
                       height: 11,
                     ),
 
+                    if(radioButtonItemride == 'Self Drive' || radioButtonItemride == 'Wedding Ride')
+
                     Row(
                       children: <Widget>[
                         Padding(
                           padding: EdgeInsets.only(left: 11),
                           child: SizedBox(
-                              width: MediaQuery.of(context).size.width/1.3,
+                              width: 100,
                               height: 45,
                               child: TextFormField(
                               controller: priceController,
@@ -1613,11 +1747,166 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
                         Text('Per Day'),
                       ],
-                    ),
+                    ) else
 
+                      Row(
+      children: <Widget>[
+
+
+
+        Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 11),
+              child: SizedBox(
+                width: 100,
+                height: 45,
+                child: TextFormField(
+                  controller: priceController,
+                  keyboardType: TextInputType.number,
+                  validator: (priceController) {
+                    String value = priceController.toString();
+                    if (value!.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+
+                  decoration: InputDecoration(
+                    filled: true,
+                    hintText: "Enter Here",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(9),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(9),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text('Per day'),
+
+            SizedBox(width: 31,),
+
+            Padding(
+              padding: EdgeInsets.only(left: 11),
+              child: SizedBox(
+                width: 100,
+                height: 45,
+                child: TextFormField(
+                  controller: pricekmController,
+                  keyboardType: TextInputType.number,
+                  validator: (pricekmController) {
+                    String value = pricekmController.toString();
+                    if (value!.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+
+                  decoration: InputDecoration(
+                    filled: true,
+                    hintText: "Enter Here",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(9),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(9),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+
+
+            Text('Per Km'),
+          ],
+        ),
+
+
+      ],
+    ),
 
                     SizedBox(
                       height: 11,
+                    ),
+
+
+                    //
+                    //
+
+
+                    // if(radioButtonItemride == 'Self Drive' || radioButtonItemride == 'Wedding Ride')
+                    //  Text("")
+                    //  else Row(
+                    //   children: <Widget>[
+                    //     Padding(
+                    //       padding: EdgeInsets.only(left: 11),
+                    //       child: SizedBox(
+                    //         width: 100,
+                    //         height: 45,
+                    //         child: TextFormField(
+                    //           controller: priceController,
+                    //           keyboardType: TextInputType.number,
+                    //           validator: (priceController) {
+                    //             String value = priceController.toString();
+                    //             if (value!.isEmpty) {
+                    //               return 'Please enter some text';
+                    //             }
+                    //             return null;
+                    //           },
+                    //
+                    //           decoration: InputDecoration(
+                    //             filled: true,
+                    //             hintText: "Enter Here",
+                    //             border: OutlineInputBorder(
+                    //               borderRadius: BorderRadius.circular(9),
+                    //               borderSide: BorderSide(
+                    //                 color: Colors.grey,
+                    //               ),
+                    //             ),
+                    //             enabledBorder: OutlineInputBorder(
+                    //               borderRadius: BorderRadius.circular(9),
+                    //               borderSide: BorderSide(
+                    //                 color: Colors.white,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //
+                    //     SizedBox(
+                    //       width: 5,
+                    //     ),
+                    //
+                    //
+                    //     Text('Per Day'),
+                    //   ],
+                    // ),
+                    //
+//
+                    SizedBox(
+                      height: 21,
                     ),
 
                     Padding(
@@ -1679,7 +1968,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
-                          child: Text('Image of vehicle license and insurance copy',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
+                          child: Text('Image of vehicle license and insurance ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
 
 
@@ -1700,10 +1989,29 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             child: Container(
                               height: 115,
                               width: 161,
-                              child: Card(
-                                  color: Colors.brown.shade50,
-                                  child: Image.file(File(image1!.path),fit: BoxFit.cover,)
-                              ),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: 115,
+                                    width: 161,
+                                    child: Card(
+                                        color: Colors.grey.shade50,
+                                        child: Image.file(File(image1!.path),fit: BoxFit.cover,)
+                                    ),
+                                  ),
+
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: (){
+                                        setState(() {
+                                          image1 = null;
+                                        });
+                                      }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                  ),
+
+                                ],
+                              )
                             ),
                           ),
                         ): GestureDetector(
@@ -1714,7 +2022,9 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             height: 115,
                             width: 161,
                             child: Card(
-                              color: Colors.brown.shade50,
+                              color: Colors.grey.shade50,
+
+                              child: Image.network('http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
 
                             ),
                           ),
@@ -1733,10 +2043,29 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           child: Container(
                             height: 115,
                             width: 161,
-                            child: Card(
-                                color: Colors.brown.shade50,
-                                child: Image.file(File(image2!.path),fit: BoxFit.cover,)
-                            ),
+                            child: Stack(
+                              children: [
+                                Container(
+                                  height: 115,
+                                  width: 161,
+                                  child: Card(
+                                      color: Colors.grey.shade50,
+                                      child: Image.file(File(image2!.path),fit: BoxFit.cover,)
+                                  ),
+                                ),
+
+                                Positioned(
+                                  left: 111,
+                                  child: IconButton(
+                                    onPressed: (){
+                                      setState(() {
+                                        image2 = null;
+                                      });
+                                    }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                ),
+
+                              ],
+                            )
                           ),
                         ): GestureDetector(
                           onTap: (){
@@ -1746,7 +2075,9 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             height: 115,
                             width: 161,
                             child: Card(
-                              color: Colors.brown.shade50,
+
+                              color: Colors.grey.shade50,
+                              child: Image.network('http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
                             ),
                           ),
                         ),
@@ -1763,7 +2094,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
-                          child: Text('Image of vehicle book copy',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
+                          child: Text('Images of rc book ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
 
                     SizedBox(
@@ -1783,10 +2114,29 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             child: Container(
                               height: 115,
                               width: 161,
-                              child: Card(
-                                color: Colors.brown.shade50,
-                                  child: Image.file(File(image3!.path),fit: BoxFit.cover,)
-                              ),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: 115,
+                                    width: 161,
+                                    child: Card(
+                                        color: Colors.grey.shade50,
+                                        child: Image.file(File(image3!.path),fit: BoxFit.cover,)
+                                    ),
+                                  ),
+
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: (){
+                                        setState(() {
+                                          image3 = null;
+                                        });
+                                      }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                  ),
+
+                                ],
+                              )
                             ),
                           ),
                         ): GestureDetector(
@@ -1797,7 +2147,8 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             height: 115,
                             width: 161,
                             child: Card(
-                                color: Colors.brown.shade50,
+                                color: Colors.grey.shade50,
+                              child: Image.network('http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
 
                             ),
                           ),
@@ -1814,10 +2165,31 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           child: Container(
                             height: 115,
                             width: 161,
-                            child: Card(
-                              color: Colors.brown.shade50,
-                            child: Image.file(File(image4!.path),fit: BoxFit.cover,)
-                            ),
+                            child: Stack(
+
+                              children: [
+
+                                Container(
+                                  height: 115,
+                                  width: 161,
+                                  child: Card(
+                                      color: Colors.grey.shade50,
+                                      child: Image.file(File(image4!.path),fit: BoxFit.cover,)
+                                  ),
+                                ),
+
+                                Positioned(
+                                  left: 111,
+                                  child: IconButton(
+                                    onPressed: (){
+                                      setState(() {
+                                        image4 = null;
+                                      });
+                                    }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                ),
+
+                              ],
+                            )
                           ),
                         ): GestureDetector(
                           onTap: (){
@@ -1827,7 +2199,8 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             height: 115,
                             width: 161,
                             child: Card(
-                                color: Colors.brown.shade50,
+                                color: Colors.grey.shade50,
+                              child: Image.network('http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
                             ),
                           ),
                         ),
@@ -1840,72 +2213,101 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                     ),
 
 
-                    // GestureDetector(
-                    //   onTap: (){
-                    //     selectImages();
-                    //   },
-                    //   child: SizedBox(
-                    //     width: 300.0,
-                    //     height: 195,// To show images in particular area only
-                    //     child: selectedImagesnew.isEmpty  // If no images is selected
-                    //         ? const Center(child: Text('Sorry nothing selected!!'))
-                    //         : GridView.builder(
-                    //       // scrollDirection: Axis.horizontal,
-                    //       itemCount: selectedImagesnew.length,
-                    //       gridDelegate:
-                    //       const SliverGridDelegateWithFixedCrossAxisCount(
-                    //           crossAxisCount: 3
-                    //         // Horizontally only 3 images will show
-                    //       ),
-                    //       itemBuilder: (BuildContext context, int index) {
-                    //         // TO show selected file
-                    //         return Padding(
-                    //           padding: EdgeInsets.all(7),
-                    //           child: Center(
-                    //               child: kIsWeb
-                    //                   ? Image.network(
-                    //                   selectedImagesnew[index].path)
-                    //                   : Image.file(selectedImagesnew[index])),
-                    //         );
-                    //         // If you are making the web app then you have to
-                    //         // use image provider as network image or in
-                    //         // android or iOS it will as file only
-                    //       },
-                    //     ),
+
+         //           SizedBox(
+           //           width: 21,
+             //       ),
+
+
+
+                    // child: Container(
+                    //   height: 115,
+                    //   width: 161,
+                    //   child: Card(
+                    //
+                    //     color: Colors.brown.shade50,
+                    //     child: Image.network('http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
                     //   ),
                     // ),
 
+                    GestureDetector(
+                      onTap: (){
+                    },
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 155,
+                        child: selectedImagesnew.isEmpty ? Card(
+                            color: Colors.grey.shade50,
+                            child: Center(
+                              child: Text('Add Vehicle Images'),
+                            )
 
 
+                        )
 
-                    GestureDetector( onTap: (){  }, child: SizedBox( width: MediaQuery.of(context).size.width, height: 155, child: selectedImagesnew.isEmpty ? const Center(child: Text('Add Images') )
-
-                        : GridView.builder(
+                        : Padding(
+                          padding: EdgeInsets.only(left: 21,right: 21),
+                          child: GridView.builder(
 
                       scrollDirection: Axis.horizontal,
                       itemCount:  selectedImagesnew.length,
                       gridDelegate:
                       const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1
-
+                            crossAxisCount: 1
                       ),
                       itemBuilder: (BuildContext context, int index) {
-                        // TO show selected file
-                        return Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black26
-                                  ,width: 2
-                              )
+                          // TO show selected file
+                          return  Stack(
+                            children: <Widget>[
+                              GestureDetector(
+                            onTap: (){
+                              setState(() {
+                       //       selectedImagesnew.removeAt(index);
+                              });
+                            },
+                            child: Stack(
+                              children: [
+
+
+                                Container(
+                                  width: 161,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.black26
+                                          ,width: 2
+                                      )
+                                  ),
+                                  child: kIsWeb
+                                      ? Image.network(
+                                      selectedImagesnew[index].path)
+                                      : Image.file(selectedImagesnew[index],fit: BoxFit.cover,),
+                                ),
+
+                                Positioned(
+                                  left: 111,
+                                  child: IconButton(
+                                    onPressed: (){
+                                      setState(() {
+                                        selectedImagesnew.removeAt(index);
+
+                                        imagesarr.removeAt(index);
+
+                                      });
+                                    }, icon: new Icon(Icons.delete,color: Colors.red,), ),
+                                ),
+                              ],
+                            ),
                           ),
-                          child: kIsWeb
-                              ? Image.network(
-                              selectedImagesnew[index].path)
-                              : Image.file(selectedImagesnew[index],fit: BoxFit.cover,),
-                        );
+
+
+
+
+                            ],
+                          );
 
                       },
                     ),
+                        ),
                     ),
                     ),
 
@@ -1914,10 +2316,17 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
                       selectImages();
 
+
+                      print("this model is : $brandmodel");
+                      print("this gear is : $gearmodel");
+                      print("this fuel is : $fuelmodel");
+
+
                     }, child: Text('Add Images')
                     )else Padding(
                         padding: EdgeInsets.all(15),
-                        child: Text('Max 5 images allowed',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),)),
+                        child: Text('Max 5 images allowed',style: TextStyle(fontWeight: FontWeight.bold,
+                            color: Colors.blue.shade300),)),
 
 
                     Padding(
@@ -1952,12 +2361,12 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                                   id,
                                   radioButtonItemvehicle,
                                   xval ?? '0',
-                                  brandNameController.text,
+                                  brandmodel ?? 'Ferrari Enzo',
                                   int.parse(numofdoorController.text),
                                   int.parse(noofluggageController.text),
                                   idac.toString(),
-                                  gearController.text,
-                                  fuelController.text,
+                                  gearmodel ?? 'Manual',
+                                  fuelmodel ?? 'Petrol',
                                   int.parse(seatsController.text),
                                   vehiclenoController.text,
                                   insuranceController.text,
@@ -1984,12 +2393,12 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             print(id);
                             print(radioButtonItemvehicle);
                             print(xval);
-                            print(brandNameController.text);
+                            print(brandmodel);
                             print(int.parse(numofdoorController.text));
                             print(int.parse(noofluggageController.text));
                             print(idac.toString());
-                            print(gearController.text);
-                            print(fuelController.text);
+                            print(gearmodel);
+                            print(fuelmodel);
                             print(int.parse(seatsController.text));
                             print(vehiclenoController.text);
                             print(insuranceController.text);
@@ -2217,6 +2626,21 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
     }
 
   }
+
+
+  // bool isItemDisabled(String s) {
+  //   if(s.startsWith('I')){
+  //     return true;
+  //   }
+  //   else{
+  //     return false;
+  //   }
+  // }
+  //
+  void itemSelectionChanged(String? s){
+    print(s);
+  }
+
 
 }
 

@@ -637,7 +637,7 @@ class _TukTukDetailsState extends State<TukTukDetails> {
                           SizedBox(
                             width: 118,
                           ),
-                          Text('Count of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                          Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
                         ],

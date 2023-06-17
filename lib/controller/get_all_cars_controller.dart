@@ -7,22 +7,27 @@ import '../classes/drive_category.dart';
 import '../classes/getallcars.dart';
 
 class GetAllCarsController extends GetxController {
-
   var isLoading = false.obs;
+
+
+
   GetAllCars? getAllCars;
   late SharedPreferences prefs;
   String? token;
 
+  RxList<GetAllCars> getCars = <GetAllCars>[].obs;
+
+
+
   @override
   Future<void> onInit() async {
     super.onInit();
-    fetchData();
     initSharedPref();
+    fetchData();
   }
   void initSharedPref() async{
     prefs = await SharedPreferences.getInstance();
   }
-
   fetchData() async {
     try {
       isLoading(true);
@@ -36,10 +41,19 @@ class GetAllCarsController extends GetxController {
       print(response);
       print(response.body);
       print('Token in cat page : $valTok');
-
       if (response.statusCode == 200) {
+        getCars.refresh();
         var result = jsonDecode(response.body);
         getAllCars = GetAllCars.fromJson(result);
+        print(getAllCars);
+
+
+         //      return result;
+         // List<Map<String,dynamic>> results = [];
+         // results.addAll(result);
+         // print("results::: $results");
+         //     return
+
       }
       else {
         print('error fetching data');
@@ -52,7 +66,6 @@ class GetAllCarsController extends GetxController {
       isLoading(false);
     }
   }
-
   Future<String?> getToken() async{
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString('token');

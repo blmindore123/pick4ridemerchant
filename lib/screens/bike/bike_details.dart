@@ -637,7 +637,7 @@ class _BikeDetailsState extends State<BikeDetails> {
                           SizedBox(
                             width: 118,
                           ),
-                          Text('Count of Luggage Space',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                          Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
 
 
                         ],

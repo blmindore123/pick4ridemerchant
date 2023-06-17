@@ -55,6 +55,7 @@ class _HomeFragmentState extends State<HomeFragment> {
       ),
       endDrawer: Drawer(
         child: Container(
+          margin: EdgeInsets.only(top: 30),
           decoration: BoxDecoration(color: Colors.white),
           child: Column(
             children: <Widget>[
@@ -63,9 +64,14 @@ class _HomeFragmentState extends State<HomeFragment> {
                   child: Column(children: <Widget>[
                     ListTile(
                       title: Text(""),
-                      trailing: Icon(
-                        Icons.arrow_forward_outlined,
-                        color: Colors.black,
+                      trailing: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_forward_outlined,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
 

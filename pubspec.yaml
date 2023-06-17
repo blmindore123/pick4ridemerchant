@@ -48,7 +48,9 @@ dependencies:
 #  jwt_decoder:
   checkbox_formfield:
   intl: ^0.17.0
+  is_first_run: ^1.0.0
   image_picker: ^0.8.7+4
+  dropdown_search: ^5.0.6
 
 dev_dependencies:
   flutter_test:

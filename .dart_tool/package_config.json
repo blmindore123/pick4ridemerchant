@@ -9,9 +9,9 @@
     },
     {
       "name": "args",
-      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/args-2.4.1",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/args-2.4.2",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.19"
     },
     {
       "name": "async",
@@ -98,6 +98,12 @@
       "languageVersion": "2.15"
     },
     {
+      "name": "dropdown_search",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/dropdown_search-5.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
@@ -114,6 +120,30 @@
       "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/file-6.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "file_selector_linux",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_linux-0.9.1+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "file_selector_macos",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_macos-0.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "file_selector_platform_interface",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_platform_interface-2.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "file_selector_windows",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/file_selector_windows-0.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "flutter",
@@ -195,37 +225,61 @@
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-0.8.7+5",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-0.8.9",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.6+19",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.7",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "image_picker_for_web",
-      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_for_web-2.1.12",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_for_web-2.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "image_picker_ios",
-      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_ios-0.8.7+4",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_ios-0.8.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "image_picker_linux",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_linux-0.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "image_picker_macos",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_macos-0.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.6.3",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.8.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "image_picker_windows",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_windows-0.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "intl",
       "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "is_first_run",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/is_first_run-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -258,6 +312,12 @@
       "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.9.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "mime",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "nb_utils",
@@ -309,9 +369,9 @@
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.6",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.7",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "petitparser",
@@ -351,9 +411,9 @@
     },
     {
       "name": "shared_preferences",
-      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.1.1",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "shared_preferences_android",
@@ -453,9 +513,9 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/win32-4.1.4",
+      "rootUri": "file:///C:/Users/arpit/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.0.3",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "xdg_directories",
@@ -482,7 +542,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-06-03T08:40:01.385905Z",
+  "generated": "2023-06-17T09:32:31.274842Z",
   "generator": "pub",
   "generatorVersion": "3.0.2"
 }

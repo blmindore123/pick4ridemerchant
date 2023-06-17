@@ -29,25 +29,23 @@ import '../van/edit_van.dart';
 import '../van/van_details.dart';
 
 class RegisteredCarsList extends StatefulWidget {
-
   final String? token;
+
   const RegisteredCarsList({
     @required this.token,
     Key? key,
   }) : super(key: key);
+
   @override
   _RegisteredCarsListState createState() => _RegisteredCarsListState();
 }
 
 class _RegisteredCarsListState extends State<RegisteredCarsList> {
-
-
   final _formKey = GlobalKey<FormState>();
   late SharedPreferences prefs;
   String? multi;
   String? token;
   GetAllCars? getAllCars;
-
 
   TextEditingController controller = new TextEditingController();
 
@@ -56,7 +54,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
   //
   // List<Map<String,dynamic>> _foundUsers = [];
 
- String? toke;
+  String? toke;
 
   @override
   void initState() {
@@ -66,28 +64,14 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
     checkToken();
 
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       getAllCarsController.fetchData();
 
-
-          setState(() {
-     });
+      setState(() {});
     });
-
-
-
-
-
-
-
   }
 
-
-
-
-
-  void initSharedPref() async{
+  void initSharedPref() async {
     prefs = await SharedPreferences.getInstance();
 
     toke = prefs.getString('token');
@@ -104,8 +88,6 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
   //     _foundUsers = results;
   //   });
   // }
-
-
 
   GetAllCarsController getAllCarsController = Get.put(GetAllCarsController());
 
@@ -146,21 +128,22 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
   //
 
-
   @override
   Widget build(BuildContext context) {
-
     // String? valTok = prefs.getString('token');
     // if(valTok == null){
     //   Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
     // }
 
     return Scaffold(
-     // resizeToAvoidBottomInset: true,
+      // resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Icon(Icons.arrow_back),
-        title: Text("Registered Vehicles",style: TextStyle(color: Colors.black),),
+        title: Text(
+          "Registered Vehicles",
+          style: TextStyle(color: Colors.black),
+        ),
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
       ),
@@ -173,8 +156,11 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
               Expanded(
                 child: Column(children: <Widget>[
                   ListTile(
-                    title:  Text(""),
-                    trailing:  Icon(Icons.arrow_forward_outlined,color: Colors.black,),
+                    title: Text(""),
+                    trailing: Icon(
+                      Icons.arrow_forward_outlined,
+                      color: Colors.black,
+                    ),
                   ),
                   // ListTile(
                   //   title: Text(
@@ -202,8 +188,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                       size: 20.0,
                       color: Colors.purple,
                     ),
-                    onTap: () {
-                    },
+                    onTap: () {},
                   ),
                   ListTile(
                     title: Text(
@@ -261,7 +246,8 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                     leading: Icon(
                       Icons.location_on,
                       size: 20.0,
-                      color: Colors.purple,),
+                      color: Colors.purple,
+                    ),
                     onTap: () {
                       /* Navigator.pop(context);
                       Navigator.of(context).push(new MaterialPageRoute(
@@ -364,13 +350,12 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                       // logOut(valTok!);
                       showDialog(
                         context: context,
-                        builder: (BuildContext context) => _buildPopupDialog(context),
+                        builder: (BuildContext context) =>
+                            _buildPopupDialog(context),
                       );
                     },
                   ),
-
-                ]
-                ),
+                ]),
               ),
             ],
           ),
@@ -379,98 +364,93 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
       backgroundColor: Colors.white,
 
       body:
-    //  SingleChildScrollView(
-       // physics: AlwaysScrollableScrollPhysics(),
-        // child: RefreshIndicator(
-        //   onRefresh: () async {
-        //     setState(()
-        //     {
-        //
-        //     }
-        //     );
-        //
-        //   },
-      //  child:
-        SingleChildScrollView(
-          physics: ScrollPhysics(),
-          child: Stack(
-              children: [
-
-                // child:
-                Column(
+          //  SingleChildScrollView(
+          // physics: AlwaysScrollableScrollPhysics(),
+          // child: RefreshIndicator(
+          //   onRefresh: () async {
+          //     setState(()
+          //     {
+          //
+          //     }
+          //     );
+          //
+          //   },
+          //  child:
+          SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Stack(
+          children: [
+            // child:
+            Column(
               //    crossAxisAlignment: CrossAxisAlignment.center,
-            //      mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
+              //      mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                SizedBox(
+                  height: 21,
+                ),
 
+                // TextField(
+                //   onChanged: (value) => _runFilter(value),
+                //   decoration: InputDecoration(
+                //     labelText: 'search',suffixIcon: Icon(Icons.search)),
+                // ),
 
-                    SizedBox(
-                      height: 21,
-                    ),
-
-                    // TextField(
-                    //   onChanged: (value) => _runFilter(value),
-                    //   decoration: InputDecoration(
-                    //     labelText: 'search',suffixIcon: Icon(Icons.search)),
-                    // ),
-
-
-                    Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-
-                          Text('Location',style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text('change',style: TextStyle(color: Colors.blue),),
-
-                        ],
+                Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Location',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    ),
+                      Text(
+                        'change',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ],
+                  ),
+                ),
 
-                    Divider(color: Colors.black,),
+                Divider(
+                  color: Colors.black,
+                ),
 
+                SizedBox(
+                  height: 11,
+                ),
 
+                Padding(
+                    padding: EdgeInsets.only(left: 23, bottom: 11),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Obx(() => getAllCarsController.isLoading.value
+                          ? Center(
+                              child: Text(""),
+                            )
+                          : Text(
+                              "${getAllCarsController.getAllCars?.data?.length.toString() ?? '0'} Vehicles",
+                              style: TextStyle(fontWeight: FontWeight.w300),
+                            ),),
+                    ),),
 
+                //       if(getAllCarsController.getAllCars?.data?.length != null)
+                Container(
+                  child: Obx(
+                    () => getAllCarsController.isLoading.value
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount:
+                                getAllCarsController.getAllCars?.data?.length ??
+                                    0,
 
-
-                    SizedBox(
-                      height: 11,
-                    ),
-
-                    Padding(
-                        padding: EdgeInsets.only(left: 23,bottom: 11),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Obx(
-                                  () =>  getAllCarsController.isLoading.value
-                                  ? Center(
-                                child: Text(""),
-                              )
-                                  :       Text("${getAllCarsController.getAllCars?.data?.length.toString() ?? '0'} Vehicles",style: TextStyle(fontWeight: FontWeight.w300),)),
-
-
-                        )
-
-                    ),
-
-
-
-                    //       if(getAllCarsController.getAllCars?.data?.length != null)
-                    Container(
-                      child: Obx(
-                            () =>
-                            getAllCarsController.isLoading.value
-                                ? Center(
-                          child: CircularProgressIndicator(),
-                        )
-                            :ListView.builder(
-                               physics: NeverScrollableScrollPhysics(),
-                               shrinkWrap: true,
-                                itemCount: getAllCarsController.getAllCars?.data?.length ??  0,
-
-                          //     itemCount: _foundUsers.length,
-                            itemBuilder: (context,index){
-                         //     _allUsers.add();
+                            //     itemCount: _foundUsers.length,
+                            itemBuilder: (context, index) {
+                              //     _allUsers.add();
 
                               // suggestons.add(
                               //     getAllCarsController.getAllCars!.data[index].brandModel
@@ -480,108 +460,132 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
                               //one insur
                               var imageinsurone = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 0; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imageinsurone = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].imageUrl;
+                              for (var i = 0;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imageinsurone = getAllCarsController
+                                    .getAllCars!.data[index].images[i].imageUrl;
                                 break;
                               }
-
 
                               //two insur
 
                               var imageinsurtwo = AppConstants.DEFAULT_IMAGE;
                               print(imageinsurtwo);
 
-                              for (var i = 1; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imageinsurtwo = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].imageUrl;
+                              for (var i = 1;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imageinsurtwo = getAllCarsController
+                                    .getAllCars!.data[index].images[i].imageUrl;
                                 break;
                               }
-
-
 
                               //one rc
                               var imagercone = AppConstants.DEFAULT_IMAGE;
                               print(imagercone);
 
-                              for (var i = 2; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imagercone = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].imageUrl;
+                              for (var i = 2;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imagercone = getAllCarsController
+                                    .getAllCars!.data[index].images[i].imageUrl;
                                 break;
                               }
-
 
                               //two rc
                               var imagerctwo = AppConstants.DEFAULT_IMAGE;
                               print(imagerctwo);
-                              for (var i = 3; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imagerctwo = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].imageUrl;
+                              for (var i = 3;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imagerctwo = getAllCarsController
+                                    .getAllCars!.data[index].images[i].imageUrl;
                                 break;
                               }
-
 
                               //one veh
                               var imagevehone = AppConstants.DEFAULT_IMAGE;
 
                               print(imagevehone);
 
-                              for (var i = 4; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imagevehone = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].imageUrl;
+                              for (var i = 4;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imagevehone = getAllCarsController
+                                    .getAllCars!.data[index].images[i].imageUrl;
                                 break;
                               }
-
 
                               //two veh
                               var imagevehtwo = AppConstants.DEFAULT_IMAGE;
 
                               print(imagevehtwo);
 
-                              for (var i = 5; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imagevehtwo = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].imageUrl;
+                              for (var i = 5;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imagevehtwo = getAllCarsController
+                                    .getAllCars!.data[index].images[i].imageUrl;
                                 break;
                               }
-
 
                               //three veh
                               var imagevehthree = AppConstants.DEFAULT_IMAGE;
 
                               print(imagevehthree);
 
-                              for (var i = 6; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imagevehthree = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].imageUrl;
+                              for (var i = 6;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imagevehthree = getAllCarsController
+                                    .getAllCars!.data[index].images[i].imageUrl;
                                 break;
                               }
-
 
                               //four veh
                               var imagevehfour = AppConstants.DEFAULT_IMAGE;
 
                               print(imagevehfour);
 
-                              for (var i = 7; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imagevehfour = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].imageUrl;
+                              for (var i = 7;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imagevehfour = getAllCarsController
+                                    .getAllCars!.data[index].images[i].imageUrl;
                                 break;
                               }
-
 
                               //five veh
                               var imagevehfive = AppConstants.DEFAULT_IMAGE;
 
                               print(imagevehfive);
 
-                              for (var i = 8; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imagevehfive = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].imageUrl;
+                              for (var i = 8;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imagevehfive = getAllCarsController
+                                    .getAllCars!.data[index].images[i].imageUrl;
                                 break;
                               }
-
-
-
 
                               imagesgroup.add(imagevehone ?? '');
                               imagesgroup.add(imagevehtwo ?? '');
@@ -589,108 +593,148 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                               imagesgroup.add(imagevehfour ?? '');
                               imagesgroup.add(imagevehfive ?? '');
 
-
-
-
                               //////////////////////
-                              var imageinsuroneedit = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 0; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imageinsuroneedit = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].image;
+                              var imageinsuroneedit =
+                                  AppConstants.DEFAULT_IMAGE;
+                              for (var i = 0;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imageinsuroneedit = getAllCarsController
+                                    .getAllCars!.data[index].images[i].image;
                                 break;
                               }
-                              var imageinsurtwoedit = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 1; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imageinsurtwoedit = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].image;
+                              var imageinsurtwoedit =
+                                  AppConstants.DEFAULT_IMAGE;
+                              for (var i = 1;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imageinsurtwoedit = getAllCarsController
+                                    .getAllCars!.data[index].images[i].image;
                                 break;
                               }
                               var imagerconeedit = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 2; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imagerconeedit = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].image;
+                              for (var i = 2;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imagerconeedit = getAllCarsController
+                                    .getAllCars!.data[index].images[i].image;
                                 break;
                               }
                               var imagerctwoedit = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 3; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imagerctwoedit = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].image;
+                              for (var i = 3;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imagerctwoedit = getAllCarsController
+                                    .getAllCars!.data[index].images[i].image;
                                 break;
                               }
                               var imageveh1edit = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 4; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imageveh1edit = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].image;
+                              for (var i = 4;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imageveh1edit = getAllCarsController
+                                    .getAllCars!.data[index].images[i].image;
                                 break;
                               }
                               var imageveh2edit = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 5; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imageveh2edit = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].image;
+                              for (var i = 5;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imageveh2edit = getAllCarsController
+                                    .getAllCars!.data[index].images[i].image;
                                 break;
                               }
                               var imageveh3edit = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 6; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imageveh3edit = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].image;
+                              for (var i = 6;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imageveh3edit = getAllCarsController
+                                    .getAllCars!.data[index].images[i].image;
                                 break;
                               }
                               var imageveh4edit = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 7; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imageveh4edit = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].image;
+                              for (var i = 7;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imageveh4edit = getAllCarsController
+                                    .getAllCars!.data[index].images[i].image;
                                 break;
                               }
                               var imageveh5edit = AppConstants.DEFAULT_IMAGE;
-                              for (var i = 8; i <  getAllCarsController.getAllCars!.data[index].images.length ; i++) {
-                                imageveh5edit = getAllCarsController.getAllCars!.data[index]
-                                    .images[i].image;
+                              for (var i = 8;
+                                  i <
+                                      getAllCarsController.getAllCars!
+                                          .data[index].images.length;
+                                  i++) {
+                                imageveh5edit = getAllCarsController
+                                    .getAllCars!.data[index].images[i].image;
                                 break;
                               }
 
-
-
                               print("this is image in var image: $imagevehone");
-                              if(getAllCarsController.getAllCars!.data[index].images != null)
+                              if (getAllCarsController
+                                      .getAllCars!.data[index].images !=
+                                  null)
                                 mywidget.add(
                                   ClipRRect(
                                     borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(8.0),
                                       topRight: Radius.circular(8.0),
                                     ),
-                                    child: Image.network(imagevehone,fit: BoxFit.cover,height: 93,width: 133,),
+                                    child: Image.network(
+                                      imagevehone,
+                                      fit: BoxFit.cover,
+                                      height: 93,
+                                      width: 133,
+                                    ),
+                                  ),
+                                );
+                              else
+                                mywidget.add(
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(8.0),
+                                      topRight: Radius.circular(8.0),
+                                    ),
+                                    child: Image.network(
+                                      AppConstants.DEFAULT_IMAGE,
+                                      fit: BoxFit.cover,
+                                      height: 93,
+                                      width: 133,
+                                    ),
                                   ),
                                 );
 
-                              else mywidget.add(
-                                ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8.0),
-                                    topRight: Radius.circular(8.0),
-                                  ),
-
-                                  child: Image.network(AppConstants.DEFAULT_IMAGE,fit: BoxFit.cover,height: 93,width: 133,),
-                                ),
-                              );
-
                               //  }
 
-
-
-                              print(getAllCarsController.getAllCars?.data[index].id);
-                              int? vehicledelid = getAllCarsController.getAllCars?.data[index].id;
+                              print(getAllCarsController
+                                  .getAllCars?.data[index].id);
+                              int? vehicledelid = getAllCarsController
+                                  .getAllCars?.data[index].id;
 
                               //    prefs?.setString('vehicledelid', vehicledelid.toString());
                               //  print("ids $vehicledelid");
 
-
-
                               return Card(
-
                                 //
                                 //key: ValueKey(getAllCarsController.getAllCars!.data[index].brandModel),
                                 // key: ValueKey(_foundUsers[index].brandModel),
-
 
                                 //we have to replace each fields like
                                 //getAllCarsController.getAllCars?.data[index].brandModel ?? 'no name'
@@ -707,191 +751,640 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                     padding: const EdgeInsets.all(20.0),
                                     child: Column(
                                       children: [
-
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(getAllCarsController.getAllCars?.data[index].brandModel ?? 'no name'
-                                              ,style: TextStyle(fontWeight: FontWeight.bold),),
-
+                                            Text(
+                                              getAllCarsController
+                                                      .getAllCars
+                                                      ?.data[index]
+                                                      .brandModel ??
+                                                  'no name',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                             GestureDetector(
-                                              onTap: () async{
+                                              onTap: () async {
                                                 // print("top: $imagevehone top");
                                                 // print(imagesgroup);
                                                 var valToken = await getToken();
                                                 print("edit car $valToken");
 
-                                                if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Car"){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> EditCar(
-                                                    token: valToken,
-                                                    id: vehicledelid,
-                                                    brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
-                                                    vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
-                                                    seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
-                                                    doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
-                                                    luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
-                                                    ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
-                                                    gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
-                                                    fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
-                                                    fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
-                                                    price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
-                                                    description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
-                                                    secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                    vehno: getAllCarsController.getAllCars?.data[index].vehicleNo ?? 'no',
-                                                    imgs:  imageinsurone ?? '',
-                                                    imgs2: imageinsurtwo ?? '',
-                                                    imgs3: imagercone ?? '',
-                                                    imgs4: imagerctwo ?? '',
-                                                    imgs5: imagevehone ?? '',
-                                                    imgs6: imagevehtwo ?? '',
-                                                    imgs7: imagevehthree ?? '',
-                                                    imgs8: imagevehfour ?? '',
-                                                    imgs9: imagevehfive ?? '',
-                                                    editimgs:  imageinsuroneedit ?? '',
-                                                    editimgs2: imageinsurtwoedit ?? '',
-                                                    editimgs3: imagerconeedit ?? '',
-                                                    editimgs4: imagerctwoedit ?? '',
-                                                    editimgs5: imageveh1edit ?? '',
-                                                    editimgs6: imageveh2edit ?? '',
-                                                    editimgs7: imageveh3edit ?? '',
-                                                    editimgs8: imageveh4edit ?? '',
-                                                    editimgs9: imageveh5edit ?? '',
-                                                    insurance: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate ?? 'no',
-                                                    group: imagesgroup,
-                                                    drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
-
-                                                  )));
+                                                if (getAllCarsController
+                                                        .getAllCars
+                                                        ?.data[index]
+                                                        .vehicleCategory
+                                                        .name ==
+                                                    "Car") {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder:
+                                                              (context) =>
+                                                                  EditCar(
+                                                                    token:
+                                                                        valToken,
+                                                                    id: vehicledelid,
+                                                                    brandn: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .brandModel ??
+                                                                        'no',
+                                                                    vehicletype: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .vehicleType ??
+                                                                        'no',
+                                                                    seats: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfSeats
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    doors: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfDoors
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    luggage: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfLuggageSpace
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    ac: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .airCondition ??
+                                                                        'no',
+                                                                    gear: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .gearType ??
+                                                                        'no',
+                                                                    fuel: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .fuelType ??
+                                                                        'no',
+                                                                    fuelstatus: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .status ??
+                                                                        'no',
+                                                                    price: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .price
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    description: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .description ??
+                                                                        'no',
+                                                                    secdepo: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .securityDeposit ??
+                                                                        'no',
+                                                                    vehno: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .vehicleNo ??
+                                                                        'no',
+                                                                    imgs:
+                                                                        imageinsurone ??
+                                                                            '',
+                                                                    imgs2:
+                                                                        imageinsurtwo ??
+                                                                            '',
+                                                                    imgs3:
+                                                                        imagercone ??
+                                                                            '',
+                                                                    imgs4:
+                                                                        imagerctwo ??
+                                                                            '',
+                                                                    imgs5:
+                                                                        imagevehone ??
+                                                                            '',
+                                                                    imgs6:
+                                                                        imagevehtwo ??
+                                                                            '',
+                                                                    imgs7:
+                                                                        imagevehthree ??
+                                                                            '',
+                                                                    imgs8:
+                                                                        imagevehfour ??
+                                                                            '',
+                                                                    imgs9:
+                                                                        imagevehfive ??
+                                                                            '',
+                                                                    editimgs:
+                                                                        imageinsuroneedit ??
+                                                                            '',
+                                                                    editimgs2:
+                                                                        imageinsurtwoedit ??
+                                                                            '',
+                                                                    editimgs3:
+                                                                        imagerconeedit ??
+                                                                            '',
+                                                                    editimgs4:
+                                                                        imagerctwoedit ??
+                                                                            '',
+                                                                    editimgs5:
+                                                                        imageveh1edit ??
+                                                                            '',
+                                                                    editimgs6:
+                                                                        imageveh2edit ??
+                                                                            '',
+                                                                    editimgs7:
+                                                                        imageveh3edit ??
+                                                                            '',
+                                                                    editimgs8:
+                                                                        imageveh4edit ??
+                                                                            '',
+                                                                    editimgs9:
+                                                                        imageveh5edit ??
+                                                                            '',
+                                                                    insurance: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .insuranceExpiryDate ??
+                                                                        'no',
+                                                                    group:
+                                                                        imagesgroup,
+                                                                    drivetype: getAllCarsController
+                                                                        .getAllCars
+                                                                        ?.data[
+                                                                            index]
+                                                                        .rideCategory
+                                                                        .id,
+                                                                  )));
                                                 }
-                                                if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Bike"){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> EditBike(
-                                                    token: valToken,
-                                                    id: vehicledelid,
-                                                    brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
-                                                    vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
-                                                    seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
-                                                    doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
-                                                    luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
-                                                    ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
-                                                    gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
-                                                    fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
-                                                    fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
-                                                    price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
-                                                    description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
-                                                    secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                    vehno: getAllCarsController.getAllCars?.data[index].vehicleNo ?? 'no',
-                                                    imgs:  imageinsurone ?? '',
-                                                    imgs2: imageinsurtwo ?? '',
-                                                    imgs3: imagercone ?? '',
-                                                    imgs4: imagerctwo ?? '',
-                                                    imgs5: imagevehone ?? '',
-                                                    imgs6: imagevehtwo ?? '',
-                                                    imgs7: imagevehthree ?? '',
-                                                    imgs8: imagevehfour ?? '',
-                                                    imgs9: imagevehfive ?? '',
-                                                    editimgs:  imageinsuroneedit ?? '',
-                                                    editimgs2: imageinsurtwoedit ?? '',
-                                                    editimgs3: imagerconeedit ?? '',
-                                                    editimgs4: imagerctwoedit ?? '',
-                                                    editimgs5: imageveh1edit ?? '',
-                                                    editimgs6: imageveh2edit ?? '',
-                                                    editimgs7: imageveh3edit ?? '',
-                                                    editimgs8: imageveh4edit ?? '',
-                                                    editimgs9: imageveh5edit ?? '',
-                                                    insurance: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate ?? 'no',
-                                                    group: imagesgroup,
-                                                    drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
-
-                                                  )));
+                                                if (getAllCarsController
+                                                        .getAllCars
+                                                        ?.data[index]
+                                                        .vehicleCategory
+                                                        .name ==
+                                                    "Bike") {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder:
+                                                              (context) =>
+                                                                  EditBike(
+                                                                    token:
+                                                                        valToken,
+                                                                    id: vehicledelid,
+                                                                    brandn: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .brandModel ??
+                                                                        'no',
+                                                                    vehicletype: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .vehicleType ??
+                                                                        'no',
+                                                                    seats: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfSeats
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    doors: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfDoors
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    luggage: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfLuggageSpace
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    ac: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .airCondition ??
+                                                                        'no',
+                                                                    gear: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .gearType ??
+                                                                        'no',
+                                                                    fuel: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .fuelType ??
+                                                                        'no',
+                                                                    fuelstatus: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .status ??
+                                                                        'no',
+                                                                    price: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .price
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    description: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .description ??
+                                                                        'no',
+                                                                    secdepo: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .securityDeposit ??
+                                                                        'no',
+                                                                    vehno: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .vehicleNo ??
+                                                                        'no',
+                                                                    imgs:
+                                                                        imageinsurone ??
+                                                                            '',
+                                                                    imgs2:
+                                                                        imageinsurtwo ??
+                                                                            '',
+                                                                    imgs3:
+                                                                        imagercone ??
+                                                                            '',
+                                                                    imgs4:
+                                                                        imagerctwo ??
+                                                                            '',
+                                                                    imgs5:
+                                                                        imagevehone ??
+                                                                            '',
+                                                                    imgs6:
+                                                                        imagevehtwo ??
+                                                                            '',
+                                                                    imgs7:
+                                                                        imagevehthree ??
+                                                                            '',
+                                                                    imgs8:
+                                                                        imagevehfour ??
+                                                                            '',
+                                                                    imgs9:
+                                                                        imagevehfive ??
+                                                                            '',
+                                                                    editimgs:
+                                                                        imageinsuroneedit ??
+                                                                            '',
+                                                                    editimgs2:
+                                                                        imageinsurtwoedit ??
+                                                                            '',
+                                                                    editimgs3:
+                                                                        imagerconeedit ??
+                                                                            '',
+                                                                    editimgs4:
+                                                                        imagerctwoedit ??
+                                                                            '',
+                                                                    editimgs5:
+                                                                        imageveh1edit ??
+                                                                            '',
+                                                                    editimgs6:
+                                                                        imageveh2edit ??
+                                                                            '',
+                                                                    editimgs7:
+                                                                        imageveh3edit ??
+                                                                            '',
+                                                                    editimgs8:
+                                                                        imageveh4edit ??
+                                                                            '',
+                                                                    editimgs9:
+                                                                        imageveh5edit ??
+                                                                            '',
+                                                                    insurance: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .insuranceExpiryDate ??
+                                                                        'no',
+                                                                    group:
+                                                                        imagesgroup,
+                                                                    drivetype: getAllCarsController
+                                                                        .getAllCars
+                                                                        ?.data[
+                                                                            index]
+                                                                        .rideCategory
+                                                                        .id,
+                                                                  ),),);
                                                 }
-                                                if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Van"){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> EditVan(
-                                                    token: valToken,
-                                                    id: vehicledelid,
-                                                    brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
-                                                    vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
-                                                    seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
-                                                    doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
-                                                    luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
-                                                    ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
-                                                    gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
-                                                    fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
-                                                    fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
-                                                    price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
-                                                    description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
-                                                    secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                    vehno: getAllCarsController.getAllCars?.data[index].vehicleNo ?? 'no',
-                                                    imgs:  imageinsurone ?? '',
-                                                    imgs2: imageinsurtwo ?? '',
-                                                    imgs3: imagercone ?? '',
-                                                    imgs4: imagerctwo ?? '',
-                                                    imgs5: imagevehone ?? '',
-                                                    imgs6: imagevehtwo ?? '',
-                                                    imgs7: imagevehthree ?? '',
-                                                    imgs8: imagevehfour ?? '',
-                                                    imgs9: imagevehfive ?? '',
-                                                    editimgs:  imageinsuroneedit ?? '',
-                                                    editimgs2: imageinsurtwoedit ?? '',
-                                                    editimgs3: imagerconeedit ?? '',
-                                                    editimgs4: imagerctwoedit ?? '',
-                                                    editimgs5: imageveh1edit ?? '',
-                                                    editimgs6: imageveh2edit ?? '',
-                                                    editimgs7: imageveh3edit ?? '',
-                                                    editimgs8: imageveh4edit ?? '',
-                                                    editimgs9: imageveh5edit ?? '',
-                                                    insurance: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate ?? 'no',
-                                                    group: imagesgroup,
-                                                    drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
-
-                                                  )));
+                                                if (getAllCarsController
+                                                        .getAllCars
+                                                        ?.data[index]
+                                                        .vehicleCategory
+                                                        .name ==
+                                                    "Van") {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder:
+                                                              (context) =>
+                                                                  EditVan(
+                                                                    token:
+                                                                        valToken,
+                                                                    id: vehicledelid,
+                                                                    brandn: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .brandModel ??
+                                                                        'no',
+                                                                    vehicletype: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .vehicleType ??
+                                                                        'no',
+                                                                    seats: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfSeats
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    doors: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfDoors
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    luggage: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfLuggageSpace
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    ac: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .airCondition ??
+                                                                        'no',
+                                                                    gear: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .gearType ??
+                                                                        'no',
+                                                                    fuel: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .fuelType ??
+                                                                        'no',
+                                                                    fuelstatus: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .status ??
+                                                                        'no',
+                                                                    price: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .price
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    description: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .description ??
+                                                                        'no',
+                                                                    secdepo: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .securityDeposit ??
+                                                                        'no',
+                                                                    vehno: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .vehicleNo ??
+                                                                        'no',
+                                                                    imgs:
+                                                                        imageinsurone ??
+                                                                            '',
+                                                                    imgs2:
+                                                                        imageinsurtwo ??
+                                                                            '',
+                                                                    imgs3:
+                                                                        imagercone ??
+                                                                            '',
+                                                                    imgs4:
+                                                                        imagerctwo ??
+                                                                            '',
+                                                                    imgs5:
+                                                                        imagevehone ??
+                                                                            '',
+                                                                    imgs6:
+                                                                        imagevehtwo ??
+                                                                            '',
+                                                                    imgs7:
+                                                                        imagevehthree ??
+                                                                            '',
+                                                                    imgs8:
+                                                                        imagevehfour ??
+                                                                            '',
+                                                                    imgs9:
+                                                                        imagevehfive ??
+                                                                            '',
+                                                                    editimgs:
+                                                                        imageinsuroneedit ??
+                                                                            '',
+                                                                    editimgs2:
+                                                                        imageinsurtwoedit ??
+                                                                            '',
+                                                                    editimgs3:
+                                                                        imagerconeedit ??
+                                                                            '',
+                                                                    editimgs4:
+                                                                        imagerctwoedit ??
+                                                                            '',
+                                                                    editimgs5:
+                                                                        imageveh1edit ??
+                                                                            '',
+                                                                    editimgs6:
+                                                                        imageveh2edit ??
+                                                                            '',
+                                                                    editimgs7:
+                                                                        imageveh3edit ??
+                                                                            '',
+                                                                    editimgs8:
+                                                                        imageveh4edit ??
+                                                                            '',
+                                                                    editimgs9:
+                                                                        imageveh5edit ??
+                                                                            '',
+                                                                    insurance: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .insuranceExpiryDate ??
+                                                                        'no',
+                                                                    group:
+                                                                        imagesgroup,
+                                                                    drivetype: getAllCarsController
+                                                                        .getAllCars
+                                                                        ?.data[
+                                                                            index]
+                                                                        .rideCategory
+                                                                        .id,
+                                                                  ),),);
                                                 }
-                                                if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Tuk-Tuk"){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> EditTukTuk(
-                                                    token: valToken,
-                                                    id: vehicledelid,
-                                                    brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
-                                                    vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
-                                                    seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
-                                                    doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
-                                                    luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
-                                                    ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
-                                                    gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
-                                                    fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
-                                                    fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
-                                                    price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
-                                                    description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
-                                                    secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                    vehno: getAllCarsController.getAllCars?.data[index].vehicleNo ?? 'no',
-                                                    imgs:  imageinsurone ?? '',
-                                                    imgs2: imageinsurtwo ?? '',
-                                                    imgs3: imagercone ?? '',
-                                                    imgs4: imagerctwo ?? '',
-                                                    imgs5: imagevehone ?? '',
-                                                    imgs6: imagevehtwo ?? '',
-                                                    imgs7: imagevehthree ?? '',
-                                                    imgs8: imagevehfour ?? '',
-                                                    imgs9: imagevehfive ?? '',
-                                                    editimgs:  imageinsuroneedit ?? '',
-                                                    editimgs2: imageinsurtwoedit ?? '',
-                                                    editimgs3: imagerconeedit ?? '',
-                                                    editimgs4: imagerctwoedit ?? '',
-                                                    editimgs5: imageveh1edit ?? '',
-                                                    editimgs6: imageveh2edit ?? '',
-                                                    editimgs7: imageveh3edit ?? '',
-                                                    editimgs8: imageveh4edit ?? '',
-                                                    editimgs9: imageveh5edit ?? '',
-                                                    insurance: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate ?? 'no',
-                                                    group: imagesgroup,
-                                                    drivetype: getAllCarsController.getAllCars?.data[index].rideCategory.id,
-
-                                                  )));
-                                                }
-                                                else{
+                                                if (getAllCarsController
+                                                        .getAllCars
+                                                        ?.data[index]
+                                                        .vehicleCategory
+                                                        .name ==
+                                                    "Tuk-Tuk") {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder:
+                                                              (context) =>
+                                                                  EditTukTuk(
+                                                                    token:
+                                                                        valToken,
+                                                                    id: vehicledelid,
+                                                                    brandn: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .brandModel ??
+                                                                        'no',
+                                                                    vehicletype: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .vehicleType ??
+                                                                        'no',
+                                                                    seats: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfSeats
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    doors: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfDoors
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    luggage: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .noOfLuggageSpace
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    ac: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .airCondition ??
+                                                                        'no',
+                                                                    gear: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .gearType ??
+                                                                        'no',
+                                                                    fuel: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .fuelType ??
+                                                                        'no',
+                                                                    fuelstatus: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .status ??
+                                                                        'no',
+                                                                    price: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .price
+                                                                            .toString() ??
+                                                                        'no',
+                                                                    description: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .description ??
+                                                                        'no',
+                                                                    secdepo: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .securityDeposit ??
+                                                                        'no',
+                                                                    vehno: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .vehicleNo ??
+                                                                        'no',
+                                                                    imgs:
+                                                                        imageinsurone ??
+                                                                            '',
+                                                                    imgs2:
+                                                                        imageinsurtwo ??
+                                                                            '',
+                                                                    imgs3:
+                                                                        imagercone ??
+                                                                            '',
+                                                                    imgs4:
+                                                                        imagerctwo ??
+                                                                            '',
+                                                                    imgs5:
+                                                                        imagevehone ??
+                                                                            '',
+                                                                    imgs6:
+                                                                        imagevehtwo ??
+                                                                            '',
+                                                                    imgs7:
+                                                                        imagevehthree ??
+                                                                            '',
+                                                                    imgs8:
+                                                                        imagevehfour ??
+                                                                            '',
+                                                                    imgs9:
+                                                                        imagevehfive ??
+                                                                            '',
+                                                                    editimgs:
+                                                                        imageinsuroneedit ??
+                                                                            '',
+                                                                    editimgs2:
+                                                                        imageinsurtwoedit ??
+                                                                            '',
+                                                                    editimgs3:
+                                                                        imagerconeedit ??
+                                                                            '',
+                                                                    editimgs4:
+                                                                        imagerctwoedit ??
+                                                                            '',
+                                                                    editimgs5:
+                                                                        imageveh1edit ??
+                                                                            '',
+                                                                    editimgs6:
+                                                                        imageveh2edit ??
+                                                                            '',
+                                                                    editimgs7:
+                                                                        imageveh3edit ??
+                                                                            '',
+                                                                    editimgs8:
+                                                                        imageveh4edit ??
+                                                                            '',
+                                                                    editimgs9:
+                                                                        imageveh5edit ??
+                                                                            '',
+                                                                    insurance: getAllCarsController
+                                                                            .getAllCars
+                                                                            ?.data[index]
+                                                                            .insuranceExpiryDate ??
+                                                                        'no',
+                                                                    group:
+                                                                        imagesgroup,
+                                                                    drivetype: getAllCarsController
+                                                                        .getAllCars
+                                                                        ?.data[
+                                                                            index]
+                                                                        .rideCategory
+                                                                        .id,
+                                                                  )));
+                                                } else {
                                                   print("sss");
                                                 }
-
-
-
-
 
                                                 print("img $imagevehone img");
                                               },
@@ -900,66 +1393,78 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                 height: 31,
                                                 decoration: BoxDecoration(
                                                   color: Colors.black12,
-                                                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(30)),
                                                 ),
-                                                child: Icon(Icons.edit_outlined,size: 15,),
-
+                                                child: Icon(
+                                                  Icons.edit_outlined,
+                                                  size: 15,
+                                                ),
                                               ),
                                             ),
-
-
                                           ],
                                         ),
 
-
-
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-
-                                            Text('or similar',style: TextStyle(fontWeight: FontWeight.w300),),
-
+                                            Text(
+                                              'or similar',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w300),
+                                            ),
                                             GestureDetector(
-                                              onTap: () async{
+                                              onTap: () async {
+                                                try {
+                                                  int? vehicleId =
+                                                      getAllCarsController
+                                                          .getAllCars!
+                                                          .data[index]
+                                                          .id;
 
-
-                                                try{
-
-                                                  int? vehicleId = getAllCarsController.getAllCars!.data[index].id;
-
-                                                  var valToken = await getToken();
+                                                  var valToken =
+                                                      await getToken();
                                                   print("delete car $valToken");
 
                                                   Response response = await delete(
-                                                      Uri.parse(AppConstants.BASE_URL+'/merchant/vehicles/$vehicleId'),
+                                                      Uri.parse(AppConstants
+                                                              .BASE_URL +
+                                                          '/merchant/vehicles/$vehicleId'),
                                                       headers: {
-                                                        'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
-                                                      }
-                                                  );
-                                                  if(response.statusCode == 200){
-                                                    print(response.body.toString());
+                                                        'Content-type':
+                                                            'application/json; charset=UTF-8',
+                                                        'Authorization':
+                                                            'Bearer $valToken'
+                                                      });
+                                                  if (response.statusCode ==
+                                                      200) {
+                                                    print(response.body
+                                                        .toString());
 
-                                                    var result = jsonDecode(response.body);
+                                                    var result = jsonDecode(
+                                                        response.body);
 
                                                     setState(() {
-                                                      getAllCarsController.getAllCars!.data.removeAt(index);
+                                                      getAllCarsController
+                                                          .getAllCars!.data
+                                                          .removeAt(index);
                                                     });
 
-                                                    getAllCars = GetAllCars.fromJson(result);
-
-
-                                                  }
-                                                  else {
+                                                    getAllCars =
+                                                        GetAllCars.fromJson(
+                                                            result);
+                                                  } else {
                                                     print('failed');
-                                                    print(response.body.toString());
+                                                    print(response.body
+                                                        .toString());
                                                     print(response.toString());
                                                     print(valToken);
                                                   }
-                                                }
-                                                catch(e){
+                                                } catch (e) {
                                                   print(e.toString());
                                                 }
-
                                               },
                                               child: Container(
                                                 width: 31,
@@ -968,22 +1473,19 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                 //   color: Colors.black12,
                                                 //   borderRadius: BorderRadius.all(Radius.circular(30)),
                                                 // ),
-                                                child: Icon(Icons.delete,size: 15,color: Colors.red,),
-
+                                                child: Icon(
+                                                  Icons.delete,
+                                                  size: 15,
+                                                  color: Colors.red,
+                                                ),
                                               ),
                                             ),
-
-
                                           ],
                                         ),
-
 
                                         SizedBox(
                                           height: 23,
                                         ),
-
-
-
 
                                         Row(
                                           //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -991,24 +1493,30 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                           children: [
                                             Align(
                                                 alignment: Alignment.topLeft,
-                                                child: Text('Economy',style: TextStyle(fontWeight: FontWeight.bold),)
-                                            ),
+                                                child: Text(
+                                                  'Economy',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
 
                                             //Spacer(),
-
 
                                             SizedBox(
                                               width: 141,
                                             ),
 
-                                            Text("Rs. ${getAllCarsController.getAllCars?.data[index].price.toString() ??  'no name'}",style: TextStyle(fontWeight: FontWeight.bold),)
-
-
+                                            Text(
+                                              "Rs. ${getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no name'}",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            )
                                           ],
                                         ),
 
-                                        SizedBox(height: 11,),
-
+                                        SizedBox(
+                                          height: 11,
+                                        ),
 
                                         Row(
                                           children: [
@@ -1016,35 +1524,9 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                               children: [
                                                 Row(
                                                   children: [
-
                                                     SizedBox(
-                                                      width: 2 ,
+                                                      width: 2,
                                                     ),
-
-                                                    Container(
-                                                      width: 53,
-                                                      height: 28
-                                                      ,
-                                                      color: Colors.black12,
-                                                      child: Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 5 ,
-                                                          ),
-                                                          Text(getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? '0',style: TextStyle(fontWeight: FontWeight.bold),),
-                                                          SizedBox(
-                                                            width: 5 ,
-                                                          ),
-                                                          Icon(Icons.person,color: Colors.black26,),
-                                                        ],
-                                                      ),
-                                                    ),
-
-
-                                                    SizedBox(
-                                                      width: 2 ,
-                                                    ),
-
                                                     Container(
                                                       width: 53,
                                                       height: 28,
@@ -1052,41 +1534,96 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                       child: Row(
                                                         children: [
                                                           SizedBox(
-                                                            width: 5 ,
+                                                            width: 5,
                                                           ),
-                                                          Text(getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? '0',style: TextStyle(fontWeight: FontWeight.bold),),
+                                                          Text(
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .noOfSeats
+                                                                    .toString() ??
+                                                                '0',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
                                                           SizedBox(
-                                                            width: 5 ,
+                                                            width: 5,
                                                           ),
-                                                          Icon(Icons.food_bank_outlined,color: Colors.black26,),
+                                                          Icon(
+                                                            Icons.person,
+                                                            color:
+                                                                Colors.black26,
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
-
-
+                                                    SizedBox(
+                                                      width: 2,
+                                                    ),
+                                                    Container(
+                                                      width: 53,
+                                                      height: 28,
+                                                      color: Colors.black12,
+                                                      child: Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .noOfDoors
+                                                                    .toString() ??
+                                                                '0',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Icon(
+                                                            Icons
+                                                                .food_bank_outlined,
+                                                            color:
+                                                                Colors.black26,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                               ],
                                             ),
-
                                             SizedBox(
                                               width: 91,
                                             ),
-
                                             Column(
                                               children: [
-                                                Text(getAllCarsController.getAllCars?.data[index].vehicleNo ?? '',style: TextStyle(fontWeight: FontWeight.bold),)
+                                                Text(
+                                                  getAllCarsController
+                                                          .getAllCars
+                                                          ?.data[index]
+                                                          .vehicleNo ??
+                                                      '',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
                                               ],
                                             ),
                                           ],
                                         ),
 
-
-
                                         SizedBox(
                                           height: 21,
                                         ),
-
 
                                         Row(
                                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -1094,55 +1631,82 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                             Column(
                                               //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
-
-
                                                 Row(
-
                                                   children: [
                                                     Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
                                                         Icon(Icons.ac_unit),
-                                                        SizedBox(height: 11,),
-                                                        Icon(Icons.car_rental_outlined),
-                                                        SizedBox(height: 11,),
-                                                        Icon(Icons.propane_tank),
+                                                        SizedBox(
+                                                          height: 11,
+                                                        ),
+                                                        Icon(Icons
+                                                            .car_rental_outlined),
+                                                        SizedBox(
+                                                          height: 11,
+                                                        ),
+                                                        Icon(
+                                                            Icons.propane_tank),
                                                       ],
                                                     ),
-
                                                     SizedBox(
                                                       width: 11,
                                                     ),
-
                                                     Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        Text('Air Conditioning',style: TextStyle(fontWeight: FontWeight.bold),),
-                                                        SizedBox(height: 21,),
-                                                        Text(getAllCarsController.getAllCars?.data[index].gearType ?? '',style: TextStyle(fontWeight: FontWeight.bold),),
-                                                        SizedBox(height: 21,),
-                                                        Text(getAllCarsController.getAllCars?.data[index].fuelType ?? '',style: TextStyle(fontWeight: FontWeight.bold),),
+                                                        Text(
+                                                          'Air Conditioning',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 21,
+                                                        ),
+                                                        Text(
+                                                          getAllCarsController
+                                                                  .getAllCars
+                                                                  ?.data[index]
+                                                                  .gearType ??
+                                                              '',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 21,
+                                                        ),
+                                                        Text(
+                                                          getAllCarsController
+                                                                  .getAllCars
+                                                                  ?.data[index]
+                                                                  .fuelType ??
+                                                              '',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
                                                       ],
                                                     ),
                                                   ],
                                                 ),
-
-
-
-
                                               ],
                                             ),
-
-
                                             Spacer(),
-
                                             Container(
-                                              width: MediaQuery.of(context).size.width/2.53,
-                                              child: Column(
-
-                                                  children: mywidget
-
-                                              ),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2.53,
+                                              child: Column(children: mywidget),
                                             ),
                                           ],
                                         ),
@@ -1152,258 +1716,581 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                           height: 26,
                                         ), //SizedBox
 
-
-
-
-
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
                                           children: [
-
-
                                             SizedBox(
                                               width: 170,
                                               height: 31,
                                               child: ElevatedButton.icon(
+                                                onPressed: () async {
+                                                  var valToken =
+                                                      await getToken();
+                                                  print(
+                                                      "details car $valToken");
 
-                                                onPressed: () async{
+                                                  if (getAllCarsController
+                                                          .getAllCars
+                                                          ?.data[index]
+                                                          .vehicleCategory
+                                                          .name ==
+                                                      "Car") {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    CarDetails(
+                                                                      token:
+                                                                          valToken,
+                                                                      id: vehicledelid,
+                                                                      brandn: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .brandModel ??
+                                                                          'no',
+                                                                      vehicletype: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .vehicleType ??
+                                                                          'no',
+                                                                      seats: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .noOfSeats
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      doors: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .noOfDoors
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      luggage: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .noOfLuggageSpace
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      ac: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .airCondition ??
+                                                                          'no',
+                                                                      gear: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .gearType ??
+                                                                          'no',
+                                                                      fuel: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .fuelType ??
+                                                                          'no',
+                                                                      fuelstatus: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .status ??
+                                                                          'no',
+                                                                      price: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .price
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      description: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .description ??
+                                                                          'no',
+                                                                      secdepo: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .securityDeposit ??
+                                                                          'no',
+                                                                      imgs:
+                                                                          imageinsurone ??
+                                                                              '',
+                                                                      imgs2:
+                                                                          imageinsurtwo ??
+                                                                              '',
+                                                                      imgs3:
+                                                                          imagercone ??
+                                                                              '',
+                                                                      imgs4:
+                                                                          imagerctwo ??
+                                                                              '',
+                                                                      imgs5:
+                                                                          imagevehone ??
+                                                                              '',
+                                                                      imgs6:
+                                                                          imagevehtwo ??
+                                                                              '',
+                                                                      imgs7:
+                                                                          imagevehthree ??
+                                                                              '',
+                                                                      imgs8:
+                                                                          imagevehfour ??
+                                                                              '',
+                                                                      imgs9:
+                                                                          imagevehfive ??
+                                                                              '',
+                                                                      insur: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .insuranceExpiryDate,
 
-
-                                                  var valToken = await getToken();
-                                                  print("details car $valToken");
-
-                                                  if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Car")
-                                                   {
-                                                     Navigator.push(context, MaterialPageRoute(builder: (context)=> CarDetails(
-                                                       token: valToken,
-                                                       id: vehicledelid,
-                                                       brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
-                                                       vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
-                                                       seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
-                                                       doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
-                                                       luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
-                                                       ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
-                                                       gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
-                                                       fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
-                                                       fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
-                                                       price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
-                                                       description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
-                                                       secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                       imgs:  imageinsurone ?? '',
-                                                       imgs2: imageinsurtwo ?? '',
-                                                       imgs3: imagercone ?? '',
-                                                       imgs4: imagerctwo ?? '',
-                                                       imgs5: imagevehone ?? '',
-                                                       imgs6: imagevehtwo ?? '',
-                                                       imgs7: imagevehthree ?? '',
-                                                       imgs8: imagevehfour ?? '',
-                                                       imgs9: imagevehfive ?? '',
-                                                       insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
-
-                                                       //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
-
-                                                     )));
-                                                   }
-                                                  if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Bike")
-                                                  {
-                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> BikeDetails(
-                                                      token: valToken,
-                                                      id: vehicledelid,
-                                                      brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
-                                                      vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
-                                                      seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
-                                                      doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
-                                                      luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
-                                                      ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
-                                                      gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
-                                                      fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
-                                                      fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
-                                                      price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
-                                                      description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
-                                                      secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                      imgs:  imageinsurone ?? '',
-                                                      imgs2: imageinsurtwo ?? '',
-                                                      imgs3: imagercone ?? '',
-                                                      imgs4: imagerctwo ?? '',
-                                                      imgs5: imagevehone ?? '',
-                                                      imgs6: imagevehtwo ?? '',
-                                                      imgs7: imagevehthree ?? '',
-                                                      imgs8: imagevehfour ?? '',
-                                                      imgs9: imagevehfive ?? '',
-                                                      insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
-
-                                                      //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
-
-                                                    )));
+                                                                      //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
+                                                                    )));
                                                   }
-                                                  if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Van")
-                                                  {
-                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> VanDetails(
-                                                      token: valToken,
-                                                      id: vehicledelid,
-                                                      brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
-                                                      vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
-                                                      seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
-                                                      doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
-                                                      luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
-                                                      ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
-                                                      gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
-                                                      fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
-                                                      fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
-                                                      price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
-                                                      description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
-                                                      secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                      imgs:  imageinsurone ?? '',
-                                                      imgs2: imageinsurtwo ?? '',
-                                                      imgs3: imagercone ?? '',
-                                                      imgs4: imagerctwo ?? '',
-                                                      imgs5: imagevehone ?? '',
-                                                      imgs6: imagevehtwo ?? '',
-                                                      imgs7: imagevehthree ?? '',
-                                                      imgs8: imagevehfour ?? '',
-                                                      imgs9: imagevehfive ?? '',
-                                                      insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
+                                                  if (getAllCarsController
+                                                          .getAllCars
+                                                          ?.data[index]
+                                                          .vehicleCategory
+                                                          .name ==
+                                                      "Bike") {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    BikeDetails(
+                                                                      token:
+                                                                          valToken,
+                                                                      id: vehicledelid,
+                                                                      brandn: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .brandModel ??
+                                                                          'no',
+                                                                      vehicletype: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .vehicleType ??
+                                                                          'no',
+                                                                      seats: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .noOfSeats
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      doors: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .noOfDoors
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      luggage: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .noOfLuggageSpace
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      ac: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .airCondition ??
+                                                                          'no',
+                                                                      gear: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .gearType ??
+                                                                          'no',
+                                                                      fuel: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .fuelType ??
+                                                                          'no',
+                                                                      fuelstatus: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .status ??
+                                                                          'no',
+                                                                      price: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .price
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      description: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .description ??
+                                                                          'no',
+                                                                      secdepo: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .securityDeposit ??
+                                                                          'no',
+                                                                      imgs:
+                                                                          imageinsurone ??
+                                                                              '',
+                                                                      imgs2:
+                                                                          imageinsurtwo ??
+                                                                              '',
+                                                                      imgs3:
+                                                                          imagercone ??
+                                                                              '',
+                                                                      imgs4:
+                                                                          imagerctwo ??
+                                                                              '',
+                                                                      imgs5:
+                                                                          imagevehone ??
+                                                                              '',
+                                                                      imgs6:
+                                                                          imagevehtwo ??
+                                                                              '',
+                                                                      imgs7:
+                                                                          imagevehthree ??
+                                                                              '',
+                                                                      imgs8:
+                                                                          imagevehfour ??
+                                                                              '',
+                                                                      imgs9:
+                                                                          imagevehfive ??
+                                                                              '',
+                                                                      insur: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .insuranceExpiryDate,
 
-                                                      //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
-
-                                                    )));
+                                                                      //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
+                                                                    )));
                                                   }
-                                                  if(getAllCarsController.getAllCars?.data[index].vehicleCategory.name == "Tuk-Tuk")
-                                                  {
-                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> TukTukDetails(
-                                                      token: valToken,
-                                                      id: vehicledelid,
-                                                      brandn: getAllCarsController.getAllCars?.data[index].brandModel ?? 'no',
-                                                      vehicletype: getAllCarsController.getAllCars?.data[index].vehicleType ?? 'no',
-                                                      seats: getAllCarsController.getAllCars?.data[index].noOfSeats.toString() ?? 'no',
-                                                      doors: getAllCarsController.getAllCars?.data[index].noOfDoors.toString() ?? 'no',
-                                                      luggage: getAllCarsController.getAllCars?.data[index].noOfLuggageSpace.toString() ?? 'no',
-                                                      ac: getAllCarsController.getAllCars?.data[index].airCondition ?? 'no',
-                                                      gear: getAllCarsController.getAllCars?.data[index].gearType ?? 'no',
-                                                      fuel: getAllCarsController.getAllCars?.data[index].fuelType ?? 'no',
-                                                      fuelstatus: getAllCarsController.getAllCars?.data[index].status ?? 'no',
-                                                      price: getAllCarsController.getAllCars?.data[index].price.toString() ?? 'no',
-                                                      description: getAllCarsController.getAllCars?.data[index].description ?? 'no',
-                                                      secdepo: getAllCarsController.getAllCars?.data[index].securityDeposit ?? 'no',
-                                                      imgs:  imageinsurone ?? '',
-                                                      imgs2: imageinsurtwo ?? '',
-                                                      imgs3: imagercone ?? '',
-                                                      imgs4: imagerctwo ?? '',
-                                                      imgs5: imagevehone ?? '',
-                                                      imgs6: imagevehtwo ?? '',
-                                                      imgs7: imagevehthree ?? '',
-                                                      imgs8: imagevehfour ?? '',
-                                                      imgs9: imagevehfive ?? '',
-                                                      insur: getAllCarsController.getAllCars?.data[index].insuranceExpiryDate,
+                                                  if (getAllCarsController
+                                                          .getAllCars
+                                                          ?.data[index]
+                                                          .vehicleCategory
+                                                          .name ==
+                                                      "Van") {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    VanDetails(
+                                                                      token:
+                                                                          valToken,
+                                                                      id: vehicledelid,
+                                                                      brandn: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .brandModel ??
+                                                                          'no',
+                                                                      vehicletype: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .vehicleType ??
+                                                                          'no',
+                                                                      seats: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .noOfSeats
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      doors: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .noOfDoors
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      luggage: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .noOfLuggageSpace
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      ac: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .airCondition ??
+                                                                          'no',
+                                                                      gear: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .gearType ??
+                                                                          'no',
+                                                                      fuel: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .fuelType ??
+                                                                          'no',
+                                                                      fuelstatus: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .status ??
+                                                                          'no',
+                                                                      price: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .price
+                                                                              .toString() ??
+                                                                          'no',
+                                                                      description: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .description ??
+                                                                          'no',
+                                                                      secdepo: getAllCarsController
+                                                                              .getAllCars
+                                                                              ?.data[index]
+                                                                              .securityDeposit ??
+                                                                          'no',
+                                                                      imgs:
+                                                                          imageinsurone ??
+                                                                              '',
+                                                                      imgs2:
+                                                                          imageinsurtwo ??
+                                                                              '',
+                                                                      imgs3:
+                                                                          imagercone ??
+                                                                              '',
+                                                                      imgs4:
+                                                                          imagerctwo ??
+                                                                              '',
+                                                                      imgs5:
+                                                                          imagevehone ??
+                                                                              '',
+                                                                      imgs6:
+                                                                          imagevehtwo ??
+                                                                              '',
+                                                                      imgs7:
+                                                                          imagevehthree ??
+                                                                              '',
+                                                                      imgs8:
+                                                                          imagevehfour ??
+                                                                              '',
+                                                                      imgs9:
+                                                                          imagevehfive ??
+                                                                              '',
+                                                                      insur: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .insuranceExpiryDate,
 
-                                                      //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
-
-                                                    )));
+                                                                      //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
+                                                                    )));
                                                   }
-                                                  else{
+                                                  if (getAllCarsController
+                                                          .getAllCars
+                                                          ?.data[index]
+                                                          .vehicleCategory
+                                                          .name ==
+                                                      "Tuk-Tuk") {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                TukTukDetails(
+                                                                  token:
+                                                                      valToken,
+                                                                  id: vehicledelid,
+                                                                  brandn: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .brandModel ??
+                                                                      'no',
+                                                                  vehicletype: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .vehicleType ??
+                                                                      'no',
+                                                                  seats: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .noOfSeats
+                                                                          .toString() ??
+                                                                      'no',
+                                                                  doors: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .noOfDoors
+                                                                          .toString() ??
+                                                                      'no',
+                                                                  luggage: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .noOfLuggageSpace
+                                                                          .toString() ??
+                                                                      'no',
+                                                                  ac: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .airCondition ??
+                                                                      'no',
+                                                                  gear: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .gearType ??
+                                                                      'no',
+                                                                  fuel: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .fuelType ??
+                                                                      'no',
+                                                                  fuelstatus: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .status ??
+                                                                      'no',
+                                                                  price: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .price
+                                                                          .toString() ??
+                                                                      'no',
+                                                                  description: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .description ??
+                                                                      'no',
+                                                                  secdepo: getAllCarsController
+                                                                          .getAllCars
+                                                                          ?.data[
+                                                                              index]
+                                                                          .securityDeposit ??
+                                                                      'no',
+                                                                  imgs:
+                                                                      imageinsurone ??
+                                                                          '',
+                                                                  imgs2:
+                                                                      imageinsurtwo ??
+                                                                          '',
+                                                                  imgs3:
+                                                                      imagercone ??
+                                                                          '',
+                                                                  imgs4:
+                                                                      imagerctwo ??
+                                                                          '',
+                                                                  imgs5:
+                                                                      imagevehone ??
+                                                                          '',
+                                                                  imgs6:
+                                                                      imagevehtwo ??
+                                                                          '',
+                                                                  imgs7:
+                                                                      imagevehthree ??
+                                                                          '',
+                                                                  imgs8:
+                                                                      imagevehfour ??
+                                                                          '',
+                                                                  imgs9:
+                                                                      imagevehfive ??
+                                                                          '',
+                                                                  insur: getAllCarsController
+                                                                      .getAllCars
+                                                                      ?.data[
+                                                                          index]
+                                                                      .insuranceExpiryDate,
+
+                                                                  //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
+                                                                )));
+                                                  } else {
                                                     print("aaa");
                                                   }
 //                                                print(getAllCarsController.getAllCars?.data[index].insuranceExpiryDate);
-
                                                 },
 
-
                                                 style: ButtonStyle(
-
-                                                   foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                                                   backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                    foregroundColor:
+                                                        MaterialStateProperty.all<Color>(
+                                                            Colors.black),
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all<Color>(
+                                                                Colors.black),
+                                                    shape: MaterialStateProperty.all<
+                                                            RoundedRectangleBorder>(
                                                         RoundedRectangleBorder(
-                                                            borderRadius: BorderRadius.circular(31),
-                                                            side: BorderSide(color: Colors.grey.shade300)
-                                                        )
-                                                    )
-                                               ),
-                                                icon: Icon(Icons.details_rounded,size: 20,color: Colors.white,),
-                                                label: Text('View Details',style: TextStyle(color: Colors.white),),
+                                                            borderRadius:
+                                                                BorderRadius.circular(31),
+                                                            side: BorderSide(color: Colors.grey.shade300)))),
+                                                icon: Icon(
+                                                  Icons.details_rounded,
+                                                  size: 20,
+                                                  color: Colors.white,
+                                                ),
+                                                label: Text(
+                                                  'View Details',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
                                                 // child: Padding(
                                                 //   padding: const EdgeInsets.all(4),
                                                 //   child: Icon(Icons.details_rounded,size: 25,color: Colors.blueAccent,),
                                                 // ),
                                               ),
-
                                             ), //Si
-
-
-
                                           ],
                                         ),
-
-
-
-
                                       ],
                                     ), //Column
                                   ), //Padding
                                 ), //SizedBox
                               );
-
-
-                            }
-                        ),
-                      ),
-                    ),
-                    //else Center(
-                    //     child: CircularProgressIndicator()
-                    // ),
-
-
-                    //
-
-
-                    SizedBox(height: 5,),
-
-
-                  ],
+                            }),
+                  ),
                 ),
-                //   ),
+                //else Center(
+                //     child: CircularProgressIndicator()
+                // ),
 
+                //
 
+                SizedBox(
+                  height: 5,
+                ),
               ],
             ),
+            //   ),
+          ],
         ),
+      ),
 
-       // ),
-     // ),
+      // ),
+      // ),
     );
   }
 
-
-
-  void logOut(
-      String valToken
-      ) async {
-    try{
-      Response response = await post(
-          Uri.parse('http://pick4ride.com/api/logout'),
-          headers: {
-            'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
-          }
-      );
-      if(response.statusCode == 200){
+  void logOut(String valToken) async {
+    try {
+      Response response =
+          await post(Uri.parse('http://pick4ride.com/api/logout'), headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $valToken'
+      });
+      if (response.statusCode == 200) {
         //    Map<String,dynamic> veri = json.decode(response.body);
         print(response.body.toString());
         print(response.toString());
         prefs.remove('token');
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
-      }
-      else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
+      } else {
         print('failed');
         print(response.body.toString());
         print(response.toString());
         print(valToken);
       }
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
-
 
   Widget _buildPopupDialog(BuildContext context) {
     return new AlertDialog(
@@ -1411,9 +2298,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
       content: new Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-
-        ],
+        children: <Widget>[],
       ),
       actions: <Widget>[
         new ElevatedButton(
@@ -1421,7 +2306,8 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
             String? valTok = prefs.getString('token');
             print("signout: $valTok");
             logOut(valTok!);
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Login()));
           },
           child: const Text('Yes'),
         ),
@@ -1431,49 +2317,37 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
           },
           child: const Text('No'),
         ),
-
       ],
     );
   }
 
-
-  Future<String?> getToken() async{
+  Future<String?> getToken() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString('token');
   }
 
-
-
- checkToken() async{
+  checkToken() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     checktoken = preferences.getString('token');
 
-    if(checktoken == null){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
-    }
-    else{
+    if (checktoken == null) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+    } else {
       print("kjkln");
     }
-
   }
-
-
-
-
-
-
 }
 
 class CustomDelegate extends SearchDelegate<String> {
-
-
-  List<String> data = ['apple','mango','pineapple','apple'];
+  List<String> data = ['apple', 'mango', 'pineapple', 'apple'];
 
   @override
-  List<Widget> buildActions(BuildContext context) => [IconButton(icon: Icon(Icons.clear), onPressed: () => query = '')];
+  List<Widget> buildActions(BuildContext context) =>
+      [IconButton(icon: Icon(Icons.clear), onPressed: () => query = '')];
 
   @override
-  Widget buildLeading(BuildContext context) => IconButton(icon: Icon(Icons.chevron_left), onPressed: () => close(context, ''));
+  Widget buildLeading(BuildContext context) => IconButton(
+      icon: Icon(Icons.chevron_left), onPressed: () => close(context, ''));
 
   @override
   Widget buildResults(BuildContext context) => Container();
@@ -1482,7 +2356,8 @@ class CustomDelegate extends SearchDelegate<String> {
   Widget buildSuggestions(BuildContext context) {
     var listToShow;
     if (query.isNotEmpty)
-      listToShow = data.where((e) => e.contains(query) && e.startsWith(query)).toList();
+      listToShow =
+          data.where((e) => e.contains(query) && e.startsWith(query)).toList();
     else
       listToShow = data;
 

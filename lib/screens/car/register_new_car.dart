@@ -1349,35 +1349,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             //show selected item
                             selectedItem: "Manual",
                           ),
-                          // child: TextFormField(
-                          //   controller: gearController,
-                          //   keyboardType: TextInputType.text,
-                          //   validator: (gearController) {
-                          //     String value = gearController.toString();
-                          //     if (value!.isEmpty) {
-                          //       return 'Please enter some text';
-                          //     }
-                          //     return null;
-                          //   },
-                          //
-                          //
-                          //   decoration: InputDecoration(
-                          //     filled: true,
-                          //     hintText: "Write Here",
-                          //     border: OutlineInputBorder(
-                          //       borderRadius: BorderRadius.circular(9),
-                          //       borderSide: BorderSide(
-                          //         color: Colors.grey,
-                          //       ),
-                          //     ),
-                          //     enabledBorder: OutlineInputBorder(
-                          //       borderRadius: BorderRadius.circular(9),
-                          //       borderSide: BorderSide(
-                          //         color: Colors.white,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+
                         ),
                         SizedBox(
                           width: 196,

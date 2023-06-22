@@ -11,6 +11,7 @@ import 'package:pick4ridemerchant/screens/enter_details.dart';
 import 'package:pick4ridemerchant/screens/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants/appconst.dart';
 import 'login_otp.dart';
 
 
@@ -223,7 +224,7 @@ print(MediaQuery.of(context).size.height);
                              print(widget.phone_number);
                              print(widget.role);
                              print(widget.device_id);
-                             // print(otp);
+                             //print(otp);
 
 
                              verify(
@@ -231,7 +232,8 @@ print(MediaQuery.of(context).size.height);
                                  widget.phone_number,
                                  widget.role,
                                  widget.device_id,
-                                 /*otp*/
+                                 1111
+                               //  otp
                              );
 
 
@@ -269,11 +271,11 @@ print(MediaQuery.of(context).size.height);
 
 
   void verify(
-      String countryCode,phoneNumber,role,deviceId,/*otp*/
+      String countryCode,phoneNumber,role,deviceId,otp
       ) async {
     try{
       Response response = await post(
-        Uri.parse('http://pick4ride.com/api/verify-otp'),
+        Uri.parse(AppConstants.BASE_URL+'/verify-otp'),
         body: {
           "country_code": countryCode,
           "phone_number": phoneNumber,

@@ -2035,7 +2035,7 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
       ) async {
     try{
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/logout'),
+          Uri.parse(AppConstants.BASE_URL+'/logout'),
           headers: {
             'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
           }
@@ -2124,7 +2124,7 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
       print("reg car $valToken");
 
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/merchant/vehicles'),
+          Uri.parse(AppConstants.BASE_URL+'/merchant/vehicles'),
 
           body:  json.encode(
               {

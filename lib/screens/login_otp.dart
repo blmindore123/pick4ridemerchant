@@ -1,14 +1,15 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter_otp/flutter_otp.dart';
+//import 'package:flutter_otp/flutter_otp.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
+import '../constants/appconst.dart';
 import 'otp.dart';
 
 
-
+//
 // FlutterOtp otp = FlutterOtp();
 
 class Login extends StatefulWidget {
@@ -37,7 +38,7 @@ class _LoginState extends State<Login> {
   void login(String country_code,phone_number,role) async {
     try{
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/send-otp'),
+          Uri.parse(AppConstants.BASE_URL+'/send-otp'),
           body: {
             "country_code": "+94",
             "phone_number": phone_number,
@@ -207,7 +208,7 @@ class _LoginState extends State<Login> {
      if(_formKey.currentState!.validate()) {
 
         login(country_code,numberController.text.toString(),role);
-        // otp.sendOtp(numberController.text.toString(), '1111', minNumber, maxNumber, country_code);
+      //  otp.sendOtp(numberController.text.toString(), '1111', minNumber, maxNumber, country_code);
        Navigator.pushAndRemoveUntil(
        context,
        MaterialPageRoute(

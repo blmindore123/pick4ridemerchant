@@ -2094,7 +2094,7 @@ class _EditBikeState extends State<EditBike> {
       ) async {
     try{
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/logout'),
+          Uri.parse(AppConstants.BASE_URL+'/logout'),
           headers: {
             'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
           }
@@ -2183,7 +2183,7 @@ class _EditBikeState extends State<EditBike> {
       print("edit van $valToken");
 
       Response response = await put(
-          Uri.parse('http://pick4ride.com/api/merchant/vehicles/${widget.id}'),
+          Uri.parse(AppConstants.BASE_URL+'/merchant/vehicles/${widget.id}'),
 
           body:  json.encode(
               {

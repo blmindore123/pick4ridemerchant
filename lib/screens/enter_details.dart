@@ -5,6 +5,8 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:pick4ridemerchant/screens/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants/appconst.dart';
+
 
 class EnterDetailsScreen extends StatefulWidget {
 
@@ -416,7 +418,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       ) async {
     try{
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/merchant/signup'),
+          Uri.parse(AppConstants.BASE_URL+'merchant/signup'),
           body: json.encode(
               {
                 "name": name,

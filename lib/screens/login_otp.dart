@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
+import '../constants/appconst.dart';
 import 'otp.dart';
 
 
@@ -37,7 +38,7 @@ class _LoginState extends State<Login> {
   void login(String country_code,phone_number,role) async {
     try{
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/send-otp'),
+          Uri.parse(AppConstants.BASE_URL+'/send-otp'),
           body: {
             "country_code": "+94",
             "phone_number": phone_number,

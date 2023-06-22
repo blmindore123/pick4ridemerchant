@@ -15,6 +15,7 @@ import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/imageres.dart';
 import '../../controller/drive_category_controller.dart';
+import '../../widgets/drawer.dart';
 import '../home.dart';
 import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
@@ -570,241 +571,7 @@ class _EditCarState extends State<EditCar> {
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
       ),
-      endDrawer: Drawer(
-
-
-        child: Container(
-          decoration: BoxDecoration(color: Colors.white),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Column(children: <Widget>[
-
-                  ListTile(
-                    title:  Text(""),
-                    trailing:  Icon(Icons.arrow_forward_outlined,color: Colors.black,),
-                  ),
-
-                  // ListTile(
-                  //   title: Text(
-                  //     'Sign up as supplier',
-                  //     style: TextStyle(fontSize: 18.0, color: Colors.black),
-                  //   ),
-                  //   leading: Icon(
-                  //     Icons.person,
-                  //     size: 20.0,
-                  //     color: Colors.purple,
-                  //   ),
-                  //   onTap: () {
-                  //     /* Navigator.pop(context);
-                  //   Navigator.of(context).push(new MaterialPageRoute(
-                  //       builder: (context) => dealerBuilder()));*/
-                  //   },
-                  // ),
-                  ListTile(
-                    title: Text(
-                      'Invoice Report',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.shuffle,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /*Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => shufflerBuilder()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Profile Management',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.info_outline,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-
-
-                  ListTile(
-                    title: Text(
-                      'FAQ',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.fax,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-
-
-                  ListTile(
-                    title: Text(
-                      'Privacy Policy',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.policy_outlined,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Change Location',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.location_on,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Contact Us',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.contact_page,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'About Us',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.info,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Terms and Conditions',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.note,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Booking Details',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.book,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Share App',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.share,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Sign Out',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.logout,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-
-                      // String? valTok = prefs.getString('token');
-                      // print("signout: $valTok");
-                      // logOut(valTok!);
-
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => _buildPopupDialog(context),
-                      );
-
-
-                    },
-                  ),
-
-                ]
-                ),
-              ),
-
-            ],
-          ),
-        ),
-
-
-
-
-
-
-
-      ),
+      endDrawer: MyDrawer(),
       backgroundColor: Colors.white,
 
       body: RefreshIndicator(
@@ -2342,7 +2109,7 @@ class _EditCarState extends State<EditCar> {
       ) async {
     try{
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/logout'),
+          Uri.parse(AppConstants.BASE_URL+'/logout'),
           headers: {
             'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
           }
@@ -2431,7 +2198,7 @@ class _EditCarState extends State<EditCar> {
       print("edit car $valToken");
 
       Response response = await put(
-          Uri.parse('http://pick4ride.com/api/merchant/vehicles/${widget.id}'),
+          Uri.parse(AppConstants.BASE_URL+'/merchant/vehicles/${widget.id}'),
 
           body:  json.encode(
               {

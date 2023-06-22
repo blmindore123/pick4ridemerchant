@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:nb_utils/nb_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../classes/bookingsrequestymodel.dart';
 import '../classes/drive_category.dart';
@@ -21,10 +22,16 @@ class BookingListController extends GetxController {
     super.onInit();
 
     var booktype = await getBooktype();
-
     print("day1 saved id: $booktype");
 
-    fetchCarsBookingList(booktype ?? '');
+    // var bookingcount = await getBookingcount();
+    // print("book count: $bookingcount");
+
+
+
+    fetchCarsBookingList(booktype ?? '',
+    //    bookingcount ?? ''
+    );
 
     initSharedPref();
 
@@ -35,7 +42,9 @@ class BookingListController extends GetxController {
   }
 
 
-  fetchCarsBookingList(String booktype) async {
+  fetchCarsBookingList(String booktype,
+      //String bookingcount
+      ) async {
     try {
       isLoading(true);
 
@@ -44,8 +53,8 @@ class BookingListController extends GetxController {
 
       //status==all
 
-      var url = Uri.parse(AppConstants.BASE_URL+'/merchant/booking/list?limit=20&booking_status=$booktype');
-
+//      var url = Uri.parse(AppConstants.BASE_URL+'/merchant/booking/list?limit=$bookingcount&booking_status=$booktype');
+      var url = Uri.parse(AppConstants.BASE_URL+'/merchant/booking/list?limit=50&booking_status=$booktype');
       print('token h yr: $valTok');
 
       final response = await http.get(url, headers: {
@@ -73,6 +82,9 @@ class BookingListController extends GetxController {
 
     }
     catch (e) {
+
+
+
       print('Error while getting data is $e');
     }
     finally {
@@ -90,5 +102,15 @@ class BookingListController extends GetxController {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString('bookingname');
   }
+
+
+
+
+
+  Future<String?> getBookingcount() async{
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString('bookingcount');
+  }
+
 
 }

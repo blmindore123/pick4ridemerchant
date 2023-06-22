@@ -46,6 +46,9 @@ class _BookingListScreenState extends State<BookingListScreen> {
   late final Gradient gradient;
   String? gearmodel;
 
+
+   String? bookingcount;
+
   BookingListController bookingListController = Get.put(BookingListController());
   TextEditingController rejectreasonController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -58,7 +61,9 @@ class _BookingListScreenState extends State<BookingListScreen> {
         .addPostFrameCallback((_) {
       //getAllCarsController.postDateTimeForSelfDriveCar('','','','');
      // bookingListController.fetchCarsBookingList(gearmodel ?? '');
-      bookingListController.fetchCarsBookingList(gearmodel ?? '');
+      bookingListController.fetchCarsBookingList(gearmodel ?? '',
+      //    bookingcount ?? ''
+      );
       setState(() {
       });
     });
@@ -290,6 +295,11 @@ class _BookingListScreenState extends State<BookingListScreen> {
                             itemCount: bookingListController.bookingListModel?.data.length ??  0,
 
                             itemBuilder: (context,index){
+
+
+                              // bookingcount = bookingListController.bookingListModel?.data.length.toString();
+                              // prefs.setString('bookingcount', bookingcount!);
+
 
 
                               _buildPopupDialog2(BuildContext context) {
@@ -679,6 +689,14 @@ class _BookingListScreenState extends State<BookingListScreen> {
 
 
 
+
+
+
+
+
+
+
+
                                               if(bookingListController.bookingListModel?.data[index].bookingStatus == 'requested')
                                               Expanded(
                                                 child: Container(
@@ -719,22 +737,22 @@ class _BookingListScreenState extends State<BookingListScreen> {
 
 
 
-                                              if(bookingListController.bookingListModel?.data[index].bookingStatus == 'accepted')
-                                                Expanded(
-                                                  child: Container(
-                                                    margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-                                                    child: ElevatedButton(
-                                                      onPressed: (){
-
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext context) => _buildPopupDialog3(context),
-                                                        );
-                                                      }, child: Text('Start Now'),
-
-                                                    ),
-                                                  ),
-                                                ),
+                                              // if(bookingListController.bookingListModel?.data[index].bookingStatus == 'accepted')
+                                              //   Expanded(
+                                              //     child: Container(
+                                              //       margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                                              //       child: ElevatedButton(
+                                              //         onPressed: (){
+                                              //
+                                              //           showDialog(
+                                              //             context: context,
+                                              //             builder: (BuildContext context) => _buildPopupDialog3(context),
+                                              //           );
+                                              //         }, child: Text('Start Now'),
+                                              //
+                                              //       ),
+                                              //     ),
+                                              //   ),
 
 
 
@@ -821,7 +839,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
       ) async {
     try{
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/logout'),
+          Uri.parse(AppConstants.BASE_URL+'/logout'),
 
           headers: {
             'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
@@ -873,20 +891,27 @@ class _BookingListScreenState extends State<BookingListScreen> {
       if(response.statusCode == 200){
         print(response.body.toString());
         print('');
-        var snackBar = SnackBar(content: Text(''));
+        var snackBar = SnackBar(content: Text(response.body.toString()));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
 
+        setState(() {
+
+        });
         //    String? valTok = prefs.getString('token');
         //    print("valTok: $valTok");
       }
       else {
         print('failed');
         print(response.statusCode);
+       var snackBar = SnackBar(content: Text('Booking Failed'));
+       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     }catch(e){
       print(e.toString());
       print('catched');
+      var snackBar = SnackBar(content: Text("${e.toString()}"));
+     ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 

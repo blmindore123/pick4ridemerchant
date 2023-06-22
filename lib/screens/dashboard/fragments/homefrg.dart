@@ -5,6 +5,7 @@ import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 import 'package:pick4ridemerchant/screens/register_new_vehicle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../constants/appconst.dart';
 import '../../../widgets/drawer.dart';
 import '../../home.dart';
 import '../../login_otp.dart';
@@ -351,7 +352,7 @@ backgroundColor: Colors.white,
       ) async {
     try{
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/logout'),
+          Uri.parse(AppConstants.BASE_URL+'/logout'),
           headers: {
             'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
           }

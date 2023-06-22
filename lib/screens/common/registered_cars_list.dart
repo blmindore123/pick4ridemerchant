@@ -421,18 +421,21 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                 ),
 
                 Padding(
-                    padding: EdgeInsets.only(left: 23, bottom: 11),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Obx(() => getAllCarsController.isLoading.value
+                  padding: EdgeInsets.only(left: 23, bottom: 11),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Obx(
+                      () => getAllCarsController.isLoading.value
                           ? Center(
                               child: Text(""),
                             )
                           : Text(
                               "${getAllCarsController.getAllCars?.data?.length.toString() ?? '0'} Vehicles",
                               style: TextStyle(fontWeight: FontWeight.w300),
-                            ),),
-                    ),),
+                            ),
+                    ),
+                  ),
+                ),
 
                 //       if(getAllCarsController.getAllCars?.data?.length != null)
                 Container(
@@ -931,151 +934,158 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                         .name ==
                                                     "Bike") {
                                                   Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder:
-                                                              (context) =>
-                                                                  EditBike(
-                                                                    token:
-                                                                        valToken,
-                                                                    id: vehicledelid,
-                                                                    brandn: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .brandModel ??
-                                                                        'no',
-                                                                    vehicletype: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .vehicleType ??
-                                                                        'no',
-                                                                    seats: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .noOfSeats
-                                                                            .toString() ??
-                                                                        'no',
-                                                                    doors: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .noOfDoors
-                                                                            .toString() ??
-                                                                        'no',
-                                                                    luggage: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .noOfLuggageSpace
-                                                                            .toString() ??
-                                                                        'no',
-                                                                    ac: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .airCondition ??
-                                                                        'no',
-                                                                    gear: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .gearType ??
-                                                                        'no',
-                                                                    fuel: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .fuelType ??
-                                                                        'no',
-                                                                    fuelstatus: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .status ??
-                                                                        'no',
-                                                                    price: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .price
-                                                                            .toString() ??
-                                                                        'no',
-                                                                    description: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .description ??
-                                                                        'no',
-                                                                    secdepo: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .securityDeposit ??
-                                                                        'no',
-                                                                    vehno: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .vehicleNo ??
-                                                                        'no',
-                                                                    imgs:
-                                                                        imageinsurone ??
-                                                                            '',
-                                                                    imgs2:
-                                                                        imageinsurtwo ??
-                                                                            '',
-                                                                    imgs3:
-                                                                        imagercone ??
-                                                                            '',
-                                                                    imgs4:
-                                                                        imagerctwo ??
-                                                                            '',
-                                                                    imgs5:
-                                                                        imagevehone ??
-                                                                            '',
-                                                                    imgs6:
-                                                                        imagevehtwo ??
-                                                                            '',
-                                                                    imgs7:
-                                                                        imagevehthree ??
-                                                                            '',
-                                                                    imgs8:
-                                                                        imagevehfour ??
-                                                                            '',
-                                                                    imgs9:
-                                                                        imagevehfive ??
-                                                                            '',
-                                                                    editimgs:
-                                                                        imageinsuroneedit ??
-                                                                            '',
-                                                                    editimgs2:
-                                                                        imageinsurtwoedit ??
-                                                                            '',
-                                                                    editimgs3:
-                                                                        imagerconeedit ??
-                                                                            '',
-                                                                    editimgs4:
-                                                                        imagerctwoedit ??
-                                                                            '',
-                                                                    editimgs5:
-                                                                        imageveh1edit ??
-                                                                            '',
-                                                                    editimgs6:
-                                                                        imageveh2edit ??
-                                                                            '',
-                                                                    editimgs7:
-                                                                        imageveh3edit ??
-                                                                            '',
-                                                                    editimgs8:
-                                                                        imageveh4edit ??
-                                                                            '',
-                                                                    editimgs9:
-                                                                        imageveh5edit ??
-                                                                            '',
-                                                                    insurance: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .insuranceExpiryDate ??
-                                                                        'no',
-                                                                    group:
-                                                                        imagesgroup,
-                                                                    drivetype: getAllCarsController
-                                                                        .getAllCars
-                                                                        ?.data[
-                                                                            index]
-                                                                        .rideCategory
-                                                                        .id,
-                                                                  ),),);
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EditBike(
+                                                        token: valToken,
+                                                        id: vehicledelid,
+                                                        brandn:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .brandModel ??
+                                                                'no',
+                                                        vehicletype:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .vehicleType ??
+                                                                'no',
+                                                        seats:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .noOfSeats
+                                                                    .toString() ??
+                                                                'no',
+                                                        doors:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .noOfDoors
+                                                                    .toString() ??
+                                                                'no',
+                                                        luggage: getAllCarsController
+                                                                .getAllCars
+                                                                ?.data[index]
+                                                                .noOfLuggageSpace
+                                                                .toString() ??
+                                                            'no',
+                                                        ac: getAllCarsController
+                                                                .getAllCars
+                                                                ?.data[index]
+                                                                .airCondition ??
+                                                            'no',
+                                                        gear:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .gearType ??
+                                                                'no',
+                                                        fuel:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .fuelType ??
+                                                                'no',
+                                                        fuelstatus:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .status ??
+                                                                'no',
+                                                        price:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .price
+                                                                    .toString() ??
+                                                                'no',
+                                                        description:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .description ??
+                                                                'no',
+                                                        secdepo:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .securityDeposit ??
+                                                                'no',
+                                                        vehno:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .vehicleNo ??
+                                                                'no',
+                                                        imgs:
+                                                            imageinsurone ?? '',
+                                                        imgs2:
+                                                            imageinsurtwo ?? '',
+                                                        imgs3: imagercone ?? '',
+                                                        imgs4: imagerctwo ?? '',
+                                                        imgs5:
+                                                            imagevehone ?? '',
+                                                        imgs6:
+                                                            imagevehtwo ?? '',
+                                                        imgs7:
+                                                            imagevehthree ?? '',
+                                                        imgs8:
+                                                            imagevehfour ?? '',
+                                                        imgs9:
+                                                            imagevehfive ?? '',
+                                                        editimgs:
+                                                            imageinsuroneedit ??
+                                                                '',
+                                                        editimgs2:
+                                                            imageinsurtwoedit ??
+                                                                '',
+                                                        editimgs3:
+                                                            imagerconeedit ??
+                                                                '',
+                                                        editimgs4:
+                                                            imagerctwoedit ??
+                                                                '',
+                                                        editimgs5:
+                                                            imageveh1edit ?? '',
+                                                        editimgs6:
+                                                            imageveh2edit ?? '',
+                                                        editimgs7:
+                                                            imageveh3edit ?? '',
+                                                        editimgs8:
+                                                            imageveh4edit ?? '',
+                                                        editimgs9:
+                                                            imageveh5edit ?? '',
+                                                        insurance:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .insuranceExpiryDate ??
+                                                                'no',
+                                                        group: imagesgroup,
+                                                        drivetype:
+                                                            getAllCarsController
+                                                                .getAllCars
+                                                                ?.data[index]
+                                                                .rideCategory
+                                                                .id,
+                                                      ),
+                                                    ),
+                                                  );
                                                 }
                                                 if (getAllCarsController
                                                         .getAllCars
@@ -1084,151 +1094,158 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                         .name ==
                                                     "Van") {
                                                   Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder:
-                                                              (context) =>
-                                                                  EditVan(
-                                                                    token:
-                                                                        valToken,
-                                                                    id: vehicledelid,
-                                                                    brandn: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .brandModel ??
-                                                                        'no',
-                                                                    vehicletype: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .vehicleType ??
-                                                                        'no',
-                                                                    seats: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .noOfSeats
-                                                                            .toString() ??
-                                                                        'no',
-                                                                    doors: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .noOfDoors
-                                                                            .toString() ??
-                                                                        'no',
-                                                                    luggage: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .noOfLuggageSpace
-                                                                            .toString() ??
-                                                                        'no',
-                                                                    ac: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .airCondition ??
-                                                                        'no',
-                                                                    gear: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .gearType ??
-                                                                        'no',
-                                                                    fuel: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .fuelType ??
-                                                                        'no',
-                                                                    fuelstatus: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .status ??
-                                                                        'no',
-                                                                    price: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .price
-                                                                            .toString() ??
-                                                                        'no',
-                                                                    description: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .description ??
-                                                                        'no',
-                                                                    secdepo: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .securityDeposit ??
-                                                                        'no',
-                                                                    vehno: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .vehicleNo ??
-                                                                        'no',
-                                                                    imgs:
-                                                                        imageinsurone ??
-                                                                            '',
-                                                                    imgs2:
-                                                                        imageinsurtwo ??
-                                                                            '',
-                                                                    imgs3:
-                                                                        imagercone ??
-                                                                            '',
-                                                                    imgs4:
-                                                                        imagerctwo ??
-                                                                            '',
-                                                                    imgs5:
-                                                                        imagevehone ??
-                                                                            '',
-                                                                    imgs6:
-                                                                        imagevehtwo ??
-                                                                            '',
-                                                                    imgs7:
-                                                                        imagevehthree ??
-                                                                            '',
-                                                                    imgs8:
-                                                                        imagevehfour ??
-                                                                            '',
-                                                                    imgs9:
-                                                                        imagevehfive ??
-                                                                            '',
-                                                                    editimgs:
-                                                                        imageinsuroneedit ??
-                                                                            '',
-                                                                    editimgs2:
-                                                                        imageinsurtwoedit ??
-                                                                            '',
-                                                                    editimgs3:
-                                                                        imagerconeedit ??
-                                                                            '',
-                                                                    editimgs4:
-                                                                        imagerctwoedit ??
-                                                                            '',
-                                                                    editimgs5:
-                                                                        imageveh1edit ??
-                                                                            '',
-                                                                    editimgs6:
-                                                                        imageveh2edit ??
-                                                                            '',
-                                                                    editimgs7:
-                                                                        imageveh3edit ??
-                                                                            '',
-                                                                    editimgs8:
-                                                                        imageveh4edit ??
-                                                                            '',
-                                                                    editimgs9:
-                                                                        imageveh5edit ??
-                                                                            '',
-                                                                    insurance: getAllCarsController
-                                                                            .getAllCars
-                                                                            ?.data[index]
-                                                                            .insuranceExpiryDate ??
-                                                                        'no',
-                                                                    group:
-                                                                        imagesgroup,
-                                                                    drivetype: getAllCarsController
-                                                                        .getAllCars
-                                                                        ?.data[
-                                                                            index]
-                                                                        .rideCategory
-                                                                        .id,
-                                                                  ),),);
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          EditVan(
+                                                        token: valToken,
+                                                        id: vehicledelid,
+                                                        brandn:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .brandModel ??
+                                                                'no',
+                                                        vehicletype:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .vehicleType ??
+                                                                'no',
+                                                        seats:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .noOfSeats
+                                                                    .toString() ??
+                                                                'no',
+                                                        doors:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .noOfDoors
+                                                                    .toString() ??
+                                                                'no',
+                                                        luggage: getAllCarsController
+                                                                .getAllCars
+                                                                ?.data[index]
+                                                                .noOfLuggageSpace
+                                                                .toString() ??
+                                                            'no',
+                                                        ac: getAllCarsController
+                                                                .getAllCars
+                                                                ?.data[index]
+                                                                .airCondition ??
+                                                            'no',
+                                                        gear:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .gearType ??
+                                                                'no',
+                                                        fuel:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .fuelType ??
+                                                                'no',
+                                                        fuelstatus:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .status ??
+                                                                'no',
+                                                        price:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .price
+                                                                    .toString() ??
+                                                                'no',
+                                                        description:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .description ??
+                                                                'no',
+                                                        secdepo:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .securityDeposit ??
+                                                                'no',
+                                                        vehno:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .vehicleNo ??
+                                                                'no',
+                                                        imgs:
+                                                            imageinsurone ?? '',
+                                                        imgs2:
+                                                            imageinsurtwo ?? '',
+                                                        imgs3: imagercone ?? '',
+                                                        imgs4: imagerctwo ?? '',
+                                                        imgs5:
+                                                            imagevehone ?? '',
+                                                        imgs6:
+                                                            imagevehtwo ?? '',
+                                                        imgs7:
+                                                            imagevehthree ?? '',
+                                                        imgs8:
+                                                            imagevehfour ?? '',
+                                                        imgs9:
+                                                            imagevehfive ?? '',
+                                                        editimgs:
+                                                            imageinsuroneedit ??
+                                                                '',
+                                                        editimgs2:
+                                                            imageinsurtwoedit ??
+                                                                '',
+                                                        editimgs3:
+                                                            imagerconeedit ??
+                                                                '',
+                                                        editimgs4:
+                                                            imagerctwoedit ??
+                                                                '',
+                                                        editimgs5:
+                                                            imageveh1edit ?? '',
+                                                        editimgs6:
+                                                            imageveh2edit ?? '',
+                                                        editimgs7:
+                                                            imageveh3edit ?? '',
+                                                        editimgs8:
+                                                            imageveh4edit ?? '',
+                                                        editimgs9:
+                                                            imageveh5edit ?? '',
+                                                        insurance:
+                                                            getAllCarsController
+                                                                    .getAllCars
+                                                                    ?.data[
+                                                                        index]
+                                                                    .insuranceExpiryDate ??
+                                                                'no',
+                                                        group: imagesgroup,
+                                                        drivetype:
+                                                            getAllCarsController
+                                                                .getAllCars
+                                                                ?.data[index]
+                                                                .rideCategory
+                                                                .id,
+                                                      ),
+                                                    ),
+                                                  );
                                                 }
                                                 if (getAllCarsController
                                                         .getAllCars

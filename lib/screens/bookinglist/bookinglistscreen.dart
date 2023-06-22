@@ -179,11 +179,22 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                   width: 130,
                                   height: 32,
                                   child: DropdownSearch<String>(
-                                    //mode of dropdown
-                                    mode: Mode.DIALOG,
-                                    //to show search box
-                                    showSearchBox: true,
-                                    showSelectedItem: true,
+                                    popupProps: PopupProps.menu(
+                                      showSearchBox: true,
+                                      showSelectedItems: true,
+                                      disabledItemFn: (String s) => s.startsWith('I'),
+                                    ),
+                                    dropdownDecoratorProps: DropDownDecoratorProps(
+                                      dropdownSearchDecoration: InputDecoration(
+                                        labelText: "Menu mode",
+                                        hintText: "country in menu mode",
+                                      ),
+                                    ),
+                                    // //mode of dropdown
+                                    // mode: Mode.DIALOG,
+                                    // //to show search box
+                                    // showSearchBox: true,
+                                    // showSelectedItem: true,
                                     //list of dropdown items
                                     items: [
                                       "All",

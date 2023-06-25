@@ -34,7 +34,7 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(children: <Widget>[
-        ListTile(
+        const ListTile(
           title: Text(""),
           trailing: Icon(
             Icons.arrow_forward_outlined,
@@ -42,11 +42,11 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
         ),
         ListTile(
-          title: Text(
+          title: const Text(
             'Invoice Report',
             style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
-          leading: Icon(
+          leading: const Icon(
             Icons.shuffle,
             size: 20.0,
             color: Colors.purple,
@@ -60,11 +60,11 @@ class _MyDrawerState extends State<MyDrawer> {
           },
         ),
         ListTile(
-          title: Text(
+          title: const Text(
             'Profile Management',
             style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
-          leading: Icon(
+          leading: const Icon(
             Icons.info_outline,
             size: 20.0,
             color: Colors.purple,
@@ -201,15 +201,15 @@ class _MyDrawerState extends State<MyDrawer> {
   }
 
   Widget _buildPopupDialog(BuildContext context) {
-    return new AlertDialog(
+    return AlertDialog(
       title: const Text('Are you sure you want to sign out?'),
-      content: new Column(
+      content: const Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[],
       ),
       actions: <Widget>[
-        new ElevatedButton(
+        ElevatedButton(
           onPressed: () {
             String? valTok = prefs.getString('token');
             print("signout: $valTok");
@@ -220,7 +220,7 @@ class _MyDrawerState extends State<MyDrawer> {
           },
           child: const Text('Yes'),
         ),
-        new ElevatedButton(
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
           },

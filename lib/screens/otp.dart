@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:pick4ridemerchant/dimensions/dimen.dart';
 import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
 import 'package:pick4ridemerchant/screens/enter_details.dart';
@@ -9,9 +10,11 @@ import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
 import 'package:http/http.dart';
 import 'package:pick4ridemerchant/screens/enter_details.dart';
 import 'package:pick4ridemerchant/screens/home.dart';
+import 'package:pick4ridemerchant/utils/ApiCall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/appconst.dart';
+import '../model/UserModel.dart';
 import 'login_otp.dart';
 
 class OtpPage extends StatefulWidget {
@@ -47,12 +50,12 @@ class _OtpPageState extends State<OtpPage> {
     myFocusNode.requestFocus();
 
     //init sharedpref
-    initSharedPref();
+    // initSharedPref();
   }
 
-  void initSharedPref() async {
-    prefs = await SharedPreferences.getInstance();
-  }
+  // void initSharedPref() async {
+  //   prefs = await SharedPreferences.getInstance();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,13 +83,13 @@ class _OtpPageState extends State<OtpPage> {
                   Padding(
                     padding: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width /
-                          6.55, //392.72 802.9
-                      right: MediaQuery.of(context).size.width / 6.55,
+                          5, //392.72 802.9
+                      // right: MediaQuery.of(context).size.width / 6.55,
                       top: MediaQuery.of(context).size.height / 2.82, //
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      //mainAxisAlignment: MainAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         Text("Please Wait",
@@ -146,7 +149,7 @@ class _OtpPageState extends State<OtpPage> {
                     padding: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height / 1.1,
                       left: MediaQuery.of(context).size.width / 2.48,
-                      right: MediaQuery.of(context).size.width / 2.7,
+                      right: MediaQuery.of(context).size.width / 5,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -195,10 +198,11 @@ class _OtpPageState extends State<OtpPage> {
                           print(widget.device_id);
                           //print(otp);
 
-                          verify(widget.country_code, widget.phone_number,
-                              widget.role, widget.device_id, 1111
-                              //  otp
-                              );
+                          // verify(widget.country_code, widget.phone_number,
+                          //     widget.role, widget.device_id, 1111
+                          //     //  otp
+                          //     );
+                          verifyApi();
                         },
                         child: Text(
                           "Verify",
@@ -226,60 +230,102 @@ class _OtpPageState extends State<OtpPage> {
     super.dispose();
   }
 
-  void verify(String countryCode, phoneNumber, role, deviceId, otp) async {
-    try {
-      Response response = await post(
-        Uri.parse(AppConstants.BASE_URL + '/verify-otp'),
-        body: {
-          "country_code": countryCode,
-          "phone_number": phoneNumber,
-          "otp": 1111.toString(),
-          "role": role,
-          "device_id": deviceId,
-          "device_type": "android",
-          "certification_type": "development"
-        },
-      );
-      if (response.statusCode == 200) {
-        Map<String, dynamic> veri = json.decode(response.body);
-        String nest = veri['data']['profile_status'];
+  late UserModel userModel;
+  bool clickLoad = false;
 
-        print(nest);
-        print(response.body.toString());
-        print('Login successfully');
+  void verifyApi() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      clickLoad = true;
+    });
+    userModel = await ApiCall.verifyOtpApi(widget.country_code,
+        widget.phone_number, widget.role, widget.device_id, 1111);
 
-        // addTokenToSF() async{
-        //   SharedPreferences prefs = await SharedPreferences.getInstance();
-        //   prefs.setString('token', token);
-        // }
+    if (userModel.success == true) {
+      // var newToken = veri['data']['token'];
+      var newToken = userModel.data!.token;
+      prefs.setString('token', newToken!);
+      print("new token h: $newToken");
+      String? valTok = prefs.getString('token');
+      print("valTok: $valTok");
 
-        var newToken = veri['data']['token'];
-
-        prefs.setString('token', newToken);
-        print("new token h: $newToken");
-
-        String? valTok = prefs.getString('token');
-        print("valTok: $valTok");
-
-        if (veri['data']['profile_status'] == "completed") {
-          prefs.setBool("true", true);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeScreen(token: newToken)));
-        } else {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => EnterDetailsScreen(token: newToken)));
-        }
+      if (userModel.data!.profileStatus == "completed") {
+        prefs.setBool("true", true);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => HomeScreen(token: newToken)));
       } else {
-        print('failed');
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => EnterDetailsScreen(token: newToken)));
       }
-    } catch (e) {
-      print(e.toString());
-      print(e);
-      print('catched');
+    } else {
+      Fluttertoast.showToast(
+          msg: userModel.message!,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.SNACKBAR);
     }
+    setState(() {
+      clickLoad = false;
+    });
   }
+
+// void verify(String countryCode, phoneNumber, role, deviceId, otp) async {
+//   try {
+//     Response response = await post(
+//       Uri.parse(AppConstants.BASE_URL + '/verify-otp'),
+//       body: {
+//         "country_code": countryCode,
+//         "phone_number": phoneNumber,
+//         "otp": 1111.toString(),
+//         "role": role,
+//         "device_id": deviceId,
+//         "device_type": "android",
+//         "certification_type": "development"
+//       },
+//     );
+//     if (response.statusCode == 200) {
+//       Map<String, dynamic> veri = json.decode(response.body);
+//       String nest = veri['data']['profile_status'];
+//
+//       print(nest);
+//       print(response.body.toString());
+//       print('Login successfully');
+//
+//       // addTokenToSF() async{
+//       //   SharedPreferences prefs = await SharedPreferences.getInstance();
+//       //   prefs.setString('token', token);
+//       // }
+//
+//       var newToken = veri['data']['token'];
+//
+//       prefs.setString('token', newToken);
+//       print("new token h: $newToken");
+//
+//       String? valTok = prefs.getString('token');
+//       print("valTok: $valTok");
+//
+//       if (veri['data']['profile_status'] == "completed") {
+//         prefs.setBool("true", true);
+//         Navigator.push(
+//             context,
+//             MaterialPageRoute(
+//                 builder: (context) => HomeScreen(token: newToken)));
+//       } else {
+//         Navigator.push(
+//             context,
+//             MaterialPageRoute(
+//                 builder: (context) => EnterDetailsScreen(token: newToken)));
+//       }
+//     } else {
+//       print('failed');
+//     }
+//   } catch (e) {
+//     print(e.toString());
+//     print(e);
+//     print('catched');
+//   }
+// }
 }

@@ -48,11 +48,12 @@ class _HomeFragmentState extends State<HomeFragment> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        automaticallyImplyLeading: false,
+        title: const Text(
           "Welcome",
           style: TextStyle(color: Colors.black),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
       ),
       endDrawer: MyDrawer(),
@@ -108,7 +109,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                                       iconSize:
                                           MediaQuery.of(context).size.width /
                                               19.65,
-                                    )),
+                                    ),),
                                 onChanged: (val) {
                                   setState(() {});
                                 },
@@ -161,7 +162,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => RegisteredCarsList(
-                                      token: toke,
+                                      token: toke
                                     )));
                       },
                       child: Container(
@@ -353,7 +354,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         print(response.body.toString());
         print(response.toString());
         prefs.remove('token');
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       } else {
         print('failed');
@@ -367,15 +368,15 @@ class _HomeFragmentState extends State<HomeFragment> {
   }
 
   Widget _buildPopupDialog(BuildContext context) {
-    return new AlertDialog(
+    return AlertDialog(
       title: const Text('Are you sure you want to sign out?'),
-      content: new Column(
+      content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[],
       ),
       actions: <Widget>[
-        new ElevatedButton(
+        ElevatedButton(
           onPressed: () {
             String? valTok = prefs.getString('token');
             print("signout: $valTok");
@@ -385,7 +386,7 @@ class _HomeFragmentState extends State<HomeFragment> {
           },
           child: const Text('Yes'),
         ),
-        new ElevatedButton(
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
           },

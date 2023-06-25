@@ -144,7 +144,7 @@ class _LoginState extends State<Login> {
 
                             TextFormField(
                               inputFormatters: [
-                                new LengthLimitingTextInputFormatter(10),
+                                LengthLimitingTextInputFormatter(10),
                               ],
                               controller: numberController,
                               keyboardType: TextInputType.phone,

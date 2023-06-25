@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:pick4ridemerchant/controller/get_all_cars_controller.dart';
+import 'package:pick4ridemerchant/utils/HelperSaveData.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/getallcars.dart';
 import '../../classes/imageres.dart';
@@ -1420,68 +1421,9 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'or similar',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w300),
-                                            ),
                                             GestureDetector(
                                               onTap: () async {
-                                                try {
-                                                  int? vehicleId =
-                                                      getAllCarsController
-                                                          .getAllCars!
-                                                          .data[index]
-                                                          .id;
-
-                                                  var valToken =
-                                                      await getToken();
-                                                  print("delete car $valToken");
-
-                                                  Response response = await delete(
-                                                      Uri.parse(AppConstants
-                                                              .BASE_URL +
-                                                          '/merchant/vehicles/$vehicleId'),
-                                                      headers: {
-                                                        'Content-type':
-                                                            'application/json; charset=UTF-8',
-                                                        'Authorization':
-                                                            'Bearer $valToken'
-                                                      });
-                                                  if (response.statusCode ==
-                                                      200) {
-                                                    print(response.body
-                                                        .toString());
-
-                                                    var result = jsonDecode(
-                                                        response.body);
-
-                                                    setState(() {
-                                                      getAllCarsController
-                                                          .getAllCars!.data
-                                                          .removeAt(index);
-                                                    });
-
-                                                    getAllCars =
-                                                        GetAllCars.fromJson(
-                                                            result);
-                                                  } else {
-                                                    print('failed');
-                                                    print(response.body
-                                                        .toString());
-                                                    print(response.toString());
-                                                    print(valToken);
-                                                  }
-                                                } catch (e) {
-                                                  print(e.toString());
-                                                }
+                                                _buildPopupDialogDelete(context,index);
                                               },
                                               child: Container(
                                                 width: 31,
@@ -1497,6 +1439,19 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                 ),
                                               ),
                                             ),
+                                          ],
+                                        ),
+
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'or similar',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w300),
+                                            ),
+
                                           ],
                                         ),
 
@@ -2296,7 +2251,8 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
         print(response.body.toString());
         print(response.toString());
         prefs.remove('token');
-        Navigator.push(
+        HelperSaveData.helperSaveData.logout();
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       } else {
         print('failed');
@@ -2307,6 +2263,79 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Widget _buildPopupDialogDelete(BuildContext context,int index) {
+    return AlertDialog(
+      title: const Text('Are you sure you want to delete vehicle?'),
+      content: const Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[],
+      ),
+      actions: <Widget>[
+        ElevatedButton(
+          onPressed: () async {
+            try {
+              int? vehicleId =
+                  getAllCarsController
+                      .getAllCars!
+                      .data[index]
+                      .id;
+
+              var valToken =
+                  await getToken();
+              print("delete car $valToken");
+
+              Response response = await delete(
+                  Uri.parse(AppConstants
+                      .BASE_URL +
+                      '/merchant/vehicles/$vehicleId'),
+                  headers: {
+                    'Content-type':
+                    'application/json; charset=UTF-8',
+                    'Authorization':
+                    'Bearer $valToken'
+                  });
+              if (response.statusCode ==
+                  200) {
+                print(response.body
+                    .toString());
+
+                var result = jsonDecode(
+                    response.body);
+
+                setState(() {
+                  getAllCarsController
+                      .getAllCars!.data
+                      .removeAt(index);
+                });
+
+                getAllCars =
+                    GetAllCars.fromJson(
+                        result);
+              } else {
+                print('failed');
+                print(response.body
+                    .toString());
+                print(response.toString());
+                print(valToken);
+              }
+            } catch (e) {
+              print(e.toString());
+            }
+            Navigator.pop(context);
+          },
+          child: const Text('Yes'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('No'),
+        ),
+      ],
+    );
   }
 
   Widget _buildPopupDialog(BuildContext context) {

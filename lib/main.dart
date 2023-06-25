@@ -46,7 +46,7 @@ class SplashScreenState extends State<MyHomePage> {
     bool? status = prefs.getBool('true');
 
     print("state: $valTok");
-    if (status == true) {
+    if (status == false) {
       Timer(Duration(seconds: 5), () async {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));

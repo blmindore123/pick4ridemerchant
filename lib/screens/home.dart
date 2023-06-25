@@ -14,17 +14,11 @@ class HomeScreen extends StatefulWidget {
 
   HomeScreen({@required this.token});
 
-
-
-
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   late SharedPreferences prefs;
 
   int currentIndex = 0;
@@ -36,105 +30,75 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void init() async {
-
-     // currentIndex = 0;
-      setState(() {});
-
+    // currentIndex = 0;
+    setState(() {});
   }
+
   @override
   void setState(fn) {
-   // if (mounted) super.setState(fn);
+    // if (mounted) super.setState(fn);
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-     // backgroundColor: Colors.pink,
+      // backgroundColor: Colors.pink,
 
       body: [
-
         HomeFragment(),
         EarningFragment(),
         ProfileFragment(),
         NotifyFragment(),
         FilterFragment(),
+      ][currentIndex],
 
-      ]
-      [currentIndex]
-      ,
+      endDrawer: Drawer(),
 
-      endDrawer: Drawer(
-
-      ),
-
-     bottomNavigationBar: Container(
-       decoration: BoxDecoration(
-         boxShadow: <BoxShadow>[
-           BoxShadow(
-             color: Colors.grey,
-             blurRadius: 9
-           )
-         ]
-       ),
-       child: BottomNavigationBar(
-      //    currentIndex: currentIndex,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(boxShadow: <BoxShadow>[
+          BoxShadow(color: Colors.grey, blurRadius: 9)
+        ]),
+        child: BottomNavigationBar(
+          //    currentIndex: currentIndex,
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled,size: MediaQuery.of(context).size.width/11,),
-               // a.iconImage(color: Colors.blue),
-                label: ''
-            ),
-
+                icon: Icon(
+                  Icons.home_filled,
+                  size: MediaQuery.of(context).size.width / 11,
+                ),
+                // a.iconImage(color: Colors.blue),
+                label: ''),
             BottomNavigationBarItem(
-                icon: b.iconImage(color: Colors.grey),
-                label: ''
-            ),
-
+                icon: b.iconImage(color: Colors.grey), label: ''),
             BottomNavigationBarItem(
-              icon: c.iconImage(color: Colors.grey),
-              label: ''
-            ),
+                icon: c.iconImage(color: Colors.grey), label: ''),
             BottomNavigationBarItem(
-                icon: d.iconImage(color: Colors.grey),
-                label: ''
-            ),
+                icon: d.iconImage(color: Colors.grey), label: ''),
             BottomNavigationBarItem(
-                icon: e.iconImage(color: Colors.grey),
-                label: ''
-            ),
-
-
+                icon: e.iconImage(color: Colors.grey), label: ''),
           ],
           onTap: (index) {
-        //    currentIndex = index;
+            //    currentIndex = index;
             setState(() {});
           },
           type: BottomNavigationBarType.fixed,
-         // showSelectedLabels: true,
+          // showSelectedLabels: true,
           showUnselectedLabels: false,
         ),
-     ),
+      ),
 
       endDrawerEnableOpenDragGesture: false,
     );
   }
 
-
   //
 
-  void noToken() async{
+  void noToken() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     var x = preferences.getString('token');
 
-    if(x == null){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    if (x == null) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
     }
-
   }
-
 }

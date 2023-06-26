@@ -31,8 +31,8 @@ class Data {
     required this.merchantId,
     required this.pickupDate,
     required this.dropOffDate,
-    required this.pickupPoint,
-    required this.dropOffPoint,
+    this.pickupPoint,
+    this.dropOffPoint,
     this.pickupLatitude,
     this.pickupLongitude,
     this.dropOffLatitude,
@@ -46,8 +46,10 @@ class Data {
     required this.finalBookingAmount,
     required this.paidAmount,
     required this.bookingStatus,
+    this.cancelReason,
     required this.createdAt,
     required this.updatedAt,
+    required this.customer,
     required this.vehicle,
   });
   late final int id;
@@ -56,12 +58,12 @@ class Data {
   late final int merchantId;
   late final String pickupDate;
   late final String dropOffDate;
-  late final String pickupPoint;
-  late final String dropOffPoint;
-  late final Null pickupLatitude;
-  late final Null pickupLongitude;
-  late final Null dropOffLatitude;
-  late final Null dropOffLongitude;
+  late final String? pickupPoint;
+  late final String? dropOffPoint;
+  late final double? pickupLatitude;
+  late final double? pickupLongitude;
+  late final double? dropOffLatitude;
+  late final double? dropOffLongitude;
   late final Null promocodeId;
   late final Null offerCode;
   late final Null offerType;
@@ -71,8 +73,10 @@ class Data {
   late final int finalBookingAmount;
   late final int paidAmount;
   late final String bookingStatus;
+  late final Null cancelReason;
   late final String createdAt;
   late final String updatedAt;
+  late final Customer customer;
   late final Vehicle vehicle;
 
   Data.fromJson(Map<String, dynamic> json){
@@ -82,8 +86,8 @@ class Data {
     merchantId = json['merchant_id'];
     pickupDate = json['pickup_date'];
     dropOffDate = json['drop_off_date'];
-    pickupPoint = json['pickup_point'];
-    dropOffPoint = json['drop_off_point'];
+    pickupPoint = null;
+    dropOffPoint = null;
     pickupLatitude = null;
     pickupLongitude = null;
     dropOffLatitude = null;
@@ -97,8 +101,10 @@ class Data {
     finalBookingAmount = json['final_booking_amount'];
     paidAmount = json['paid_amount'];
     bookingStatus = json['booking_status'];
+    cancelReason = null;
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    customer = Customer.fromJson(json['customer']);
     vehicle = Vehicle.fromJson(json['vehicle']);
   }
 
@@ -125,9 +131,104 @@ class Data {
     _data['final_booking_amount'] = finalBookingAmount;
     _data['paid_amount'] = paidAmount;
     _data['booking_status'] = bookingStatus;
+    _data['cancel_reason'] = cancelReason;
     _data['created_at'] = createdAt;
     _data['updated_at'] = updatedAt;
+    _data['customer'] = customer.toJson();
     _data['vehicle'] = vehicle.toJson();
+    return _data;
+  }
+}
+
+class Customer {
+  Customer({
+    required this.id,
+    required this.role,
+    this.subadminType,
+    required this.firstName,
+    this.lastName,
+    required this.email,
+    required this.countryCode,
+    required this.phoneNumber,
+    this.image,
+    required this.status,
+    required this.profileStatus,
+    required this.mobileVerified,
+    required this.emailVerified,
+    this.address,
+    this.latitude,
+    this.longitude,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.imageUrl,
+    required this.fullName,
+  });
+  late final int id;
+  late final String role;
+  late final Null subadminType;
+  late final String firstName;
+  late final Null lastName;
+  late final String email;
+  late final String countryCode;
+  late final String phoneNumber;
+  late final Null image;
+  late final String status;
+  late final String profileStatus;
+  late final int mobileVerified;
+  late final int emailVerified;
+  late final Null address;
+  late final Null latitude;
+  late final Null longitude;
+  late final String createdAt;
+  late final String updatedAt;
+  late final String imageUrl;
+  late final String fullName;
+
+  Customer.fromJson(Map<String, dynamic> json){
+    id = json['id'];
+    role = json['role'];
+    subadminType = null;
+    firstName = json['first_name'];
+    lastName = null;
+    email = json['email'];
+    countryCode = json['country_code'];
+    phoneNumber = json['phone_number'];
+    image = null;
+    status = json['status'];
+    profileStatus = json['profile_status'];
+    mobileVerified = json['mobile_verified'];
+    emailVerified = json['email_verified'];
+    address = null;
+    latitude = null;
+    longitude = null;
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    imageUrl = json['image_url'];
+    fullName = json['full_name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['id'] = id;
+    _data['role'] = role;
+    _data['subadmin_type'] = subadminType;
+    _data['first_name'] = firstName;
+    _data['last_name'] = lastName;
+    _data['email'] = email;
+    _data['country_code'] = countryCode;
+    _data['phone_number'] = phoneNumber;
+    _data['image'] = image;
+    _data['status'] = status;
+    _data['profile_status'] = profileStatus;
+    _data['mobile_verified'] = mobileVerified;
+    _data['email_verified'] = emailVerified;
+    _data['address'] = address;
+    _data['latitude'] = latitude;
+    _data['longitude'] = longitude;
+    _data['created_at'] = createdAt;
+    _data['updated_at'] = updatedAt;
+    _data['image_url'] = imageUrl;
+    _data['full_name'] = fullName;
     return _data;
   }
 }
@@ -155,6 +256,7 @@ class Vehicle {
     required this.status,
     required this.createdAt,
     required this.updatedAt,
+    required this.images,
   });
   late final int id;
   late final int merchantId;
@@ -177,6 +279,7 @@ class Vehicle {
   late final String status;
   late final String createdAt;
   late final String updatedAt;
+  late final List<Images> images;
 
   Vehicle.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -200,6 +303,7 @@ class Vehicle {
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    images = List.from(json['images']).map((e)=>Images.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -225,6 +329,7 @@ class Vehicle {
     _data['status'] = status;
     _data['created_at'] = createdAt;
     _data['updated_at'] = updatedAt;
+    _data['images'] = images.map((e)=>e.toJson()).toList();
     return _data;
   }
 }
@@ -282,6 +387,51 @@ class RideCategory {
     _data['id'] = id;
     _data['name'] = name;
     _data['image'] = image;
+    _data['image_url'] = imageUrl;
+    return _data;
+  }
+}
+
+class Images {
+  Images({
+    required this.id,
+    required this.vehicleId,
+    this.image,
+    required this.type,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.imageUrl,
+  });
+  late final int id;
+  late final int vehicleId;
+  late final String? image;
+  late final String type;
+  late final String status;
+  late final String createdAt;
+  late final String updatedAt;
+  late final String imageUrl;
+
+  Images.fromJson(Map<String, dynamic> json){
+    id = json['id'];
+    vehicleId = json['vehicle_id'];
+    image = null;
+    type = json['type'];
+    status = json['status'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    imageUrl = json['image_url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['id'] = id;
+    _data['vehicle_id'] = vehicleId;
+    _data['image'] = image;
+    _data['type'] = type;
+    _data['status'] = status;
+    _data['created_at'] = createdAt;
+    _data['updated_at'] = updatedAt;
     _data['image_url'] = imageUrl;
     return _data;
   }

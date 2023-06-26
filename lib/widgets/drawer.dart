@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/bookinglist/bookinglistscreen.dart';
 import '../screens/login_otp.dart';
@@ -172,7 +173,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                       ListTile(
                         title: Text(
-                          'Booking Details',
+                          'Booking List',
                           style: TextStyle(fontSize: 18.0, color: Colors.black),
                         ),
                         leading: Icon(
@@ -217,7 +218,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
                           showDialog(
                             context: context,
-                            builder: (BuildContext context) => _buildPopupDialog(context),
+                            builder: (BuildContext context) => _dialogContent(context),
                           );
 
 
@@ -265,7 +266,7 @@ class _MyDrawerState extends State<MyDrawer> {
       ) async {
     try{
       Response response = await post(
-          Uri.parse('http://pick4ride.com/api/logout'),
+          Uri.parse(AppConstants.BASE_URL+'/logout'),
           headers: {
             'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
           }
@@ -289,5 +290,132 @@ class _MyDrawerState extends State<MyDrawer> {
       print(e.toString());
     }
   }
+
+
+  Widget _dialogContent(BuildContext context) {
+
+    return Stack(
+      children: [
+
+        Positioned(
+          right: 0,
+          left: 30,
+          top: 220,
+
+
+          child: Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                    width: 55,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle
+                    ),
+                    child: Icon(Icons.close,color: Colors.red,)
+                ),
+              )
+          ),
+
+        ),
+
+        Positioned(
+          right: 30,
+          left: 30,
+          top: 230,
+          // child: Padding(
+          // padding: EdgeInsets.all(42),
+          child: Card(
+            elevation: 8,
+            //    color: Colors.blue.shade500,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+            child: Container(
+              width: MediaQuery.of(context).size.width, height: 200,
+
+              child: Column(
+
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+
+
+
+
+                  Text('Are you sure you want to logout?',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          String? valTok = prefs.getString('token');
+                          print("signout: $valTok");
+                          logOut(valTok!);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+                        },
+                        style: ButtonStyle(
+
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(31),
+                                    side: BorderSide(color: Colors.blue)
+                                )
+                            )
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Text('YES',style: TextStyle(fontWeight: FontWeight.bold),)
+
+                        ),
+                      ),
+
+
+
+
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        style: ButtonStyle(
+
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(31),
+                                    side: BorderSide(color: Colors.redAccent)
+                                )
+                            )
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: Text('NO',style: TextStyle(fontWeight: FontWeight.bold),)
+
+                        ),
+                      ),
+                    ],
+                  )
+
+
+                ],
+              ),
+
+
+
+            ),
+          ),
+          // ),
+        ),
+      ],
+    );
+
+  }
+
 
 }

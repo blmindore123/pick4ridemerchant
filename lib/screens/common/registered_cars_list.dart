@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:pick4ridemerchant/controller/get_all_cars_controller.dart';
+import 'package:pick4ridemerchant/widgets/drawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/getallcars.dart';
 import '../../classes/imageres.dart';
@@ -157,225 +158,29 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
     return Scaffold(
      // resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: Icon(Icons.arrow_back),
-        title: Text("Registered Vehicles",style: TextStyle(color: Colors.black),),
-        iconTheme: IconThemeData(color: Colors.black),
-        elevation: 0,
-      ),
+     //  appBar: AppBar(
+     //    backgroundColor: Colors.white,
+     //    leading: Icon(Icons.arrow_back),
+     //    title: Text("Registered Vehicles",style: TextStyle(color: Colors.black),),
+     //    iconTheme: IconThemeData(color: Colors.black),
+     //    elevation: 0,
+     //  ),
 
-      endDrawer: Drawer(
-        child: Container(
-          decoration: BoxDecoration(color: Colors.white),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Column(children: <Widget>[
-                  ListTile(
-                    title:  Text(""),
-                    trailing:  Icon(Icons.arrow_forward_outlined,color: Colors.black,),
-                  ),
-                  // ListTile(
-                  //   title: Text(
-                  //     'Sign up as supplier',
-                  //     style: TextStyle(fontSize: 18.0, color: Colors.black),
-                  //   ),
-                  //   leading: Icon(
-                  //     Icons.person,
-                  //     size: 20.0,
-                  //     color: Colors.purple,
-                  //   ),
-                  //   onTap: () {
-                  //     /* Navigator.pop(context);
-                  //   Navigator.of(context).push(new MaterialPageRoute(
-                  //       builder: (context) => dealerBuilder()));*/
-                  //   },
-                  // ),
-                  ListTile(
-                    title: Text(
-                      'Invoice Report',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.shuffle,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Profile Management',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.info_outline,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'FAQ',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.fax,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Privacy Policy',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.policy_outlined,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Change Location',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.location_on,
-                      size: 20.0,
-                      color: Colors.purple,),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Contact Us',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.contact_page,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'About Us',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.info,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Terms and Conditions',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.note,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Booking Details',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.book,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Share App',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.share,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Sign Out',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.logout,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      // String? valTok = prefs.getString('token');
-                      // print("signout: $valTok");
-                      // logOut(valTok!);
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => _buildPopupDialog(context),
-                      );
-                    },
-                  ),
 
-                ]
-                ),
-              ),
-            ],
-          ),
+      appBar: AppBar(title: Text('Search here'),
+        flexibleSpace: GestureDetector(
+          onTap: () async{
+            var result = await showSearch<String>(
+              context: context,
+              delegate: CustomDelegate(),
+            );
+            setState(() => _result = result);
+          },
         ),
       ),
+
+
+      endDrawer: MyDrawer(),
       backgroundColor: Colors.white,
 
       body:
@@ -401,7 +206,6 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
               //    crossAxisAlignment: CrossAxisAlignment.center,
             //      mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-
 
                     SizedBox(
                       height: 21,
@@ -456,6 +260,13 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
                     //       if(getAllCarsController.getAllCars?.data?.length != null)
+
+
+
+
+
+                    if(_result == null)
+                    //  Text("Please Search") else Text(_result ?? ''),
                     Container(
                       child: Obx(
                             () =>
@@ -463,7 +274,8 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                 ? Center(
                           child: CircularProgressIndicator(),
                         )
-                            :ListView.builder(
+                            :
+                            ListView.builder(
                                physics: NeverScrollableScrollPhysics(),
                                shrinkWrap: true,
                                 itemCount: getAllCarsController.getAllCars?.data?.length ??  0,
@@ -475,6 +287,24 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                               // suggestons.add(
                               //     getAllCarsController.getAllCars!.data[index].brandModel
                               // );
+
+
+                              // List<String> modelname = [];
+                              // modelname.add(getAllCarsController.getAllCars!.data[index].brandModel);
+                              // print(modelname);
+
+
+
+                              void list(){
+                                List<String> modelname = [];
+                                modelname.add(getAllCarsController.getAllCars!.data[index].brandModel);
+                                print(modelname);
+                              }
+
+                              print(list);
+
+
+
 
                               List<Widget> mywidget = [];
 
@@ -1347,13 +1177,8 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                             }
                         ),
                       ),
-                    ),
-                    //else Center(
-                    //     child: CircularProgressIndicator()
-                    // ),
+                    ) else Text(_result ?? '') ,
 
-
-                    //
 
 
                     SizedBox(height: 5,),
@@ -1457,17 +1282,23 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
   }
 
-
-
-
-
-
 }
+
+
 
 class CustomDelegate extends SearchDelegate<String> {
 
 
-  List<String> data = ['apple','mango','pineapple','apple'];
+  GetAllCarsController getAllCarsController = Get.put(GetAllCarsController());
+
+  // List<String> modelname = [];
+  // modelname.add(getAllCarsController.getAllCars!.data[index].brandModel);
+
+
+
+
+
+  List<String> data = ['Apple','Mango','Banana','Pine Apple'];
 
   @override
   List<Widget> buildActions(BuildContext context) => [IconButton(icon: Icon(Icons.clear), onPressed: () => query = '')];
@@ -1489,6 +1320,9 @@ class CustomDelegate extends SearchDelegate<String> {
     return ListView.builder(
       itemCount: listToShow.length,
       itemBuilder: (_, i) {
+
+
+
         var noun = listToShow[i];
         return ListTile(
           title: Text(noun),

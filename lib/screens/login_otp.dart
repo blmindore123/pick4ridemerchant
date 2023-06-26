@@ -209,8 +209,7 @@ class _LoginState extends State<Login> {
 
         login(country_code,numberController.text.toString(),role);
       //  otp.sendOtp(numberController.text.toString(), '1111', minNumber, maxNumber, country_code);
-       Navigator.pushAndRemoveUntil(
-       context,
+       Navigator.pushAndRemoveUntil(context,
        MaterialPageRoute(
        builder: (context) =>
        //        OtpPage(country_code: country_code, phone_number: numberController.text.toString(), role: role, device_id: '4', otp: '1111',),

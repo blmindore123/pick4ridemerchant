@@ -7,6 +7,7 @@ import 'package:pick4ridemerchant/screens/register_new_vehicle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants/appconst.dart';
 import '../../../widgets/drawer.dart';
+import '../../common/registeredcarslistsecond.dart';
 import '../../home.dart';
 import '../../login_otp.dart';
 import '../../common/registered_cars_list.dart';
@@ -225,30 +226,38 @@ backgroundColor: Colors.white,
 
                 Padding(
                   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/17,right: MediaQuery.of(context).size.width/17),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height/8.11,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(blurRadius: 4,color: Colors.black)
-                            ],
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchPage(
+                      )));
+                    },
+
+                    child:
+                       Container(
+                      height: MediaQuery.of(context).size.height/8.11,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(blurRadius: 4,color: Colors.black)
+                              ],
 
 
+                            ),
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage('images/app_images/i6.png'),
+                              maxRadius: MediaQuery.of(context).size.height/12.75,
+                              minRadius: MediaQuery.of(context).size.height/13.1,
+                            ),
                           ),
-                          child: CircleAvatar(
-                            backgroundImage: AssetImage('images/app_images/i6.png'),
-                            maxRadius: MediaQuery.of(context).size.height/12.75,
-                            minRadius: MediaQuery.of(context).size.height/13.1,
-                          ),
-                        ),
-                        SizedBox(width: MediaQuery.of(context).size.width/32.75,),
-                        Text("Managing \nTravel Charges.",style: TextStyle(fontSize: MediaQuery.of(context).size.width/17.86,fontWeight: FontWeight.bold),),
-                      ],
+                          SizedBox(width: MediaQuery.of(context).size.width/32.75,),
+                          Text("Managing \nTravel Charges.",style: TextStyle(fontSize: MediaQuery.of(context).size.width/17.86,fontWeight: FontWeight.bold),),
+                        ],
+                      ),
                     ),
                   ),
                 ),

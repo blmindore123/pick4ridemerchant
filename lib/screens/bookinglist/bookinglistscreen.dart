@@ -179,10 +179,10 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                   height: 32,
                                   child: DropdownSearch<String>(
                                     //mode of dropdown
-                                    mode: Mode.DIALOG,
-                                    //to show search box
-                                    showSearchBox: true,
-                                    showSelectedItem: true,
+                                    // mode: Mode.DIALOG,
+                                    // //to show search box
+                                    // showSearchBox: true,
+                                    // showSelectedItem: true,
                                     //list of dropdown items
                                     items: [
                                       "All",

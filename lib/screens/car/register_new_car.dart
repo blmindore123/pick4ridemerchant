@@ -780,10 +780,10 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
          child: DropdownSearch<String>(
            //mode of dropdown
-           mode: Mode.DIALOG,
-           //to show search box
-           showSearchBox: true,
-           showSelectedItem: true,
+           // mode: Mode.DIALOG,
+           // //to show search box
+           // showSearchBox: true,
+           // showSelectedItem: true,
 
 
 
@@ -1089,10 +1089,10 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           height: 42,
                           child: DropdownSearch<String>(
                             //mode of dropdown
-                            mode: Mode.DIALOG,
-                            //to show search box
-                            showSearchBox: true,
-                            showSelectedItem: true,
+                            // mode: Mode.DIALOG,
+                            // //to show search box
+                            // showSearchBox: true,
+                            // showSelectedItem: true,
                             //list of dropdown items
                             items: [
                               "Manual",
@@ -1123,10 +1123,10 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                           height: 42,
                           child: DropdownSearch<String>(
                             //mode of dropdown
-                            mode: Mode.DIALOG,
-                            //to show search box
-                            showSearchBox: true,
-                            showSelectedItem: true,
+                            // mode: Mode.DIALOG,
+                            // //to show search box
+                            // showSearchBox: true,
+                            // showSelectedItem: true,
                             //list of dropdown items
                             items: [
                               "Petrol",

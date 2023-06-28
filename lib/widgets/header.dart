@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pick4ridemerchant/utils/constants.dart';
 
 class HeaderWidget extends StatelessWidget {
   final double height;

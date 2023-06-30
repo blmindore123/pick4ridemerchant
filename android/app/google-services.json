@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "610879503210",
+    "project_id": "pickride-d1cf7",
+    "storage_bucket": "pickride-d1cf7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610879503210:android:823b2ed9167471d6258313",
+        "android_client_info": {
+          "package_name": "com.example.pick4ride"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610879503210-t5ul7f9b7u1cvpis1noiaaocrt7kiriv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwV2Mw46iFUsQXuGPm7e85FlCVzyXB5Rk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610879503210-t5ul7f9b7u1cvpis1noiaaocrt7kiriv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610879503210:android:7343578c0c6c1923258313",
+        "android_client_info": {
+          "package_name": "com.example.pick4ridemerchant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610879503210-t5ul7f9b7u1cvpis1noiaaocrt7kiriv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwV2Mw46iFUsQXuGPm7e85FlCVzyXB5Rk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610879503210-t5ul7f9b7u1cvpis1noiaaocrt7kiriv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

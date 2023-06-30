@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pick4ridemerchant/dimensions/dimen.dart';
@@ -43,6 +44,9 @@ class _OtpPageState extends State<OtpPage> {
 
   var newToken;
 
+  String? devicetokenfb;
+  String? deviceId;
+
   @override
   void initState() {
     super.initState();
@@ -51,6 +55,16 @@ class _OtpPageState extends State<OtpPage> {
 
     //init sharedpref
     // initSharedPref();
+
+
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; // Change here
+    _firebaseMessaging.getToken().then((devicetoken){
+      print("device token is $devicetoken");
+
+      devicetokenfb = devicetoken;
+
+    });
+
   }
 
   // void initSharedPref() async {
@@ -196,7 +210,7 @@ class _OtpPageState extends State<OtpPage> {
                           print(widget.phone_number);
                           print(widget.role);
                           print(widget.device_id);
-                          //print(otp);
+                          print("device token $devicetokenfb");
 
                           // verify(widget.country_code, widget.phone_number,
                           //     widget.role, widget.device_id, 1111
@@ -239,7 +253,9 @@ class _OtpPageState extends State<OtpPage> {
       clickLoad = true;
     });
     userModel = await ApiCall.verifyOtpApi(widget.country_code,
-        widget.phone_number, widget.role, widget.device_id, 1111);
+        widget.phone_number, widget.role, widget.device_id, 1111,
+        devicetokenfb ?? ''
+    );
 
     if (userModel.success == true) {
       // var newToken = veri['data']['token'];
@@ -272,60 +288,5 @@ class _OtpPageState extends State<OtpPage> {
     });
   }
 
-// void verify(String countryCode, phoneNumber, role, deviceId, otp) async {
-//   try {
-//     Response response = await post(
-//       Uri.parse(AppConstants.BASE_URL + '/verify-otp'),
-//       body: {
-//         "country_code": countryCode,
-//         "phone_number": phoneNumber,
-//         "otp": 1111.toString(),
-//         "role": role,
-//         "device_id": deviceId,
-//         "device_type": "android",
-//         "certification_type": "development"
-//       },
-//     );
-//     if (response.statusCode == 200) {
-//       Map<String, dynamic> veri = json.decode(response.body);
-//       String nest = veri['data']['profile_status'];
-//
-//       print(nest);
-//       print(response.body.toString());
-//       print('Login successfully');
-//
-//       // addTokenToSF() async{
-//       //   SharedPreferences prefs = await SharedPreferences.getInstance();
-//       //   prefs.setString('token', token);
-//       // }
-//
-//       var newToken = veri['data']['token'];
-//
-//       prefs.setString('token', newToken);
-//       print("new token h: $newToken");
-//
-//       String? valTok = prefs.getString('token');
-//       print("valTok: $valTok");
-//
-//       if (veri['data']['profile_status'] == "completed") {
-//         prefs.setBool("true", true);
-//         Navigator.push(
-//             context,
-//             MaterialPageRoute(
-//                 builder: (context) => HomeScreen(token: newToken)));
-//       } else {
-//         Navigator.push(
-//             context,
-//             MaterialPageRoute(
-//                 builder: (context) => EnterDetailsScreen(token: newToken)));
-//       }
-//     } else {
-//       print('failed');
-//     }
-//   } catch (e) {
-//     print(e.toString());
-//     print(e);
-//     print('catched');
-//   }
-// }
+
 }

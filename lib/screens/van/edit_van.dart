@@ -9,7 +9,7 @@ import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:pick4ridemerchant/classes/getallcars.dart';
+import 'package:pick4ridemerchant/classes/GetAllVehicles.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -249,7 +249,7 @@ class _EditVanState extends State<EditVan> {
   String? xval;
 
 
-  GetAllCars? getAllCars;
+  GetAllVehicles? getAllVehicles;
 
   String? one;
   String? two;
@@ -2175,7 +2175,7 @@ class _EditVanState extends State<EditVan> {
         //String? valTok = prefs.getString('token');
         //print("valTok: $valTok");
         //var result = jsonDecode(response.body);
-        //getAllCars = GetAllCars.fromJson(result);
+        //GetAllVehicles = GetAllVehicles.fromJson(result);
 
 
 

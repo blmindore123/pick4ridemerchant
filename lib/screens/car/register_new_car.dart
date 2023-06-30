@@ -9,7 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pick4ridemerchant/classes/getallcars.dart';
+import 'package:pick4ridemerchant/classes/GetAllVehicles.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -113,11 +113,11 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
   List<File> selectedImagesnew = [];
   List<String> imagesarr = [];
 
-  List<GetAllCars> _userDetails = [];
+  List<GetAllVehicles> _userDetails = [];
 
   String? xval;
 
-  GetAllCars? getAllCars;
+  GetAllVehicles? getAllVehicles;
 
   String? one;
   String? two;

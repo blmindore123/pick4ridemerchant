@@ -1,20 +1,23 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:pick4ridemerchant/classes/GetAllVehicles.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../classes/getallcars.dart';
 
-class GetAllCarsController extends GetxController {
+import '../classes/GetAllVehicles.dart';
+
+
+class GetAllVehiclesController extends GetxController {
   var isLoading = false.obs;
 
 
 
-  GetAllCars? getAllCars;
+  GetAllVehicles? getAllVehicles;
   late SharedPreferences prefs;
   String? token;
 
-  RxList<GetAllCars> getCars = <GetAllCars>[].obs;
+  RxList<GetAllVehicles> getCars = <GetAllVehicles>[].obs;
 
 
 
@@ -43,8 +46,8 @@ class GetAllCarsController extends GetxController {
       if (response.statusCode == 200) {
         getCars.refresh();
         var result = jsonDecode(response.body);
-        getAllCars = GetAllCars.fromJson(result);
-        print(getAllCars);
+        getAllVehicles = GetAllVehicles.fromJson(result);
+        print(GetAllVehicles);
 
 
          //      return result;
@@ -59,7 +62,8 @@ class GetAllCarsController extends GetxController {
       }
     }
     catch (e) {
-      print('Error while getting data is $e');
+        print('Error while getting data is $e');
+
     }
     finally {
       isLoading(false);

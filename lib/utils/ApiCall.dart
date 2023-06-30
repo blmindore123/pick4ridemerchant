@@ -7,13 +7,15 @@ import 'package:http/http.dart' as http;
 import '../model/UserModel.dart';
 
 class ApiCall{
-  static Future<UserModel> verifyOtpApi(String countryCode, phoneNumber, role, deviceId, otp) async {
+  static Future<UserModel> verifyOtpApi(
+      String countryCode, phoneNumber, role, deviceId, otp,devicetoken) async {
     Map params = {
       "country_code": countryCode,
       "phone_number": phoneNumber,
       "otp": otp,
       "role": role,
       "device_id": deviceId,
+      "device_token": devicetoken,
       "device_type": "android",
       "certification_type": "development"
     };

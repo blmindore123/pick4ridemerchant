@@ -272,7 +272,7 @@ class _CarDetailsState extends State<CarDetails> {
 
                         Positioned(
                           // alignment: Alignment.centerLeft,
-                          top: 118,left: 331,
+                          top: 118,left: 341,
                           child: IconButton(
                             onPressed: (){
                               carouselController.nextPage();

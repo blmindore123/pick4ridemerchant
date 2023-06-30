@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/src/response.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pick4ridemerchant/classes/getallcars.dart';
+import 'package:pick4ridemerchant/classes/GetAllVehicles.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
 import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -100,11 +100,11 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
 
   List<String> imagesarr = [];
 
-  List<GetAllCars> _userDetails = [];
+  List<GetAllVehicles> _userDetails = [];
 
   String? xval;
 
-  GetAllCars? getAllCars;
+  GetAllVehicles? getAllVehicles;
 
   String? one;
   String? two;
@@ -2154,15 +2154,15 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
         final responseJson = json.decode(response.body);
         setState(() {
           //   for (Map<String,dynamic> user in responseJson) {
-          //    _userDetails.add(GetAllCars.fromJson(user));
+          //    _userDetails.add(GetAllVehicles.fromJson(user));
           //  }
         });
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => RegisteredCarsList()));
         //  var result = jsonDecode(response.body);
-        // getAllCars = GetAllCars.fromJson(result);
+        // GetAllVehicles = GetAllVehicles.fromJson(result);
         // setState(() {
-        //   getAllCarsController.getAllCars!.data.removeAt(index);
+        //   GetAllVehiclesController.GetAllVehicles!.data.removeAt(index);
         // });
         //
       } else {

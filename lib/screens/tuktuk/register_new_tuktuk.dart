@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/imageres.dart';
 import '../../controller/drive_category_controller.dart';
 import '../../utils/HelperSaveData.dart';
+import '../../widgets/drawer.dart';
 import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
@@ -96,6 +98,9 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
   String? thirdimage;
   String? fourthimage;
 
+  String? brandmodel;
+  String? gearmodel;
+  String? fuelmodel;
   List<File> selectedImagesnew = [];
 
   List<String> imagesarr = [];
@@ -365,227 +370,228 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
       ),
-      endDrawer: Drawer(
-        child: Container(
-          decoration: BoxDecoration(color: Colors.white),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Column(children: <Widget>[
-                  ListTile(
-                    title: Text(""),
-                    trailing: Icon(
-                      Icons.arrow_forward_outlined,
-                      color: Colors.black,
-                    ),
-                  ),
-
-                  // ListTile(
-                  //   title: Text(
-                  //     'Sign up as supplier',
-                  //     style: TextStyle(fontSize: 18.0, color: Colors.black),
-                  //   ),
-                  //   leading: Icon(
-                  //     Icons.person,
-                  //     size: 20.0,
-                  //     color: Colors.purple,
-                  //   ),
-                  //   onTap: () {
-                  //     /* Navigator.pop(context);
-                  //   Navigator.of(context).push(new MaterialPageRoute(
-                  //       builder: (context) => dealerBuilder()));*/
-                  //   },
-                  // ),
-                  ListTile(
-                    title: Text(
-                      'Invoice Report',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.shuffle,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /*Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => shufflerBuilder()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Profile Management',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.info_outline,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-
-                  ListTile(
-                    title: Text(
-                      'FAQ',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.fax,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-
-                  ListTile(
-                    title: Text(
-                      'Privacy Policy',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.policy_outlined,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Change Location',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.location_on,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Contact Us',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.contact_page,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'About Us',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.info,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Terms and Conditions',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.note,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Booking Details',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.book,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Share App',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.share,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Sign Out',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.logout,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      // String? valTok = prefs.getString('token');
-                      // print("signout: $valTok");
-                      // logOut(valTok!);
-
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) =>
-                            _buildPopupDialog(context),
-                      );
-                    },
-                  ),
-                ]),
-              ),
-            ],
-          ),
-        ),
-      ),
+      endDrawer: MyDrawer(),
+      // Drawer(
+      //   child: Container(
+      //     decoration: BoxDecoration(color: Colors.white),
+      //     child: Column(
+      //       children: <Widget>[
+      //         Expanded(
+      //           child: Column(children: <Widget>[
+      //             ListTile(
+      //               title: Text(""),
+      //               trailing: Icon(
+      //                 Icons.arrow_forward_outlined,
+      //                 color: Colors.black,
+      //               ),
+      //             ),
+      //
+      //             // ListTile(
+      //             //   title: Text(
+      //             //     'Sign up as supplier',
+      //             //     style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //             //   ),
+      //             //   leading: Icon(
+      //             //     Icons.person,
+      //             //     size: 20.0,
+      //             //     color: Colors.purple,
+      //             //   ),
+      //             //   onTap: () {
+      //             //     /* Navigator.pop(context);
+      //             //   Navigator.of(context).push(new MaterialPageRoute(
+      //             //       builder: (context) => dealerBuilder()));*/
+      //             //   },
+      //             // ),
+      //             ListTile(
+      //               title: Text(
+      //                 'Invoice Report',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.shuffle,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /*Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => shufflerBuilder()));*/
+      //               },
+      //             ),
+      //             ListTile(
+      //               title: Text(
+      //                 'Profile Management',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.info_outline,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /* Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => mistakePage()));*/
+      //               },
+      //             ),
+      //
+      //             ListTile(
+      //               title: Text(
+      //                 'FAQ',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.fax,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /* Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => mistakePage()));*/
+      //               },
+      //             ),
+      //
+      //             ListTile(
+      //               title: Text(
+      //                 'Privacy Policy',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.policy_outlined,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /* Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => mistakePage()));*/
+      //               },
+      //             ),
+      //             ListTile(
+      //               title: Text(
+      //                 'Change Location',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.location_on,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /* Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => mistakePage()));*/
+      //               },
+      //             ),
+      //             ListTile(
+      //               title: Text(
+      //                 'Contact Us',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.contact_page,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /* Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => mistakePage()));*/
+      //               },
+      //             ),
+      //             ListTile(
+      //               title: Text(
+      //                 'About Us',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.info,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /* Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => mistakePage()));*/
+      //               },
+      //             ),
+      //             ListTile(
+      //               title: Text(
+      //                 'Terms and Conditions',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.note,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /* Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => mistakePage()));*/
+      //               },
+      //             ),
+      //             ListTile(
+      //               title: Text(
+      //                 'Booking Details',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.book,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /* Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => mistakePage()));*/
+      //               },
+      //             ),
+      //             ListTile(
+      //               title: Text(
+      //                 'Share App',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.share,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 /* Navigator.pop(context);
+      //                 Navigator.of(context).push(new MaterialPageRoute(
+      //                     builder: (context) => mistakePage()));*/
+      //               },
+      //             ),
+      //             ListTile(
+      //               title: Text(
+      //                 'Sign Out',
+      //                 style: TextStyle(fontSize: 18.0, color: Colors.black),
+      //               ),
+      //               leading: Icon(
+      //                 Icons.logout,
+      //                 size: 20.0,
+      //                 color: Colors.purple,
+      //               ),
+      //               onTap: () {
+      //                 // String? valTok = prefs.getString('token');
+      //                 // print("signout: $valTok");
+      //                 // logOut(valTok!);
+      //
+      //                 showDialog(
+      //                   context: context,
+      //                   builder: (BuildContext context) =>
+      //                       _buildPopupDialog(context),
+      //                 );
+      //               },
+      //             ),
+      //           ]),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       backgroundColor: Colors.white,
       body: RefreshIndicator(
         onRefresh: () async {
@@ -607,7 +613,8 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                         alignment: Alignment.topLeft,
-                        child: Text('Choose the ride option'),
+                        child: Text('Choose the ride option',style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 13),),
                       ),
                     ),
 
@@ -881,37 +888,60 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                         //   Text('hhk'),
                         Expanded(
                           child: Container(
-                            margin: EdgeInsets.only(left: 10, right: 5),
+                            margin: EdgeInsets.only(left: 10,right: 5),
                             // width: 155,
                             height: 42,
-                            child: TextFormField(
-                              controller: brandNameController,
-                              keyboardType: TextInputType.text,
-                              textAlign: TextAlign.start,
-                              textAlignVertical: TextAlignVertical.bottom,
-                              validator: (brandNameController) {
-                                String value = brandNameController.toString();
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                hintText: "Write Here",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
+                            child: DropdownSearch<String>(
+                              popupProps: PopupProps.dialog(
+                                fit: FlexFit.loose,
+                                showSearchBox: true,
+                                showSelectedItems: true,
+                                disabledItemFn: (String s) => s.startsWith('I'),
                               ),
+                              // dropdownDecoratorProps: DropDownDecoratorProps(
+                              //   dropdownSearchDecoration: InputDecoration(
+                              //     labelText: "Menu mode",
+                              //     hintText: "country in menu mode",
+                              //   ),
+                              // ),
+
+                              //list of dropdown items
+                              items: [
+                                "Bajaj Tuktuk 1",
+                                "Bajaj Tuktuk 2",
+                              ],
+                              //    label: "Country",
+
+                              // onChanged: print,
+                              onChanged: (v) {
+
+                                brandmodel = v;
+
+                                print(brandmodel);
+                                // if (v == "Ferrari Enzo") {
+                                //   brandmodel = "Ferrari Enzo";
+                                // }
+                                //
+                                // if (v == "Maruti Zen") {
+                                //   brandmodel = "Maruti Zen";
+                                // }
+                                //
+                                // if (v == "Maruti Baleno") {
+                                //   brandmodel = "Maruti Baleno";
+                                // }
+                                //
+                                // if (v == "Hyundai Creta") {
+                                //   brandmodel = "Hyundai Creta";
+                                // }
+                                //
+                                // if (v == "Toyota Fortuner") {
+                                //   brandmodel = "Toyota Fortuner";
+                                // } else {
+                                //   print("");
+                                // }
+                              },
+
+                              selectedItem: "Bajaj Tuktuk 1",
                             ),
                           ),
                         ),
@@ -994,77 +1024,125 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         //   Text('hhk'),
-
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(left: 10, right: 5),
-                            // width: 155,
+                            // width: 196,
                             height: 42,
-                            child: TextFormField(
-                              controller: gearController,
-                              keyboardType: TextInputType.text,
-                              textAlign: TextAlign.start,
-                              textAlignVertical: TextAlignVertical.bottom,
-                              validator: (gearController) {
-                                String value = gearController.toString();
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                hintText: "Write Here",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+                            child: DropdownSearch<String>(
+                              popupProps: PopupProps.dialog(
+                                fit: FlexFit.loose,
+                                showSearchBox: true,
+                                showSelectedItems: true,
+                                disabledItemFn: (String s) => s.startsWith('I'),
                               ),
+                              // dropdownDecoratorProps: DropDownDecoratorProps(
+                              //   dropdownSearchDecoration: InputDecoration(
+                              //     labelText: "Menu mode",
+                              //     hintText: "country in menu mode",
+                              //   ),
+                              // ),
+                              //list of dropdown items
+                              items: [
+                                "Manual",
+                                "Automatic",
+                              ],
+                              //    label: "Country",
+
+                              onChanged: (vgear) {
+                                if (vgear == "Manual") {
+                                  gearmodel = "Manual";
+                                }
+                                if (vgear == "Automatic") {
+                                  gearmodel = "Automatic";
+                                } else {
+                                  print("");
+                                }
+                              },
+                              //show selected item
+                              selectedItem: "Manual",
                             ),
                           ),
                         ),
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(left: 5, right: 10),
-                            // width: 155,
+                            // width: 196,
                             height: 42,
-                            child: TextFormField(
-                              controller: fuelController,
-                              keyboardType: TextInputType.text,
-                              textAlign: TextAlign.start,
-                              textAlignVertical: TextAlignVertical.bottom,
-                              validator: (fuelController) {
-                                String value = fuelController.toString();
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                hintText: "Write Here",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(9),
                             ),
+                            child: DropdownSearch<String>(
+                              popupProps: PopupProps.dialog(
+                                fit: FlexFit.loose,
+                                showSearchBox: true,
+                                showSelectedItems: true,
+                                disabledItemFn: (String s) => s.startsWith('I'),
+                              ),
+                              // dropdownDecoratorProps: DropDownDecoratorProps(
+                              //   dropdownSearchDecoration: InputDecoration(
+                              //     labelText: "Menu mode",
+                              //     // hintText: "country in menu mode",
+                              //   ),
+                              // ),
+                              //list of dropdown items
+                              items: [
+                                "Petrol",
+                                "Diesel",
+
+                              ],
+                              //    label: "Country",
+                              onChanged: (vfuel) {
+                                if (vfuel == "Petrol") {
+                                  fuelmodel = "Petrol";
+                                }
+                                if (vfuel == "Diesel") {
+                                  fuelmodel = "Diesel";
+                                }
+                                if (vfuel == "None") {
+                                  fuelmodel = "None";
+                                }
+                                else {
+                                  print("");
+                                }
+                              },
+                              //show selected item
+                              selectedItem: "Petrol",
+                            ),
+                            // child: TextFormField(
+                            //   controller: fuelController,
+                            //   keyboardType: TextInputType.text,
+                            //   validator: (fuelController) {
+                            //     String value = fuelController.toString();
+                            //     if (value!.isEmpty) {
+                            //       return 'Please enter some text';
+                            //     }
+                            //     return null;
+                            //   },
+                            //
+                            //
+                            //   decoration: InputDecoration(
+                            //     filled: true,
+                            //     hintText: "Write Here",
+                            //     border: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(9),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.grey,
+                            //       ),
+                            //     ),
+                            //     enabledBorder: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(9),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ),
                         ),
                       ],
@@ -1936,12 +2014,12 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
                                 id,
                                 radioButtonItemvehicle,
                                 xval,
-                                brandNameController.text,
+                                brandmodel ?? 'Bajaj Tuktuk 1',
                                 0,
                                 int.parse(noofluggageController.text),
                                 "no",
-                                gearController.text,
-                                fuelController.text,
+                                gearmodel ?? 'Manual',
+                                fuelmodel ?? 'Petrol',
                                 int.parse(seatsController.text),
                                 vehiclenoController.text,
                                 insuranceController.text,

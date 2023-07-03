@@ -286,7 +286,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
                 showDialog(
                   context: context,
-                  builder: (BuildContext context) => _dialogContent(context),
+                  builder: (BuildContext context) => _dialoglogout(context),
                 );
 
 
@@ -299,36 +299,6 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 
-  Widget _buildPopupDialog(BuildContext context) {
-    return new AlertDialog(
-      title: const Text('Are you sure you want to sign out?'),
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-
-        ],
-      ),
-      actions: <Widget>[
-        new ElevatedButton(
-          onPressed: () {
-            String? valTok = prefs.getString('token');
-            print("signout: $valTok");
-            logOut(valTok!);
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
-          },
-          child: const Text('Yes'),
-        ),
-        new ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('No'),
-        ),
-
-      ],
-    );
-  }
   void logOut(
       String valToken
       ) async {
@@ -360,39 +330,16 @@ class _MyDrawerState extends State<MyDrawer> {
   }
 
 
-  Widget _dialogContent(BuildContext context) {
+  Widget _dialoglogout(BuildContext context) {
 
     return Stack(
       children: [
 
-        Positioned(
-          right: 0,
-          left: 30,
-          top: 220,
 
-
-          child: Align(
-              alignment: Alignment.topRight,
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                    width: 55,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle
-                    ),
-                    child: Icon(Icons.close,color: Colors.red,)
-                ),
-              )
-          ),
-
-        ),
 
         Positioned(
-          right: 30,
-          left: 30,
+          right: 50,
+          left: 50,
           top: 230,
           // child: Padding(
           // padding: EdgeInsets.all(42),
@@ -479,6 +426,31 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           // ),
+        ),
+
+        Positioned(
+          right: 0,
+          left: 260,
+          top: 235,
+
+
+          child: Align(
+            //   alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                    width: 55,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle
+                    ),
+                    child: Icon(Icons.close,color: Colors.red,)
+                ),
+              )
+          ),
+
         ),
       ],
     );

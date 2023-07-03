@@ -307,24 +307,49 @@ class _CarDetailsState extends State<CarDetails> {
                   ),
 
 
-
                   Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('Brand/Model',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 113,
+                    padding: EdgeInsets.only(left: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Brand & Model',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
                           ),
-                          Text('Vehicle Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Vehicle Type',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  // Padding(
+                  //     padding: EdgeInsets.only(left: 11),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.start,
+                  //       children: [
+                  //
+                  //
+                  //         Text('Brand/Model',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                  //         SizedBox(
+                  //           width: 113,
+                  //         ),
+                  //         Text('Vehicle Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                  //
+                  //
+                  //       ],
+                  //     )
+                  // ),
 
                   SizedBox(
                     height: 11,
@@ -396,23 +421,31 @@ class _CarDetailsState extends State<CarDetails> {
 
 
                   Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('No. of Seats',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 118,
+                    padding: EdgeInsets.only(left: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'No. of Seats',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
                           ),
-                          Text('No. of Doors',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'No. of Doors',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-
                   SizedBox(
                     height: 11,
                   ),
@@ -483,21 +516,30 @@ class _CarDetailsState extends State<CarDetails> {
 
 
                   Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 46,
+                    padding: EdgeInsets.only(left: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Luggage Space(ltr)',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
                           ),
-                          Text('Air Condition(AC/Non-AC)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Air Condition',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
 
                   SizedBox(
@@ -571,21 +613,30 @@ class _CarDetailsState extends State<CarDetails> {
 
 
                   Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('Gear Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 131,
+                    padding: EdgeInsets.only(left: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Gear Type',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
                           ),
-                          Text('Fuel Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Fuel Type',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
 
                   SizedBox(
@@ -659,21 +710,30 @@ class _CarDetailsState extends State<CarDetails> {
 
 
                   Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('Fuel Status',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 127,
+                    padding: EdgeInsets.only(left: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Fuel Status',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
                           ),
-                          Text('Price',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Price',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
 
                   SizedBox(
@@ -841,7 +901,7 @@ class _CarDetailsState extends State<CarDetails> {
 
                               child: Padding(
                                   padding: EdgeInsets.only(top: 15,left: 6,right: 6),
-                                  child: Text("${widget.secdepo}: 8,000",maxLines:2,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 13),)),
+                                  child: Text("${widget.secdepo}",maxLines:2,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 13),)),
 
 
                             ),

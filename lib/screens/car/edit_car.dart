@@ -636,7 +636,6 @@ class _EditCarState extends State<EditCar> {
 //                  //   if(condition) Widget() else Widget(),
 //
 
-
                     Row(
                       children: [
                         Radio(
@@ -696,10 +695,6 @@ class _EditCarState extends State<EditCar> {
 
                       ],
                     ),
-
-
-
-
 
                     if(radioButtonItemride == 'Self Drive') Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -762,9 +757,6 @@ class _EditCarState extends State<EditCar> {
                           alignment: Alignment.topLeft,
                           child: Text('Vehicle Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
                     ),
-
-
-
 
 
                     Row(
@@ -1015,6 +1007,9 @@ class _EditCarState extends State<EditCar> {
                             // ),
                           ),
                         ),
+
+
+
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(left: 5, right: 10),
@@ -2528,11 +2523,11 @@ class _EditCarState extends State<EditCar> {
                     "image": imageTwoinsur
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageOnerc
                   },
                   {
-                    "type": "insurance",
+                    "type": "rc_book",
                     "image": imageTworc
                   },
                   {
@@ -2572,13 +2567,6 @@ class _EditCarState extends State<EditCar> {
 
         print(response.body.toString());
         print('vehicle added');
-        //String? valTok = prefs.getString('token');
-        //print("valTok: $valTok");
-        //var result = jsonDecode(response.body);
-        //getAllCars = GetAllCars.fromJson(result);
-
-
-
 
         Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList()));
 

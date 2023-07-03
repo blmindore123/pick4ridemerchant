@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -114,6 +115,10 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
   String? three;
   String? four;
   String? five;
+
+  String? brandmodel;
+  String? gearmodel;
+  String? fuelmodel;
 
   Future selectOneImage(ImageSource media) async {
     final XFile? selectedImage1 = await imagePicker.pickImage(source: media);
@@ -391,11 +396,17 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       height: 31,
                     ),
 
+
                     Padding(
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text('Choose the ride option')),
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Choose the ride option',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                        ),
+                      ),
                     ),
 
 //                  //   if(condition) Widget() else Widget(),
@@ -453,11 +464,12 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(left: 11),
-                              child: Text(
-                                "Security Deposit",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )),
+                            padding: EdgeInsets.only(left: 11),
+                            child: Text(
+                              "Security Deposit",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
                           SizedBox(
                             width: 41,
                           ),
@@ -505,12 +517,13 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                     Padding(
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'Vehicle Type',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 13),
-                          )),
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Vehicle Type',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                        ),
+                      ),
                     ),
 
                     Row(
@@ -530,10 +543,12 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                     });
                                   },
                                 ),
-                                Text('Commercial',
-                                    style: new TextStyle(
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.w300)),
+                                Text(
+                                  'Commercial',
+                                  style: new TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w300),
+                                ),
                               ],
                             ),
                           ),
@@ -553,10 +568,12 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                     });
                                   },
                                 ),
-                                Text('Compact',
-                                    style: new TextStyle(
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.w300)),
+                                Text(
+                                  'Compact',
+                                  style: new TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w300),
+                                ),
                               ],
                             ),
                           ),
@@ -609,7 +626,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                 ),
                                 Text(
                                   'Sports',
-                                  style: new TextStyle(
+                                  style: TextStyle(
                                       fontSize: 15.0,
                                       fontWeight: FontWeight.w300),
                                 ),
@@ -659,53 +676,137 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         //   Text('hhk'),
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(left: 10, right: 5),
-                            // width: 155,
-                            height: 42,
-                            child: TextFormField(
-                              controller: brandNameController,
-                              keyboardType: TextInputType.text,
-                              textAlign: TextAlign.start,
-                              textAlignVertical: TextAlignVertical.bottom,
-                              validator: (brandNameController) {
-                                String value = brandNameController.toString();
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                hintText: "Write Here",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+
+                        // DropdownSearch<String>(
+                        //
+                        //   mode: Mode.MENU,
+                        //   showSelectedItems: true,
+                        //   items: ["ferrari","ferrari enzo"],
+                        //   dropdownSearchDecoration: InputDecoration(
+                        //     labelText: "Brand",
+                        //     hintText: "Brand",
+                        //   ),
+                        //
+                        // //  popupItemDisabled: isItemDisabled,
+                        //   onChanged: itemSelectionChanged,
+                        //
+                        //   showSearchBox: true,
+                        //   searchFieldProps: TextFieldProps(
+                        //     cursorColor: Colors.blue
+                        //   ),
+                        // ),
 
                         Expanded(
                           child: Container(
+                            margin: EdgeInsets.only(left: 10, right: 5),
+                            // width: MediaQuery.of(context).size.width / 2.0,
+                            height: 42,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+
+                            child: DropdownSearch<String>(
+                              popupProps: PopupProps.dialog(
+                                fit: FlexFit.loose,
+                                showSearchBox: true,
+                                showSelectedItems: true,
+                                disabledItemFn: (String s) => s.startsWith('I'),
+                              ),
+                              // dropdownDecoratorProps: DropDownDecoratorProps(
+                              //   dropdownSearchDecoration: InputDecoration(
+                              //     labelText: "Menu mode",
+                              //     hintText: "country in menu mode",
+                              //   ),
+                              // ),
+
+                              //list of dropdown items
+                              items: [
+                                "Maruti Van 1",
+                                "Maruti Van 2",
+                                "Maruti Van 3",
+                                "Maruti Van 4",
+                                "Maruti Van 5",
+                              ],
+                              //    label: "Country",
+
+                              // onChanged: print,
+                              onChanged: (v) {
+
+                                brandmodel = v;
+
+                                print(brandmodel);
+                                // if (v == "Ferrari Enzo") {
+                                //   brandmodel = "Ferrari Enzo";
+                                // }
+                                //
+                                // if (v == "Maruti Zen") {
+                                //   brandmodel = "Maruti Zen";
+                                // }
+                                //
+                                // if (v == "Maruti Baleno") {
+                                //   brandmodel = "Maruti Baleno";
+                                // }
+                                //
+                                // if (v == "Hyundai Creta") {
+                                //   brandmodel = "Hyundai Creta";
+                                // }
+                                //
+                                // if (v == "Toyota Fortuner") {
+                                //   brandmodel = "Toyota Fortuner";
+                                // } else {
+                                //   print("");
+                                // }
+                              },
+
+                              selectedItem: "Maruti Van 1",
+                            ),
+
+                            // child: TextFormField(
+                            //   controller: brandNameController,
+                            //   keyboardType: TextInputType.text,
+                            //   validator: (brandNameController) {
+                            //     String value = brandNameController.toString();
+                            //     if (value!.isEmpty) {
+                            //       return 'Please enter some text';
+                            //     }
+                            //     return null;
+                            //   },
+                            //
+                            //
+                            //   decoration: InputDecoration(
+                            //     filled: true,
+                            //     hintText: "Write Here",
+                            //     border: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(9),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.grey,
+                            //       ),
+                            //     ),
+                            //     enabledBorder: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(9),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
                             margin: EdgeInsets.only(left: 5, right: 10),
-                            // width: 155,
+                            // width: MediaQuery.of(context).size.width / 2.5,
                             height: 42,
                             child: TextFormField(
                               controller: numofdoorController,
                               keyboardType: TextInputType.number,
                               textAlign: TextAlign.start,
                               textAlignVertical: TextAlignVertical.bottom,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                LengthLimitingTextInputFormatter(2),
+                              ],
                               validator: (numofdoorController) {
                                 String value = numofdoorController.toString();
                                 if (value.isEmpty) {
@@ -719,7 +820,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(9),
                                   borderSide: BorderSide(
-                                    color: Colors.grey,
+                                    color: Colors.grey.shade50,
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
@@ -779,13 +880,17 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(left: 10, right: 5),
-                            // width: 155,
+                            // width: 196,
                             height: 42,
                             child: TextFormField(
                               controller: noofluggageController,
                               keyboardType: TextInputType.number,
                               textAlign: TextAlign.start,
                               textAlignVertical: TextAlignVertical.bottom,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                LengthLimitingTextInputFormatter(2),
+                              ],
                               validator: (noofluggageController) {
                                 String value = noofluggageController.toString();
                                 if (value.isEmpty) {
@@ -799,7 +904,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(9),
                                   borderSide: BorderSide(
-                                    color: Colors.grey,
+                                    color: Colors.grey.shade50,
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
@@ -814,7 +919,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                         ),
                         Expanded(
                           child: Container(
-                            // width: 155,
+                            // width: 196,
                             height: 42,
                             child: Row(
                               children: [
@@ -902,73 +1007,121 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(left: 10, right: 5),
-                            // width: 155,
+                            // width: 196,
                             height: 42,
-                            child: TextFormField(
-                              controller: gearController,
-                              keyboardType: TextInputType.text,
-                              textAlign: TextAlign.start,
-                              textAlignVertical: TextAlignVertical.bottom,
-                              validator: (gearController) {
-                                String value = gearController.toString();
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                hintText: "Write Here",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+                            child: DropdownSearch<String>(
+                              popupProps: PopupProps.dialog(
+                                fit: FlexFit.loose,
+                                showSearchBox: true,
+                                showSelectedItems: true,
+                                disabledItemFn: (String s) => s.startsWith('I'),
                               ),
+                              // dropdownDecoratorProps: DropDownDecoratorProps(
+                              //   dropdownSearchDecoration: InputDecoration(
+                              //     labelText: "Menu mode",
+                              //     hintText: "country in menu mode",
+                              //   ),
+                              // ),
+                              //list of dropdown items
+                              items: [
+                                "Manual",
+                                "Automatic",
+                              ],
+                              //    label: "Country",
+
+                              onChanged: (vgear) {
+                                if (vgear == "Manual") {
+                                  gearmodel = "Manual";
+                                }
+                                if (vgear == "Automatic") {
+                                  gearmodel = "Automatic";
+                                } else {
+                                  print("");
+                                }
+                              },
+                              //show selected item
+                              selectedItem: "Manual",
                             ),
                           ),
                         ),
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(left: 5, right: 10),
-                            // width: 155,
+                            // width: 196,
                             height: 42,
-                            child: TextFormField(
-                              controller: fuelController,
-                              keyboardType: TextInputType.text,
-                              textAlign: TextAlign.start,
-                              textAlignVertical: TextAlignVertical.bottom,
-                              validator: (fuelController) {
-                                String value = fuelController.toString();
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                hintText: "Write Here",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(9),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(9),
                             ),
+                            child: DropdownSearch<String>(
+                              popupProps: PopupProps.dialog(
+                                fit: FlexFit.loose,
+                                showSearchBox: true,
+                                showSelectedItems: true,
+                                disabledItemFn: (String s) => s.startsWith('I'),
+                              ),
+                              // dropdownDecoratorProps: DropDownDecoratorProps(
+                              //   dropdownSearchDecoration: InputDecoration(
+                              //     labelText: "Menu mode",
+                              //     // hintText: "country in menu mode",
+                              //   ),
+                              // ),
+                              //list of dropdown items
+                              items: [
+                                "Petrol",
+                                "Diesel",
+                                "CNG",
+                              ],
+                              //    label: "Country",
+                              onChanged: (vfuel) {
+                                if (vfuel == "Petrol") {
+                                  fuelmodel = "Petrol";
+                                }
+                                if (vfuel == "Diesel") {
+                                  fuelmodel = "Diesel";
+                                }
+                                if (vfuel == "CNG") {
+                                  fuelmodel = "CNG";
+                                } else {
+                                  print("");
+                                }
+                              },
+                              //show selected item
+                              selectedItem: "Petrol",
+                            ),
+                            // child: TextFormField(
+                            //   controller: fuelController,
+                            //   keyboardType: TextInputType.text,
+                            //   validator: (fuelController) {
+                            //     String value = fuelController.toString();
+                            //     if (value!.isEmpty) {
+                            //       return 'Please enter some text';
+                            //     }
+                            //     return null;
+                            //   },
+                            //
+                            //
+                            //   decoration: InputDecoration(
+                            //     filled: true,
+                            //     hintText: "Write Here",
+                            //     border: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(9),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.grey,
+                            //       ),
+                            //     ),
+                            //     enabledBorder: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(9),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ),
                         ),
                       ],
@@ -1013,17 +1166,20 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         //   Text('hhk'),
-
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(left: 10, right: 5),
-                            // width: 155,
+                            // width: 196,
                             height: 42,
                             child: TextFormField(
                               controller: seatsController,
                               keyboardType: TextInputType.number,
                               textAlign: TextAlign.start,
                               textAlignVertical: TextAlignVertical.bottom,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                LengthLimitingTextInputFormatter(2),
+                              ],
                               validator: (seatsController) {
                                 String value = seatsController.toString();
                                 if (value.isEmpty) {
@@ -1053,7 +1209,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(left: 5, right: 10),
-                            // width: 155,
+                            // width: 196,
                             height: 42,
                             child: TextFormField(
                               controller: vehiclenoController,
@@ -1118,65 +1274,6 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        //Expanded(
-                        // child:
-                        //
-                        // SizedBox(
-                        //   width: 21,
-                        // ),
-                        //
-                        //   Padding(
-                        //     padding: EdgeInsets.only(left: 0),
-                        //     child: Container(
-                        //       color: Colors.brown.shade50,
-                        //       padding:const EdgeInsets.all(15),
-                        //       height:50,
-                        //       width: MediaQuery.of(context).size.width/2.72,
-                        //       child: Padding(
-                        //         padding: EdgeInsets.only(top: 4),
-                        //         child: TextField(
-                        //
-                        //           controller: licenseController, //editing controller of this TextField
-                        //
-                        //           decoration: const InputDecoration(
-                        //
-                        //             border: InputBorder.none,
-                        //
-                        //             hintText: 'yyyy/MM/dd'
-                        //           ),
-                        //           readOnly: true,  // when true user cannot edit text
-                        //           onTap: () async {
-                        //             DateTime? pickedTime = await showDatePicker(
-                        //                 context: context,
-                        //                 initialDate: DateTime.now(), //get today's date
-                        //                 firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                        //                 lastDate: DateTime(2101)
-                        //
-                        //
-                        //             );
-                        //
-                        //             if(pickedTime != null ){
-                        //               print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
-                        //               String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
-                        //               print(formattedDate); //formatted date output using intl package =>  2022-07-04
-                        //               setState(() {
-                        //                 licenseController.text = formattedDate; //set foratted date to TextField value.
-                        //               });
-                        //             }else{
-                        //               print("Date is not selected");
-                        //             }
-                        //           },
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-
-                        // Container(
-                        //     height: 50,
-                        //     color: Colors.brown.shade50,
-                        //     child: Icon(Icons.calendar_month,color: Colors.purple,)),
-
                         SizedBox(
                           width: 11,
                         ),
@@ -1186,7 +1283,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                         Padding(
                           padding: EdgeInsets.only(right: 0),
                           child: Container(
-                            color: Colors.brown.shade50,
+                            color: Colors.grey.shade50,
                             padding: const EdgeInsets.all(15),
                             height: 50,
                             width: MediaQuery.of(context).size.width / 2.72,
@@ -1217,8 +1314,8 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                     print(
                                         pickedTime); //get the picked date in the format => 2022-07-04 00:00:00.000
                                     String formattedDate =
-                                        DateFormat('yyyy-MM-dd').format(
-                                            pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
+                                    DateFormat('yyyy-MM-dd').format(
+                                        pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
                                     print(
                                         formattedDate); //formatted date output using intl package =>  2022-07-04
                                     //You can format date as per your need
@@ -1241,7 +1338,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
 
                         Container(
                           height: 50,
-                          color: Colors.brown.shade50,
+                          color: Colors.grey.shade50,
                           child: Icon(
                             Icons.calendar_month,
                             color: Colors.purple,
@@ -1254,17 +1351,45 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       height: 11,
                     ),
 
+                    // Padding(
+                    //   padding: EdgeInsets.only(left: 11),
+                    //   child: Align(
+                    //       alignment: Alignment.topLeft,
+                    //       child: Text('Price',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
+                    // ),
+
                     Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          'Price',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 13),
-                        ),
-                      ),
-                    ),
+                        padding: EdgeInsets.only(left: 11),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  'Price(day)',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: radioButtonItemride == 'With Driver'
+                                    ? Text(
+                                  'Price(km)',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                )
+                                    : Text(""),
+                              ),
+                            ),
+                            // SizedBox(
+                            //   width: 141,
+                            // ),
+                          ],
+                        )),
 
                     SizedBox(
                       height: 11,
@@ -1274,40 +1399,44 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                         radioButtonItemride == 'Wedding Ride')
                       Row(
                         children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(left: 11),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.3,
-                              height: 45,
-                              child: TextFormField(
-                                controller: priceController,
-                                keyboardType: TextInputType.number,
-                                textAlign: TextAlign.start,
-                                textAlignVertical: TextAlignVertical.bottom,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(5),
-                                ],
-                                validator: (priceController) {
-                                  String value = priceController.toString();
-                                  if (value.isEmpty) {
-                                    return 'Please enter some text';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  hintText: "Enter Here",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9),
-                                    borderSide: BorderSide(
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9),
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
+                          Expanded(
+                            child: Container(
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 11),
+                                child: Container(
+                                  // width: 100,
+                                  height: 45,
+                                  child: TextFormField(
+                                    controller: priceController,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.start,
+                                    textAlignVertical: TextAlignVertical.bottom,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      LengthLimitingTextInputFormatter(5),
+                                    ],
+                                    validator: (priceController) {
+                                      String value = priceController.toString();
+                                      if (value.isEmpty) {
+                                        return 'Please enter some text';
+                                      }
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      hintText: "Enter Here",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(9),
+                                        borderSide: BorderSide(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(9),
+                                        borderSide: BorderSide(
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -1318,55 +1447,147 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                             width: 5,
                           ),
                           Text('Per Day'),
+                          SizedBox(
+                            width: 15,
+                          ),
                         ],
                       )
                     else
+                    // Row(
+                    //   children: <Widget>[
                       Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(left: 11),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.3,
-                              height: 45,
-                              child: TextFormField(
-                                controller: pricekmController,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(5),
+                        children: [
+                          Expanded(
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 11),
+                                        child: SizedBox(
+                                          // width: 100,
+                                          height: 45,
+                                          child: TextFormField(
+                                            controller: priceController,
+                                            keyboardType: TextInputType.number,
+                                            textAlign: TextAlign.start,
+                                            textAlignVertical:
+                                            TextAlignVertical.bottom,
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly,
+                                              LengthLimitingTextInputFormatter(
+                                                  5),
+                                            ],
+                                            validator: (priceController) {
+                                              String value =
+                                              priceController.toString();
+                                              if (value.isEmpty) {
+                                                return 'Please enter some text';
+                                              }
+                                              return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              hintText: "Enter Here",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(9),
+                                                borderSide: BorderSide(
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(9),
+                                                borderSide: BorderSide(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('Per day'),
                                 ],
-                                validator: (pricekmController) {
-                                  String value = pricekmController.toString();
-                                  if (value.isEmpty) {
-                                    return 'Please enter some text';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  hintText: "Enter Here",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9),
-                                    borderSide: BorderSide(
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9),
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 5,
+                          Expanded(
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 11),
+                                        child: SizedBox(
+                                          // width: 100,
+                                          height: 45,
+                                          child: TextFormField(
+                                            controller: pricekmController,
+                                            keyboardType: TextInputType.number,
+                                            textAlign: TextAlign.start,
+                                            textAlignVertical:
+                                            TextAlignVertical.bottom,
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly,
+                                              LengthLimitingTextInputFormatter(
+                                                  5),
+                                            ],
+                                            validator: (pricekmController) {
+                                              String value =
+                                              pricekmController.toString();
+                                              if (value.isEmpty) {
+                                                return 'Please enter some text';
+                                              }
+                                              return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              hintText: "Enter Here",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(9),
+                                                borderSide: BorderSide(
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(9),
+                                                borderSide: BorderSide(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('Per Km'),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          Text('Per Km'),
                         ],
                       ),
+                    //   ],
+                    // ),
 
                     SizedBox(
                       height: 11,
@@ -1375,61 +1596,58 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                     //
                     //
 
-                    if (radioButtonItemride == 'Self Drive' ||
-                        radioButtonItemride == 'Wedding Ride')
-                      Text("")
-                    else
-                      Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(left: 11),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.3,
-                              height: 45,
-                              child: TextFormField(
-                                controller: priceController,
-                                keyboardType: TextInputType.number,
-                                textAlign: TextAlign.start,
-                                textAlignVertical: TextAlignVertical.bottom,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(5),
-                                ],
-                                validator: (priceController) {
-                                  String value = priceController.toString();
-                                  if (value.isEmpty) {
-                                    return 'Please enter some text';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  hintText: "Enter Here",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9),
-                                    borderSide: BorderSide(
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9),
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('Per Day'),
-                        ],
-                      ),
-
+                    // if(radioButtonItemride == 'Self Drive' || radioButtonItemride == 'Wedding Ride')
+                    //  Text("")
+                    //  else Row(
+                    //   children: <Widget>[
+                    //     Padding(
+                    //       padding: EdgeInsets.only(left: 11),
+                    //       child: SizedBox(
+                    //         width: 100,
+                    //         height: 45,
+                    //         child: TextFormField(
+                    //           controller: priceController,
+                    //           keyboardType: TextInputType.number,
+                    //           validator: (priceController) {
+                    //             String value = priceController.toString();
+                    //             if (value!.isEmpty) {
+                    //               return 'Please enter some text';
+                    //             }
+                    //             return null;
+                    //           },
+                    //
+                    //           decoration: InputDecoration(
+                    //             filled: true,
+                    //             hintText: "Enter Here",
+                    //             border: OutlineInputBorder(
+                    //               borderRadius: BorderRadius.circular(9),
+                    //               borderSide: BorderSide(
+                    //                 color: Colors.grey,
+                    //               ),
+                    //             ),
+                    //             enabledBorder: OutlineInputBorder(
+                    //               borderRadius: BorderRadius.circular(9),
+                    //               borderSide: BorderSide(
+                    //                 color: Colors.white,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //
+                    //     SizedBox(
+                    //       width: 5,
+                    //     ),
+                    //
+                    //
+                    //     Text('Per Day'),
+                    //   ],
+                    // ),
+                    //
+//
                     SizedBox(
-                      height: 11,
+                      height: 21,
                     ),
 
                     Padding(
@@ -1492,7 +1710,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          'Image of vehicle license and insurance copy',
+                          'Image of vehicle license and insurance ',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 13),
                         ),
@@ -1508,134 +1726,130 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       children: [
                         image1 != null
                             ? Padding(
-                                padding: EdgeInsets.only(left: 11),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    selectOneImage(ImageSource.gallery);
-                                  },
-                                  // child: Container(
-                                  //   height: 115,
-                                  //   width: 161,
-                                  //   child: Card(
-                                  //       color: Colors.brown.shade50,
-                                  //       child: Image.file(File(image1!.path),fit: BoxFit.cover,)
-                                  //   ),
-                                  // ),
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        width: 161,
-                                        child: Card(
-                                          color: Colors.brown.shade50,
+                          padding: EdgeInsets.only(left: 11),
+                          child: GestureDetector(
+                            onTap: () {
+                              selectOneImage(ImageSource.gallery);
+                            },
+                            child: Container(
+                                height: 115,
+                                width: 161,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: 115,
+                                      width: 161,
+                                      child: Card(
+                                          color: Colors.grey.shade50,
                                           child: Image.file(
                                             File(image1!.path),
                                             fit: BoxFit.cover,
-                                          ),
+                                          )),
+                                    ),
+                                    Positioned(
+                                      left: 111,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            image1 = null;
+                                          });
+                                        },
+                                        icon: new Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
                                         ),
-                                      ),
-                                      Positioned(
-                                        left: 111,
-                                        child: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              image1 = null;
-                                            });
-                                          },
-                                          icon: new Icon(
-                                            Icons.delete,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            : GestureDetector(
-                                onTap: () {
-                                  selectOneImage(ImageSource.gallery);
-                                },
-                                child: Container(
-                                  height: 115,
-                                  width: 161,
-                                  child: Card(
-                                    color: Colors.brown.shade50,
-                                    child: Container(
-                                      height: 40,
-                                      width: 40,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.black,
-                                        size: 40,
                                       ),
                                     ),
-                                  ),
+                                  ],
+                                )),
+                          ),
+                        )
+                            : GestureDetector(
+                          onTap: () {
+                            selectOneImage(ImageSource.gallery);
+                          },
+                          child: Container(
+                            height: 115,
+                            width: 161,
+                            child: Card(
+                              color: Colors.grey.shade50,
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.black,
+                                  size: 40,
                                 ),
                               ),
+                              // Image.network(
+                              //     'http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           width: 21,
                         ),
                         image2 != null
                             ? GestureDetector(
-                                onTap: () {
-                                  selectTwoImage(ImageSource.gallery);
-                                },
-                                child: Container(
+                          onTap: () {
+                            selectTwoImage(ImageSource.gallery);
+                          },
+                          child: Container(
+                              height: 115,
+                              width: 161,
+                              child: Stack(
+                                children: [
+                                  Container(
                                     height: 115,
                                     width: 161,
-                                    // child: Card(
-                                    //     color: Colors.brown.shade50,
-                                    //     child: Image.file(File(image2!.path),fit: BoxFit.cover,)
-                                    // ),
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          width: 161,
-                                          child: Card(
-                                              color: Colors.brown.shade50,
-                                              child: Image.file(
-                                                File(image2!.path),
-                                                fit: BoxFit.cover,
-                                              )),
-                                        ),
-                                        Positioned(
-                                          left: 111,
-                                          child: IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                image2 = null;
-                                              });
-                                            },
-                                            icon: new Icon(
-                                              Icons.delete,
-                                              color: Colors.red,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )),
-                              )
-                            : GestureDetector(
-                                onTap: () {
-                                  selectTwoImage(ImageSource.gallery);
-                                },
-                                child: Container(
-                                  height: 115,
-                                  width: 161,
-                                  child: Card(
-                                    color: Colors.brown.shade50,
-                                    child: Container(
-                                      height: 40,
-                                      width: 40,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.black,
-                                        size: 40,
+                                    child: Card(
+                                        color: Colors.grey.shade50,
+                                        child: Image.file(
+                                          File(image2!.path),
+                                          fit: BoxFit.cover,
+                                        )),
+                                  ),
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          image2 = null;
+                                        });
+                                      },
+                                      icon: new Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
                                       ),
                                     ),
                                   ),
+                                ],
+                              )),
+                        )
+                            : GestureDetector(
+                          onTap: () {
+                            selectTwoImage(ImageSource.gallery);
+                          },
+                          child: Container(
+                            height: 115,
+                            width: 161,
+                            child: Card(
+                              color: Colors.grey.shade50,
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.black,
+                                  size: 40,
                                 ),
                               ),
+                              // Image.network(
+                              //     'http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
 
@@ -1648,7 +1862,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          'Image of vehicle book copy',
+                          'Images of rc book ',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 13),
                         ),
@@ -1664,35 +1878,210 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       children: [
                         image3 != null
                             ? Padding(
-                                padding: EdgeInsets.only(left: 11),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    selectThreeImage(ImageSource.gallery);
-                                  },
-                                  child: Container(
+                          padding: EdgeInsets.only(left: 11),
+                          child: GestureDetector(
+                            onTap: () {
+                              selectThreeImage(ImageSource.gallery);
+                            },
+                            child: Container(
+                              height: 115,
+                              width: 161,
+                              child: Stack(
+                                children: [
+                                  Container(
                                     height: 115,
                                     width: 161,
-                                    // child: Card(
-                                    //     color: Colors.brown.shade50,
-                                    //     child: Image.file(File(image3!.path),fit: BoxFit.cover,)
-                                    // ),
+                                    child: Card(
+                                        color: Colors.grey.shade50,
+                                        child: Image.file(
+                                          File(image3!.path),
+                                          fit: BoxFit.cover,
+                                        )),
+                                  ),
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          image3 = null;
+                                        });
+                                      },
+                                      icon: new Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                            : GestureDetector(
+                          onTap: () {
+                            selectThreeImage(ImageSource.gallery);
+                          },
+                          child: Container(
+                            height: 115,
+                            width: 161,
+                            child: Card(
+                              color: Colors.grey.shade50,
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.black,
+                                  size: 40,
+                                ),
+                              ),
+                              // Image.network(
+                              //     'http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 21,
+                        ),
+                        image4 != null
+                            ? GestureDetector(
+                          onTap: () {
+                            selectFourImage(ImageSource.gallery);
+                          },
+                          child: Container(
+                              height: 115,
+                              width: 161,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: 115,
+                                    width: 161,
+                                    child: Card(
+                                        color: Colors.grey.shade50,
+                                        child: Image.file(
+                                          File(image4!.path),
+                                          fit: BoxFit.cover,
+                                        )),
+                                  ),
+                                  Positioned(
+                                    left: 111,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          image4 = null;
+                                        });
+                                      },
+                                      icon: new Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        )
+                            : GestureDetector(
+                          onTap: () {
+                            selectFourImage(ImageSource.gallery);
+                          },
+                          child: Container(
+                            height: 115,
+                            width: 161,
+                            child: Card(
+                              color: Colors.grey.shade50,
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.black,
+                                  size: 40,
+                                ),
+                              ),
+                              // Image.network(
+                              //     'http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 31,
+                    ),
+
+                    //           SizedBox(
+                    //           width: 21,
+                    //       ),
+
+                    // child: Container(
+                    //   height: 115,
+                    //   width: 161,
+                    //   child: Card(
+                    //
+                    //     color: Colors.brown.shade50,
+                    //     child: Image.network('http://pick4ride.com/storage/app/assets/default/default-img.jpeg'),
+                    //   ),
+                    // ),
+
+                    GestureDetector(
+                      onTap: () {},
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 155,
+                        child: selectedImagesnew.isEmpty
+                            ? Card(
+                          color: Colors.grey.shade50,
+                          child: Center(
+                            child: Text('Add Vehicle Images'),
+                          ),
+                        )
+                            : Padding(
+                          padding: EdgeInsets.only(left: 21, right: 21),
+                          child: GridView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: selectedImagesnew.length,
+                            gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 1),
+                            itemBuilder:
+                                (BuildContext context, int index) {
+                              // TO show selected file
+                              return Stack(
+                                children: <Widget>[
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        //       selectedImagesnew.removeAt(index);
+                                      });
+                                    },
                                     child: Stack(
                                       children: [
                                         Container(
                                           width: 161,
-                                          child: Card(
-                                              color: Colors.brown.shade50,
-                                              child: Image.file(
-                                                File(image3!.path),
-                                                fit: BoxFit.cover,
-                                              )),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.black26,
+                                                  width: 2)),
+                                          child: kIsWeb
+                                              ? Image.network(
+                                              selectedImagesnew[index]
+                                                  .path)
+                                              : Image.file(
+                                            selectedImagesnew[
+                                            index],
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                         Positioned(
                                           left: 111,
                                           child: IconButton(
                                             onPressed: () {
                                               setState(() {
-                                                image3 = null;
+                                                selectedImagesnew
+                                                    .removeAt(index);
+
+                                                imagesarr.removeAt(index);
                                               });
                                             },
                                             icon: new Icon(
@@ -1704,163 +2093,11 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                       ],
                                     ),
                                   ),
-                                ),
-                              )
-                            : GestureDetector(
-                                onTap: () {
-                                  selectThreeImage(ImageSource.gallery);
-                                },
-                                child: Container(
-                                  height: 115,
-                                  width: 161,
-                                  child: Card(
-                                    color: Colors.brown.shade50,
-                                    child: Container(
-                                      height: 40,
-                                      width: 40,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.black,
-                                        size: 40,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                        SizedBox(
-                          width: 21,
+                                ],
+                              );
+                            },
+                          ),
                         ),
-                        image4 != null
-                            ? GestureDetector(
-                                onTap: () {
-                                  selectFourImage(ImageSource.gallery);
-                                },
-                                child: Container(
-                                  height: 115,
-                                  width: 161,
-                                  // child: Card(
-                                  //     color: Colors.brown.shade50,
-                                  //     child: Image.file(File(image4!.path),fit: BoxFit.cover,)
-                                  // ),
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        width: 161,
-                                        child: Card(
-                                            color: Colors.brown.shade50,
-                                            child: Image.file(
-                                              File(image4!.path),
-                                              fit: BoxFit.cover,
-                                            )),
-                                      ),
-                                      Positioned(
-                                        left: 111,
-                                        child: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              image4 = null;
-                                            });
-                                          },
-                                          icon: new Icon(
-                                            Icons.delete,
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            : GestureDetector(
-                                onTap: () {
-                                  selectFourImage(ImageSource.gallery);
-                                },
-                                child: Container(
-                                  height: 115,
-                                  width: 161,
-                                  child: Card(
-                                    color: Colors.brown.shade50,
-                                    child: Container(
-                                      height: 40,
-                                      width: 40,
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.black,
-                                        size: 40,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                      ],
-                    ),
-
-                    SizedBox(
-                      height: 31,
-                    ),
-
-                    GestureDetector(
-                      onTap: () {},
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 155,
-                        child: selectedImagesnew.isEmpty
-                            ? const Center(child: Text('Add Images'))
-                            : GridView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: selectedImagesnew.length,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 1),
-                                itemBuilder: (BuildContext context, int index) {
-                                  // TO show selected file
-                                  return Stack(
-                                    children: <Widget>[
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            //       selectedImagesnew.removeAt(index);
-                                          });
-                                        },
-                                        child: Stack(
-                                          children: [
-                                            Container(
-                                              width: 161,
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.black26,
-                                                      width: 2)),
-                                              child: kIsWeb
-                                                  ? Image.network(
-                                                      selectedImagesnew[index]
-                                                          .path)
-                                                  : Image.file(
-                                                      selectedImagesnew[index],
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                            ),
-                                            Positioned(
-                                              left: 111,
-                                              child: IconButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    selectedImagesnew
-                                                        .removeAt(index);
-                                                  });
-                                                },
-                                                icon: new Icon(
-                                                  Icons.delete,
-                                                  color: Colors.red,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
                       ),
                     ),
 
@@ -1868,17 +2105,22 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                       ElevatedButton(
                           onPressed: () {
                             selectImages();
+
+                            print("this model is : $brandmodel");
+                            print("this gear is : $gearmodel");
+                            print("this fuel is : $fuelmodel");
                           },
                           child: Text('Add Images'))
                     else
                       Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Text(
-                          'Max 5 images allowed',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.blue),
-                        ),
-                      ),
+                          padding: EdgeInsets.all(15),
+                          child: Text(
+                            'Max 5 images allowed',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue.shade300),
+                          )),
+
 
                     Padding(
                       padding: EdgeInsets.only(
@@ -1917,12 +2159,12 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                 id,
                                 radioButtonItemvehicle,
                                 xval ?? '0',
-                                brandNameController.text,
+                                brandmodel ?? 'Maruti  Van 1',
                                 int.parse(numofdoorController.text),
                                 int.parse(noofluggageController.text),
                                 idac.toString(),
-                                gearController.text,
-                                fuelController.text,
+                                gearmodel ?? 'Manual',
+                                fuelmodel ?? 'Petrol',
                                 int.parse(seatsController.text),
                                 vehiclenoController.text,
                                 insuranceController.text,
@@ -1953,7 +2195,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                             // xval,
                             print(xval);
                             // brandNameController.text,
-                            print(brandNameController.text);
+                            print(brandmodel);
                             // int.parse(numofdoorController.text),
                             print(int.parse(numofdoorController.text));
                             // int.parse(noofluggageController.text),
@@ -1961,9 +2203,9 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                             // idac.toString(),
                             print(idac.toString());
                             // gearController.text,
-                            print(gearController.text);
+                            print(gearmodel);
                             // fuelController.text,
-                            print(fuelController.text);
+                            print(fuelmodel);
                             // int.parse(seatsController.text),
                             print(int.parse(seatsController.text));
                             // vehiclenoController.text,

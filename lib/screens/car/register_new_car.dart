@@ -733,27 +733,28 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
 
                               // onChanged: print,
                               onChanged: (v) {
-                                if (v == "Ferrari Enzo") {
-                                  brandmodel = "Ferrari Enzo";
-                                }
-
-                                if (v == "Maruti Zen") {
-                                  brandmodel = "Maruti Zen";
-                                }
-
-                                if (v == "Maruti Baleno") {
-                                  brandmodel = "Maruti Baleno";
-                                }
-
-                                if (v == "Hyundai Creta") {
-                                  brandmodel = "Hyundai Creta";
-                                }
-
-                                if (v == "Toyota Fortuner") {
-                                  brandmodel = "Toyota Fortuner";
-                                } else {
-                                  print("");
-                                }
+                             brandmodel = v;
+                                // if (v == "Ferrari Enzo") {
+                                //   brandmodel = "Ferrari Enzo";
+                                // }
+                                //
+                                // if (v == "Maruti Zen") {
+                                //   brandmodel = "Maruti Zen";
+                                // }
+                                //
+                                // if (v == "Maruti Baleno") {
+                                //   brandmodel = "Maruti Baleno";
+                                // }
+                                //
+                                // if (v == "Hyundai Creta") {
+                                //   brandmodel = "Hyundai Creta";
+                                // }
+                                //
+                                // if (v == "Toyota Fortuner") {
+                                //   brandmodel = "Toyota Fortuner";
+                                // } else {
+                                //   print("");
+                                // }
                               },
 
                               selectedItem: "Ferrari Enzo",

@@ -7,6 +7,7 @@ import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../widgets/drawer.dart';
 import '../home.dart';
 import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
@@ -169,248 +170,8 @@ class _TukTukDetailsState extends State<TukTukDetails> {
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
       ),
-      endDrawer: Drawer(
-
-
-        child: Container(
-          decoration: BoxDecoration(color: Colors.white),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Column(children: <Widget>[
-
-                  ListTile(
-                    title:  Text(""),
-                    trailing:  Icon(Icons.arrow_forward_outlined,color: Colors.black,),
-                  ),
-
-                  // ListTile(
-                  //   title: Text(
-                  //     'Sign up as supplier',
-                  //     style: TextStyle(fontSize: 18.0, color: Colors.black),
-                  //   ),
-                  //   leading: Icon(
-                  //     Icons.person,
-                  //     size: 20.0,
-                  //     color: Colors.purple,
-                  //   ),
-                  //   onTap: () {
-                  //     /* Navigator.pop(context);
-                  //   Navigator.of(context).push(new MaterialPageRoute(
-                  //       builder: (context) => dealerBuilder()));*/
-                  //   },
-                  // ),
-                  ListTile(
-                    title: Text(
-                      'Invoice Report',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.shuffle,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /*Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => shufflerBuilder()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Profile Management',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.info_outline,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-
-
-                  ListTile(
-                    title: Text(
-                      'FAQ',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.fax,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-
-
-                  ListTile(
-                    title: Text(
-                      'Privacy Policy',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.policy_outlined,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Change Location',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.location_on,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Contact Us',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.contact_page,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'About Us',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.info,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Terms and Conditions',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.note,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Booking Details',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.book,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Share App',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.share,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-                      /* Navigator.pop(context);
-                      Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (context) => mistakePage()));*/
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Sign Out',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    leading: Icon(
-                      Icons.logout,
-                      size: 20.0,
-                      color: Colors.purple,
-                    ),
-                    onTap: () {
-
-                      // String? valTok = prefs.getString('token');
-                      // print("signout: $valTok");
-                      // logOut(valTok!);
-
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => _buildPopupDialog(context),
-                      );
-
-
-                    },
-                  ),
-
-                ]
-                ),
-              ),
-
-            ],
-          ),
-        ),
-
-
-
-
-
-
-
-      ),
+      endDrawer: MyDrawer(),
       backgroundColor: Colors.white,
-
-
-
-
-
-
 
 
       body: RefreshIndicator(
@@ -487,8 +248,6 @@ class _TukTukDetailsState extends State<TukTukDetails> {
 
 
 
-
-
                         Positioned(
                           // alignment: Alignment.centerLeft,
                           top: 118,
@@ -503,7 +262,7 @@ class _TukTukDetailsState extends State<TukTukDetails> {
 
                         Positioned(
                           // alignment: Alignment.centerLeft,
-                          top: 118,left: 331,
+                          top: 118,left: 341,
                           child: IconButton(
                             onPressed: (){
                               carouselController.nextPage();
@@ -539,23 +298,37 @@ class _TukTukDetailsState extends State<TukTukDetails> {
 
 
 
+
+
                   Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('Brand/Model',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 113,
+                    padding: EdgeInsets.only(left: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Brand & Model',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
                           ),
-                          Text('Vehicle Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Vehicle Type',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+
+
+
 
                   SizedBox(
                     height: 11,
@@ -627,23 +400,31 @@ class _TukTukDetailsState extends State<TukTukDetails> {
 
 
                   Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('No. of Seats',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 118,
+                    padding: EdgeInsets.only(left: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'No. of Seats',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
                           ),
-                          Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Luggage Space (ltr)                                                                  ',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-
                   SizedBox(
                     height: 11,
                   ),
@@ -713,24 +494,39 @@ class _TukTukDetailsState extends State<TukTukDetails> {
 
 
 
-                  Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
 
-
-                          Text('Gear Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 131,
-                          ),
-                          Text('Fuel Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
+                  SizedBox(
+                    height: 11,
                   ),
 
+
+
+                  Padding(
+                    padding: EdgeInsets.only(left: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Gear Type',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Fuel Type',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
                     height: 11,
                   ),
@@ -802,21 +598,30 @@ class _TukTukDetailsState extends State<TukTukDetails> {
 
 
                   Padding(
-                      padding: EdgeInsets.only(left: 11),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-
-
-                          Text('Fuel Status',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                          SizedBox(
-                            width: 127,
+                    padding: EdgeInsets.only(left: 11),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              ' Fuel Status',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
                           ),
-                          Text('Price',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                        ],
-                      )
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Text(
+                              'Price',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
 
                   SizedBox(

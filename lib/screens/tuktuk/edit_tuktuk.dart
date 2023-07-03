@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
@@ -131,6 +132,10 @@ class _EditTukTukState extends State<EditTukTuk> {
   TextEditingController priceController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
+
+  String? brandmodel;
+  String? gearmodel;
+  String? fuelmodel;
 
   List<String>? imagesgroup;
 
@@ -621,11 +626,12 @@ class _EditTukTukState extends State<EditTukTuk> {
                       height: 31,
                     ),
 
+
                     Padding(
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
-                          child: Text('Choose the ride option')),
+                          child: Text('Choose the ride option',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13))),
                     ),
 
 //                  //   if(condition) Widget() else Widget(),
@@ -650,44 +656,8 @@ class _EditTukTukState extends State<EditTukTuk> {
                           style: new TextStyle(fontSize: 12.0),
                         ),
 
-                        //
-                        // Radio(
-                        //   value: 2,
-                        //   groupValue: idride,
-                        //   onChanged: (val) {
-                        //     setState(() {
-                        //       radioButtonItemride = 'With Driver';
-                        //       idride = 2;
-                        //       print(idride);
-                        //     });
-                        //   },
-                        // ),
-                        // Text(
-                        //   'With Driver',
-                        //   style: new TextStyle(fontSize: 12.0),
-                        // ),
-                        //
-                        //
-                        // Radio(
-                        //   value: 3,
-                        //   groupValue: idride,
-                        //   onChanged: (val) {
-                        //
-                        //     setState(() {
-                        //       radioButtonItemride = 'Wedding Ride';
-                        //       idride = 3;
-                        //       print(idride);
-                        //     });
-                        //
-                        //
-                        //   },
-                        //
-                        //
-                        // ),
-                        // Text(
-                        //   'Wedding Ride',
-                        //   style: new TextStyle(fontSize: 12.0),
-                        // ),
+
+
 
                       ],
                     ),
@@ -696,7 +666,8 @@ class _EditTukTukState extends State<EditTukTuk> {
 
 
 
-                    if(radioButtonItemride == 'Self Drive') Row(
+                    //if(radioButtonItemride == 'Self Drive')
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
 
@@ -711,9 +682,14 @@ class _EditTukTukState extends State<EditTukTuk> {
 
                         Text('Yes',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 11),),
 
+
                         Switch(
                           value: isSwitched,
                           onChanged: (value) {
+                            if(widget.secdepo == "yes"){
+                              isSwitched == true;
+                            }
+
                             setState(() {
                               isSwitched = value;
                               print(isSwitched);
@@ -735,7 +711,9 @@ class _EditTukTukState extends State<EditTukTuk> {
                         Text('No',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 11),),
 
                       ],
-                    ) else Text(''),
+                    ),
+
+                    //  else Text(''),
 
 
 
@@ -761,98 +739,207 @@ class _EditTukTukState extends State<EditTukTuk> {
 
 
 
-
-
                     Row(
                       children: [
-                        Radio(
-                          value: 1,
-                          groupValue: idvehicletype,
-                          onChanged: (val) {
-
-                            //    radioButtonItemvehicle = widget.vehicletype!;
-
-                            setState(() {
-
-                              radioButtonItemvehicle = 'Commercial';
-                              idvehicletype = 1;
-                            });
-                          },
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  value: 1,
+                                  groupValue: idvehicletype,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      radioButtonItemvehicle = 'Commercial';
+                                      idvehicletype = 1;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  'Commercial',
+                                  style: new TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text(
-                            'Commercial',
-                            style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300)
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  value: 2,
+                                  groupValue: idvehicletype,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      radioButtonItemvehicle = 'Compact';
+                                      idvehicletype = 2;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  'Compact',
+                                  style: new TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-
-
-                        Radio(
-                          value: 2,
-                          groupValue: idvehicletype,
-                          onChanged: (val) {
-
-
-
-                            setState(() {
-                              radioButtonItemvehicle = 'Compact';
-                              idvehicletype = 2;
-                            });
-                          },
-                        ),
-                        Text(
-                            'Compact',
-                            style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300)
-                        ),
-
                       ],
                     ),
 //
 //
                     Row(
-
                       children: [
-                        Radio(
-                          value: 3,
-                          groupValue: idvehicletype,
-                          onChanged: (val) {
-
-
-                            setState(() {
-                              radioButtonItemvehicle = 'VIP';
-                              idvehicletype = 3;
-                            });
-                          },
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  value: 3,
+                                  groupValue: idvehicletype,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      radioButtonItemvehicle = 'VIP';
+                                      idvehicletype = 3;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  'VIP',
+                                  style: new TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                        Text(
-                          'VIP',
-                          style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Radio(
+                                  value: 4,
+                                  groupValue: idvehicletype,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      radioButtonItemvehicle = 'Sports';
+                                      idvehicletype = 4;
+                                    });
+                                  },
+                                ),
+                                Text(
+                                  'Sports',
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-
-                        SizedBox(
-                          width: 66,
-                        ),
-
-                        Radio(
-                          value: 4,
-                          groupValue: idvehicletype,
-                          onChanged: (val) {
-
-
-
-                            setState(() {
-                              radioButtonItemvehicle = 'Sports';
-                              idvehicletype = 4;
-                            });
-                          },
-                        ),
-                        Text(
-                          'Sports',
-                          style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300),
-                        ),
-
-
-
                       ],
                     ),
+
+//                     Row(
+//                       children: [
+//                         Radio(
+//                           value: 1,
+//                           groupValue: idvehicletype,
+//                           onChanged: (val) {
+//
+//                             //    radioButtonItemvehicle = widget.vehicletype!;
+//
+//                             setState(() {
+//
+//                               radioButtonItemvehicle = 'Commercial';
+//                               idvehicletype = 1;
+//                             });
+//                           },
+//                         ),
+//                         Text(
+//                             'Commercial',
+//                             style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300)
+//                         ),
+//
+//
+//                         Radio(
+//                           value: 2,
+//                           groupValue: idvehicletype,
+//                           onChanged: (val) {
+//
+//
+//
+//                             setState(() {
+//                               radioButtonItemvehicle = 'Compact';
+//                               idvehicletype = 2;
+//                             });
+//                           },
+//                         ),
+//                         Text(
+//                             'Compact',
+//                             style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300)
+//                         ),
+//
+//                       ],
+//                     ),
+// //
+// //
+//                     Row(
+//
+//                       children: [
+//                         Radio(
+//                           value: 3,
+//                           groupValue: idvehicletype,
+//                           onChanged: (val) {
+//
+//
+//                             setState(() {
+//                               radioButtonItemvehicle = 'VIP';
+//                               idvehicletype = 3;
+//                             });
+//                           },
+//                         ),
+//                         Text(
+//                           'VIP',
+//                           style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300),
+//                         ),
+//
+//                         SizedBox(
+//                           width: 66,
+//                         ),
+//
+//                         Radio(
+//                           value: 4,
+//                           groupValue: idvehicletype,
+//                           onChanged: (val) {
+//
+//
+//
+//                             setState(() {
+//                               radioButtonItemvehicle = 'Sports';
+//                               idvehicletype = 4;
+//                             });
+//                           },
+//                         ),
+//                         Text(
+//                           'Sports',
+//                           style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.w300),
+//                         ),
+//
+//
+//
+//                       ],
+//                     ),
 
 
 
@@ -863,261 +950,32 @@ class _EditTukTukState extends State<EditTukTuk> {
 
 
                     Padding(
-                        padding: EdgeInsets.only(left: 11),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-
-
-                            Text('Brand & Model',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                            SizedBox(
-                              width: 105,
-                            ),
-                            Text('Luggage Space (ltr)',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                          ],
-                        )
-                    ),
-
-                    SizedBox(
-                      height: 11,
-                    ),
-
-
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-
-
-                        //   Text('hhk'),
-
-
-
-
-
-
-
-                        SizedBox(
-                          width: 155,
-                          height: 42,
-                          child: TextFormField(
-                            //initialValue: widget.brandn ?? '',
-                            controller: brandNameController,
-                            keyboardType: TextInputType.text,
-                            validator: (brandNameController) {
-                              String value = brandNameController.toString();
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
-
-
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: widget.brandn,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
+                      padding: EdgeInsets.only(left: 11),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              child: Text(
+                                'Brand & Model',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 13),
                               ),
                             ),
                           ),
-                        ),
-
-
-
-                        SizedBox(
-                          width: 155,
-                          height: 42,
-                          child: TextFormField(
-                            controller: noofluggageController,
-                            keyboardType: TextInputType.number,
-                            validator: (noofluggageController) {
-                              String value = noofluggageController.toString();
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
-
-
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: widget.luggage,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
+                          Expanded(
+                            child: Container(
+                              child: Text(
+                                'Luggage Space (ltr)',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 13),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
 
-
-
-
-
-
-                    SizedBox(
-                      height: 11,
-                    ),
-
-
-
-
-
-
-                    SizedBox(
-                      height: 11,
-                    ),
-
-                    Padding(
-                        padding: EdgeInsets.only(left: 11),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-
-
-                            Text('Gear Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                            SizedBox(
-                              width: 131,
-                            ),
-                            Text('Fuel Type',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                          ],
-                        )
-                    ),
-
-                    SizedBox(
-                      height: 11,
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-
-
-                        //   Text('hhk'),
-
-
-
-
-
-
-
-                        SizedBox(
-                          width: 155,
-                          height: 42,
-                          child: TextFormField(
-                            controller: gearController,
-                            keyboardType: TextInputType.text,
-                            validator: (gearController) {
-                              String value = gearController.toString();
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
-
-
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: widget.gear,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 155,
-                          height: 42,
-                          child: TextFormField(
-                            controller: fuelController,
-                            keyboardType: TextInputType.text,
-                            validator: (fuelController) {
-                              String value = fuelController.toString();
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
-
-
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: widget.fuel,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-
-
-
-                    SizedBox(
-                      height: 11,
-                    ),
-
-                    Padding(
-                        padding: EdgeInsets.only(left: 11),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-
-
-                            Text('No. of Seats',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-                            SizedBox(
-                              width: 111,
-                            ),
-                            Text('Vehicle No.',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
-                          ],
-                        )
-                    ),
 
                     SizedBox(
                       height: 11,
@@ -1127,78 +985,118 @@ class _EditTukTukState extends State<EditTukTuk> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-
                         //   Text('hhk'),
-                        SizedBox(
-                          width: 155,
-                          height: 42,
-                          child: TextFormField(
-                            controller: seatsController,
-                            keyboardType: TextInputType.number,
-                            validator: (seatsController) {
-                              String value = seatsController.toString();
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
 
-
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: widget.seats,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 10,right: 5),
+                            // width: 155,
+                            height: 42,
+                            child: DropdownSearch<String>(
+                              popupProps: PopupProps.dialog(
+                                fit: FlexFit.loose,
+                                showSearchBox: true,
+                                showSelectedItems: true,
+                                disabledItemFn: (String s) => s.startsWith('I'),
                               ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
+                              // dropdownDecoratorProps: DropDownDecoratorProps(
+                              //   dropdownSearchDecoration: InputDecoration(
+                              //     labelText: "Menu mode",
+                              //     hintText: "country in menu mode",
+                              //   ),
+                              // ),
+
+                              //list of dropdown items
+                              items: [
+                                "Bajaj Tuktuk 1",
+                                "Bajaj Tuktuk 2",
+                              ],
+                              //    label: "Country",
+
+                              // onChanged: print,
+                              onChanged: (v) {
+
+                                brandmodel = v;
+
+                                print(brandmodel);
+                                // if (v == "Ferrari Enzo") {
+                                //   brandmodel = "Ferrari Enzo";
+                                // }
+                                //
+                                // if (v == "Maruti Zen") {
+                                //   brandmodel = "Maruti Zen";
+                                // }
+                                //
+                                // if (v == "Maruti Baleno") {
+                                //   brandmodel = "Maruti Baleno";
+                                // }
+                                //
+                                // if (v == "Hyundai Creta") {
+                                //   brandmodel = "Hyundai Creta";
+                                // }
+                                //
+                                // if (v == "Toyota Fortuner") {
+                                //   brandmodel = "Toyota Fortuner";
+                                // } else {
+                                //   print("");
+                                // }
+                              },
+
+                              selectedItem: widget.brandn,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 5,right: 10),
+                            // width: 155,
+                            height: 42,
+                            child: TextFormField(
+                              controller: noofluggageController,
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.start,
+                              textAlignVertical: TextAlignVertical.bottom,
+                              validator: (noofluggageController) {
+                                String value = noofluggageController.toString();
+                                if (value!.isEmpty) {
+                                  return 'Please enter some text';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                hintText: widget.luggage,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(9),
+                                  borderSide: BorderSide(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(9),
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 155,
-                          height: 42,
-                          child: TextFormField(
-                            controller: vehiclenoController,
-                            keyboardType: TextInputType.text,
-                            validator: (vehiclenoController) {
-                              String value = vehiclenoController.toString();
-                              if (value!.isEmpty) {
-                                return 'Please enter some text';
-                              }
-                              return null;
-                            },
-
-
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: widget.vehno,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9),
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-
                       ],
                     ),
 
+
+
+
+                    SizedBox(
+                      height: 11,
+                    ),
+
+
+
+
+
+//
                     SizedBox(
                       height: 11,
                     ),
@@ -1208,89 +1106,301 @@ class _EditTukTukState extends State<EditTukTuk> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  'Gear Type',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  'Fuel Type',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
 
+                    SizedBox(
+                      height: 11,
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        //   Text('hhk'),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 10, right: 5),
+                            // width: 196,
+                            height: 42,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+                            child: DropdownSearch<String>(
+                              popupProps: PopupProps.dialog(
+                                fit: FlexFit.loose,
+                                showSearchBox: true,
+                                showSelectedItems: true,
+                                disabledItemFn: (String s) => s.startsWith('I'),
+                              ),
+                              // dropdownDecoratorProps: DropDownDecoratorProps(
+                              //   dropdownSearchDecoration: InputDecoration(
+                              //     labelText: "Menu mode",
+                              //     hintText: "country in menu mode",
+                              //   ),
+                              // ),
+                              //list of dropdown items
+                              items: [
+                                "Manual",
+                                "Automatic",
+                              ],
+                              //    label: "Country",
+
+                              onChanged: (vgear) {
+                                if (vgear == "Manual") {
+                                  gearmodel = "Manual";
+                                }
+                                if (vgear == "Automatic") {
+                                  gearmodel = "Automatic";
+                                } else {
+                                  print("");
+                                }
+                              },
+                              //show selected item
+                              selectedItem: widget.gear,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 5, right: 10),
+                            // width: 196,
+                            height: 42,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(9),
+                            ),
+                            child: DropdownSearch<String>(
+                              popupProps: PopupProps.dialog(
+                                fit: FlexFit.loose,
+                                showSearchBox: true,
+                                showSelectedItems: true,
+                                disabledItemFn: (String s) => s.startsWith('I'),
+                              ),
+                              // dropdownDecoratorProps: DropDownDecoratorProps(
+                              //   dropdownSearchDecoration: InputDecoration(
+                              //     labelText: "Menu mode",
+                              //     // hintText: "country in menu mode",
+                              //   ),
+                              // ),
+                              //list of dropdown items
+                              items: [
+                                "Petrol",
+                                "Diesel",
+
+                              ],
+                              //    label: "Country",
+                              onChanged: (vfuel) {
+                                if (vfuel == "Petrol") {
+                                  fuelmodel = "Petrol";
+                                }
+                                if (vfuel == "Diesel") {
+                                  fuelmodel = "Diesel";
+                                }
+                                else {
+                                  print("");
+                                }
+                              },
+                              //show selected item
+                              selectedItem: widget.fuel,
+                            ),
+                            // child: TextFormField(
+                            //   controller: fuelController,
+                            //   keyboardType: TextInputType.text,
+                            //   validator: (fuelController) {
+                            //     String value = fuelController.toString();
+                            //     if (value!.isEmpty) {
+                            //       return 'Please enter some text';
+                            //     }
+                            //     return null;
+                            //   },
                             //
+                            //
+                            //   decoration: InputDecoration(
+                            //     filled: true,
+                            //     hintText: "Write Here",
+                            //     border: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(9),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.grey,
+                            //       ),
+                            //     ),
+                            //     enabledBorder: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(9),
+                            //       borderSide: BorderSide(
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 11,
+                    ),
+
+                    Padding(
+                        padding: EdgeInsets.only(left: 11),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  'No. of Seats',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  'Vehicle No.',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+
+                    SizedBox(
+                      height: 11,
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        //   Text('hhk'),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 10,right: 5),
+                            // width: 155,
+                            height: 42,
+                            child: TextFormField(
+                              controller: seatsController,
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.start,
+                              textAlignVertical: TextAlignVertical.bottom,
+                              validator: (seatsController) {
+                                String value = seatsController.toString();
+                                if (value!.isEmpty) {
+                                  return 'Please enter some text';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                hintText: widget.seats,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(9),
+                                  borderSide: BorderSide(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(9),
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 5,right: 10),
+                            // width: 155,
+                            height: 42,
+                            child: TextFormField(
+                              controller: vehiclenoController,
+                              keyboardType: TextInputType.text,
+                              textAlign: TextAlign.start,
+                              textAlignVertical: TextAlignVertical.bottom,
+                              validator: (vehiclenoController) {
+                                String value = vehiclenoController.toString();
+                                if (value!.isEmpty) {
+                                  return 'Please enter some text';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                hintText: widget.vehno,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(9),
+                                  borderSide: BorderSide(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(9),
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 11,
+                    ),
+
+                    Padding(
+                        padding: EdgeInsets.only(left: 11),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
                             // Text('License Expired Date',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
                             // SizedBox(
-                            //   width: 61,
+                            //   width: 11,
                             // ),
-                            Text('Insurance Expired Date',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
-
-
+                            Text(
+                              'Insurance Expired Date',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 13),
+                            ),
                           ],
-                        )
-                    ),
+                        )),
 
                     SizedBox(
                       height: 11,
                     ),
 
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-
-                        // //Expanded(
-                        // // child:
-                        // Padding(
-                        //   padding: EdgeInsets.only(left: 0),
-                        //   child: Container(
-                        //     color: Colors.brown.shade50,
-                        //     padding:const EdgeInsets.all(15),
-                        //     height:50,
-                        //     width: 144,
-                        //     child: Padding(
-                        //       padding: EdgeInsets.only(top: 4),
-                        //       child: TextField(
-                        //
-                        //         controller: licenseController, //editing controller of this TextField
-                        //         // validator: (vehiclenoController) {
-                        //         //   String value = vehiclenoController.toString();
-                        //         //   if (value.length == 0) {
-                        //         //     return 'please enter';
-                        //         //   }
-                        //         //   else{
-                        //         //     return '';
-                        //         //   }
-                        //         // },
-                        //
-                        //         decoration: const InputDecoration(
-                        //
-                        //             border: InputBorder.none,
-                        //
-                        //             hintText: '2023-05-21'
-                        //         ),
-                        //         readOnly: true,  // when true user cannot edit text
-                        //         onTap: () async {
-                        //           DateTime? pickedTime = await showDatePicker(
-                        //               context: context,
-                        //               initialDate: DateTime.now(), //get today's date
-                        //               firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                        //               lastDate: DateTime(2101)
-                        //
-                        //
-                        //           );
-                        //
-                        //           if(pickedTime != null ){
-                        //             print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
-                        //             String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
-                        //             print(formattedDate); //formatted date output using intl package =>  2022-07-04
-                        //             setState(() {
-                        //               licenseController?.text = formattedDate; //set foratted date to TextField value.
-                        //             });
-                        //           }else{
-                        //             print("Date is not selected");
-                        //           }
-                        //         },
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        // // ),
-                        //
-                        //
-                        // Container(
-                        //     height: 50,
-                        //     color: Colors.brown.shade50,
-                        //     child: Icon(Icons.calendar_month,color: Colors.purple,)),
 
 
                         SizedBox(
@@ -1303,45 +1413,47 @@ class _EditTukTukState extends State<EditTukTuk> {
                           padding: EdgeInsets.only(right: 0),
                           child: Container(
                             color: Colors.brown.shade50,
-                            padding:const EdgeInsets.all(15),
-                            height:50,
-                            width: 144,
+                            padding: const EdgeInsets.all(15),
+                            height: 50,
+                            width: MediaQuery.of(context).size.width / 2.72,
                             child: Padding(
                               padding: EdgeInsets.only(top: 4),
                               child: TextField(
-
-                                controller: insuranceController, //editing controller of this TextField
-                                decoration:  InputDecoration(
+                                controller: insuranceController,
+                                //editing controller of this TextField
+                                decoration: InputDecoration(
 
 //                                    suffixIcon: Icon(Icons.calendar_month,color: Colors.purple,),
                                     border: InputBorder.none,
-                                    hintText: widget.insurance
-
-                                ),
-                                readOnly: true,  // when true user cannot edit text
+                                    hintText: widget.insurance),
+                                readOnly: true,
+                                // when true user cannot edit text
                                 onTap: () async {
                                   DateTime? pickedTime = await showDatePicker(
                                       context: context,
-                                      initialDate: DateTime.now(), //get today's date
-                                      firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
-                                      lastDate: DateTime(2101)
+                                      initialDate: DateTime.now(),
+                                      //get today's date
+                                      firstDate: DateTime(2000),
+                                      //DateTime.now() - not to allow to choose before today.
+                                      lastDate: DateTime(2101));
 
-
-                                  );
-
-                                  if(pickedTime != null ){
-                                    print(pickedTime);  //get the picked date in the format => 2022-07-04 00:00:00.000
-                                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
-                                    print(formattedDate); //formatted date output using intl package =>  2022-07-04
+                                  if (pickedTime != null) {
+                                    print(
+                                        pickedTime); //get the picked date in the format => 2022-07-04 00:00:00.000
+                                    String formattedDate =
+                                    DateFormat('yyyy-MM-dd').format(
+                                        pickedTime); // format date in required form here we use yyyy-MM-dd that means time is removed
+                                    print(
+                                        formattedDate); //formatted date output using intl package =>  2022-07-04
                                     //You can format date as per your need
 
                                     //  String newTime = formattedDate.replaceAll(new RegExp(r'[^\w\s]+'),'');
 
-
                                     setState(() {
-                                      insuranceController?.text = formattedDate; //set foratted date to TextField value.
+                                      insuranceController.text =
+                                          formattedDate; //set foratted date to TextField value.
                                     });
-                                  }else{
+                                  } else {
                                     print("Date is not selected");
                                   }
                                 },
@@ -1354,11 +1466,12 @@ class _EditTukTukState extends State<EditTukTuk> {
                         Container(
                             height: 50,
                             color: Colors.brown.shade50,
-                            child: Icon(Icons.calendar_month,color: Colors.purple,)),
-
+                            child: Icon(
+                              Icons.calendar_month,
+                              color: Colors.purple,
+                            )),
                       ],
                     ),
-
 
                     SizedBox(
                       height: 11,
@@ -1368,9 +1481,12 @@ class _EditTukTukState extends State<EditTukTuk> {
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
-                          child: Text('Price',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
+                          child: Text(
+                            'Price',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 13),
+                          )),
                     ),
-
 
                     SizedBox(
                       height: 11,
@@ -1381,7 +1497,7 @@ class _EditTukTukState extends State<EditTukTuk> {
                         Padding(
                           padding: EdgeInsets.only(left: 11),
                           child: SizedBox(
-                            width: 300,
+                            width: MediaQuery.of(context).size.width / 3.3,
                             height: 45,
                             child: TextFormField(
                               controller: priceController,
@@ -1393,7 +1509,6 @@ class _EditTukTukState extends State<EditTukTuk> {
                                 }
                                 return null;
                               },
-
                               decoration: InputDecoration(
                                 filled: true,
                                 hintText: widget.price,
@@ -1413,16 +1528,12 @@ class _EditTukTukState extends State<EditTukTuk> {
                             ),
                           ),
                         ),
-
                         SizedBox(
                           width: 5,
                         ),
-
-
                         Text('Per Day'),
                       ],
                     ),
-
 
                     SizedBox(
                       height: 11,
@@ -1432,23 +1543,25 @@ class _EditTukTukState extends State<EditTukTuk> {
                       padding: EdgeInsets.only(left: 11),
                       child: Align(
                           alignment: Alignment.topLeft,
-                          child: Text('Description',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),)),
+                          child: Text(
+                            'Description',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 13),
+                          )),
                     ),
-
 
                     SizedBox(
                       height: 11,
                     ),
 
                     Padding(
-                      padding: EdgeInsets.only(left: 11,right: 11),
+                      padding: EdgeInsets.only(left: 11, right: 11),
                       child: SizedBox(
                           width: 480,
                           //    height: 145,
                           child: TextFormField(
                             controller: descriptionController,
                             keyboardType: TextInputType.text,
-
                             validator: (descriptionController) {
                               String value = descriptionController.toString();
                               if (value!.isEmpty) {
@@ -1456,7 +1569,6 @@ class _EditTukTukState extends State<EditTukTuk> {
                               }
                               return null;
                             },
-
                             decoration: InputDecoration(
                               filled: true,
                               hintText: widget.description,
@@ -1473,11 +1585,8 @@ class _EditTukTukState extends State<EditTukTuk> {
                                 ),
                               ),
                             ),
-                          )
-                      ),
+                          )),
                     ),
-
-
 
                     SizedBox(
                       height: 11,
@@ -1833,16 +1942,16 @@ class _EditTukTukState extends State<EditTukTuk> {
                               idride ?? widget.id,
                               radioButtonItemvehicle ?? widget.vehicletype,
                               xval ?? widget.secdepo,
-                              brand ?? widget.brandn,
+                              brandmodel ?? widget.brandn,
                               0,
                               luggages,
                               "no",
-                              gears ?? widget.gear,
-                              fuels ?? widget.fuel,
-                              seats,
+                              gearmodel ?? widget.gear,
+                              fuelmodel ?? widget.fuel,
+                              seats ?? widget.seats.toInt(),
                               vehino ?? widget.vehno,
                               insurdt ?? widget.insurance,
-                              prices,
+                              prices ?? widget.price.toInt(),
                               descriptxt ?? widget.description,
                               firstimage ?? '',
                               secondimage ?? '',
@@ -1853,9 +1962,6 @@ class _EditTukTukState extends State<EditTukTuk> {
                               three ?? '',
                               four ?? '',
                               five ?? '',
-                              // three ?? widget.editimgs7,
-                              // four ?? widget.editimgs8,
-                              // five ?? widget.editimgs9,
                             );
 
 

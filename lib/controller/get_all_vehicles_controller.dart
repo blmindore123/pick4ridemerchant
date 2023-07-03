@@ -45,13 +45,14 @@ class GetAllVehiclesController extends GetxController {
       if (response.statusCode == 200) {
         getCars.refresh();
         var result = jsonDecode(response.body);
+
         getAllVehicles = GetAllVehicles.fromJson(result);
         print(getAllVehicles);
 
 
         //      return result;
-        // List<Map<String,dynamic>> results = [];
-        // results.addAll(result);
+         List<Map<String,dynamic>> results = [];
+         results.addAll(result);
         // print("results::: $results");
         //     return
 

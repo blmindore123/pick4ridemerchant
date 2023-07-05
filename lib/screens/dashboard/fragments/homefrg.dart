@@ -21,14 +21,11 @@ class HomeFragment extends StatefulWidget {
 }
 
 class _HomeFragmentState extends State<HomeFragment> {
-
   late SharedPreferences prefs;
   String? checktoken;
   String? toke;
 
-
   BannersGetController bannersGetController = Get.put(BannersGetController());
-
 
   @override
   void initState() {
@@ -37,113 +34,91 @@ class _HomeFragmentState extends State<HomeFragment> {
     initSharedPref();
     checkToken();
 
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       // if(toke == null){
       //   Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
       // }
-      setState(() {
-      });
+      setState(() {});
     });
-
-
-
   }
-  void initSharedPref() async{
+
+  void initSharedPref() async {
     prefs = await SharedPreferences.getInstance();
 
     toke = prefs.getString('token');
-
   }
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
-
-
-
       resizeToAvoidBottomInset: true,
-
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Welcome",style: TextStyle(color: Colors.black),),
-
+        title: Text(
+          "Welcome",
+          style: TextStyle(color: Colors.black),
+        ),
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
       ),
       endDrawer: MyDrawer(),
       backgroundColor: Colors.white,
-
-
-
-
-
-
-
-
       body: RefreshIndicator(
         onRefresh: () async {
-          setState(()
-          {
-
-          }
-          );
-
+          setState(() {});
         },
         child: Stack(
           children: [
             SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
-
-              child:
-
-              Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-
                   Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.width/65.3),
+                    padding: EdgeInsets.all(
+                        MediaQuery.of(context).size.width / 65.3),
                     child: Container(
-
                       child: Column(
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.only(top: 1, left: MediaQuery.of(context).size.width/32.75, right: MediaQuery.of(context).size.width/49.125),
+                            padding: EdgeInsets.only(
+                                top: 1,
+                                left: MediaQuery.of(context).size.width / 32.75,
+                                right:
+                                    MediaQuery.of(context).size.width / 49.125),
                             child: Container(
-                              height: MediaQuery.of(context).size.height/20.075,
+                              height:
+                                  MediaQuery.of(context).size.height / 20.075,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.0),
-                                  color: Colors.grey.shade100
-                              ),
+                                  color: Colors.grey.shade100),
                               child: TextField(
                                 textInputAction: TextInputAction.search,
                                 decoration: InputDecoration(
                                     hintText: "search",
                                     border: InputBorder.none,
-                                    contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/26.2, top: MediaQuery.of(context).size.height/133.83),
+                                    contentPadding: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width /
+                                                26.2,
+                                        top:
+                                            MediaQuery.of(context).size.height /
+                                                133.83),
                                     suffixIcon: IconButton(
-                                      icon: Icon(Icons.search,color: Colors.black,),
-                                      onPressed: (){},
-                                      iconSize: MediaQuery.of(context).size.width/19.65,
-                                    )
-                                ),
+                                      icon: Icon(
+                                        Icons.search,
+                                        color: Colors.black,
+                                      ),
+                                      onPressed: () {},
+                                      iconSize:
+                                          MediaQuery.of(context).size.width /
+                                              19.65,
+                                    )),
                                 onChanged: (val) {
-                                  setState(() {
-                                  }
-                                  );
+                                  setState(() {});
                                 },
-                                onSubmitted: (term) {
-
-                                },
+                                onSubmitted: (term) {},
                               ),
                             ),
                           ),
@@ -152,66 +127,66 @@ class _HomeFragmentState extends State<HomeFragment> {
                     ),
                   ),
 
-
-
                   Padding(
-                      padding: EdgeInsets.only(left: 23,bottom: 11),
+                      padding: EdgeInsets.only(left: 23, bottom: 11),
                       child: Align(
                         alignment: Alignment.topLeft,
-                        child: Obx(
-                                () =>  bannersGetController.isLoading.value
-                                ? Center(
-                              child: Text(""),
-                            )
-                                :
+                        child: Obx(() => bannersGetController.isLoading.value
+                            ? Center(
+                                child: Text(""),
+                              )
+                            :
                             // Text("${bannersGetController.bannersListModel?.data?.length.toString() ?? '0'} Cars",style: TextStyle(fontWeight: FontWeight.w300),
                             // )
 
                             Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 100,
-                                  //   margin: EdgeInsets.symmetric(horizontal: 1.0),
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey.shade200
-                                  ),
-                                  child: CarouselSlider(
-
-                                    items: <Widget>[
-                                      for (var i = 0; i < bannersGetController.bannersListModel!.data.length; i++)
-                                        Container(
-                                          // margin: const EdgeInsets.only(top: 20.0, left: 20.0),
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: NetworkImage(bannersGetController.bannersListModel!.data[i].imageUrl),
-                                              fit: BoxFit.fitHeight,
+                                padding: EdgeInsets.all(10),
+                                child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 100,
+                                    //   margin: EdgeInsets.symmetric(horizontal: 1.0),
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade200),
+                                    child: CarouselSlider(
+                                      items: <Widget>[
+                                        for (var i = 0;
+                                            i <
+                                                bannersGetController
+                                                    .bannersListModel!
+                                                    .data
+                                                    .length;
+                                            i++)
+                                          Container(
+                                            // margin: const EdgeInsets.only(top: 20.0, left: 20.0),
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    bannersGetController
+                                                        .bannersListModel!
+                                                        .data[i]
+                                                        .imageUrl),
+                                                fit: BoxFit.fitHeight,
+                                              ),
+                                              // border:
+                                              //     Border.all(color: Theme.of(context).accentColor),
+                                              borderRadius:
+                                                  BorderRadius.circular(32.0),
                                             ),
-                                            // border:
-                                            //     Border.all(color: Theme.of(context).accentColor),
-                                            borderRadius: BorderRadius.circular(32.0),
                                           ),
-                                        ),
-                                    ],
-
-                                    options: CarouselOptions(
-                                      height: MediaQuery.of(context).size.height/5.3,
-                                      autoPlay: true,
-                                      autoPlayInterval: Duration(seconds: 3),
-                                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                                      autoPlayCurve: Curves.fastOutSlowIn,
-                                    ),
-
-
-                                  )
-
-
-                              ),
-                            )
-
-                        ),
-                      )
-                  ),
+                                      ],
+                                      options: CarouselOptions(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                5.3,
+                                        autoPlay: true,
+                                        autoPlayInterval: Duration(seconds: 3),
+                                        autoPlayAnimationDuration:
+                                            Duration(milliseconds: 800),
+                                        autoPlayCurve: Curves.fastOutSlowIn,
+                                      ),
+                                    )),
+                              )),
+                      )),
 
                   // Padding(
                   //   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/133.83),
@@ -241,18 +216,20 @@ class _HomeFragmentState extends State<HomeFragment> {
                   ),
 
                   Padding(
-                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/17,right: MediaQuery.of(context).size.width/17),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 17,
+                        right: MediaQuery.of(context).size.width / 17),
                     child: GestureDetector(
-
-
-
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList(
-                          token: toke,
-                        )));
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisteredCarsList(
+                                      token: toke,
+                                    )));
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height/8.11,
+                        height: MediaQuery.of(context).size.height / 8.11,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -261,25 +238,33 @@ class _HomeFragmentState extends State<HomeFragment> {
                                 color: Colors.white,
                                 shape: BoxShape.circle,
                                 boxShadow: [
-                                  BoxShadow(blurRadius: 4,color: Colors.black)
+                                  BoxShadow(blurRadius: 4, color: Colors.black)
                                 ],
-
-
                               ),
                               child: CircleAvatar(
-                                backgroundImage: AssetImage('images/app_images/i5.png'),
-                                maxRadius: MediaQuery.of(context).size.height/12.75,
-                                minRadius: MediaQuery.of(context).size.height/13.1,
+                                backgroundImage:
+                                    AssetImage('images/app_images/i5.png'),
+                                maxRadius:
+                                    MediaQuery.of(context).size.height / 12.75,
+                                minRadius:
+                                    MediaQuery.of(context).size.height / 13.1,
                               ),
                             ),
-                            SizedBox(width: MediaQuery.of(context).size.width/32.75,),
-                            Text("Vehicle \nManagement.",style: TextStyle(fontSize: MediaQuery.of(context).size.width/17.86,fontWeight: FontWeight.bold),),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 32.75,
+                            ),
+                            Text(
+                              "Vehicle \nManagement.",
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 17.86,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ],
                         ),
                       ),
                     ),
                   ),
-
 
                   // Divider(),
                   //  Divider(),
@@ -288,22 +273,22 @@ class _HomeFragmentState extends State<HomeFragment> {
                     height: 25,
                   ),
 
-
-
-
                   Padding(
-                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/17,right: MediaQuery.of(context).size.width/17),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 17,
+                        right: MediaQuery.of(context).size.width / 17),
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         // Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchPage(
                         // )));
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MultiLevelDropDownExample(
-                        )));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    MultiLevelDropDownExample()));
                       },
-
-                      child:
-                      Container(
-                        height: MediaQuery.of(context).size.height/8.11,
+                      child: Container(
+                        height: MediaQuery.of(context).size.height / 8.11,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -312,19 +297,28 @@ class _HomeFragmentState extends State<HomeFragment> {
                                 color: Colors.white,
                                 shape: BoxShape.circle,
                                 boxShadow: [
-                                  BoxShadow(blurRadius: 4,color: Colors.black)
+                                  BoxShadow(blurRadius: 4, color: Colors.black)
                                 ],
-
-
                               ),
                               child: CircleAvatar(
-                                backgroundImage: AssetImage('images/app_images/i6.png'),
-                                maxRadius: MediaQuery.of(context).size.height/12.75,
-                                minRadius: MediaQuery.of(context).size.height/13.1,
+                                backgroundImage:
+                                    AssetImage('images/app_images/i6.png'),
+                                maxRadius:
+                                    MediaQuery.of(context).size.height / 12.75,
+                                minRadius:
+                                    MediaQuery.of(context).size.height / 13.1,
                               ),
                             ),
-                            SizedBox(width: MediaQuery.of(context).size.width/32.75,),
-                            Text("Managing \nTravel Charges.",style: TextStyle(fontSize: MediaQuery.of(context).size.width/17.86,fontWeight: FontWeight.bold),),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 32.75,
+                            ),
+                            Text(
+                              "Managing \nTravel Charges.",
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 17.86,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ],
                         ),
                       ),
@@ -337,9 +331,11 @@ class _HomeFragmentState extends State<HomeFragment> {
                   // Divider(),
                   // Divider(),
                   Padding(
-                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width/17,right: MediaQuery.of(context).size.width/17),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 17,
+                        right: MediaQuery.of(context).size.width / 17),
                     child: Container(
-                      height: MediaQuery.of(context).size.height/8.11,
+                      height: MediaQuery.of(context).size.height / 8.11,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -348,112 +344,102 @@ class _HomeFragmentState extends State<HomeFragment> {
                               color: Colors.white,
                               shape: BoxShape.circle,
                               boxShadow: [
-                                BoxShadow(blurRadius: 4,color: Colors.black)
+                                BoxShadow(blurRadius: 4, color: Colors.black)
                               ],
-
-
                             ),
                             child: CircleAvatar(
-                              backgroundImage: AssetImage('images/app_images/i7.png'),
-                              maxRadius: MediaQuery.of(context).size.height/12.75,
-                              minRadius: MediaQuery.of(context).size.height/13.1,
+                              backgroundImage:
+                                  AssetImage('images/app_images/i7.png'),
+                              maxRadius:
+                                  MediaQuery.of(context).size.height / 12.75,
+                              minRadius:
+                                  MediaQuery.of(context).size.height / 13.1,
                             ),
                           ),
-                          SizedBox(width: MediaQuery.of(context).size.width/32.75,),
-                          Text("Vehicle available \nor Unavailable",style: TextStyle(fontSize: MediaQuery.of(context).size.width/17.86,fontWeight: FontWeight.bold),),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 32.75,
+                          ),
+                          Text(
+                            "Vehicle available \nor Unavailable",
+                            style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 17.86,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ],
                       ),
                     ),
                   ),
 
-
-
-
-
-
-
                   Padding(
                     padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height/17.23
-                      ,
-                      left: MediaQuery.of(context).size.width/13.6,
-                      right: MediaQuery.of(context).size.width/13.6,
-
-
-
+                      top: MediaQuery.of(context).size.height / 17.23,
+                      left: MediaQuery.of(context).size.width / 13.6,
+                      right: MediaQuery.of(context).size.width / 13.6,
                     ),
                     child: SizedBox(
-                      // height: 49, //height of button
-                        height: MediaQuery.of(context).size.height/13.38,
-                        width: MediaQuery.of(context).size.width/1.16, //width of button
-                        child:ElevatedButton(
+                        // height: 49, //height of button
+                        height: MediaQuery.of(context).size.height / 13.38,
+                        width: MediaQuery.of(context).size.width /
+                            1.16, //width of button
+                        child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.blue, //background color of button
-                              side: BorderSide(width:3, color:Colors.blue), //border width and color
+                              primary: Colors.blue,
+                              //background color of button
+                              side: BorderSide(width: 3, color: Colors.blue),
+                              //border width and color
                               //    elevation: 3, //elevation of button
-                              shape: RoundedRectangleBorder( //to set border radius to button
-                                  borderRadius: BorderRadius.circular(30)
-                              ),
+                              shape: RoundedRectangleBorder(
+                                  //to set border radius to button
+                                  borderRadius: BorderRadius.circular(30)),
                               //  padding: EdgeInsets.all(20) //content padding inside button
                             ),
-                            onPressed: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterNewVehicle(
-                                  token: toke
-                              )));
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      RegisterNewVehicle(token: toke)));
                               //code to execute when this button is pressed.
                             },
-                            child: Text("Register New Vehicles",style: TextStyle(fontSize: MediaQuery.of(context).size.width/14.96),)
-                        )
-                    ),
+                            child: Text(
+                              "Register New Vehicles",
+                              style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.width /
+                                      14.96),
+                            ))),
                   ),
-
-
                 ],
               ),
-
-
-            ),//scroll
-
-
-
+            ), //scroll
           ],
         ),
-
       ),
     );
   }
 
-
-
-  void logOut(
-      String valToken
-      ) async {
-    try{
-      Response response = await post(
-          Uri.parse(AppConstants.BASE_URL+'/logout'),
-          headers: {
-            'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
-          }
-      );
-      if(response.statusCode == 200){
+  void logOut(String valToken) async {
+    try {
+      Response response =
+          await post(Uri.parse(AppConstants.BASE_URL + '/logout'), headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $valToken'
+      });
+      if (response.statusCode == 200) {
         //    Map<String,dynamic> veri = json.decode(response.body);
         print(response.body.toString());
         print(response.toString());
         prefs.remove('token');
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
-      }
-      else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Login()));
+      } else {
         print('failed');
         print(response.body.toString());
         print(response.toString());
         print(valToken);
       }
-    }
-    catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
-
 
   Widget _buildPopupDialog(BuildContext context) {
     return new AlertDialog(
@@ -461,9 +447,7 @@ class _HomeFragmentState extends State<HomeFragment> {
       content: new Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-
-        ],
+        children: <Widget>[],
       ),
       actions: <Widget>[
         new ElevatedButton(
@@ -471,7 +455,8 @@ class _HomeFragmentState extends State<HomeFragment> {
             String? valTok = prefs.getString('token');
             print("signout: $valTok");
             logOut(valTok!);
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Login()));
           },
           child: const Text('Yes'),
         ),
@@ -481,48 +466,29 @@ class _HomeFragmentState extends State<HomeFragment> {
           },
           child: const Text('No'),
         ),
-
       ],
     );
   }
 
-
-
   //
 
-  void noToken() async{
+  void noToken() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     var x = preferences.getString('token');
 
-    if(x == null){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+    if (x == null) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
     }
-
   }
 
-
-
-
-  checkToken() async{
+  checkToken() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     checktoken = preferences.getString('token');
 
-    if(checktoken == null){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
-    }
-    else{
+    if (checktoken == null) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+    } else {
       print("kjkln");
     }
-
   }
-
-
-
 }
-
-
-
-
-
-
-

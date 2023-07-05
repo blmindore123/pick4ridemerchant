@@ -21,6 +21,7 @@ Future<void> main() async{
       [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown])
       .then((_) => runApp(
       GetMaterialApp(
+        debugShowCheckedModeBanner: false,
           home: MyApp())
   )
   );

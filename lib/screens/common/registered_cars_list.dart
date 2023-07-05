@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -161,6 +162,21 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
   @override
   Widget build(BuildContext context) {
 
+
+
+    //
+
+    List<String> dataList = ["A", "B", "C"];
+    List<String> dataListA = ["A1", "A2", "A3", "A4", "A5"];
+    List<String> dataListB = ["B1", "B2", "B3", "B4", "B5"];
+    List<String> dataListC = ["C1", "C2", "C3", "C4", "C5"];
+
+    String? valueItem;
+    List<String> listItem = [];
+    String? yourvalue;
+    String? newList;
+
+    //
 
     List<String> suggestons = [];
 
@@ -348,6 +364,13 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
                 //
+
+
+
+
+
+
+
 
 
 
@@ -719,7 +742,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
                           //one veh
-                          var imagevehone = AppConstants.DEFAULT_IMAGE;
+                          var imagevehone = '';
 
                           print(imagevehone);
 
@@ -731,7 +754,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
                           //two veh
-                          var imagevehtwo = AppConstants.DEFAULT_IMAGE;
+                          var imagevehtwo = '';
 
                           print(imagevehtwo);
 
@@ -743,7 +766,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
                           //three veh
-                          var imagevehthree = AppConstants.DEFAULT_IMAGE;
+                          var imagevehthree = '';
 
                           print(imagevehthree);
 
@@ -755,7 +778,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
                           //four veh
-                          var imagevehfour = AppConstants.DEFAULT_IMAGE;
+                          var imagevehfour = '';
 
                           print(imagevehfour);
 
@@ -767,7 +790,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
                           //five veh
-                          var imagevehfive = AppConstants.DEFAULT_IMAGE;
+                          var imagevehfive = '';
 
                           print(imagevehfive);
 
@@ -1349,15 +1372,15 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                   price: getAllCarsController.getAllVehicles?.data[index].price.toString() ?? 'no',
                                                   description: getAllCarsController.getAllVehicles?.data[index].description ?? 'no',
                                                   secdepo: getAllCarsController.getAllVehicles?.data[index].securityDeposit ?? 'no',
-                                                  imgs:  imageinsurone ?? '',
-                                                  imgs2: imageinsurtwo ?? '',
-                                                  imgs3: imagercone ?? '',
-                                                  imgs4: imagerctwo ?? '',
-                                                  imgs5: imagevehone ?? '',
-                                                  imgs6: imagevehtwo ?? '',
-                                                  imgs7: imagevehthree ?? '',
-                                                  imgs8: imagevehfour ?? '',
-                                                  imgs9: imagevehfive ?? '',
+                                                  imgs:  imageinsurone,
+                                                  imgs2: imageinsurtwo,
+                                                  imgs3: imagercone,
+                                                  imgs4: imagerctwo,
+                                                  imgs5: imagevehone,
+                                                  imgs6: imagevehtwo,
+                                                  imgs7: imagevehthree,
+                                                  imgs8: imagevehfour,
+                                                  imgs9: imagevehfive,
                                                   insur: getAllCarsController.getAllVehicles?.data[index].insuranceExpiryDate,
 
                                                   //  ac: getAllCarsController.getAllCars?.data[index].airCondition,

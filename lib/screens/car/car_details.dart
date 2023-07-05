@@ -141,20 +141,31 @@ class _CarDetailsState extends State<CarDetails> {
   Widget build(BuildContext context) {
 
 
+
     vehwidaimg = widget.imgs5;
-    widgetimg.add(vehwidaimg);
+    if(vehwidaimg != ''){
+      widgetimg.add(vehwidaimg);
+    }
 
     vehwidbimg = widget.imgs6;
-    widgetimg.add(vehwidbimg);
+    if(vehwidbimg != ''){
+      widgetimg.add(vehwidbimg);
+    }
 
     vehwidcimg = widget.imgs7;
-    widgetimg.add(vehwidcimg);
+    if(vehwidcimg != ''){
+      widgetimg.add(vehwidcimg);
+    }
 
     vehwiddimg = widget.imgs8;
-    widgetimg.add(vehwiddimg);
+    if(vehwiddimg != ''){
+      widgetimg.add(vehwiddimg);
+    }
 
     vehwideimg = widget.imgs9;
-    widgetimg.add(vehwideimg);
+    if(vehwideimg != ''){
+      widgetimg.add(vehwideimg);
+    }
 
 
 
@@ -207,17 +218,12 @@ class _CarDetailsState extends State<CarDetails> {
 
 
 
-
+                  if(widgetimg.length > 1)
                   SizedBox(
                     height: 311,
-                    width: 411,
+                    width: 393,
                     child: Stack(
                       children: [
-
-
-
-
-
                         GestureDetector(
                           onTap: (){
                           },
@@ -226,7 +232,7 @@ class _CarDetailsState extends State<CarDetails> {
                             options: CarouselOptions(
                               height:280.0,
                             ),
-                            itemCount: 5,
+                            itemCount: widgetimg.length,
                             itemBuilder: (context, itemIndex, realIndex)
                             {
                               return Padding(
@@ -252,12 +258,12 @@ class _CarDetailsState extends State<CarDetails> {
                               );
                             },
                           ),
-                        ),
+                        ) ,
 
 
 
 
-
+                        if(widgetimg.length > 1)
                         Positioned(
                           // alignment: Alignment.centerLeft,
                           top: 118,
@@ -268,8 +274,9 @@ class _CarDetailsState extends State<CarDetails> {
                             },
                             icon: Icon(Icons.arrow_back_ios),
                           ),
-                        ),
+                        ) else Text(""),
 
+                        if(widgetimg.length > 1)
                         Positioned(
                           // alignment: Alignment.centerLeft,
                           top: 118,left: 341,
@@ -279,7 +286,7 @@ class _CarDetailsState extends State<CarDetails> {
                             },
                             icon: Icon(Icons.arrow_forward_ios_sharp),
                           ),
-                        ),
+                        ) else Text(""),
 
 
 
@@ -288,6 +295,25 @@ class _CarDetailsState extends State<CarDetails> {
 
                       ],
                     ),
+                  ) else Padding(
+                    padding: EdgeInsets.all(15),
+                    child: SizedBox(
+                      height: 231,
+                      width: 273,
+                        child: ListView.builder(
+                          itemCount: 1,
+                          itemBuilder: (BuildContext context, int index) {
+                            return  Container(
+                              width: 273,
+
+                              //   color: Colors.brown.shade50,
+                              //  child: Image.network(widget.imgs!,fit: BoxFit.cover,),
+                              child: Image.network(widgetimg[index]!,fit: BoxFit.cover,),
+                            );
+                          },
+
+                        )
+                        ),
                   ),
 
 

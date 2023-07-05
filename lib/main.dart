@@ -11,11 +11,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]).then((_) =>
-      runApp(GetMaterialApp(debugShowCheckedModeBanner: false, home: MyApp())));
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown
+  // ]).then((_) =>
+  //     runApp(
+  //         GetMaterialApp(debugShowCheckedModeBanner: false, home: MyApp())));
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown])
+      .then((_) => runApp(
+      GetMaterialApp(
+          home: MyApp())
+  )
+  );
 }
 
 class MyApp extends StatelessWidget {

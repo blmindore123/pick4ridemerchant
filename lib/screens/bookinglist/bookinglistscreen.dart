@@ -462,7 +462,8 @@ class _BookingListScreenState extends State<BookingListScreen> {
 
                                                       acceptrejectbook(
                                                           bookingListController.bookingListModel?.data[index].id,
-                                                          'rejected'
+                                                          'rejected',
+                                                          rejectreasonController.text
                                                       );
 
                                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> BookingListScreen(token: token)));
@@ -602,7 +603,8 @@ class _BookingListScreenState extends State<BookingListScreen> {
 
                                                       acceptrejectbook(
                                                           bookingListController.bookingListModel?.data[index].id,
-                                                          'accepted'
+                                                          'accepted',
+                                                          ''
                                                       );
 
                                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> BookingListScreen(token: token)));
@@ -699,7 +701,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                               return Padding(
                                 padding: EdgeInsets.all(15),
                                 child: Card(
-                                  elevation: 60,
+                                  elevation: 10,
                                   //    shadowColor: Colors.black,
                                   color: Colors.white,
 
@@ -1170,6 +1172,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
   void acceptrejectbook(
       int? bookid,
       String? status,
+      String? rejectreason
       ) async {
     try{
 
@@ -1177,7 +1180,18 @@ class _BookingListScreenState extends State<BookingListScreen> {
       print("booking $valToken");
 
       Response response = await put(
+
           Uri.parse(AppConstants.BASE_URL+'/merchant/booking/$bookid/$status'),
+
+          body: json.encode(
+              {
+                "cancel_reason": rejectreason
+              }
+              ),
+         // body: {
+         //   "cancel_reason": rejectreason
+         // },
+
           headers: {
             'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
           }

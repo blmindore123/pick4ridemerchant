@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/src/response.dart';
 import 'package:http/http.dart';
+import 'package:pick4ridemerchant/screens/dummy/multileveldropdown.dart';
 import 'package:pick4ridemerchant/screens/register_new_vehicle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants/appconst.dart';
+import '../../../controller/get_all_banners.dart';
 import '../../../widgets/drawer.dart';
 import '../../home.dart';
 import '../../login_otp.dart';
 import '../../common/registered_cars_list.dart';
+import 'package:get/get.dart' hide Response;
+import 'package:get/get_core/src/get_main.dart';
 
 class HomeFragment extends StatefulWidget {
   @override
@@ -21,6 +25,10 @@ class _HomeFragmentState extends State<HomeFragment> {
   late SharedPreferences prefs;
   String? checktoken;
   String? toke;
+
+
+  BannersGetController bannersGetController = Get.put(BannersGetController());
+
 
   @override
   void initState() {
@@ -145,26 +153,86 @@ class _HomeFragmentState extends State<HomeFragment> {
                   ),
 
 
+
                   Padding(
-                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/133.83),
-                    child: CarouselSlider(
-                      options: CarouselOptions(height: MediaQuery.of(context).size.height/5.3),
-                      items: [1,2].map((i) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width,
-                              //   margin: EdgeInsets.symmetric(horizontal: 1.0),
-                              decoration: BoxDecoration(
-                                  color: Colors.blue
+                      padding: EdgeInsets.only(left: 23,bottom: 11),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Obx(
+                                () =>  bannersGetController.isLoading.value
+                                ? Center(
+                              child: Text(""),
+                            )
+                                :
+                            // Text("${bannersGetController.bannersListModel?.data?.length.toString() ?? '0'} Cars",style: TextStyle(fontWeight: FontWeight.w300),
+                            // )
+
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 100,
+                                  //   margin: EdgeInsets.symmetric(horizontal: 1.0),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey.shade200
+                                  ),
+                                  child: CarouselSlider(
+
+                                    items: <Widget>[
+                                      for (var i = 0; i < bannersGetController.bannersListModel!.data.length; i++)
+                                        Container(
+                                          // margin: const EdgeInsets.only(top: 20.0, left: 20.0),
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(bannersGetController.bannersListModel!.data[i].imageUrl),
+                                              fit: BoxFit.fitHeight,
+                                            ),
+                                            // border:
+                                            //     Border.all(color: Theme.of(context).accentColor),
+                                            borderRadius: BorderRadius.circular(32.0),
+                                          ),
+                                        ),
+                                    ],
+
+                                    options: CarouselOptions(
+                                      height: MediaQuery.of(context).size.height/5.3,
+                                      autoPlay: true,
+                                      autoPlayInterval: Duration(seconds: 3),
+                                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                    ),
+
+
+                                  )
+
+
                               ),
-                              child: Image.asset('images/app_images/ads.png',fit: BoxFit.cover,),
-                            );
-                          },
-                        );
-                      }).toList(),
-                    ),
+                            )
+
+                        ),
+                      )
                   ),
+
+                  // Padding(
+                  //   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/133.83),
+                  //   child: CarouselSlider(
+                  //     options: CarouselOptions(height: MediaQuery.of(context).size.height/5.3),
+                  //     items: [1,2].map((i) {
+                  //       return Builder(
+                  //         builder: (BuildContext context) {
+                  //           return Container(
+                  //             width: MediaQuery.of(context).size.width,
+                  //             //   margin: EdgeInsets.symmetric(horizontal: 1.0),
+                  //             decoration: BoxDecoration(
+                  //                 color: Colors.blue
+                  //             ),
+                  //             child: Image.asset('images/app_images/ads.png',fit: BoxFit.cover,),
+                  //           );
+                  //         },
+                  //       );
+                  //     }).toList(),
+                  //   ),
+                  // ),
 //                Divider(),
                   //              Divider(),
 
@@ -229,6 +297,8 @@ class _HomeFragmentState extends State<HomeFragment> {
                       onTap: (){
                         // Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchPage(
                         // )));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MultiLevelDropDownExample(
+                        )));
                       },
 
                       child:

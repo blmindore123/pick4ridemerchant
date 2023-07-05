@@ -11,6 +11,7 @@ import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
 import 'package:http/http.dart';
 import 'package:pick4ridemerchant/screens/enter_details.dart';
 import 'package:pick4ridemerchant/screens/home.dart';
+import 'package:pick4ridemerchant/screens/resend_otp.dart';
 import 'package:pick4ridemerchant/utils/ApiCall.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -41,6 +42,8 @@ class OtpPage extends StatefulWidget {
 class _OtpPageState extends State<OtpPage> {
   late FocusNode myFocusNode;
   late SharedPreferences prefs;
+
+  TextEditingController phoneController = TextEditingController();
 
   var newToken;
 
@@ -135,6 +138,7 @@ class _OtpPageState extends State<OtpPage> {
                       top: MediaQuery.of(context).size.height / 1.85,
                     ),
                     child: PinCodeFields(
+                      controller: phoneController,
                       length: 4,
                       fieldBorderStyle: FieldBorderStyle.square,
                       responsive: false,
@@ -159,70 +163,98 @@ class _OtpPageState extends State<OtpPage> {
                     ),
                   ),
 
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height / 1.1,
-                      left: MediaQuery.of(context).size.width / 2.48,
-                      right: MediaQuery.of(context).size.width / 5,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Resend Code?",
-                          style: TextStyle(fontWeight: FontWeight.w200),
-                        ),
-                      ],
-                    ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(
+                  //     top: MediaQuery.of(context).size.height / 1.1,
+                  //     left: MediaQuery.of(context).size.width / 2.48,
+                  //     right: MediaQuery.of(context).size.width / 5,
+                  //   ),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //     children: [
+                  //       Text(
+                  //         "Resend Code?",
+                  //         style: TextStyle(fontWeight: FontWeight.normal),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+
+                  Align(
+
+                      alignment: Alignment.center,
+                      child: Padding(
+                          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/1.1),
+                          child: GestureDetector(
+                              onTap: (){
+                                resendCode(widget.phone_number,widget.country_code);
+                              },
+                              child: Text('Resend Code?',style: TextStyle(fontWeight: FontWeight.normal,),)))
                   ),
 
-                  // Center(
-                  //   child:
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height / 1.23,
-                      left: MediaQuery.of(context).size.width / 3.4,
-                      right: MediaQuery.of(context).size.width / 4.6,
-                    ),
-                    child: SizedBox(
-                      // height: 49, //height of button
-                      height: MediaQuery.of(context).size.height / 13.38,
-                      width: MediaQuery.of(context).size.width /
-                          1.16, //width of button
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.orange,
-                          //background color of button
-                          side:
-                              BorderSide(width: 3, color: Colors.orangeAccent),
-                          //border width and color
-                          //    elevation: 3, //elevation of button
-                          shape: RoundedRectangleBorder(
-                              //to set border radius to button
-                              borderRadius: BorderRadius.circular(30)),
-                          //  padding: EdgeInsets.all(20) //content padding inside button
-                        ),
-                        onPressed: () {
-                          //            Navigator.of(context).push(MaterialPageRoute(builder: (context) => EnterDetailsScreen()));
-                          //code to execute when this button is pressed.
 
-                          print(widget.country_code);
-                          print(widget.phone_number);
-                          print(widget.role);
-                          print(widget.device_id);
-                          print("device token $devicetokenfb");
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                       top: MediaQuery.of(context).size.height/1.25,
 
-                          // verify(widget.country_code, widget.phone_number,
-                          //     widget.role, widget.device_id, 1111
-                          //     //  otp
-                          //     );
-                          verifyApi();
-                        },
-                        child: Text(
-                          "Verify",
-                          style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.width / 15.86),
+                      ),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height/15.38,
+                        width: MediaQuery.of(context).size.width/2,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.orange,
+                            //background color of button
+                            side:
+                                BorderSide(width: 3, color: Colors.orangeAccent),
+                            //border width and color
+                            //    elevation: 3, //elevation of button
+                            shape: RoundedRectangleBorder(
+                                //to set border radius to button
+                                borderRadius: BorderRadius.circular(30)),
+                            //  padding: EdgeInsets.all(20) //content padding inside button
+                          ),
+                          onPressed: () {
+                            //            Navigator.of(context).push(MaterialPageRoute(builder: (context) => EnterDetailsScreen()));
+                            //code to execute when this button is pressed.
+
+
+                            if (phoneController.text.length < 4) {
+                              // showDialog(
+                              //     context: context,
+                              //     builder: (BuildContext context) {
+                              //       return AlertDialog(
+                              //         title: Text("Enter 4 Digits Code"),
+                              //       );
+                              //     });
+                              var snackBar = SnackBar(content: Text('Enter 4 Digits Code'));
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+                            else{
+                              verifyApi();
+                            }
+
+
+                            print(widget.country_code);
+                            print(widget.phone_number);
+                            print(widget.role);
+                            print(widget.device_id);
+                            print("device token $devicetokenfb");
+
+                            // verify(widget.country_code, widget.phone_number,
+                            //     widget.role, widget.device_id, 1111
+                            //     //  otp
+                            //     );
+
+                          },
+                          child: Text(
+                            "Verify",
+                            style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width / 15.86),
+                          ),
                         ),
                       ),
                     ),
@@ -286,6 +318,45 @@ class _OtpPageState extends State<OtpPage> {
     setState(() {
       clickLoad = false;
     });
+  }
+
+  void resendCode(String phoneNumber,String countryCode) async{
+
+    try{
+      Response response = await post(
+        Uri.parse(AppConstants.BASE_URL+'/resend-otp'),
+        body: {
+          "country_code": countryCode,
+          "phone_number": phoneNumber,
+          "role": "customer"
+        },
+
+
+      );
+      if(response.statusCode == 200){
+
+        String? valTok = prefs.getString('token');
+        print("valTok: $valTok");
+
+
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> ResendOtpPage(
+          token: valTok,
+          country_code: widget.country_code,
+          phone_number: widget.phone_number,
+          role: widget.role,
+          device_id: widget.device_id,
+        )));
+
+      }
+      else {
+        print('failed');
+      }
+    }catch(e){
+      print(e.toString());
+      print(e);
+      print('catched');
+    }
+
   }
 
 

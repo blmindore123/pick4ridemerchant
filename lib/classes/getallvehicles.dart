@@ -47,7 +47,6 @@ class Data {
     required this.createdAt,
     required this.updatedAt,
     required this.images,
-    required this.merchant,
   });
   late final int id;
   late final int merchantId;
@@ -71,7 +70,6 @@ class Data {
   late final String createdAt;
   late final String updatedAt;
   late final List<Images> images;
-  late final Merchant merchant;
 
   Data.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -96,7 +94,6 @@ class Data {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     images = List.from(json['images']).map((e)=>Images.fromJson(e)).toList();
-    merchant = Merchant.fromJson(json['merchant']);
   }
 
   Map<String, dynamic> toJson() {
@@ -123,7 +120,6 @@ class Data {
     _data['created_at'] = createdAt;
     _data['updated_at'] = updatedAt;
     _data['images'] = images.map((e)=>e.toJson()).toList();
-    _data['merchant'] = merchant.toJson();
     return _data;
   }
 }
@@ -219,99 +215,6 @@ class Images {
     _data['created_at'] = createdAt;
     _data['updated_at'] = updatedAt;
     _data['image_url'] = imageUrl;
-    return _data;
-  }
-}
-
-class Merchant {
-  Merchant({
-    required this.id,
-    required this.role,
-    this.subadminType,
-    required this.firstName,
-    this.lastName,
-    required this.email,
-    required this.countryCode,
-    required this.phoneNumber,
-    this.image,
-    required this.status,
-    required this.profileStatus,
-    required this.mobileVerified,
-    required this.emailVerified,
-    required this.address,
-    this.latitude,
-    this.longitude,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.imageUrl,
-    required this.fullName,
-  });
-  late final int id;
-  late final String role;
-  late final Null subadminType;
-  late final String firstName;
-  late final Null lastName;
-  late final String email;
-  late final String countryCode;
-  late final String phoneNumber;
-  late final Null image;
-  late final String status;
-  late final String profileStatus;
-  late final int mobileVerified;
-  late final int emailVerified;
-  late final String address;
-  late final Null latitude;
-  late final Null longitude;
-  late final String createdAt;
-  late final String updatedAt;
-  late final String imageUrl;
-  late final String fullName;
-
-  Merchant.fromJson(Map<String, dynamic> json){
-    id = json['id'];
-    role = json['role'];
-    subadminType = null;
-    firstName = json['first_name'];
-    lastName = null;
-    email = json['email'];
-    countryCode = json['country_code'];
-    phoneNumber = json['phone_number'];
-    image = null;
-    status = json['status'];
-    profileStatus = json['profile_status'];
-    mobileVerified = json['mobile_verified'];
-    emailVerified = json['email_verified'];
-    address = json['address'];
-    latitude = null;
-    longitude = null;
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    imageUrl = json['image_url'];
-    fullName = json['full_name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['role'] = role;
-    _data['subadmin_type'] = subadminType;
-    _data['first_name'] = firstName;
-    _data['last_name'] = lastName;
-    _data['email'] = email;
-    _data['country_code'] = countryCode;
-    _data['phone_number'] = phoneNumber;
-    _data['image'] = image;
-    _data['status'] = status;
-    _data['profile_status'] = profileStatus;
-    _data['mobile_verified'] = mobileVerified;
-    _data['email_verified'] = emailVerified;
-    _data['address'] = address;
-    _data['latitude'] = latitude;
-    _data['longitude'] = longitude;
-    _data['created_at'] = createdAt;
-    _data['updated_at'] = updatedAt;
-    _data['image_url'] = imageUrl;
-    _data['full_name'] = fullName;
     return _data;
   }
 }

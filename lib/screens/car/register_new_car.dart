@@ -2170,10 +2170,10 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                                 thirdimage ?? '',
                                 fourthimage ?? '',
                                 one ?? '',
-                                two ?? '',
-                                three ?? '',
-                                four ?? '',
-                                five ?? '',
+                                // two ?? '',
+                                // three ?? '',
+                                // four ?? '',
+                                // five ?? '',
                               );
                             } else {
                               const snackBar = SnackBar(
@@ -2307,52 +2307,99 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
     String? imageOnerc,
     String? imageTworc,
     String? imageOneveh,
-    String? imageTwoveh,
-    String? imageThreeveh,
-    String? imageFourveh,
-    String? imageFiveveh,
+    // String? imageTwoveh,
+    // String? imageThreeveh,
+    // String? imageFourveh,
+    // String? imageFiveveh,
   ) async {
     try {
       var valToken = await getToken();
       print("reg car $valToken");
-      Response response =
-          await post(Uri.parse(AppConstants.BASE_URL + '/merchant/vehicles'),
-              body: json.encode({
-                "vehicle_category": 1,
-                "ride_category": id,
-                "vehicle_type": vehicletypecat,
-                "security_deposit": secdepo,
-                "brand_model": brand,
-                "no_of_doors": doors,
-                "no_of_luggage_space": luggage,
-                "air_condition": ac,
-                "gear_type": gear,
-                "fuel_type": fuel,
-                "no_of_seats": seats,
-                "vehicle_no": vehicleno,
-                "insurance_expiry_date": insurance,
-                "price": price,
-                "description": description,
-                "images": [
-                  {"type": "insurance", "image": imageOneinsur},
-                  {"type": "insurance", "image": imageTwoinsur},
-                  {"type": "rc_book", "image": imageOnerc},
-                  {"type": "rc_book", "image": imageTworc},
-                  {"type": "vehicle", "image": imageOneveh},
-                  {"type": "vehicle", "image": imageTwoveh},
-                  {"type": "vehicle", "image": imageThreeveh},
-                  {"type": "vehicle", "image": imageFourveh},
-                  {"type": "vehicle", "image": imageFiveveh}
-                ]
-              }),
+
+
+      final queryparams = {
+
+        "vehicle_category": 1,
+        "ride_category": id,
+        "vehicle_type": vehicletypecat,
+        "security_deposit": secdepo,
+        "brand_model": brand,
+        "no_of_doors": doors,
+        "no_of_luggage_space": luggage,
+        "air_condition": ac,
+        "gear_type": gear,
+        "fuel_type": fuel,
+        "no_of_seats": seats,
+        "vehicle_no": vehicleno,
+        "insurance_expiry_date": insurance,
+        "price": price,
+        "description": description,
+        "images": [
+          {"type": "insurance", "image": imageOneinsur},
+          {"type": "insurance", "image": imageTwoinsur},
+          {"type": "rc_book", "image": imageOnerc},
+          {"type": "rc_book", "image": imageTworc},
+          {if(one != '') "type": "vehicle", "image": imageOneveh },
+          // {if(two != '') "type": "vehicle", "image": imageTwoveh},
+          // {if(three != '') "type": "vehicle", "image": imageThreeveh},
+          // {if(four != '') "type": "vehicle", "image": imageFourveh},
+          // {if(five != '') "type": "vehicle", "image": imageFiveveh}
+        ]
+
+      };
+
+
+
+
+      Response response = await post(Uri.parse(AppConstants.BASE_URL + '/merchant/vehicles'),
+
+
+              body: json.encode(
+
+                queryparams
+          //        {
+                // "vehicle_category": 1,
+                // "ride_category": id,
+                // "vehicle_type": vehicletypecat,
+                // "security_deposit": secdepo,
+                // "brand_model": brand,
+                // "no_of_doors": doors,
+                // "no_of_luggage_space": luggage,
+                // "air_condition": ac,
+                // "gear_type": gear,
+                // "fuel_type": fuel,
+                // "no_of_seats": seats,
+                // "vehicle_no": vehicleno,
+                // "insurance_expiry_date": insurance,
+                // "price": price,
+                // "description": description,
+                // "images": [
+                //   {"type": "insurance", "image": imageOneinsur},
+                //   {"type": "insurance", "image": imageTwoinsur},
+                //   {"type": "rc_book", "image": imageOnerc},
+                //   {"type": "rc_book", "image": imageTworc},
+                //   {"type": "vehicle", "image": imageOneveh},
+                //   {"type": "vehicle", "image": imageTwoveh},
+                //   {"type": "vehicle", "image": imageThreeveh},
+                //   {"type": "vehicle", "image": imageFourveh},
+                //   {"type": "vehicle", "image": imageFiveveh}
+                // ]
+        //      }
+
+              ),
               headers: {
             'Content-type': 'application/json; charset=UTF-8',
             'Authorization': 'Bearer $valToken'
           });
 
+
+      //print(body);
+
       if (response.statusCode == 200) {
         print(response.body.toString());
         print('vehicle added');
+
+        print(queryparams);
         //    String? valTok = prefs.getString('token');
         //    print("valTok: $valTok");
 

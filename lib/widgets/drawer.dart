@@ -92,7 +92,10 @@ class _MyDrawerState extends State<MyDrawer> {
 
                           return Align(
                               alignment: Alignment.center,
-                              child: Text(getAllCarsController.getAllVehicles?.data[index].merchant.fullName.toUpperCase() ?? '',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),));
+                              //child: Text(getAllCarsController.getAllVehicles?.data[index].merchant.fullName.toUpperCase() ?? '',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),
+                             child: Text(""),
+
+                          );
 
                         }
                     ),
@@ -365,58 +368,72 @@ class _MyDrawerState extends State<MyDrawer> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          String? valTok = prefs.getString('token');
-                          print("signout: $valTok");
-                          logOut(valTok!);
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
-                        },
-                        style: ButtonStyle(
 
-                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(31),
-                                    side: BorderSide(color: Colors.blue)
-                                )
-                            )
-                        ),
-                        child: Padding(
-                            padding: const EdgeInsets.all(4),
-                            child: Text('YES',style: TextStyle(fontWeight: FontWeight.bold),)
+                      // SizedBox(
+                      //   width: 15,
+                      // ),
 
+                      SizedBox(
+                        width: 80,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            String? valTok = prefs.getString('token');
+                            print("signout: $valTok");
+                            logOut(valTok!);
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+                          },
+                          style: ButtonStyle(
+
+                              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(31),
+                                      side: BorderSide(color: Colors.blue)
+                                  )
+                              )
+                          ),
+                          child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Text('YES',style: TextStyle(fontWeight: FontWeight.bold),)
+
+                          ),
                         ),
                       ),
 
 
 
 
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        style: ButtonStyle(
+                      SizedBox(
+                        width: 80,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          style: ButtonStyle(
 
-                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                            backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(31),
-                                    side: BorderSide(color: Colors.redAccent)
-                                )
-                            )
-                        ),
-                        child: Padding(
-                            padding: const EdgeInsets.all(4),
-                            child: Text('NO',style: TextStyle(fontWeight: FontWeight.bold),)
+                              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(31),
+                                      side: BorderSide(color: Colors.redAccent)
+                                  )
+                              )
+                          ),
+                          child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Text('NO',style: TextStyle(fontWeight: FontWeight.bold),)
 
+                          ),
                         ),
                       ),
                     ],
-                  )
+                  ),
 
+                  // SizedBox(
+                  //   width: 15,
+                  // ),
 
                 ],
               ),
@@ -429,8 +446,7 @@ class _MyDrawerState extends State<MyDrawer> {
         ),
 
         Positioned(
-          right: 0,
-          left: 260,
+          right: 40,
           top: 235,
 
 

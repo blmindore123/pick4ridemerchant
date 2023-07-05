@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pick4ridemerchant/extensions/string_ext.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/images.dart';
+import '../widgets/drawer.dart';
 import 'dashboard/fragments/earning.dart';
 import 'dashboard/fragments/filter.dart';
 import 'dashboard/fragments/homefrg.dart';
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
         FilterFragment(),
       ][currentIndex],
 
-      endDrawer: Drawer(),
+      endDrawer: MyDrawer(),
 
       bottomNavigationBar: Container(
         decoration: BoxDecoration(boxShadow: <BoxShadow>[

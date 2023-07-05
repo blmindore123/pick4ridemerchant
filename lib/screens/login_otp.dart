@@ -203,9 +203,20 @@ class _LoginState extends State<Login> {
                             shape: StadiumBorder() // foreground
                             ),
                         onPressed: () {
-                          //
-                          //
-                          if (_formKey.currentState!.validate()) {
+
+
+                          if (numberController.text.length != 10) {
+                            // showDialog(
+                            //     context: context,
+                            //     builder: (BuildContext context) {
+                            //       return AlertDialog(
+                            //         title: Text("Enter 10 Digits Mobile Number"),
+                            //       );
+                            //     });
+                            var snackBar = SnackBar(content: Text('Enter 10 Digits Mobile Number'));
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          }
+                          else{
                             login(country_code,
                                 numberController.text.toString(), role);
                             //  otp.sendOtp(numberController.text.toString(), '1111', minNumber, maxNumber, country_code);
@@ -213,16 +224,39 @@ class _LoginState extends State<Login> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      //        OtpPage(country_code: country_code, phone_number: numberController.text.toString(), role: role, device_id: '4', otp: '1111',),
-                                      OtpPage(
-                                          country_code: country_code,
-                                          phone_number:
-                                              numberController.text.toString(),
-                                          role: role,
-                                          device_id: '4'),
+                                  //        OtpPage(country_code: country_code, phone_number: numberController.text.toString(), role: role, device_id: '4', otp: '1111',),
+                                  OtpPage(
+                                      country_code: country_code,
+                                      phone_number:
+                                      numberController.text.toString(),
+                                      role: role,
+                                      device_id: '1'),
                                 ),
-                                (route) => false);
+                                    (route) => false);
                           }
+
+
+
+                          // //
+                          // //
+                          // if (_formKey.currentState!.validate()) {
+                          //   login(country_code,
+                          //       numberController.text.toString(), role);
+                          //   //  otp.sendOtp(numberController.text.toString(), '1111', minNumber, maxNumber, country_code);
+                          //   Navigator.pushAndRemoveUntil(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             //        OtpPage(country_code: country_code, phone_number: numberController.text.toString(), role: role, device_id: '4', otp: '1111',),
+                          //             OtpPage(
+                          //                 country_code: country_code,
+                          //                 phone_number:
+                          //                     numberController.text.toString(),
+                          //                 role: role,
+                          //                 device_id: '4'),
+                          //       ),
+                          //       (route) => false);
+                          // }
                         },
                         child: Text(
                           'Login',

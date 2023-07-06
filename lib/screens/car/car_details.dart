@@ -142,33 +142,39 @@ class _CarDetailsState extends State<CarDetails> {
 
 
 
+
+
+
     vehwidaimg = widget.imgs5;
-    if(vehwidaimg != ''){
+    if(vehwidaimg != null){
       widgetimg.add(vehwidaimg);
+      print("first image: $widgetimg");
     }
 
     vehwidbimg = widget.imgs6;
-    if(vehwidbimg != ''){
+    if(vehwidbimg != null){
       widgetimg.add(vehwidbimg);
+      print("second image: $widgetimg");
     }
 
     vehwidcimg = widget.imgs7;
-    if(vehwidcimg != ''){
+    if(vehwidcimg != null){
       widgetimg.add(vehwidcimg);
     }
 
     vehwiddimg = widget.imgs8;
-    if(vehwiddimg != ''){
+    if(vehwiddimg != null){
       widgetimg.add(vehwiddimg);
     }
 
     vehwideimg = widget.imgs9;
-    if(vehwideimg != ''){
+    if(vehwideimg != null){
       widgetimg.add(vehwideimg);
     }
 
 
-
+    print("all images : $widgetimg");
+    print("all images : ${widgetimg.length}");
 
 
     return Scaffold(
@@ -218,7 +224,7 @@ class _CarDetailsState extends State<CarDetails> {
 
 
 
-                  if(widgetimg.length > 1)
+
                   SizedBox(
                     height: 311,
                     width: 393,
@@ -279,7 +285,7 @@ class _CarDetailsState extends State<CarDetails> {
                         if(widgetimg.length > 1)
                         Positioned(
                           // alignment: Alignment.centerLeft,
-                          top: 118,left: 341,
+                          top: 118,right: 19,
                           child: IconButton(
                             onPressed: (){
                               carouselController.nextPage();
@@ -289,31 +295,8 @@ class _CarDetailsState extends State<CarDetails> {
                         ) else Text(""),
 
 
-
-
-
-
                       ],
                     ),
-                  ) else Padding(
-                    padding: EdgeInsets.all(15),
-                    child: SizedBox(
-                      height: 231,
-                      width: 273,
-                        child: ListView.builder(
-                          itemCount: 1,
-                          itemBuilder: (BuildContext context, int index) {
-                            return  Container(
-                              width: 273,
-
-                              //   color: Colors.brown.shade50,
-                              //  child: Image.network(widget.imgs!,fit: BoxFit.cover,),
-                              child: Image.network(widgetimg[index]!,fit: BoxFit.cover,),
-                            );
-                          },
-
-                        )
-                        ),
                   ),
 
 

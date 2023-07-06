@@ -2170,10 +2170,10 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                                 thirdimage ?? '',
                                 fourthimage ?? '',
                                 one ?? '',
-                                // two ?? '',
-                                // three ?? '',
-                                // four ?? '',
-                                // five ?? '',
+                                two ?? '',
+                                three ?? '',
+                                four ?? '',
+                                five ?? '',
                               );
                             } else {
                               const snackBar = SnackBar(
@@ -2307,10 +2307,10 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
     String? imageOnerc,
     String? imageTworc,
     String? imageOneveh,
-    // String? imageTwoveh,
-    // String? imageThreeveh,
-    // String? imageFourveh,
-    // String? imageFiveveh,
+    String? imageTwoveh,
+    String? imageThreeveh,
+    String? imageFourveh,
+    String? imageFiveveh,
   ) async {
     try {
       var valToken = await getToken();
@@ -2339,11 +2339,11 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
           {"type": "insurance", "image": imageTwoinsur},
           {"type": "rc_book", "image": imageOnerc},
           {"type": "rc_book", "image": imageTworc},
-          {if(one != '') "type": "vehicle", "image": imageOneveh },
-          // {if(two != '') "type": "vehicle", "image": imageTwoveh},
-          // {if(three != '') "type": "vehicle", "image": imageThreeveh},
-          // {if(four != '') "type": "vehicle", "image": imageFourveh},
-          // {if(five != '') "type": "vehicle", "image": imageFiveveh}
+          if(one != null){"type": "vehicle", "image": imageOneveh },
+          if(two != null){"type": "vehicle", "image": imageTwoveh},
+          if(three != null){"type": "vehicle", "image": imageThreeveh},
+          if(four != null){"type": "vehicle", "image": imageFourveh},
+          if(five != null){"type": "vehicle", "image": imageFiveveh}
         ]
 
       };

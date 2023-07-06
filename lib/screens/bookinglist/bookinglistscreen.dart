@@ -76,12 +76,6 @@ class _BookingListScreenState extends State<BookingListScreen> {
   }
 
 
-
-
-
-
-
-
   static List<Animal> _animals = [
     Animal(id: 1, name: "All"),
     Animal(id: 2, name: "Past"),
@@ -466,6 +460,11 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                           rejectreasonController.text
                                                       );
 
+
+                                                      setState(() {
+                                                        bookingListController.fetchCarsBookingList(gearmodel ?? '');
+                                                      });
+
                                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> BookingListScreen(token: token)));
 
                                                     },
@@ -606,6 +605,11 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                           'accepted',
                                                           ''
                                                       );
+
+
+                                                     setState(() {
+                                                       bookingListController.fetchCarsBookingList(gearmodel ?? '');
+                                                     });
 
                                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> BookingListScreen(token: token)));
 
@@ -1206,19 +1210,21 @@ class _BookingListScreenState extends State<BookingListScreen> {
 
 
         String oldString = response.body.toString();
-        String newString = oldString.replaceAll('{"success":false,"message":', '');
+        String newString = oldString.replaceAll('{"success":true,"message":', '');
         String latString = newString.replaceAll(',"data":[]}','');
         var snackBar = SnackBar(
             behavior: SnackBarBehavior.floating,
             margin: EdgeInsets.only(bottom: 300.0),
             content: Text(latString)
         );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        print("latstring : $latString");
-
         setState(() {
 
         });
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        print("latstring : $latString");
+
+
         //    String? valTok = prefs.getString('token');
         //    print("valTok: $valTok");
       }

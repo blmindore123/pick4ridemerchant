@@ -263,7 +263,7 @@ class _VanDetailsState extends State<VanDetails> {
 
                         Positioned(
                           // alignment: Alignment.centerLeft,
-                          top: 118,left: 341,
+                          top: 118,right: 19,
                           child: IconButton(
                             onPressed: (){
                               carouselController.nextPage();

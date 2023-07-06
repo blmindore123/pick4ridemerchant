@@ -430,7 +430,18 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                               ? Center(
                             child: Text(""),
                           )
-                              :       Text("${getAllCarsController.getAllVehicles?.data?.length.toString() ?? '0'} Vehicles",style: TextStyle(fontWeight: FontWeight.w300),)),
+                              :       Align(
+                                alignment: Alignment.topRight,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: 11),
+                                    child: Text("${getAllCarsController.getAllVehicles?.data?.length.toString() ?? '0'} Vehicles",style: TextStyle(fontWeight: FontWeight.w300),
+                                    ),
+                                  )
+                              )
+
+
+
+                      ),
 
 
                     )
@@ -490,7 +501,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10)),
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width, height: 200,
+                                      width: MediaQuery.of(context).size.width, height: 230,
 
                                       child: Column(
 
@@ -499,126 +510,132 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
                                           Padding(
                                               padding: EdgeInsets.only(top: 31),
-                                              child: Text("Are you sure you want to delete this vehicle?",softWrap: true,)),
+                                              child: Text("Are you sure you want \n to delete this vehicle?",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),softWrap: true,)),
 
-                                          Material(
-                                            child: Align(
-                                                alignment: Alignment.topRight,
-                                                child: GestureDetector(
-                                                  onTap: (){
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Padding(
-                                                    padding: EdgeInsets.all(15),
-                                                    child: Container(
-                                                      height: 60,
-                                                      width:  MediaQuery.of(context).size.width,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white,
-                                                          shape: BoxShape.circle
-                                                      ),
-
-                                                    ),
-                                                  ),
-                                                )
-                                            ),
-                                          ),
+                                          // Material(
+                                          //   child: Align(
+                                          //       alignment: Alignment.topRight,
+                                          //       child: GestureDetector(
+                                          //         onTap: (){
+                                          //           Navigator.of(context).pop();
+                                          //         },
+                                          //         child: Padding(
+                                          //           padding: EdgeInsets.all(15),
+                                          //           child: Container(
+                                          //             height: 60,
+                                          //             width:  MediaQuery.of(context).size.width,
+                                          //             decoration: BoxDecoration(
+                                          //                 color: Colors.white,
+                                          //                 shape: BoxShape.circle
+                                          //             ),
+                                          //
+                                          //           ),
+                                          //         ),
+                                          //       )
+                                          //   ),
+                                          // ),
 
 
 
 
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              ElevatedButton(
-                                                onPressed: () async{
+                                              Padding(
+                                                padding: EdgeInsets.only(left: 5,right:5),
+                                                child: ElevatedButton(
+                                                  onPressed: () async{
 
 
-                                                  // String? valTok = prefs.getString('token');
-                                                  // print("signout: $valTok");
+                                                    // String? valTok = prefs.getString('token');
+                                                    // print("signout: $valTok");
 
 
-                                                  try{
+                                                    try{
 
-                                                    int? vehicleId = getAllCarsController.getAllVehicles!.data[index].id;
+                                                      int? vehicleId = getAllCarsController.getAllVehicles!.data[index].id;
 
-                                                    var valToken = await getToken();
-                                                    print("delete car $valToken");
+                                                      var valToken = await getToken();
+                                                      print("delete car $valToken");
 
-                                                    Response response = await delete(
-                                                        Uri.parse(AppConstants.BASE_URL+'/merchant/vehicles/$vehicleId'),
-                                                        headers: {
-                                                          'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
-                                                        }
-                                                    );
-                                                    if(response.statusCode == 200){
-                                                      print(response.body.toString());
+                                                      Response response = await delete(
+                                                          Uri.parse(AppConstants.BASE_URL+'/merchant/vehicles/$vehicleId'),
+                                                          headers: {
+                                                            'Content-type':'application/json; charset=UTF-8', 'Authorization':'Bearer $valToken'
+                                                          }
+                                                      );
+                                                      if(response.statusCode == 200){
+                                                        print(response.body.toString());
 
-                                                      var result = jsonDecode(response.body);
+                                                        var result = jsonDecode(response.body);
 
-                                                      setState(() {
-                                                        getAllCarsController.getAllVehicles!.data.removeAt(index);
-                                                      });
+                                                        setState(() {
+                                                          getAllCarsController.getAllVehicles!.data.removeAt(index);
+                                                        });
 
-                                                      getAllVehicles = GetAllVehicles.fromJson(result);
+                                                        getAllVehicles = GetAllVehicles.fromJson(result);
 
 
+                                                      }
+                                                      else {
+                                                        print('failed');
+                                                        print(response.body.toString());
+                                                        print(response.toString());
+                                                        print(valToken);
+                                                      }
                                                     }
-                                                    else {
-                                                      print('failed');
-                                                      print(response.body.toString());
-                                                      print(response.toString());
-                                                      print(valToken);
+                                                    catch(e){
+                                                      print(e.toString());
                                                     }
-                                                  }
-                                                  catch(e){
-                                                    print(e.toString());
-                                                  }
 
 
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList(token: token)));
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> RegisteredCarsList(token: token)));
 
-                                                },
-                                                style: ButtonStyle(
+                                                  },
+                                                  style: ButtonStyle(
 
-                                                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
-                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                            borderRadius: BorderRadius.circular(31),
-                                                            side: BorderSide(color: Colors.redAccent)
-                                                        )
-                                                    )
-                                                ),
-                                                child: Padding(
-                                                    padding: const EdgeInsets.all(4),
-                                                    child: Text('YES',style: TextStyle(fontWeight: FontWeight.bold),)
+                                                      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
+                                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(31),
+                                                              side: BorderSide(color: Colors.redAccent)
+                                                          )
+                                                      )
+                                                  ),
+                                                  child: Padding(
+                                                      padding: const EdgeInsets.all(4),
+                                                      child: Text('YES',style: TextStyle(fontWeight: FontWeight.bold),)
 
+                                                  ),
                                                 ),
                                               ),
 
 
 
 
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                style: ButtonStyle(
+                                              Padding(
+                                                padding: EdgeInsets.only(left: 5,right:5),
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  style: ButtonStyle(
 
-                                                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                        RoundedRectangleBorder(
-                                                            borderRadius: BorderRadius.circular(31),
-                                                            side: BorderSide(color: Colors.blue)
-                                                        )
-                                                    )
-                                                ),
-                                                child: Padding(
-                                                    padding: const EdgeInsets.all(4),
-                                                    child: Text('NO',style: TextStyle(fontWeight: FontWeight.bold),)
+                                                      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(31),
+                                                              side: BorderSide(color: Colors.blue)
+                                                          )
+                                                      )
+                                                  ),
+                                                  child: Padding(
+                                                      padding: const EdgeInsets.all(4),
+                                                      child: Text('NO',style: TextStyle(fontWeight: FontWeight.bold),)
 
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -747,38 +764,40 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                           print(imagevehone);
 
                           for (var i = 4; i <  getAllCarsController.getAllVehicles!.data[index].images.length ; i++) {
-                            imagevehone = getAllCarsController.getAllVehicles!.data[index]
-                                .images[i].imageUrl;
+                            imagevehone = getAllCarsController.getAllVehicles!.data[index].images[i].imageUrl;
+
+                            print("1 $imagevehone");
+
                             break;
                           }
 
 
                           //two veh
-                          var imagevehtwo = '';
+                          var imagevehtwo = null;
 
                           print(imagevehtwo);
 
                           for (var i = 5; i <  getAllCarsController.getAllVehicles!.data[index].images.length ; i++) {
-                            imagevehtwo = getAllCarsController.getAllVehicles!.data[index]
-                                .images[i].imageUrl;
+                            imagevehtwo = getAllCarsController.getAllVehicles!.data[index].images[i].imageUrl;
+                            print("2 $imagevehtwo");
                             break;
                           }
 
 
                           //three veh
-                          var imagevehthree = '';
+                          var imagevehthree = null;
 
                           print(imagevehthree);
 
                           for (var i = 6; i <  getAllCarsController.getAllVehicles!.data[index].images.length ; i++) {
-                            imagevehthree = getAllCarsController.getAllVehicles!.data[index]
-                                .images[i].imageUrl;
+                            imagevehthree = getAllCarsController.getAllVehicles!.data[index].images[i].imageUrl;
+                            print("3 $imagevehone");
                             break;
                           }
 
 
                           //four veh
-                          var imagevehfour = '';
+                          var imagevehfour = null;
 
                           print(imagevehfour);
 
@@ -790,7 +809,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
 
 
                           //five veh
-                          var imagevehfive = '';
+                          var imagevehfive = null;
 
                           print(imagevehfive);
 
@@ -810,6 +829,8 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                           imagesgroup.add(imagevehfive ?? '');
 
 
+                          print("images group: $imagesgroup");
+                          print("images group: ${imagesgroup.length}");
 
 
                           //////////////////////
@@ -1184,7 +1205,7 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                           width: 141,
                                         ),
 
-                                        Text("SLRs. ${getAllCarsController.getAllVehicles?.data[index].price.toString() ??  'no name'}",style: TextStyle(fontWeight: FontWeight.bold),)
+                                        Text("රු ${getAllCarsController.getAllVehicles?.data[index].price.toString() ??  'no name'}",style: TextStyle(fontWeight: FontWeight.bold),)
 
 
                                       ],
@@ -1386,6 +1407,9 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                   //  ac: getAllCarsController.getAllCars?.data[index].airCondition,
 
                                                 )));
+
+                                                print("1: $imagevehone");
+                                                print("2: $imagevehtwo");
                                               }
                                               if(getAllCarsController.getAllVehicles?.data[index].vehicleCategory.name == "Bike")
                                               {

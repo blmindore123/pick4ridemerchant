@@ -2158,36 +2158,70 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
       var valToken = await getToken();
       print("reg car $valToken");
 
+      final queryparams = {
+        "vehicle_category": 3,
+        "ride_category": id,
+        "vehicle_type": vehicletypecat,
+        "security_deposit": secdepo,
+        "brand_model": brand,
+        "no_of_doors": doors,
+        "no_of_luggage_space": luggage,
+        "air_condition": ac,
+        "gear_type": gear,
+        "fuel_type": fuel,
+        "no_of_seats": seats,
+        "vehicle_no": vehicleno,
+        "insurance_expiry_date": insurance,
+        "price": price,
+        "description": description,
+        "images": [
+          {"type": "insurance", "image": imageOneinsur},
+          {"type": "insurance", "image": imageTwoinsur},
+          {"type": "rc_book", "image": imageOnerc},
+          {"type": "rc_book", "image": imageTworc},
+          if(one != null){"type": "vehicle", "image": imageOneveh },
+          if(two != null){"type": "vehicle", "image": imageTwoveh},
+          if(three != null){"type": "vehicle", "image": imageThreeveh},
+          if(four != null){"type": "vehicle", "image": imageFourveh},
+          if(five != null){"type": "vehicle", "image": imageFiveveh}
+        ]
+
+      };
+
+
       Response response =
           await post(Uri.parse(AppConstants.BASE_URL + '/merchant/vehicles'),
-              body: json.encode({
-                "vehicle_category": 3,
-                "ride_category": id,
-                "vehicle_type": vehicletypecat,
-                "security_deposit": secdepo,
-                "brand_model": brand,
-                "no_of_doors": doors,
-                "no_of_luggage_space": luggage,
-                "air_condition": ac,
-                "gear_type": gear,
-                "fuel_type": fuel,
-                "no_of_seats": seats,
-                "vehicle_no": vehicleno,
-                "insurance_expiry_date": insurance,
-                "price": price,
-                "description": description,
-                "images": [
-                  {"type": "insurance", "image": imageOneinsur},
-                  {"type": "insurance", "image": imageTwoinsur},
-                  {"type": "rc_book", "image": imageOnerc},
-                  {"type": "rc_book", "image": imageTworc},
-                  {"type": "vehicle", "image": imageOneveh},
-                  {"type": "vehicle", "image": imageTwoveh},
-                  {"type": "vehicle", "image": imageThreeveh},
-                  {"type": "vehicle", "image": imageFourveh},
-                  {"type": "vehicle", "image": imageFiveveh}
-                ]
-              }),
+              body: json.encode(
+              queryparams
+                //     {
+              //   "vehicle_category": 3,
+              //   "ride_category": id,
+              //   "vehicle_type": vehicletypecat,
+              //   "security_deposit": secdepo,
+              //   "brand_model": brand,
+              //   "no_of_doors": doors,
+              //   "no_of_luggage_space": luggage,
+              //   "air_condition": ac,
+              //   "gear_type": gear,
+              //   "fuel_type": fuel,
+              //   "no_of_seats": seats,
+              //   "vehicle_no": vehicleno,
+              //   "insurance_expiry_date": insurance,
+              //   "price": price,
+              //   "description": description,
+              //   "images": [
+              //     {"type": "insurance", "image": imageOneinsur},
+              //     {"type": "insurance", "image": imageTwoinsur},
+              //     {"type": "rc_book", "image": imageOnerc},
+              //     {"type": "rc_book", "image": imageTworc},
+              //     {"type": "vehicle", "image": imageOneveh},
+              //     {"type": "vehicle", "image": imageTwoveh},
+              //     {"type": "vehicle", "image": imageThreeveh},
+              //     {"type": "vehicle", "image": imageFourveh},
+              //     {"type": "vehicle", "image": imageFiveveh}
+              //   ]
+              // }
+              ),
               headers: {
             'Content-type': 'application/json; charset=UTF-8',
             'Authorization': 'Bearer $valToken'

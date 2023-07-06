@@ -84,11 +84,6 @@ class _HomeFragmentState extends State<HomeFragment> {
 
 
 
-
-
-
-
-
       body: RefreshIndicator(
         onRefresh: () async {
           setState(()
@@ -179,18 +174,25 @@ class _HomeFragmentState extends State<HomeFragment> {
                                   child: CarouselSlider(
 
                                     items: <Widget>[
-                                      for (var i = 0; i < bannersGetController.bannersListModel!.data.length; i++)
+                                      for (var i = 0; i < 1; i++)
                                         Container(
+
+                                          width: MediaQuery.of(context).size.width,
+                                          height: 100,
                                           // margin: const EdgeInsets.only(top: 20.0, left: 20.0),
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: NetworkImage(bannersGetController.bannersListModel!.data[i].imageUrl),
-                                              fit: BoxFit.fitHeight,
-                                            ),
-                                            // border:
-                                            //     Border.all(color: Theme.of(context).accentColor),
-                                            borderRadius: BorderRadius.circular(32.0),
-                                          ),
+                                          // decoration: BoxDecoration(
+                                          //   image: DecorationImage(
+                                          //     image: NetworkImage(bannersGetController.bannersListModel!.data[i].imageUrl),
+                                          //   //  fit: BoxFit.cover,
+                                          //   ),
+                                          //   // border:
+                                          //   //     Border.all(color: Theme.of(context).accentColor),
+                                          //   borderRadius: BorderRadius.circular(32.0),
+                                          // ),
+
+                                          child: Image.network(bannersGetController.bannersListModel?.data[i].imageUrl ?? ''),
+
+
                                         ),
                                     ],
 
@@ -212,6 +214,16 @@ class _HomeFragmentState extends State<HomeFragment> {
                         ),
                       )
                   ),
+
+
+
+
+
+
+
+
+
+
 
                   // Padding(
                   //   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/133.83),

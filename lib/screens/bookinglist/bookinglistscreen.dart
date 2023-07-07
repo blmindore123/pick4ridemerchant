@@ -327,17 +327,12 @@ class _BookingListScreenState extends State<BookingListScreen> {
                               String result2 = dropdates.substring(0,dropdates.indexOf('00:00:00'));
 
                               print(result2);
+                             // bookingListController.bookingListModel?.data[index].id
 
-
-                              int? bookvehiclesid = bookingListController.bookingListModel?.data[index].vehicle.id;
+                              int? bookvehiclesid = bookingListController.bookingListModel?.data[index].id;
                               print(bookvehiclesid);
                               // bookingcount = bookingListController.bookingListModel?.data.length.toString();
                               // prefs.setString('bookingcount', bookingcount!);
-
-
-
-
-
 
 
                               var imagevehicledet = AppConstants.DEFAULT_IMAGE;
@@ -350,12 +345,8 @@ class _BookingListScreenState extends State<BookingListScreen> {
 
 
                               Widget _dialogrejectbooking(BuildContext context) {
-
                                 return Stack(
                                   children: [
-
-
-
                                     Positioned(
                                       right: 30,
                                       left: 30,
@@ -364,21 +355,15 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                       // padding: EdgeInsets.all(42),
                                       child: Card(
                                         elevation: 8,
-
-
                                         //    color: Colors.blue.shade500,
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(10)),
                                         child: Container(
                                           width: MediaQuery.of(context).size.width, height: 300,
-
                                           child: Column(
-
                                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             children: [
-
                                               Text("Are you sure you want to reject this booking?",softWrap: true,),
-
                                               Material(
                                                 child: Align(
                                                     alignment: Alignment.topRight,
@@ -412,8 +397,6 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                                   }
                                                                   return null;
                                                                 },
-
-
                                                                 decoration: InputDecoration(
                                                                   filled: true,
                                                                   hintText: "Write here",
@@ -433,7 +416,6 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                               ),
                                                             ),
                                                           ),
-
                                                         ),
                                                       ),
                                                     )
@@ -507,7 +489,6 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                     child: Padding(
                                                         padding: const EdgeInsets.all(4),
                                                         child: Text('Cancel',style: TextStyle(fontWeight: FontWeight.bold),)
-
                                                     ),
                                                   ),
                                                 ],
@@ -529,8 +510,6 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                       right: 0,
                                       left: 310,
                                       top: 220,
-
-
                                       child: Align(
                                         //  alignment: Alignment.topRight,
                                           child: GestureDetector(
@@ -592,30 +571,22 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                 children: [
+
                                                   ElevatedButton(
                                                     onPressed: () {
-
-
-
                                                       String? valTok = prefs.getString('token');
                                                       print("signout: $valTok");
-
                                                       acceptrejectbook(
                                                           bookingListController.bookingListModel?.data[index].id,
                                                           'accepted',
                                                           ''
                                                       );
-
-
                                                      setState(() {
                                                        bookingListController.fetchCarsBookingList(gearmodel ?? '');
                                                      });
-
                                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> BookingListScreen(token: token)));
-
                                                     },
                                                     style: ButtonStyle(
-
                                                         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                                                         backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
                                                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -628,11 +599,8 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                     child: Padding(
                                                         padding: const EdgeInsets.all(4),
                                                         child: Text('Submit',style: TextStyle(fontWeight: FontWeight.bold),)
-
                                                     ),
                                                   ),
-
-
 
 
                                                   ElevatedButton(
@@ -640,7 +608,6 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                       Navigator.of(context).pop();
                                                     },
                                                     style: ButtonStyle(
-
                                                         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                                                         backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),
                                                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -653,13 +620,11 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                     child: Padding(
                                                         padding: const EdgeInsets.all(4),
                                                         child: Text('Cancel',style: TextStyle(fontWeight: FontWeight.bold),)
-
                                                     ),
                                                   ),
+
                                                 ],
                                               )
-
-
                                             ],
                                           ),
 

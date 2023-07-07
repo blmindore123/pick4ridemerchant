@@ -2022,6 +2022,24 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                     //   ),
                     // ),
 
+                                        Padding(
+                      padding: EdgeInsets.only(left: 11),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Vehicle Images',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 11,
+                    ),
+
+
+
                     GestureDetector(
                       onTap: () {},
                       child: SizedBox(
@@ -2031,7 +2049,11 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                             ? Card(
                                 color: Colors.grey.shade50,
                                 child: Center(
-                                  child: Text('Add Vehicle Images'),
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.black,
+                                    size: 40,
+                                  ),
                                 ),
                               )
                             : Padding(
@@ -2064,7 +2086,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
                                                 child: kIsWeb
                                                     ? Image.network(
                                                         selectedImagesnew[index]
-                                                            .path)
+                                                            .path,fit: BoxFit.cover,)
                                                     : Image.file(
                                                         selectedImagesnew[
                                                             index],

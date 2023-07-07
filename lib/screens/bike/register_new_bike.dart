@@ -1855,13 +1855,32 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
                       height: 31,
                     ),
 
+                    Padding(
+                      padding: EdgeInsets.only(left: 11),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Vehicle Images',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                        ),
+                      ),
+                    ),
+
+
                     GestureDetector(
                       onTap: () {},
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 155,
                         child: selectedImagesnew.isEmpty
-                            ? const Center(child: Text('Add Images'))
+                            ? const Center(
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.black,
+                            size: 40,
+                          ),
+                        )
                             : GridView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: selectedImagesnew.length,
@@ -1896,6 +1915,7 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
                                           children: [
                                             Container(
                                               width: 161,
+                                              height: 70,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: Colors.black26,
@@ -1903,7 +1923,7 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
                                               child: kIsWeb
                                                   ? Image.network(
                                                       selectedImagesnew[index]
-                                                          .path)
+                                                          .path,fit: BoxFit.cover,)
                                                   : Image.file(
                                                       selectedImagesnew[index],
                                                       fit: BoxFit.cover,

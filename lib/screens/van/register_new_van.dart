@@ -2024,6 +2024,21 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                     //   ),
                     // ),
 
+                    Padding(
+                      padding: EdgeInsets.only(left: 11),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Vehicle Images',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                        ),
+                      ),
+                    ),
+
+
+
+
                     GestureDetector(
                       onTap: () {},
                       child: SizedBox(
@@ -2033,7 +2048,11 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                             ? Card(
                           color: Colors.grey.shade50,
                           child: Center(
-                            child: Text('Add Vehicle Images'),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.black,
+                              size: 40,
+                            ),
                           ),
                         )
                             : Padding(
@@ -2066,7 +2085,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
                                           child: kIsWeb
                                               ? Image.network(
                                               selectedImagesnew[index]
-                                                  .path)
+                                                  .path,fit: BoxFit.cover,)
                                               : Image.file(
                                             selectedImagesnew[
                                             index],

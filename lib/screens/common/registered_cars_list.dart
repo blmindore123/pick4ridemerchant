@@ -994,6 +994,9 @@ class _RegisteredCarsListState extends State<RegisteredCarsList> {
                                                 drivetype: getAllCarsController.getAllVehicles?.data[index].rideCategory.id,
 
                                               )));
+
+                                              print("ggggg: $imagevehone");
+                                              print("ggggg: $imagevehtwo");
                                             }
                                             if(getAllCarsController.getAllVehicles?.data[index].vehicleCategory.name == "Bike"){
                                               Navigator.push(context, MaterialPageRoute(builder: (context)=> EditBike(

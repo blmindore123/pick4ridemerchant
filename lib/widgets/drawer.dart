@@ -82,8 +82,9 @@ class _MyDrawerState extends State<MyDrawer> {
                         alignment: Alignment.center,
                         //child: Text(getAllCarsController.getAllVehicles?.data[index].merchant.fullName.toUpperCase() ?? '',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),
                         child: Text(
-                          userFirstName,
-                          style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),
+                          userFirstName.replaceFirst(userFirstName[0], userFirstName[0].toUpperCase()),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 25,fontWeight: FontWeight.w600),
                         ),
                       );
                     }),

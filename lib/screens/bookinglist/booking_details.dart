@@ -470,7 +470,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                     //   pageHeader: '',
                     // ),
                     SizedBox(
-                      height: 20,
+                      height: 50,
                     ),
                     Text(
                       "${widget.modelname}".toUpperCase(),

@@ -77,6 +77,14 @@ class _BookingListScreenState extends State<BookingListScreen> {
 
   List<Animal> _selectedAnimals5 = [];
 
+  var bookList = [
+    "All",
+    "Past",
+    "Current",
+    "Future",
+  ];
+  String selectBookVehicle = "All";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,78 +138,88 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                 //
                                 // Text("All Bookings"),
 
-                                SizedBox(
+                                Container(
                                   width: 130,
                                   height: 32,
-                                  child: DropdownSearch<String>(
-                                    //mode of dropdown
-                                    // mode: Mode.DIALOG,
-                                    // //to show search box
-                                    // showSearchBox: true,
-                                    // showSelectedItem: true,
-                                    //list of dropdown items
-                                    items: [
-                                      "All",
-                                      "Past",
-                                      "Current",
-                                      "Future",
-                                    ],
-                                    //    label: "Country",
-
+                                  padding: EdgeInsets.only(left: 10,right: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.black,
+                                      width: 1,
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    value: selectBookVehicle,
+                                    underline: Container(),
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down,
+                                      color: Colors.black,
+                                    ),
+                                    items: bookList.map((String items) {
+                                      return DropdownMenuItem(
+                                        value: items,
+                                        child: Text(
+                                          items,
+                                        ),
+                                      );
+                                    }).toList(),
                                     onChanged: (vgear) {
-                                      if (vgear == "All") {
-                                        setState(() {
-                                          gearmodel = "all";
-                                          prefs.setString(
-                                              'bookingname', gearmodel!);
-                                          print(
-                                              "type of saved pref book $gearmodel");
-                                          bookingListController
-                                              .fetchCarsBookingList(
-                                                  gearmodel ?? '');
-                                        });
-                                      }
-                                      if (vgear == "Past") {
-                                        setState(() {
-                                          gearmodel = "past";
-                                          prefs.setString(
-                                              'bookingname', gearmodel!);
-                                          print(
-                                              "type of saved pref book $gearmodel");
-                                          bookingListController
-                                              .fetchCarsBookingList(
-                                                  gearmodel ?? '');
-                                        });
-                                      }
-                                      if (vgear == "Current") {
-                                        setState(() {
-                                          gearmodel = "current";
-                                          prefs.setString(
-                                              'bookingname', gearmodel!);
-                                          print(
-                                              "type of saved pref book $gearmodel");
-                                          bookingListController
-                                              .fetchCarsBookingList(
-                                                  gearmodel ?? '');
-                                        });
-                                      }
-                                      if (vgear == "Future") {
-                                        setState(() {
-                                          gearmodel = "future";
-                                          prefs.setString(
-                                              'bookingname', gearmodel!);
-                                          print(
-                                              "type of saved pref book $gearmodel");
-                                          bookingListController
-                                              .fetchCarsBookingList(
-                                                  gearmodel ?? '');
-                                        });
-                                      } else {
-                                        print("");
-                                      }
+                                      setState(() {
+                                        selectBookVehicle = vgear!;
+                                        if (vgear == "All") {
+                                          setState(() {
+                                            gearmodel = "all";
+                                            prefs.setString(
+                                                'bookingname', gearmodel!);
+                                            print(
+                                                "type of saved pref book $gearmodel");
+                                            bookingListController
+                                                .fetchCarsBookingList(
+                                                    gearmodel ?? '');
+                                          });
+                                        }
+                                        if (vgear == "Past") {
+                                          setState(() {
+                                            gearmodel = "past";
+                                            prefs.setString(
+                                                'bookingname', gearmodel!);
+                                            print(
+                                                "type of saved pref book $gearmodel");
+                                            bookingListController
+                                                .fetchCarsBookingList(
+                                                    gearmodel ?? '');
+                                          });
+                                        }
+                                        if (vgear == "Current") {
+                                          setState(() {
+                                            gearmodel = "current";
+                                            prefs.setString(
+                                                'bookingname', gearmodel!);
+                                            print(
+                                                "type of saved pref book $gearmodel");
+                                            bookingListController
+                                                .fetchCarsBookingList(
+                                                    gearmodel ?? '');
+                                          });
+                                        }
+                                        if (vgear == "Future") {
+                                          setState(() {
+                                            gearmodel = "future";
+                                            prefs.setString(
+                                                'bookingname', gearmodel!);
+                                            print(
+                                                "type of saved pref book $gearmodel");
+                                            bookingListController
+                                                .fetchCarsBookingList(
+                                                    gearmodel ?? '');
+                                          });
+                                        } else {
+                                          print("");
+                                        }
+                                      });
                                     },
-                                    //show selected item
-                                    selectedItem: "All",
                                   ),
                                 ),
                               ],
@@ -221,6 +239,7 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                   color: Colors.purple,
                                   size: 25,
                                 ),
+                                SizedBox(width: 5,),
                                 Text("Extend Booking"),
                               ],
                             ),

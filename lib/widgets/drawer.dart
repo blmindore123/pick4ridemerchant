@@ -39,10 +39,10 @@ class _MyDrawerState extends State<MyDrawer> {
     prefs = await SharedPreferences.getInstance();
     await prefs.reload();
 
-    if(userFirstName != null){
+    if (userFirstName != null) {
       userFirstName = prefs.getString(Constatnts.firstName).toString();
     }
-    if(userLastName != null){
+    if (userLastName != null) {
       userLastName = prefs.getString(Constatnts.lastName).toString();
     }
   }
@@ -81,7 +81,10 @@ class _MyDrawerState extends State<MyDrawer> {
                       return Align(
                         alignment: Alignment.center,
                         //child: Text(getAllCarsController.getAllVehicles?.data[index].merchant.fullName.toUpperCase() ?? '',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),
-                        child: Text(userFirstName),
+                        child: Text(
+                          userFirstName,
+                          style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),
+                        ),
                       );
                     }),
           ),
@@ -336,11 +339,12 @@ class _MyDrawerState extends State<MyDrawer> {
                                       borderRadius: BorderRadius.circular(31),
                                       side: BorderSide(color: Colors.blue)))),
                           child: Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: Text(
-                                'YES',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),),
+                            padding: const EdgeInsets.all(4),
+                            child: Text(
+                              'YES',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ),
                       ),
 
@@ -385,20 +389,22 @@ class _MyDrawerState extends State<MyDrawer> {
           right: 40,
           top: 235,
           child: Align(
-              //   alignment: Alignment.topRight,
-              child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: Container(
+            //   alignment: Alignment.topRight,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Container(
                 width: 55,
                 decoration:
                     BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                 child: Icon(
                   Icons.close,
                   color: Colors.red,
-                ),),
-          ),),
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );

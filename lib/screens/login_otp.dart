@@ -1,16 +1,10 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-//import 'package:flutter_otp/flutter_otp.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:nb_utils/nb_utils.dart';
 import '../constants/appconst.dart';
 import 'otp.dart';
-
-//
-// FlutterOtp otp = FlutterOtp();
 
 class Login extends StatefulWidget {
   @override
@@ -20,7 +14,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
-  // static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController numberController = TextEditingController();
 
   String country_code = "+94";
@@ -29,7 +22,6 @@ class _LoginState extends State<Login> {
 
   String role = "merchant";
 
-//
   int minNumber = 1000;
 
   int maxNumber = 6000;

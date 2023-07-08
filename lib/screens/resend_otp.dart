@@ -1,35 +1,24 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:pick4ridemerchant/dimensions/dimen.dart';
 import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
-import 'package:pick4ridemerchant/screens/enter_details.dart';
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
-import 'package:http/http.dart';
 import 'package:pick4ridemerchant/screens/enter_details.dart';
 import 'package:pick4ridemerchant/screens/home.dart';
-import 'package:pick4ridemerchant/screens/resend_otp.dart';
 import 'package:pick4ridemerchant/utils/ApiCall.dart';
+import 'package:pick4ridemerchant/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../constants/appconst.dart';
 import '../model/UserModel.dart';
-import 'login_otp.dart';
 
 class ResendOtpPage extends StatefulWidget {
   static final routeName = "otp-page";
 
-  String? token;
   String country_code;
   String phone_number;
   String role;
   String device_id;
 
   ResendOtpPage({
-    required this.token,
     required this.country_code,
     required this.phone_number,
     required this.role,
@@ -46,8 +35,6 @@ class _ResendOtpPageState extends State<ResendOtpPage> {
   late SharedPreferences prefs;
 
   TextEditingController phoneController = TextEditingController();
-
-  var newToken;
 
   String? devicetokenfb;
   String? deviceId;
@@ -282,24 +269,18 @@ class _ResendOtpPageState extends State<ResendOtpPage> {
     );
 
     if (userModel.success == true) {
-      // var newToken = veri['data']['token'];
-      var newToken = userModel.data!.token;
-      prefs.setString('token', newToken!);
-      print("new token h: $newToken");
-      String? valTok = prefs.getString('token');
-      print("valTok: $valTok");
-
+      prefs.setString(Constatnts.token, userModel.data!.token!);
       if (userModel.data!.profileStatus == "completed") {
         prefs.setBool("true", true);
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (_) => HomeScreen(token: newToken)));
+                builder: (_) => HomeScreen()));
       } else {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (_) => EnterDetailsScreen(token: newToken)));
+                builder: (_) => EnterDetailsScreen()));
       }
     } else {
       Fluttertoast.showToast(

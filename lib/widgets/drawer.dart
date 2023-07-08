@@ -321,6 +321,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         width: 80,
                         child: ElevatedButton(
                           onPressed: () {
+                            Navigator.pop(context);
                             String? valTok = prefs.getString('token');
                             print("signout: $valTok");
                             logOut(valTok!);

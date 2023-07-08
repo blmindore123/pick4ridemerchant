@@ -17,6 +17,7 @@ class Constatnts {
   static const String role = "role";
   static const String id = "id";
   static const String subadmin_type = "subadmin_type";
+  static const String token = "token";
 
   // static final String baseUrl =
   //     'https://maps.googleapis.com/maps/api/place/nearbysearch/json';

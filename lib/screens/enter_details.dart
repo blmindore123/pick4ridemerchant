@@ -3,20 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:pick4ridemerchant/screens/home.dart';
+import 'package:pick4ridemerchant/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/appconst.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
-  final token;
-
   final bool? value;
   final String label;
   final bool leadingCheckbox;
   final ValueChanged<bool?>? onChanged;
 
   const EnterDetailsScreen({
-    @required this.token,
     Key? key,
     this.value,
     this.onChanged,
@@ -37,7 +35,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
   final TextEditingController addressController = new TextEditingController();
 
   late SharedPreferences prefs;
-  String? token;
 
   bool onError = false;
 
@@ -371,7 +368,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
                                               _formKey.currentState?.save();
                                               //
                                               String? valTok =
-                                                  prefs.getString('token');
+                                                  prefs.getString(Constatnts.token);
                                               print("enterdetails: $valTok");
                                               print(nameController.text
                                                   .toString());

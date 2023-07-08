@@ -36,11 +36,7 @@ class OtpPage extends StatefulWidget {
 class _OtpPageState extends State<OtpPage> {
   late FocusNode myFocusNode;
   late SharedPreferences prefs;
-
   TextEditingController phoneController = TextEditingController();
-
-  var newToken;
-
   String? devicetokenfb;
   String? deviceId;
 
@@ -53,15 +49,13 @@ class _OtpPageState extends State<OtpPage> {
     //init sharedpref
     // initSharedPref();
 
-
-    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance; // Change here
-    _firebaseMessaging.getToken().then((devicetoken){
+    FirebaseMessaging _firebaseMessaging =
+        FirebaseMessaging.instance; // Change here
+    _firebaseMessaging.getToken().then((devicetoken) {
       print("device token is $devicetoken");
 
       devicetokenfb = devicetoken;
-
     });
-
   }
 
   // void initSharedPref() async {
@@ -93,8 +87,8 @@ class _OtpPageState extends State<OtpPage> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width /
-                          5, //392.72 802.9
+                      left:
+                          MediaQuery.of(context).size.width / 5, //392.72 802.9
                       // right: MediaQuery.of(context).size.width / 6.55,
                       top: MediaQuery.of(context).size.height / 2.82, //
                     ),
@@ -175,34 +169,37 @@ class _OtpPageState extends State<OtpPage> {
                   // ),
 
                   Align(
-
                       alignment: Alignment.center,
                       child: Padding(
-                          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/1.1),
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height / 1.1),
                           child: GestureDetector(
-                              onTap: (){
-                                resendCode(widget.phone_number,widget.country_code);
+                              onTap: () {
+                                resendCode(
+                                    widget.phone_number, widget.country_code);
                               },
-                              child: Text('Resend Code?',style: TextStyle(fontWeight: FontWeight.normal,),)))
-                  ),
-
+                              child: Text(
+                                'Resend Code?',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              )))),
 
                   Align(
                     alignment: Alignment.center,
                     child: Padding(
                       padding: EdgeInsets.only(
-                       top: MediaQuery.of(context).size.height/1.25,
-
+                        top: MediaQuery.of(context).size.height / 1.25,
                       ),
                       child: SizedBox(
-                        height: MediaQuery.of(context).size.height/15.38,
-                        width: MediaQuery.of(context).size.width/2,
+                        height: MediaQuery.of(context).size.height / 15.38,
+                        width: MediaQuery.of(context).size.width / 2,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Colors.orange,
                             //background color of button
-                            side:
-                                BorderSide(width: 3, color: Colors.orangeAccent),
+                            side: BorderSide(
+                                width: 3, color: Colors.orangeAccent),
                             //border width and color
                             //    elevation: 3, //elevation of button
                             shape: RoundedRectangleBorder(
@@ -214,7 +211,6 @@ class _OtpPageState extends State<OtpPage> {
                             //            Navigator.of(context).push(MaterialPageRoute(builder: (context) => EnterDetailsScreen()));
                             //code to execute when this button is pressed.
 
-
                             if (phoneController.text.length < 4) {
                               // showDialog(
                               //     context: context,
@@ -223,13 +219,13 @@ class _OtpPageState extends State<OtpPage> {
                               //         title: Text("Enter 4 Digits Code"),
                               //       );
                               //     });
-                              var snackBar = SnackBar(content: Text('Enter 4 Digits Code'));
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            }
-                            else{
+                              var snackBar = SnackBar(
+                                  content: Text('Enter 4 Digits Code'));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            } else {
                               verifyApi();
                             }
-
 
                             print(widget.country_code);
                             print(widget.phone_number);
@@ -241,7 +237,6 @@ class _OtpPageState extends State<OtpPage> {
                             //     widget.role, widget.device_id, 1111
                             //     //  otp
                             //     );
-
                           },
                           child: Text(
                             "Verify",
@@ -278,32 +273,27 @@ class _OtpPageState extends State<OtpPage> {
     setState(() {
       clickLoad = true;
     });
-    userModel = await ApiCall.verifyOtpApi(widget.country_code,
-        widget.phone_number, widget.role, widget.device_id, 1111,
-        devicetokenfb ?? ''
-    );
+    userModel = await ApiCall.verifyOtpApi(
+        widget.country_code,
+        widget.phone_number,
+        widget.role,
+        widget.device_id,
+        1111,
+        devicetokenfb ?? '');
 
     if (userModel.success == true) {
-      // var newToken = veri['data']['token'];
-      var newToken = userModel.data!.token;
-      prefs.setString('token', newToken!);
+      print("token login =   "+userModel.data!.token.toString());
+      prefs.setString(Constatnts.token, userModel.data!.token!.toString());
       prefs.setString(Constatnts.firstName, userModel.data!.firstName!);
       prefs.setString(Constatnts.lastName, userModel.data!.lastName!);
-      print("new token h: $newToken");
-      String? valTok = prefs.getString('token');
-      print("valTok: $valTok");
 
       if (userModel.data!.profileStatus == "completed") {
         prefs.setBool("true", true);
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => HomeScreen(token: newToken)));
+            context, MaterialPageRoute(builder: (_) => HomeScreen()));
       } else {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => EnterDetailsScreen(token: newToken)));
+            context, MaterialPageRoute(builder: (_) => EnterDetailsScreen()));
       }
     } else {
       Fluttertoast.showToast(
@@ -316,44 +306,33 @@ class _OtpPageState extends State<OtpPage> {
     });
   }
 
-  void resendCode(String phoneNumber,String countryCode) async{
-
-    try{
+  void resendCode(String phoneNumber, String countryCode) async {
+    try {
       Response response = await post(
-        Uri.parse(AppConstants.BASE_URL+'/resend-otp'),
+        Uri.parse(AppConstants.BASE_URL + '/resend-otp'),
         body: {
           "country_code": countryCode,
           "phone_number": phoneNumber,
           "role": "customer"
         },
-
-
       );
-      if(response.statusCode == 200){
-
-        String? valTok = prefs.getString('token');
-        print("valTok: $valTok");
-
-
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> ResendOtpPage(
-          token: valTok,
-          country_code: widget.country_code,
-          phone_number: widget.phone_number,
-          role: widget.role,
-          device_id: widget.device_id,
-        )));
-
-      }
-      else {
+      if (response.statusCode == 200) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ResendOtpPage(
+                      country_code: widget.country_code,
+                      phone_number: widget.phone_number,
+                      role: widget.role,
+                      device_id: widget.device_id,
+                    )));
+      } else {
         print('failed');
       }
-    }catch(e){
+    } catch (e) {
       print(e.toString());
       print(e);
       print('catched');
     }
-
   }
-
-
 }

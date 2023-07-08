@@ -133,7 +133,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                         alignment: Alignment.topLeft,
                         child: Obx(() => bannersGetController.isLoading.value
                             ? Center(
-                                child: Text(""),
+                                child: Text("No Data"),
                               )
                             :
                             // Text("${bannersGetController.bannersListModel?.data?.length.toString() ?? '0'} Cars",style: TextStyle(fontWeight: FontWeight.w300),

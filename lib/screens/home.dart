@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick4ridemerchant/extensions/string_ext.dart';
+import 'package:pick4ridemerchant/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/images.dart';
 import '../widgets/drawer.dart';
@@ -11,9 +12,7 @@ import 'dashboard/fragments/profile.dart';
 import 'login_otp.dart';
 
 class HomeScreen extends StatefulWidget {
-  final token;
-
-  HomeScreen({@required this.token});
+  HomeScreen();
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -96,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void noToken() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
-    var x = preferences.getString('token');
+    var x = preferences.getString(Constatnts.token);
 
     if (x == null) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));

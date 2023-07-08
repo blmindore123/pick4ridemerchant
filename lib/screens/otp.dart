@@ -1,15 +1,10 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:pick4ridemerchant/dimensions/dimen.dart';
 import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
 import 'package:pick4ridemerchant/screens/enter_details.dart';
-import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
 import 'package:http/http.dart';
-import 'package:pick4ridemerchant/screens/enter_details.dart';
 import 'package:pick4ridemerchant/screens/home.dart';
 import 'package:pick4ridemerchant/screens/resend_otp.dart';
 import 'package:pick4ridemerchant/utils/ApiCall.dart';
@@ -17,7 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/appconst.dart';
 import '../model/UserModel.dart';
-import 'login_otp.dart';
 
 class OtpPage extends StatefulWidget {
   static final routeName = "otp-page";

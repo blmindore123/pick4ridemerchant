@@ -7,8 +7,8 @@ class Constatnts {
 
   static const String full_name = "full_name";
   static const String image_url = "image_url";
-  static const String first_name = "first_name";
-  static const String last_name = "last_name";
+  static const String firstName = "first_name";
+  static const String lastName = "last_name";
   static const String email = "email";
   static const String phone_number = "phone_number";
   static const String mobile_verified = "mobile_verified";

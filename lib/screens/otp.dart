@@ -8,10 +8,10 @@ import 'package:http/http.dart';
 import 'package:pick4ridemerchant/screens/home.dart';
 import 'package:pick4ridemerchant/screens/resend_otp.dart';
 import 'package:pick4ridemerchant/utils/ApiCall.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/appconst.dart';
 import '../model/UserModel.dart';
+import '../utils/constants.dart';
 
 class OtpPage extends StatefulWidget {
   static final routeName = "otp-page";
@@ -287,6 +287,8 @@ class _OtpPageState extends State<OtpPage> {
       // var newToken = veri['data']['token'];
       var newToken = userModel.data!.token;
       prefs.setString('token', newToken!);
+      prefs.setString(Constatnts.firstName, userModel.data!.firstName!);
+      prefs.setString(Constatnts.lastName, userModel.data!.lastName!);
       print("new token h: $newToken");
       String? valTok = prefs.getString('token');
       print("valTok: $valTok");

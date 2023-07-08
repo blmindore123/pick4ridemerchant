@@ -14,7 +14,6 @@ import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/imageres.dart';
 import '../../controller/drive_category_controller.dart';
-import '../../utils/HelperSaveData.dart';
 import '../../widgets/drawer.dart';
 import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
@@ -2117,7 +2116,7 @@ class _RegisterNewTukTukState extends State<RegisterNewTukTuk> {
         print(response.body.toString());
         print(response.toString());
         prefs.remove('token');
-        HelperSaveData.helperSaveData.logout();
+        prefs.clear();
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Login()));
       } else {

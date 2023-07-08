@@ -14,7 +14,6 @@ import 'package:pick4ridemerchant/screens/common/registered_cars_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/imageres.dart';
 import '../../controller/drive_category_controller.dart';
-import '../../utils/HelperSaveData.dart';
 import '../../widgets/drawer.dart';
 import '../home.dart';
 import '../login_otp.dart';
@@ -2086,7 +2085,7 @@ class _RegisterNewBikeState extends State<RegisterNewBike> {
         print(response.body.toString());
         print(response.toString());
         prefs.remove('token');
-        HelperSaveData.helperSaveData.logout();
+        prefs.clear();
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       } else {

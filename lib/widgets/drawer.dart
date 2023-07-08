@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pick4ridemerchant/constants/appconst.dart';
-import 'package:pick4ridemerchant/utils/HelperSaveData.dart';
+import 'package:pick4ridemerchant/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../controller/get_all_vehicles_controller.dart';
 import '../screens/bookinglist/bookinglistscreen.dart';
@@ -24,6 +24,8 @@ class _MyDrawerState extends State<MyDrawer> {
   late SharedPreferences prefs;
 
   String _email = '';
+  String userFirstName = '';
+  String userLastName = '';
 
   String? token;
 
@@ -36,6 +38,13 @@ class _MyDrawerState extends State<MyDrawer> {
   void initSharedPref() async {
     prefs = await SharedPreferences.getInstance();
     await prefs.reload();
+
+    if(userFirstName != null){
+      userFirstName = prefs.getString(Constatnts.firstName).toString();
+    }
+    if(userLastName != null){
+      userLastName = prefs.getString(Constatnts.lastName).toString();
+    }
   }
 
   @override
@@ -72,7 +81,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       return Align(
                         alignment: Alignment.center,
                         //child: Text(getAllCarsController.getAllVehicles?.data[index].merchant.fullName.toUpperCase() ?? '',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22),
-                        child: Text(""),
+                        child: Text(userFirstName),
                       );
                     }),
           ),
@@ -258,7 +267,7 @@ class _MyDrawerState extends State<MyDrawer> {
         print(response.body.toString());
         print(response.toString());
         prefs.remove('token');
-        HelperSaveData.helperSaveData.logout();
+        prefs.clear();
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       } else {
@@ -331,7 +340,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               child: Text(
                                 'YES',
                                 style: TextStyle(fontWeight: FontWeight.bold),
-                              )),
+                              ),),
                         ),
                       ),
 
@@ -388,8 +397,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 child: Icon(
                   Icons.close,
                   color: Colors.red,
-                )),
-          )),
+                ),),
+          ),),
         ),
       ],
     );

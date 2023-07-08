@@ -16,7 +16,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/imageres.dart';
 import '../../controller/drive_category_controller.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import '../../utils/HelperSaveData.dart';
 import '../../widgets/drawer.dart';
 import '../home.dart';
 import '../login_otp.dart';
@@ -2244,7 +2243,7 @@ class _RegisterNewCarState extends State<RegisterNewCar> {
         print(response.body.toString());
         print(response.toString());
         prefs.remove('token');
-        HelperSaveData.helperSaveData.logout();
+        prefs.clear();
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       } else {

@@ -16,7 +16,6 @@ import 'package:pick4ridemerchant/widgets/drawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../classes/imageres.dart';
 import '../../controller/drive_category_controller.dart';
-import '../../utils/HelperSaveData.dart';
 import '../login_otp.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
@@ -2262,7 +2261,7 @@ class _RegisterNewVanState extends State<RegisterNewVan> {
         print(response.body.toString());
         print(response.toString());
         prefs.remove('token');
-        HelperSaveData.helperSaveData.logout();
+        prefs.clear();
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       } else {

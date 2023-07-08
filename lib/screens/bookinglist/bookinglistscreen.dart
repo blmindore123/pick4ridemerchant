@@ -442,13 +442,25 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                           rejectreasonController.text
                                                       );
 
+                                                      Future.delayed(Duration(milliseconds: 10),(){
+                                                        setState(() {
+                                                          bookingListController.fetchCarsBookingList(gearmodel ?? '');
+                                                        });
 
-                                                      setState(() {
-                                                        bookingListController.fetchCarsBookingList(gearmodel ?? '');
                                                       });
 
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> BookingListScreen(token: token)));
 
+                                                      Future.delayed(Duration(milliseconds: 45),(){
+                                                        Navigator.of(context).pop();
+                                                      });
+
+                                                      // setState(() {
+                                                      //   bookingListController.fetchCarsBookingList(gearmodel ?? '');
+                                                      // });
+                                                      //
+                                                      // Future.delayed(Duration(milliseconds: 30),(){
+                                                      //   Navigator.of(context).pop();
+                                                      // });
                                                     },
                                                     style: ButtonStyle(
 
@@ -581,10 +593,33 @@ class _BookingListScreenState extends State<BookingListScreen> {
                                                           'accepted',
                                                           ''
                                                       );
-                                                     setState(() {
-                                                       bookingListController.fetchCarsBookingList(gearmodel ?? '');
-                                                     });
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> BookingListScreen(token: token)));
+                                                     // setState(() {
+                                                     //
+                                                     // });
+
+
+
+
+                                                      Future.delayed(Duration(milliseconds: 10),(){
+                                                        setState(() {
+                                                          bookingListController.fetchCarsBookingList(gearmodel ?? '');
+                                                        });
+
+                                                      });
+
+
+                                                      Future.delayed(Duration(milliseconds: 45),(){
+                                                        Navigator.of(context).pop();
+                                                      });
+
+                                                      // Future.delayed(Duration(milliseconds: 30),(){
+                                                      //   setState(() {
+                                                      //     bookingListController.fetchCarsBookingList(gearmodel ?? '');
+                                                      //   });
+                                                      //   Navigator.of(context).pop();
+                                                      // });
+
+
                                                     },
                                                     style: ButtonStyle(
                                                         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -1178,8 +1213,8 @@ class _BookingListScreenState extends State<BookingListScreen> {
         String newString = oldString.replaceAll('{"success":true,"message":', '');
         String latString = newString.replaceAll(',"data":[]}','');
         var snackBar = SnackBar(
-            behavior: SnackBarBehavior.floating,
-            margin: EdgeInsets.only(bottom: 300.0),
+            // behavior: SnackBarBehavior.floating,
+            // margin: EdgeInsets.only(bottom: 300.0),
             content: Text(latString)
         );
         setState(() {

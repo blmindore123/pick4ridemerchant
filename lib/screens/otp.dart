@@ -284,8 +284,7 @@ class _OtpPageState extends State<OtpPage> {
     if (userModel.success == true) {
       print("token login =   "+userModel.data!.token.toString());
       prefs.setString(Constatnts.token, userModel.data!.token!.toString());
-      prefs.setString(Constatnts.firstName, userModel.data!.firstName!);
-      prefs.setString(Constatnts.lastName, userModel.data!.lastName!);
+      prefs.setString(Constatnts.firstName, userModel.data!.firstName!.toString());
 
       if (userModel.data!.profileStatus == "completed") {
         prefs.setBool("true", true);

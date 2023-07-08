@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:pick4ridemerchant/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../classes/banners/bannerslistmodel.dart';
 import '../classes/drive_category.dart';
@@ -12,7 +13,6 @@ class BannersGetController extends GetxController {
   var isLoading = false.obs;
   BannersListModel? bannersListModel;
   late SharedPreferences prefs;
-  String? token;
 
   @override
   Future<void> onInit() async {
@@ -32,7 +32,6 @@ class BannersGetController extends GetxController {
       // print('drive cart token : $valTok');
       var valTok = await getToken();
       var url = Uri.parse(AppConstants.BASE_URL+'/banners');
-      print('token h yr: $valTok');
       final response = await http.get(url, headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $valTok',
@@ -59,6 +58,6 @@ class BannersGetController extends GetxController {
 
   Future<String?> getToken() async{
     final SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString('token');
+    return preferences.getString(Constatnts.token);
   }
 }

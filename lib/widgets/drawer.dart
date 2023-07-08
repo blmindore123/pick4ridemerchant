@@ -25,7 +25,6 @@ class _MyDrawerState extends State<MyDrawer> {
 
   String _email = '';
   String userFirstName = '';
-  String userLastName = '';
 
   String? token;
 
@@ -41,9 +40,6 @@ class _MyDrawerState extends State<MyDrawer> {
 
     if (userFirstName != null) {
       userFirstName = prefs.getString(Constatnts.firstName).toString();
-    }
-    if (userLastName != null) {
-      userLastName = prefs.getString(Constatnts.lastName).toString();
     }
   }
 

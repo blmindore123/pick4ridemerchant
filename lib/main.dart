@@ -44,7 +44,6 @@ class MyHomePage extends StatefulWidget {
 
 class SplashScreenState extends State<MyHomePage> {
   late SharedPreferences prefs;
-  String? xval;
 
   @override
   void initState() {
@@ -54,10 +53,8 @@ class SplashScreenState extends State<MyHomePage> {
 
   void initSharedPref() async {
     prefs = await SharedPreferences.getInstance();
-    String? valTok = prefs.getString('token');
     bool? status = prefs.getBool('true');
 
-    print("state: $valTok");
     if (status == false) {
       Timer(Duration(seconds: 5), () async {
         Navigator.pushReplacement(

@@ -1,49 +1,57 @@
+// To parse this JSON data, do
+//
+//     final bannersListModel = bannersListModelFromJson(jsonString);
+
+import 'dart:convert';
+
+BannersListModel bannersListModelFromJson(String str) => BannersListModel.fromJson(json.decode(str));
+
+String bannersListModelToJson(BannersListModel data) => json.encode(data.toJson());
+
 class BannersListModel {
+  bool? success;
+  String? message;
+  List<Datum>? data;
+
   BannersListModel({
-    required this.success,
-    required this.message,
-    required this.data,
+    this.success,
+    this.message,
+    this.data,
   });
-  late final bool success;
-  late final String message;
-  late final List<Data> data;
 
-  BannersListModel.fromJson(Map<String, dynamic> json){
-    success = json['success'];
-    message = json['message'];
-    data = List.from(json['data']).map((e)=>Data.fromJson(e)).toList();
-  }
+  factory BannersListModel.fromJson(Map<String, dynamic> json) => BannersListModel(
+    success: json["success"],
+    message: json["message"],
+    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+  );
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['success'] = success;
-    _data['message'] = message;
-    _data['data'] = data.map((e)=>e.toJson()).toList();
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+    "success": success,
+    "message": message,
+    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+  };
 }
 
-class Data {
-  Data({
-    required this.id,
-    required this.image,
-    required this.imageUrl,
+class Datum {
+  int? id;
+  String? image;
+  String? imageUrl;
+
+  Datum({
+    this.id,
+    this.image,
+    this.imageUrl,
   });
-  late final int id;
-  late final String image;
-  late final String imageUrl;
 
-  Data.fromJson(Map<String, dynamic> json){
-    id = json['id'];
-    image = json['image'];
-    imageUrl = json['image_url'];
-  }
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["id"],
+    image: json["image"],
+    imageUrl: json["image_url"],
+  );
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['image'] = image;
-    _data['image_url'] = imageUrl;
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "image": image,
+    "image_url": imageUrl,
+  };
 }

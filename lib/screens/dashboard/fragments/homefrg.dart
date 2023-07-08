@@ -153,7 +153,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                                             i <
                                                 bannersGetController
                                                     .bannersListModel!
-                                                    .data
+                                                    .data!
                                                     .length;
                                             i++)
                                           Container(
@@ -163,8 +163,8 @@ class _HomeFragmentState extends State<HomeFragment> {
                                                 image: NetworkImage(
                                                     bannersGetController
                                                         .bannersListModel!
-                                                        .data[i]
-                                                        .imageUrl),
+                                                        .data![i]
+                                                        .imageUrl.toString()),
                                                 fit: BoxFit.fitHeight,
                                               ),
                                               // border:
